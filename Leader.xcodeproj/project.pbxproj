@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B1A475B22E80801006DD5F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */; };
 		9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B921B22E7F37300B1985F /* AppDelegate.swift */; };
 		9B5B921E22E7F37300B1985F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B921D22E7F37300B1985F /* ViewController.swift */; };
 		9B5B922122E7F37300B1985F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B921F22E7F37300B1985F /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		9B5B921822E7F37300B1985F /* Leader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5B921B22E7F37300B1985F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B5B921D22E7F37300B1985F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -55,11 +57,12 @@
 			isa = PBXGroup;
 			children = (
 				9B5B921B22E7F37300B1985F /* AppDelegate.swift */,
-				9B5B921D22E7F37300B1985F /* ViewController.swift */,
-				9B5B921F22E7F37300B1985F /* Main.storyboard */,
 				9B5B922222E7F37400B1985F /* Assets.xcassets */,
-				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
 				9B5B922722E7F37400B1985F /* Info.plist */,
+				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
+				9B5B921F22E7F37300B1985F /* Main.storyboard */,
+				9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */,
+				9B5B921D22E7F37300B1985F /* ViewController.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -137,6 +140,7 @@
 			files = (
 				9B5B921E22E7F37300B1985F /* ViewController.swift in Sources */,
 				9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */,
+				9B1A475B22E80801006DD5F0 /* SettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +289,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +308,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
