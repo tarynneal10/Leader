@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B1A475B22E80801006DD5F0 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */; };
+		8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */; };
+		8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */; };
+		8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */; };
+		8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */; };
+		9B1A475B22E80801006DD5F0 /* SettingsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A475A22E80801006DD5F0 /* SettingsTableVC.swift */; };
 		9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B921B22E7F37300B1985F /* AppDelegate.swift */; };
 		9B5B921E22E7F37300B1985F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5B921D22E7F37300B1985F /* ViewController.swift */; };
 		9B5B922122E7F37300B1985F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B921F22E7F37300B1985F /* Main.storyboard */; };
@@ -16,7 +20,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLAViewController.swift; sourceTree = "<group>"; };
+		8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEventsVC.swift; sourceTree = "<group>"; };
+		8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEventsVC.swift; sourceTree = "<group>"; };
+		8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFBLAVC.swift; sourceTree = "<group>"; };
+		9B1A475A22E80801006DD5F0 /* SettingsTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableVC.swift; sourceTree = "<group>"; };
 		9B5B921822E7F37300B1985F /* Leader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Leader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B5B921B22E7F37300B1985F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9B5B921D22E7F37300B1985F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +45,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8B6B076722E8B17D008C6885 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9B5B921B22E7F37300B1985F /* AppDelegate.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8B6B076822E8B1AF008C6885 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
+				9B5B921F22E7F37300B1985F /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8B6B076922E8B1C2008C6885 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9B5B921D22E7F37300B1985F /* ViewController.swift */,
+				9B1A475A22E80801006DD5F0 /* SettingsTableVC.swift */,
+				8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */,
+				8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */,
+				8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */,
+				8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		9B5B920F22E7F37300B1985F = {
 			isa = PBXGroup;
 			children = (
@@ -56,13 +94,11 @@
 		9B5B921A22E7F37300B1985F /* Leader */ = {
 			isa = PBXGroup;
 			children = (
-				9B5B921B22E7F37300B1985F /* AppDelegate.swift */,
+				8B6B076722E8B17D008C6885 /* Model */,
+				8B6B076822E8B1AF008C6885 /* View */,
+				8B6B076922E8B1C2008C6885 /* Controller */,
 				9B5B922222E7F37400B1985F /* Assets.xcassets */,
 				9B5B922722E7F37400B1985F /* Info.plist */,
-				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
-				9B5B921F22E7F37300B1985F /* Main.storyboard */,
-				9B1A475A22E80801006DD5F0 /* SettingsViewController.swift */,
-				9B5B921D22E7F37300B1985F /* ViewController.swift */,
 			);
 			path = Leader;
 			sourceTree = "<group>";
@@ -139,8 +175,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B5B921E22E7F37300B1985F /* ViewController.swift in Sources */,
+				8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */,
 				9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */,
-				9B1A475B22E80801006DD5F0 /* SettingsViewController.swift in Sources */,
+				9B1A475B22E80801006DD5F0 /* SettingsTableVC.swift in Sources */,
+				8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */,
+				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,
+				8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
