@@ -12,3 +12,11 @@ import UIKit
 class CurrentEventsVC : UITableViewController {
     
 }
+
+class CurrentEventsCell : UITableViewCell {
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
+    
+}
