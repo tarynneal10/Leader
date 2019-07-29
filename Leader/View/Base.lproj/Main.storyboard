@@ -18,10 +18,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTv-wJ-cVE">
-                                <rect key="frame" x="116" y="267" width="142" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="YTv-wJ-cVE">
+                                <rect key="frame" x="110" y="263" width="155" height="155"/>
                                 <color key="backgroundColor" red="0.3231457932920978" green="0.54230574823428845" blue="0.97680455450000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YTv-wJ-cVE" secondAttribute="height" multiplier="1:1" id="CwB-cT-bUk"/>
+                                </constraints>
                                 <state key="normal" title="Current Events">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -29,10 +31,12 @@
                                     <segue destination="VBQ-yY-umX" kind="show" id="Zbu-NI-Q9y"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAQ-3H-ws4">
-                                <rect key="frame" x="116" y="100" width="142" height="132"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="HAQ-3H-ws4">
+                                <rect key="frame" x="110" y="93" width="155" height="155"/>
                                 <color key="backgroundColor" red="0.32314579329999998" green="0.54230574819999999" blue="0.97680455450000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HAQ-3H-ws4" secondAttribute="height" multiplier="1:1" id="5fK-qx-wxq"/>
+                                </constraints>
                                 <state key="normal" title="About FBLA">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -40,10 +44,12 @@
                                     <segue destination="uRl-0x-Ttp" kind="show" id="Zj4-zU-dV9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FpC-cT-Edd">
-                                <rect key="frame" x="116" y="431" width="157" height="152"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="FpC-cT-Edd">
+                                <rect key="frame" x="110" y="433" width="155" height="155"/>
                                 <color key="backgroundColor" red="0.32314579329999998" green="0.54230574819999999" blue="0.97680455450000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FpC-cT-Edd" secondAttribute="height" multiplier="1:1" id="9lk-LT-zZd"/>
+                                </constraints>
                                 <state key="normal" title="Competitive Events">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -53,14 +59,27 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6qH-Yf-s3m" firstAttribute="bottom" secondItem="FpC-cT-Edd" secondAttribute="bottom" constant="30" id="4h8-pW-Bss"/>
+                            <constraint firstItem="HAQ-3H-ws4" firstAttribute="top" secondItem="6qH-Yf-s3m" secondAttribute="top" constant="29" id="73o-vd-LNq"/>
+                            <constraint firstItem="YTv-wJ-cVE" firstAttribute="top" secondItem="HAQ-3H-ws4" secondAttribute="bottom" constant="15" id="7sh-zd-BKL"/>
+                            <constraint firstItem="FpC-cT-Edd" firstAttribute="leading" secondItem="6qH-Yf-s3m" secondAttribute="leading" constant="110" id="F0C-IS-Gg3"/>
+                            <constraint firstItem="YTv-wJ-cVE" firstAttribute="leading" secondItem="6qH-Yf-s3m" secondAttribute="leading" constant="110" id="VP1-e3-SBJ"/>
+                            <constraint firstItem="YTv-wJ-cVE" firstAttribute="top" secondItem="HAQ-3H-ws4" secondAttribute="bottom" constant="15" id="ZWQ-lB-ll9"/>
+                            <constraint firstItem="6qH-Yf-s3m" firstAttribute="trailing" secondItem="YTv-wJ-cVE" secondAttribute="trailing" constant="110" id="dFK-Ja-F4i"/>
+                            <constraint firstItem="6qH-Yf-s3m" firstAttribute="trailing" secondItem="FpC-cT-Edd" secondAttribute="trailing" constant="110" id="gkL-Ds-ieA"/>
+                            <constraint firstItem="HAQ-3H-ws4" firstAttribute="leading" secondItem="6qH-Yf-s3m" secondAttribute="leading" constant="110" id="sXc-Mt-LLo"/>
+                            <constraint firstItem="6qH-Yf-s3m" firstAttribute="trailing" secondItem="HAQ-3H-ws4" secondAttribute="trailing" constant="110" id="vZe-Vn-DuX"/>
+                            <constraint firstItem="FpC-cT-Edd" firstAttribute="top" secondItem="YTv-wJ-cVE" secondAttribute="bottom" constant="15" id="wKj-9S-8Aw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6qH-Yf-s3m"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" selectedImage="HomeIcon" id="klK-Sj-aMU"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="HomeIcon" selectedImage="HomeIcon" id="klK-Sj-aMU"/>
                     <navigationItem key="navigationItem" title="FBLA" id="ZgN-kB-6Ur"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lat-6s-omD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="-880"/>
+            <point key="canvasLocation" x="1456.8" y="-880.20989505247383"/>
         </scene>
         <!--About FBLA-->
         <scene sceneID="Xnk-Ye-LZc">
@@ -326,44 +345,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Inr-fI-MA8">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQm-U1-siC">
-                                <rect key="frame" x="136" y="211" width="103" height="39"/>
+                                <rect key="frame" x="112" y="201" width="150" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <state key="normal" title="Log In"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" red="0.99165906829999995" green="0.91255290870000005" blue="0.075346855010000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <segue destination="a3c-6Y-moX" kind="show" id="eRh-1C-oYe"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-HB-U7N">
-                                <rect key="frame" x="110" y="375" width="154" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <state key="normal" title="Join FBLA"/>
-                                <connections>
-                                    <segue destination="C75-Bf-96w" kind="show" id="hIO-kh-SGu"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G5q-0o-X0p">
-                                <rect key="frame" x="136" y="314" width="103" height="39"/>
+                                <rect key="frame" x="112" y="314" width="150" height="45"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
-                                <state key="normal" title="Sign Up"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" red="0.99165906829999995" green="0.91255290870000005" blue="0.075346855010000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
                                 <connections>
                                     <segue destination="BgM-3d-ev9" kind="show" id="jJm-Ca-EU4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQS-HB-U7N">
+                                <rect key="frame" x="112" y="423" width="150" height="45"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="TimesNewRomanPSMT" family="Times New Roman" pointSize="17"/>
+                                <state key="normal" title="Join FBLA">
+                                    <color key="titleColor" red="0.99165906829999995" green="0.91255290870000005" blue="0.075346855010000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <segue destination="C75-Bf-96w" kind="show" id="hIO-kh-SGu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Inr-fI-MA8" firstAttribute="leading" secondItem="xr6-lk-FJ9" secondAttribute="leading" id="AsY-Xw-Pj7"/>
-                            <constraint firstItem="Inr-fI-MA8" firstAttribute="bottom" secondItem="xr6-lk-FJ9" secondAttribute="bottom" id="PyV-yy-ZmX"/>
-                            <constraint firstItem="Inr-fI-MA8" firstAttribute="top" secondItem="xr6-lk-FJ9" secondAttribute="top" id="YHd-OI-qJi"/>
-                            <constraint firstItem="Inr-fI-MA8" firstAttribute="trailing" secondItem="xr6-lk-FJ9" secondAttribute="trailing" id="iTh-pP-fyT"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="xr6-lk-FJ9"/>
                     </view>
                     <navigationItem key="navigationItem" id="GIR-Jm-gZm"/>
@@ -412,13 +431,30 @@
                     <view key="view" contentMode="scaleToFill" id="bRU-Mx-wTE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Chapter Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dx5-dE-5yx">
+                                <rect key="frame" x="92" y="154" width="141" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cDt-1U-Svk">
+                                <rect key="frame" x="67" y="221" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in gyguygreprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="1Zd-VC-HTp"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uox-dP-86w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-186" y="-1"/>
+            <point key="canvasLocation" x="-186.40000000000001" y="-1.3493253373313345"/>
         </scene>
         <!--Member Sign Up-->
         <scene sceneID="9aE-13-WKI">
@@ -671,12 +707,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="EdY-D4-Sos"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Settings" selectedImage="SettingsTabBarItem" id="V7o-ik-aoq"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="SettingsTabBarItem" selectedImage="SettingsTabBarItem" id="V7o-ik-aoq"/>
                     <navigationItem key="navigationItem" id="bXy-HB-YdY"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZX-BZ-fKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="324"/>
+            <point key="canvasLocation" x="1457" y="430"/>
         </scene>
         <!--Profile Editor-->
         <scene sceneID="yCD-Oz-1XK">
