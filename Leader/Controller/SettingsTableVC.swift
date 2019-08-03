@@ -9,39 +9,41 @@
 import Foundation
 import UIKit
 
-class SettingsVC : UITableViewController {
+class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var settingsTableView: UITableView!
+    @IBOutlet weak var positionLabel: UILabel!
+    @IBOutlet weak var chapterLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var profilePicture: UIImageView!
     
-//   // @IBOutlet weak var settingsTableView: UITableView!
-//    @IBOutlet weak var positionLabel: UILabel!
-//    @IBOutlet weak var chapterLabel: UILabel!
-//    @IBOutlet weak var nameLabel: UILabel!
-//    @IBOutlet weak var profilePicture: UIImageView!
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        profilePicture.image = UIImage(named: "Logo2")
-//        // Do any additional setup after loading the view.
-//    }
-//   // let settingsTitleArray = [("huh"), ("wack"), ("plz work")]
-//    //let settingsImageArray = [("HomeIcon"), ("Logo2"), ("CalendarIcon")]
-//
-////    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-////        return settingsTitleArray.count
-////    }
-////
-////    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//////        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell",for: indexPath as IndexPath) as! SettingsTableCell
-//////        cell.settingsLabel?.text = self.settingsTitleArray[indexPath.row]
-//////            return cell
-//////
-////            let cell : SettingsTableCell = self.settingsTableView.dequeueReusableCell(withIdentifier: "settingsCell", for : indexPath as IndexPath) as! SettingsTableCell
-////
-////            cell.settingsLabel?.text = "yikes"
-////
-////            return cell
-////    }
+    let settingsCellLabelArray = ["Security", "Q&A", "Contact Us", "Bug Report", "Log Out"]
+    let settingsCellImageArray = ["untitled","BugIcon"]
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        profilePicture.image = UIImage(named: "Logo2")
+        //nameLabel.text = ""
+        // Do any additional setup after loading the view.
+    }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        settingsTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return settingsCellLabelArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableCell
+        
+        cell.settingsCellLabel?.text = settingsCellLabelArray[indexPath.item]
+       // cell.settingsCellImage?.image = UIImage(named: settingsCellImageArray)
+
+        return cell
+    }
 }
 class SettingsTableCell : UITableViewCell {
-    //@IBOutlet weak var settingsLabel: UILabel!
-    //@IBOutlet weak var settingsImage: UIImageView!
+    @IBOutlet weak var settingsCellLabel: UILabel!
+    @IBOutlet weak var settingsCellImage: UIImageView!
 }
