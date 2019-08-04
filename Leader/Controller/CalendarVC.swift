@@ -21,6 +21,20 @@ class CalendarVC : UIViewController {
        // var variable : String = "yayagaga"
         // Do any additional setup after loading the view.
     }
+    
+    func configureCell(view: JTAppleCell?, cellState: CellState) {
+        guard let cell = view as? DateCell  else { return }
+        cell.dateLabel.text = cellState.text
+        handleCellTextColor(cell: cell, cellState: cellState)
+    }
+    
+    func handleCellTextColor(cell: DateCell, cellState: CellState) {
+        if cellState.dateBelongsTo == .thisMonth {
+            cell.dateLabel.textColor = UIColor.black
+        } else {
+            cell.dateLabel.textColor = UIColor.gray
+        }
+    }
 
 }
 
@@ -43,14 +57,15 @@ extension CalendarVC: JTAppleCalendarViewDelegate {
     func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
         
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateCell
-        cell.dateLabel.text = cellState.text
+        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
         return cell
         
     }
     func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         
-        let cell = cell as! DateCell
-        cell.dateLabel.text = cellState.text
+//        let cell = cell as! DateCell
+//        cell.dateLabel.text = cellState.text
+        configureCell(view: cell, cellState: cellState)
         
     }
 }

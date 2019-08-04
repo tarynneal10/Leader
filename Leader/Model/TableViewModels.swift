@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-struct SettingsStructure {
+struct Settings {
     
+    
+}
+
+struct CurrentEvents {
     
 }

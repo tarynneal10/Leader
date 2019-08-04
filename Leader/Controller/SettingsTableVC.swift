@@ -17,7 +17,8 @@ class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate 
     @IBOutlet weak var profilePicture: UIImageView!
     
     let settingsCellLabelArray = ["Security", "Q&A", "Contact Us", "Bug Report", "Log Out"]
-    let settingsCellImageArray = ["untitled","BugIcon"]
+    let settingsCellImageArray = [UIImage(named: "Logo2"), UIImage(named: "HomeIcon"), UIImage(named: "Logo2"), UIImage(named: "BugIcon"), UIImage(named: "HomeIcon")]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePicture.image = UIImage(named: "Logo2")
@@ -38,7 +39,7 @@ class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate 
         let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableCell
         
         cell.settingsCellLabel?.text = settingsCellLabelArray[indexPath.item]
-       // cell.settingsCellImage?.image = UIImage(named: settingsCellImageArray)
+        cell.settingsCellImage?.image = settingsCellImageArray[indexPath.item]
 
         return cell
     }
