@@ -8,7 +8,7 @@
 import JTAppleCalendar
 import UIKit
 
-class DateCell: JTAppleCell {
+class DateCell: JTACDayCell {
     
     @IBOutlet var dateLabel: UILabel!
     
@@ -20,27 +20,34 @@ class CalendarVC : UIViewController {
         super.viewDidLoad()
        // var variable : String = "yayagaga"
         // Do any additional setup after loading the view.
+       // navigationController?.navigationBar.topItem?.hidesBackButton = true
     }
-    
-    func configureCell(view: JTAppleCell?, cellState: CellState) {
-        guard let cell = view as? DateCell  else { return }
-        cell.dateLabel.text = cellState.text
-        handleCellTextColor(cell: cell, cellState: cellState)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.navigationBar.topItem?.hidesBackButton = true
+        //Only works when click back into tab- not quite right
     }
-    
-    func handleCellTextColor(cell: DateCell, cellState: CellState) {
-        if cellState.dateBelongsTo == .thisMonth {
-            cell.dateLabel.textColor = UIColor.black
-        } else {
-            cell.dateLabel.textColor = UIColor.gray
-        }
-    }
+//
+//    func configureCell(view: JTACDayCell?, cellState: CellState) {
+//        guard let cell = view as? DateCell  else { return }
+//        cell.dateLabel.text = cellState.text
+//        handleCellTextColor(cell: cell, cellState: cellState)
+//    }
+//
+//    func handleCellTextColor(cell: DateCell, cellState: CellState) {
+//        if cellState.dateBelongsTo == .thisMonth {
+//            cell.dateLabel.textColor = UIColor.black
+//        }
+//        else {
+//            cell.dateLabel.textColor = UIColor.gray
+//        }
+//    }
 
 }
 
-extension CalendarVC: JTAppleCalendarViewDataSource {
+extension CalendarVC: JTACMonthViewDataSource {
     
-    func configureCalendar(_ calendar: JTAppleCalendarView) -> ConfigurationParameters {
+    func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy MM dd"
@@ -52,20 +59,22 @@ extension CalendarVC: JTAppleCalendarViewDataSource {
     
 }
 
-extension CalendarVC: JTAppleCalendarViewDelegate {
+extension CalendarVC: JTACMonthViewDelegate {
     
-    func calendar(_ calendar: JTAppleCalendarView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTAppleCell {
+    func calendar(_ calendar: JTACMonthView, cellForItemAt date: Date, cellState: CellState, indexPath: IndexPath) -> JTACDayCell {
         
         let cell = calendar.dequeueReusableJTAppleCell(withReuseIdentifier: "dateCell", for: indexPath) as! DateCell
-        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
+        cell.dateLabel.text = cellState.text
         return cell
+//        self.calendar(calendar, willDisplay: cell, forItemAt: date, cellState: cellState, indexPath: indexPath)
+
         
     }
-    func calendar(_ calendar: JTAppleCalendarView, willDisplay cell: JTAppleCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
+    func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         
-//        let cell = cell as! DateCell
-//        cell.dateLabel.text = cellState.text
-        configureCell(view: cell, cellState: cellState)
+        let cell = cell as! DateCell
+        cell.dateLabel.text = cellState.text
+       // configureCell(view: cell, cellState: cellState)
         
     }
 }

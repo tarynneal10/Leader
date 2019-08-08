@@ -24,11 +24,20 @@ class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate 
         profilePicture.image = UIImage(named: "Logo2")
         //nameLabel.text = ""
         // Do any additional setup after loading the view.
+//        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
+//        navigationItem.leftBarButtonItem = backButton
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         settingsTableView.reloadData()
+        //self.navigationItem.setHidesBackButton(true, animated: true)
+//        self.navigationItem.setLeftBarButtonItems(nil, animated: true)
+//        self.navigationItem.setHidesBackButton(true, animated:true)
+        //self.navigationItem.setHidesBackButton(true, animated: false)
+        //code commented out in did load and appear more for when activating push segue in code- for later
+        //navigationController?.navigationBar.topItem?.hidesBackButton = true
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

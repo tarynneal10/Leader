@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class LoginVC : UIViewController {
+//    override func viewWillAppear(_ animated: Bool) {
+//
+//    }
     
 }
 //import UIKit

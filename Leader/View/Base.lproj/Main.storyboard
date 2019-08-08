@@ -203,7 +203,7 @@
             </objects>
             <point key="canvasLocation" x="2257" y="-1045"/>
         </scene>
-        <!--Ib Calendar Data Source-->
+        <!--CalendarViewController-->
         <scene sceneID="38T-VX-rDC">
             <objects>
                 <viewController title="CalendarViewController" id="fhp-0h-x8w" customClass="CalendarVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
@@ -253,10 +253,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="ibCalendarDataSource" destination="fhp-0h-x8w" id="zKS-FP-I8W"/>
-                                    <outlet property="ibCalendarDelegate" destination="fhp-0h-x8w" id="a8l-KM-tAx"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -272,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4P-gx-aYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1457" y="-262"/>
+            <point key="canvasLocation" x="1457" y="-233"/>
         </scene>
         <!--Competitive Events-->
         <scene sceneID="efN-uX-APc">
@@ -536,7 +532,7 @@
         <!--Log In-->
         <scene sceneID="TZD-JN-x67">
             <objects>
-                <viewController title="Log In" id="a3c-6Y-moX" sceneMemberID="viewController">
+                <viewController title="Log In" id="a3c-6Y-moX" customClass="LoginVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="REc-Tm-htn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -949,6 +945,6 @@
         <image name="SettingsTabBarItem" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OgH-7a-myC"/>
+        <segue reference="4l7-ts-uLl"/>
     </inferredMetricsTieBreakers>
 </document>
