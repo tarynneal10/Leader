@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class CompetitiveEventsVC : UITableViewController {
     
@@ -15,5 +16,7 @@ class CompetitiveEventsVC : UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
+    let events = CompetitiveEventsBank()
+    
     
 }

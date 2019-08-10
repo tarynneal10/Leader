@@ -9,16 +9,12 @@
 import Foundation
 import UIKit
 
-class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var settingsTableView: UITableView!
+class SettingsVC : UIViewController {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var chapterLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
-    let settingsCellLabelArray = ["Security", "Q&A", "Contact Us", "Bug Report", "Log Out"]
-    let settingsCellImageArray = [UIImage(named: "Logo2"), UIImage(named: "HomeIcon"), UIImage(named: "Logo2"), UIImage(named: "BugIcon"), UIImage(named: "HomeIcon")]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePicture.image = UIImage(named: "Logo2")
@@ -30,7 +26,6 @@ class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        settingsTableView.reloadData()
         //self.navigationItem.setHidesBackButton(true, animated: true)
 //        self.navigationItem.setLeftBarButtonItems(nil, animated: true)
 //        self.navigationItem.setHidesBackButton(true, animated:true)
@@ -39,21 +34,4 @@ class SettingsVC : UIViewController, UITableViewDataSource, UITableViewDelegate 
         //navigationController?.navigationBar.topItem?.hidesBackButton = true
 
     }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return settingsCellLabelArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath) as! SettingsTableCell
-        
-        cell.settingsCellLabel?.text = settingsCellLabelArray[indexPath.item]
-        cell.settingsCellImage?.image = settingsCellImageArray[indexPath.item]
-
-        return cell
-    }
-}
-class SettingsTableCell : UITableViewCell {
-    @IBOutlet weak var settingsCellLabel: UILabel!
-    @IBOutlet weak var settingsCellImage: UIImageView!
 }

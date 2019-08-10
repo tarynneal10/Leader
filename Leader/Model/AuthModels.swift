@@ -14,6 +14,7 @@ class Chapter : Object {
     @objc dynamic var done : Bool = false
     @objc dynamic var dateCreated : Date?
     let members = List<Member>()
+    let currentEvents = List<CurrentEvent>()
 }
 
 class Member : Object {

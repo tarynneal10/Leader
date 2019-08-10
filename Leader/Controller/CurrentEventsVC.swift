@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class CurrentEventsVC : UITableViewController {
+class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
 @IBOutlet var currentEventsTableView: UITableView!
     let currentEventsTitles = [("Logo2"),("HomeIcon"),("CalendarIcon"),("SettingsTabBarItem"),("SettingsIcon")]
     let currentEventsDates = [("9/6/19"),("8/4/19"),("1/2/20"),("4/3/5"),("3/5/6")]
@@ -23,24 +24,19 @@ class CurrentEventsVC : UITableViewController {
         currentEventsTableView.reloadData()
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentEventsTitles.count
-
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
-
+        
         cell.photoImageView?.image = currentEventsImages[indexPath.item]
         cell.nameLabel?.text = currentEventsTitles[indexPath.item]
         cell.dateLabel?.text = currentEventsDates[indexPath.item]
-
+        
         return cell
     }
-
-
     
 }
 
