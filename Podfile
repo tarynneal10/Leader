@@ -9,9 +9,5 @@ target 'Leader' do
   
 pod 'JTAppleCalendar'
 pod 'RealmSwift'
-pod 'Firebase'
-pod 'Firebase/Auth'
-pod 'Firebase/Database'
-pod 'Firebase/Analytics'
 
 end
