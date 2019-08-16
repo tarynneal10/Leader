@@ -561,6 +561,7 @@
                                     <color key="titleColor" red="0.039215686274509803" green="0.039215686274509803" blue="0.039215686274509803" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
+                                    <action selector="logInPressed:" destination="a3c-6Y-moX" eventType="touchUpInside" id="g4E-Nf-L21"/>
                                     <segue destination="J8h-BQ-s8e" kind="push" id="4l7-ts-uLl"/>
                                 </connections>
                             </button>
@@ -808,6 +809,13 @@
                                     <constraint firstAttribute="height" constant="50" id="z7E-eI-n0A"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Test Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="poP-Mg-Eic">
+                                <rect key="frame" x="123" y="492" width="146" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -892,6 +900,7 @@
                         <outlet property="nameLabel" destination="f9h-Qu-kfP" id="xdz-AF-aC5"/>
                         <outlet property="positionLabel" destination="kvv-UN-ABT" id="7vv-6F-b39"/>
                         <outlet property="profilePicture" destination="ak5-0K-YYv" id="nww-ip-A7y"/>
+                        <outlet property="testLabel" destination="poP-Mg-Eic" id="LfF-b6-BCy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VZX-BZ-fKO" userLabel="First Responder" sceneMemberID="firstResponder"/>

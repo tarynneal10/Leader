@@ -28,11 +28,11 @@ class CurrentEvent : Object {
     @objc dynamic var eventDate : String = ""
     @objc dynamic var eventDescription : String = ""
     @objc dynamic var eventCreator : String = ""
-    var parentChapter = LinkingObjects(fromType: Chapter.self, property: "currentEvents")
+   var parentChapter = LinkingObjects(fromType: Chapter.self, property: "currentEvents")
 }
-//
-//class CompetitiveEvents : Object {
-//    @objc dynamic var name : String = ""
-//    @objc dynamic var type : String = ""
-//    @objc dynamic var category : String = ""
-//}
+
+class CompetitiveEvents : Object {
+    @objc dynamic var name : String = ""
+    @objc dynamic var type : String = ""
+    @objc dynamic var category : String = ""
+}

@@ -11,10 +11,13 @@ import RealmSwift
 
 class Chapter : Object {
     @objc dynamic var name : String = ""
-    @objc dynamic var done : Bool = false
+    @objc dynamic var done : Bool = true
     @objc dynamic var dateCreated : Date?
     let members = List<Member>()
     let currentEvents = List<CurrentEvent>()
+    override static func primaryKey() -> String? {
+        return "name"
+    }
 }
 
 class Member : Object {

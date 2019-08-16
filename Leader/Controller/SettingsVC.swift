@@ -8,12 +8,16 @@
 
 import Foundation
 import UIKit
+import Realm
+import RealmSwift
 
 class SettingsVC : UIViewController {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var chapterLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
+    
+    let chapter = Chapter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +26,13 @@ class SettingsVC : UIViewController {
         // Do any additional setup after loading the view.
 //        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
 //        navigationItem.leftBarButtonItem = backButton
+        //var chapterName = getChapterName(name: "Marysville Getchell")
+        //testLabel.text = chapterName?.name
     }
-    
+//    func getChapterName(name: String) -> Chapter? {
+//        let realm = try! Realm()
+//        return realm.object(ofType: Chapter.self, forPrimaryKey: name)
+//    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //self.navigationItem.setHidesBackButton(true, animated: true)
@@ -34,4 +43,6 @@ class SettingsVC : UIViewController {
         //navigationController?.navigationBar.topItem?.hidesBackButton = true
 
     }
+    @IBOutlet weak var testLabel: UILabel!
+    
 }

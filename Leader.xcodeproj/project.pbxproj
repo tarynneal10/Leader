@@ -91,8 +91,8 @@
 		8B6B076822E8B1AF008C6885 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
 				9B5B921F22E7F37300B1985F /* Main.storyboard */,
+				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -436,7 +436,10 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -453,7 +456,10 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
