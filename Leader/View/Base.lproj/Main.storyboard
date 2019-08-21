@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -138,48 +137,48 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lgi-Hu-uNw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="150" height="125"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="150" id="I3Y-bh-elr"/>
                                                         <constraint firstAttribute="height" constant="125" id="ai2-md-nRO"/>
+                                                        <constraint firstAttribute="width" constant="125" id="uw5-n5-Qn4"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xIZ-vG-Vb6">
-                                                    <rect key="frame" x="150" y="0.0" width="225" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="125" y="0.0" width="250" height="32"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vil-y7-SBv">
-                                                    <rect key="frame" x="150" y="21" width="225" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <rect key="frame" x="125" y="32" width="250" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvx-OY-TdW">
-                                                    <rect key="frame" x="150" y="42" width="225" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mvx-OY-TdW">
+                                                    <rect key="frame" x="125" y="53" width="250" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="8Fx-9K-8b8"/>
-                                                <constraint firstItem="lgi-Hu-uNw" firstAttribute="top" secondItem="BcH-0f-ulp" secondAttribute="top" id="CGx-x9-Nzf"/>
-                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="top" secondItem="xIZ-vG-Vb6" secondAttribute="bottom" id="MbG-PA-CLs"/>
-                                                <constraint firstAttribute="trailing" secondItem="Vil-y7-SBv" secondAttribute="trailing" id="OBT-Pn-D8d"/>
-                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="OX2-I9-Kk5"/>
-                                                <constraint firstAttribute="trailing" secondItem="xIZ-vG-Vb6" secondAttribute="trailing" id="Rn8-j2-ici"/>
-                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="top" secondItem="Vil-y7-SBv" secondAttribute="bottom" id="TXG-Kk-r7N"/>
-                                                <constraint firstAttribute="trailing" secondItem="mvx-OY-TdW" secondAttribute="trailing" id="WDo-rx-Ur9"/>
-                                                <constraint firstAttribute="bottom" secondItem="mvx-OY-TdW" secondAttribute="bottom" id="djh-Uy-OYN"/>
-                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="top" secondItem="Vil-y7-SBv" secondAttribute="bottom" id="et6-4i-Ckh"/>
-                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="kVP-pa-Fdt"/>
-                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="mkb-Vv-RfV"/>
-                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="top" secondItem="BcH-0f-ulp" secondAttribute="top" id="mrx-6M-3MP"/>
-                                                <constraint firstItem="lgi-Hu-uNw" firstAttribute="leading" secondItem="BcH-0f-ulp" secondAttribute="leading" id="uVk-lQ-Zh3"/>
-                                                <constraint firstAttribute="bottom" secondItem="lgi-Hu-uNw" secondAttribute="bottom" id="vYl-Hz-t7n"/>
-                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="top" secondItem="xIZ-vG-Vb6" secondAttribute="bottom" id="xZC-Eo-R7a"/>
+                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="top" secondItem="Vil-y7-SBv" secondAttribute="bottom" id="B8q-5O-nYT"/>
+                                                <constraint firstAttribute="trailing" secondItem="Vil-y7-SBv" secondAttribute="trailing" id="Bmb-lI-Gfz"/>
+                                                <constraint firstAttribute="trailing" secondItem="mvx-OY-TdW" secondAttribute="trailing" id="IJF-6m-tZv"/>
+                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="top" secondItem="BcH-0f-ulp" secondAttribute="top" id="JUf-C6-XAI"/>
+                                                <constraint firstItem="lgi-Hu-uNw" firstAttribute="leading" secondItem="BcH-0f-ulp" secondAttribute="leading" id="PBM-If-NdT"/>
+                                                <constraint firstAttribute="bottom" secondItem="mvx-OY-TdW" secondAttribute="bottom" id="RPW-HY-jlM"/>
+                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="T9J-ho-nDO"/>
+                                                <constraint firstAttribute="bottom" secondItem="lgi-Hu-uNw" secondAttribute="bottom" id="Wu7-fS-rlU"/>
+                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="top" secondItem="xIZ-vG-Vb6" secondAttribute="bottom" id="XAg-qD-cAA"/>
+                                                <constraint firstItem="lgi-Hu-uNw" firstAttribute="top" secondItem="BcH-0f-ulp" secondAttribute="top" id="YH1-1y-wwY"/>
+                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="top" secondItem="xIZ-vG-Vb6" secondAttribute="bottom" id="ck9-NA-f1b"/>
+                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="top" secondItem="Vil-y7-SBv" secondAttribute="bottom" id="eRs-Gr-5yF"/>
+                                                <constraint firstAttribute="trailing" secondItem="xIZ-vG-Vb6" secondAttribute="trailing" id="eUA-XS-KWx"/>
+                                                <constraint firstItem="Vil-y7-SBv" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="egl-ZD-ebB"/>
+                                                <constraint firstItem="mvx-OY-TdW" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="jh5-s9-V7V"/>
+                                                <constraint firstItem="xIZ-vG-Vb6" firstAttribute="leading" secondItem="lgi-Hu-uNw" secondAttribute="trailing" id="snO-ah-nal"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <accessibility key="accessibilityConfiguration">

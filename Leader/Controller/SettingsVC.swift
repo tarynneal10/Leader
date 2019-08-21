@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-//import Realm
-//import RealmSwift
+import Realm
+import RealmSwift
 
 class SettingsVC : UIViewController {
     @IBOutlet weak var positionLabel: UILabel!
@@ -18,21 +18,19 @@ class SettingsVC : UIViewController {
     @IBOutlet weak var profilePicture: UIImageView!
     
     //let chapter = Chapter()
-    
+    let realm = try! Realm()
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePicture.image = UIImage(named: "Logo2")
+        let chapterName = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
+       // print(chapterName.first as Any)
+        testLabel.text = chapterName.first?.name
         //nameLabel.text = ""
         // Do any additional setup after loading the view.
 //        let backButton = UIBarButtonItem(title: "", style: .plain, target: navigationController, action: nil)
 //        navigationItem.leftBarButtonItem = backButton
-        //var chapterName = getChapterName(name: "Marysville Getchell")
-        //testLabel.text = chapterName?.name
     }
-//    func getChapterName(name: String) -> Chapter? {
-//        let realm = try! Realm()
-//        return realm.object(ofType: Chapter.self, forPrimaryKey: name)
-//    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //self.navigationItem.setHidesBackButton(true, animated: true)
