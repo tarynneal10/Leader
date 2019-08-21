@@ -16,7 +16,7 @@ class LoginVC : UIViewController {
 //
 //    }
     
-//let realm = try! Realm()
+let realm = try! Realm()
 //let testChapter = Chapter()
     
     @IBAction func logInPressed(_ sender: Any) {

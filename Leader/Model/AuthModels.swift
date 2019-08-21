@@ -8,16 +8,16 @@
 
 import Foundation
 import RealmSwift
-
+//
 class Chapter : Object {
     @objc dynamic var name : String = ""
-    @objc dynamic var done : Bool = true
     @objc dynamic var dateCreated : Date?
+    @objc dynamic var done : Bool = true
     let members = List<Member>()
     let currentEvents = List<CurrentEvent>()
-    override static func primaryKey() -> String? {
-        return "name"
-    }
+//    override static func primaryKey() -> String? {
+//        return "name"
+//    }
 }
 
 class Member : Object {

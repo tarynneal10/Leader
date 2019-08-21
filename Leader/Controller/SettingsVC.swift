@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-import Realm
-import RealmSwift
+//import Realm
+//import RealmSwift
 
 class SettingsVC : UIViewController {
     @IBOutlet weak var positionLabel: UILabel!
@@ -17,7 +17,7 @@ class SettingsVC : UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     
-    let chapter = Chapter()
+    //let chapter = Chapter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
