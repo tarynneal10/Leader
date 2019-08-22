@@ -28,8 +28,9 @@ class CurrentEvent : Object {
     @objc dynamic var eventDate : String = ""
     @objc dynamic var eventDescription : String = ""
     @objc dynamic var eventCreator : String = ""
+    //@objc dynamic var chapterName : String = Chapter().name
     //@objc dynamic var eventImage : UIImage?
-   var parentChapter = LinkingObjects(fromType: Chapter.self, property: "currentEvents")
+    var parentChapter = LinkingObjects(fromType: Chapter.self, property: "currentEvents")
 }
 
 class CompetitiveEvents : Object {

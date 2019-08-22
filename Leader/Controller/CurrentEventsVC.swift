@@ -16,24 +16,44 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 @IBOutlet var currentEventsTableView: UITableView!
     let realm = try! Realm()
     var currentEvents: Results<CurrentEvent>?
+//    var currentChapter : Chapter? {
+//        didSet{
+//            loadItems()
+//        }
+//    }
+  //  var currentChapter : Chapter?
+   // let chapter = Chapter()
+
  //   let currentEventsDates = [("9/6/19"),("8/4/19"),("1/2/20"),("4/3/5"),("3/5/6")]
   //  let currentEventsImages = [UIImage(named: "Logo2"), UIImage(named: "HomeIcon"), UIImage(named: "Logo2"), UIImage(named: "CalendarIcon"), UIImage(named: "HomeIcon")]
   //  let currentEvent = CurrentEvent()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentEventsTableView.separatorStyle = .none
-//        currentEvent.eventTitle = "First Meeting of The Year"
-//        currentEvent.eventDate = "9/12/2019"
-//        currentEvent.eventDescription = "This is the first meetings of the 2019-2020 school year. It will be at 2:30pm in rm 202 ISC"
+        //currentEventsTableView.separatorStyle = .none
+        //Code to add a current event to realm
+//        let currentEvent = CurrentEvent()
+//        currentEvent.eventTitle = "Best Day of the year"
+//        currentEvent.eventDate = "10/10/19"
+//        currentEvent.eventDescription = "Because it is. meet @ 7:35am"
 ////        currentEvent.eventImage = UIImage(named: "CurrentEventImageTest")
 //        try! realm.write  {
 //            realm.add(currentEvent)
+//           // currentChapter?.currentEvents.append(currentEvent)
 //        }
+        //Code to filter through object values
     //let currentEvents = realm.objects(CurrentEvent.self).filter("parentChapter like 'Marysville Getchell'")
-//print(currentEvents.first as Any)
-    }
+        //Could make values like the ones below and use later on for more automation
+        //let chapterName = currentUser.chapter
+        //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)")
+        
+        currentEventsTableView.reloadData()
 
+       loadItems()
+        print(currentEvents?.first as Any)
+//         let currentChapter = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
+//        print(currentChapter)
+    }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -47,6 +67,8 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
+           //let why = currentEvents?.filter("eventTitle like 'First Meeting of The Year'")
+        //todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
 //        let currentEventsTitles = currentEvents.eventTitle
 //        let currentEventsDates = currentEvents.eventDate
 //        let currentEventsDescriptions = currentEvents.eventDescription
@@ -54,9 +76,10 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 //        cell.nameLabel?.text = currentEventsTitles[indexPath.item]
 //        cell.dateLabel?.text = currentEventsDates[indexPath.item]
         //let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        
+
         if let event = currentEvents?[indexPath.row] {
-            
+            //current problem if something along the lines of the current event isn't actually associated with the chapter, but it is there- need to figure out to generate current event specifically for chapter- need to figure out how to programativally add new object to array- can also generate object then do manually?
+            //problem is now that I can load up all the current events but I can't sort them by their parent category
             cell.nameLabel?.text = event.eventTitle
             cell.dateLabel?.text = event.eventDate
             cell.descriptionLabel?.text = event.eventDescription
@@ -69,13 +92,24 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 //                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
 //
 //            }
+            
         }
         else {
             cell.nameLabel?.text = "No Items Added"
+            //Set up better GUI protocols here- maybe something like cell.imageView.hidden = true at first, then set to false here & tap into the .hidden of other objects and set to true.
         }
         return cell
+       
     }
-    
+    func loadItems() {
+        //currentEvents = currentChapter?.currentEvents.sorted(byKeyPath: "eventTitle", ascending: true)
+        currentEvents = realm.objects(CurrentEvent.self)
+//        let currentChapter = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
+//        currentEvents = currentChapter
+        currentEventsTableView.reloadData()
+        
+    }
+
 }
 
 class CurrentEventsCell : UITableViewCell {
