@@ -21,7 +21,7 @@ class CompetitiveEventsVC : UITableViewController {
     
 }
 //Code example for search bar methods
-//extension ToDoListViewController: UISearchBarDelegate {
+extension CompetitiveEventsVC: UISearchBarDelegate {
 //
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //
@@ -40,4 +40,4 @@ class CompetitiveEventsVC : UITableViewController {
 //
 //        }
 //    }
-//}
+}

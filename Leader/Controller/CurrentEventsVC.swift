@@ -15,18 +15,8 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
     
 @IBOutlet var currentEventsTableView: UITableView!
     let realm = try! Realm()
-    var currentEvents: Results<CurrentEvent>?
-//    var currentChapter : Chapter? {
-//        didSet{
-//            loadItems()
-//        }
-//    }
-  //  var currentChapter : Chapter?
-   // let chapter = Chapter()
-
- //   let currentEventsDates = [("9/6/19"),("8/4/19"),("1/2/20"),("4/3/5"),("3/5/6")]
-  //  let currentEventsImages = [UIImage(named: "Logo2"), UIImage(named: "HomeIcon"), UIImage(named: "Logo2"), UIImage(named: "CalendarIcon"), UIImage(named: "HomeIcon")]
-  //  let currentEvent = CurrentEvent()
+    var currentEvents: List<CurrentEvent>?
+    var currentChapter : Results<Chapter>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,18 +31,12 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 //            realm.add(currentEvent)
 //           // currentChapter?.currentEvents.append(currentEvent)
 //        }
-        //Code to filter through object values
-    //let currentEvents = realm.objects(CurrentEvent.self).filter("parentChapter like 'Marysville Getchell'")
         //Could make values like the ones below and use later on for more automation
         //let chapterName = currentUser.chapter
         //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)")
         
         currentEventsTableView.reloadData()
-
-       loadItems()
-        print(currentEvents?.first as Any)
-//         let currentChapter = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
-//        print(currentChapter)
+        loadItems()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -67,31 +51,12 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
-           //let why = currentEvents?.filter("eventTitle like 'First Meeting of The Year'")
-        //todoItems = selectedCategory?.items.sorted(byKeyPath: "title", ascending: true)
-//        let currentEventsTitles = currentEvents.eventTitle
-//        let currentEventsDates = currentEvents.eventDate
-//        let currentEventsDescriptions = currentEvents.eventDescription
-//      //  cell.photoImageView?.image = currentEventsImages[indexPath.item]
-//        cell.nameLabel?.text = currentEventsTitles[indexPath.item]
-//        cell.dateLabel?.text = currentEventsDates[indexPath.item]
-        //let cell = super.tableView(tableView, cellForRowAt: indexPath)
 
         if let event = currentEvents?[indexPath.row] {
-            //current problem if something along the lines of the current event isn't actually associated with the chapter, but it is there- need to figure out to generate current event specifically for chapter- need to figure out how to programativally add new object to array- can also generate object then do manually?
-            //problem is now that I can load up all the current events but I can't sort them by their parent category
+            
             cell.nameLabel?.text = event.eventTitle
             cell.dateLabel?.text = event.eventDate
             cell.descriptionLabel?.text = event.eventDescription
-            
-            //cell.accessoryType = item.done ? .checkmark : .none
-            
-//            if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
-//
-//                cell.backgroundColor = color
-//                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
-//
-//            }
             
         }
         else {
@@ -102,10 +67,11 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
        
     }
     func loadItems() {
-        //currentEvents = currentChapter?.currentEvents.sorted(byKeyPath: "eventTitle", ascending: true)
-        currentEvents = realm.objects(CurrentEvent.self)
-//        let currentChapter = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
-//        currentEvents = currentChapter
+        let predicate = NSPredicate(format: "name = %@", "Marysville Getchell")
+        // let predicate = NSPredicate(format: "color = %@ AND name BEGINSWITH %@", "tan", "B")
+        currentChapter = realm.objects(Chapter.self).filter(predicate)
+        currentEvents = currentChapter?.first?.currentEvents
+
         currentEventsTableView.reloadData()
         
     }
