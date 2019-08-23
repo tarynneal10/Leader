@@ -11,13 +11,8 @@ import RealmSwift
 //
 class Chapter : Object {
     @objc dynamic var name : String = ""
-    @objc dynamic var dateCreated : Date?
-    @objc dynamic var done : Bool = true
     let members = List<Member>()
     let currentEvents = List<CurrentEvent>()
-//    override static func primaryKey() -> String? {
-//        return "name"
-//    }
 }
 
 class Member : Object {
@@ -30,5 +25,6 @@ class Member : Object {
     @objc dynamic var profilePhoto : String = ""
     @objc dynamic var profileBio : String = ""
     @objc dynamic var awards : String = ""
+    let competitiveEvents = List<CompetitiveEvents>()
     var parentChapter = LinkingObjects(fromType: Chapter.self, property: "members")
 }

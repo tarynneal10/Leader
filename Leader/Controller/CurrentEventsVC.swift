@@ -26,7 +26,6 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 //        currentEvent.eventTitle = "Best Day of the year"
 //        currentEvent.eventDate = "10/10/19"
 //        currentEvent.eventDescription = "Because it is. meet @ 7:35am"
-////        currentEvent.eventImage = UIImage(named: "CurrentEventImageTest")
 //        try! realm.write  {
 //            realm.add(currentEvent)
 //           // currentChapter?.currentEvents.append(currentEvent)
@@ -35,8 +34,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
         //let chapterName = currentUser.chapter
         //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)")
         
-        currentEventsTableView.reloadData()
-        loadItems()
+        loadCurrentEvents()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -66,7 +64,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
         return cell
        
     }
-    func loadItems() {
+    func loadCurrentEvents() {
         let predicate = NSPredicate(format: "name = %@", "Marysville Getchell")
         // let predicate = NSPredicate(format: "color = %@ AND name BEGINSWITH %@", "tan", "B")
         currentChapter = realm.objects(Chapter.self).filter(predicate)
