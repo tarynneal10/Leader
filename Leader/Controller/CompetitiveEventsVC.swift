@@ -12,25 +12,30 @@ import Realm
 import RealmSwift
 
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+//running into weird bug where values show up differently when I run on my phone- look at after integrated more functionality
+    
     @IBOutlet var competitiveEventsTableView: UITableView!
     let realm = try! Realm()
     var competitiveEvents : Results<CompetitiveEvents>?
+    var selectedEvent : CompetitiveEvents?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         //Code to add a competitive event to realm- could make array when finially want to add all of them for prod- for now just add a few to test
 //                let newEvent = CompetitiveEvents()
-//                newEvent.name = "Mobile App"
-//                newEvent.category = "Demonstration"
-//                newEvent.type = "Individual or Team"
+//                newEvent.name = "3-D Animation"
+//        newEvent.category = "Prejuged Project"
+//                newEvent.type = "Why"
 //                try! realm.write  {
 //                    realm.add(newEvent)
 //                }
+       
+        
         loadCompetitiveEvents()
         
     }
+
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return competitiveEvents?.count ?? 1
@@ -38,7 +43,6 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
-        
         if let event = competitiveEvents?[indexPath.row] {
             
             cell.eventName?.text = event.name
@@ -58,29 +62,36 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         competitiveEvents = realm.objects(CompetitiveEvents.self)
         competitiveEventsTableView.reloadData()
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //competitiveEvents?.first?. =
+        //selectedEvent = competitiveEvents.
+        
+    //Might be able to do it by setting up an integer value for each of the events ... I'm sorting by name right now. Going to try todoey's version rn but ultimately will probs end up attributing to some value when loaded here then cqallling this class and tapping into that value. Could also reference center card's code.
+    }
 }
-//Code example for search bar methods
-//extension CompetitiveEventsVC: UISearchBarDelegate {
-//
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//
-//        competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
-//
-//        competitiveEventsTableView.reloadData()
-//    }
-//
-//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        if searchBar.text?.count == 0 {
-//            loadCompetitiveEvents()
-//
-//            DispatchQueue.main.async {
-//                searchBar.resignFirstResponder()
-//            }
-//
-//        }
-//    }
-//
-//}
+//Code example for search bar methods- note that it crashes every time I click search
+extension CompetitiveEventsVC: UISearchBarDelegate {
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
+//Still need to get it to accept search filters for category and type
+        
+        competitiveEventsTableView.reloadData()
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadCompetitiveEvents()
+
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+
+        }
+    }
+    
+//* Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'unable to dequeue a cell with identifier competitiveEventsCell - must register a nib or a class for the identifier or connect a prototype cell in a storyboard'- This is the error from when I try and run the app
+}
 class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventCategory: UILabel!

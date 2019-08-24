@@ -8,5 +8,5 @@ target 'Leader' do
   # Pods for Leader
   
 pod 'RealmSwift'
-
+# pod 'JTAppleCalendar', '~>; 7.1.7'
 end
