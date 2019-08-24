@@ -21,7 +21,7 @@ let realm = try! Realm()
     
     @IBAction func logInPressed(_ sender: Any) {
         // for swift 2.0 Xcode 7
-        //print(Realm.Configuration.defaultConfiguration.fileURL!)
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         //testChapter.name = "Marysville Getchell"
 //        try! realm.write  {
 //            //realm.add(testChapter)

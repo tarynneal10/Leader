@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Realm
 import RealmSwift
-
+//K so the problem with realm is that it doesn't update between devices. I could possibly with something like competitive events mantain it entirely by downloading it when they first download the app onto their local realm
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 //running into weird bug where values show up differently when I run on my phone- look at after integrated more functionality
     
@@ -18,7 +18,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     let realm = try! Realm()
     var competitiveEvents : Results<CompetitiveEvents>?
     var selectedEvent : CompetitiveEvents?
-    
+    var selectedRow : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,8 +35,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         loadCompetitiveEvents()
         
     }
-
-
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return competitiveEvents?.count ?? 1
     }
@@ -63,6 +62,18 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         competitiveEventsTableView.reloadData()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row >= 0 {
+//        }
+        selectedRow = indexPath.row
+       //var amountOfEvents = competitiveEvents?.count
+       
+        
+        //Now I have it's number
+       // var selectedItem = indexPath.item
+        //So from the copetitive events results that I'm currently sorting through I can get the values of what is first and what is last. From the indexpath.row/.item I can get the integer number of the row that I clicked on. I am sorting the results by when they were added (Need to change that soon) and I need a way to sort through them and say I want result number two because I clicked indexPath.row number two. I can also get the total number of competitiveEvents
+      //  selectedEvent?.name = indexPath.row
+        
+       // indexPath.row.eventName
         //competitiveEvents?.first?. =
         //selectedEvent = competitiveEvents.
         

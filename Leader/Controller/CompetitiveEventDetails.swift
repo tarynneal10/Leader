@@ -13,13 +13,15 @@ import RealmSwift
 
 class CompetitiveEventDetailsVC : UIViewController {
     let realm = try! Realm()
-    var competitiveEvents : Results<CompetitiveEvents>?
-    var eventName : String?
-    var selectedEvent : CompetitiveEvents? {
-        didSet{
-            loadDetails()
-        }
-    }
+    var competitiveEventsDetails : Results<CompetitiveEvents>?
+    let CompetitiveEventsClass = CompetitiveEventsVC()
+    
+    
+//    var selectedEvent : CompetitiveEvents? {
+//        didSet{
+//            loadDetails()
+//        }
+//    }
     
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -28,8 +30,7 @@ class CompetitiveEventDetailsVC : UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        // loadCompetitiveEvents()
-        nameLabel.text = eventName
-        
+        setTextValues()
         
     }
     func loadDetails() {
@@ -41,9 +42,14 @@ class CompetitiveEventDetailsVC : UIViewController {
 //    func selectedEvent() {
 //        competitiveEvents = realm.objects(CompetitiveEvents.self).filter("")
 //    }
-//    func setTextValues() {
-//        typeLabel.text = competitiveEvents?.first?.name
-//
-//    }
+    func findEventDetails() {
+        
+    }
+    func setTextValues() {
+        typeLabel.text = competitiveEventsDetails?.first?.type
+        categoryLabel.text = competitiveEventsDetails?.first?.category
+        nameLabel.text = competitiveEventsDetails?.first?.name
+//Should probs set up a parameter or two for when there's no value
+    }
 //
 }
