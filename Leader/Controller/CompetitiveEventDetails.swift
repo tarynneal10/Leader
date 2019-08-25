@@ -8,15 +8,15 @@
 
 import Foundation
 import UIKit
-import Realm
-import RealmSwift
+//import Realm
+//import RealmSwift
 
 class CompetitiveEventDetailsVC : UIViewController {
-    let realm = try! Realm()
-    var competitiveEventsDetails : Results<CompetitiveEvents>?
-    let CompetitiveEventsClass = CompetitiveEventsVC()
-    
-    
+//    let realm = try! Realm()
+//    var competitiveEventsDetails : Results<CompetitiveEvents>?
+//    let CompetitiveEventsClass = CompetitiveEventsVC()
+//
+//
 //    var selectedEvent : CompetitiveEvents? {
 //        didSet{
 //            loadDetails()
@@ -46,10 +46,10 @@ class CompetitiveEventDetailsVC : UIViewController {
         
     }
     func setTextValues() {
-        typeLabel.text = competitiveEventsDetails?.first?.type
-        categoryLabel.text = competitiveEventsDetails?.first?.category
-        nameLabel.text = competitiveEventsDetails?.first?.name
-//Should probs set up a parameter or two for when there's no value
+//        typeLabel.text = competitiveEventsDetails?.first?.type
+//        categoryLabel.text = competitiveEventsDetails?.first?.category
+//        nameLabel.text = competitiveEventsDetails?.first?.name
+////Should probs set up a parameter or two for when there's no value
     }
 //
 }

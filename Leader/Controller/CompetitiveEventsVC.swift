@@ -8,17 +8,17 @@
 
 import Foundation
 import UIKit
-import Realm
-import RealmSwift
+//import Realm
+//import RealmSwift
 //K so the problem with realm is that it doesn't update between devices. I could possibly with something like competitive events mantain it entirely by downloading it when they first download the app onto their local realm
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 //running into weird bug where values show up differently when I run on my phone- look at after integrated more functionality
     
     @IBOutlet var competitiveEventsTableView: UITableView!
-    let realm = try! Realm()
-    var competitiveEvents : Results<CompetitiveEvents>?
-    var selectedEvent : CompetitiveEvents?
-    var selectedRow : Int?
+//    let realm = try! Realm()
+//    var competitiveEvents : Results<CompetitiveEvents>?
+//    var selectedEvent : CompetitiveEvents?
+//    var selectedRow : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -36,35 +36,35 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         
     }
  
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return competitiveEvents?.count ?? 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
-        if let event = competitiveEvents?[indexPath.row] {
-            
-            cell.eventName?.text = event.name
-            cell.eventCategory?.text = event.category
-            cell.eventType?.text = event.type
-            
-        }
-        else {
-            cell.eventName?.text = "No Items Added"
-            cell.eventCategory?.isHidden = true
-            cell.eventType?.isHidden = true
-            //Set up better GUI protocols here- maybe something like cell.imageView.isHidden = true at first, then set to false here & tap into the .isHidden of other objects and set to true.
-        }
-        return cell
-    }
-    func loadCompetitiveEvents() {
-        competitiveEvents = realm.objects(CompetitiveEvents.self)
-        competitiveEventsTableView.reloadData()
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return competitiveEvents?.count ?? 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
+//        if let event = competitiveEvents?[indexPath.row] {
+//            
+//            cell.eventName?.text = event.name
+//            cell.eventCategory?.text = event.category
+//            cell.eventType?.text = event.type
+//            
+//        }
+//        else {
+//            cell.eventName?.text = "No Items Added"
+//            cell.eventCategory?.isHidden = true
+//            cell.eventType?.isHidden = true
+//            //Set up better GUI protocols here- maybe something like cell.imageView.isHidden = true at first, then set to false here & tap into the .isHidden of other objects and set to true.
+//        }
+//        return cell
+//    }
+//    func loadCompetitiveEvents() {
+//        competitiveEvents = realm.objects(CompetitiveEvents.self)
+//        competitiveEventsTableView.reloadData()
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if indexPath.row >= 0 {
 //        }
-        selectedRow = indexPath.row
+       // selectedRow = indexPath.row
        //var amountOfEvents = competitiveEvents?.count
        
         
@@ -84,7 +84,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 extension CompetitiveEventsVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
+     //   competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
 //Still need to get it to accept search filters for category and type
         
         competitiveEventsTableView.reloadData()
@@ -92,7 +92,7 @@ extension CompetitiveEventsVC: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-            loadCompetitiveEvents()
+           // loadCompetitiveEvents()
 
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()

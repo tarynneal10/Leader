@@ -8,20 +8,20 @@
 
 import Foundation
 import UIKit
-import RealmSwift
-import Realm
+//import RealmSwift
+//import Realm
 
 class LoginVC : UIViewController {
 //    override func viewWillAppear(_ animated: Bool) {
 //
 //    }
     
-let realm = try! Realm()
+//let realm = try! Realm()
 //let testChapter = Chapter()
     
     @IBAction func logInPressed(_ sender: Any) {
         // for swift 2.0 Xcode 7
-        print(Realm.Configuration.defaultConfiguration.fileURL!)
+       // print(Realm.Configuration.defaultConfiguration.fileURL!)
         //testChapter.name = "Marysville Getchell"
 //        try! realm.write  {
 //            //realm.add(testChapter)

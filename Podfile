@@ -6,7 +6,8 @@ target 'Leader' do
   use_frameworks!
 
   # Pods for Leader
-  
-pod 'RealmSwift'
-# pod 'JTAppleCalendar', '~>; 7.1.7'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
+  #pod 'Firebase'
 end
