@@ -32,16 +32,17 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 //                }
        
         
-        loadCompetitiveEvents()
+     //   loadCompetitiveEvents()
         
     }
  
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return competitiveEvents?.count ?? 1
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //return competitiveEvents?.count ?? 1
+        return 0
+    }
+//
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
 //        if let event = competitiveEvents?[indexPath.row] {
 //            
 //            cell.eventName?.text = event.name
@@ -55,8 +56,8 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 //            cell.eventType?.isHidden = true
 //            //Set up better GUI protocols here- maybe something like cell.imageView.isHidden = true at first, then set to false here & tap into the .isHidden of other objects and set to true.
 //        }
-//        return cell
-//    }
+        return cell
+    }
 //    func loadCompetitiveEvents() {
 //        competitiveEvents = realm.objects(CompetitiveEvents.self)
 //        competitiveEventsTableView.reloadData()

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 //import Realm
 //import RealmSwift
 
@@ -18,6 +19,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 //    var currentEvents: List<CurrentEvent>?
 //    var currentChapter : Results<Chapter>?
 //
+   var db: Firestore!
     override func viewDidLoad() {
         super.viewDidLoad()
         //currentEventsTableView.separatorStyle = .none
@@ -33,7 +35,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
         //Could make values like the ones below and use later on for more automation
         //let chapterName = currentUser.chapter
         //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)")
-        
+       //addToFirestore()
         loadCurrentEvents()
     }
 
@@ -73,6 +75,39 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
         currentEventsTableView.reloadData()
         
+    }
+    func addToFirestore() {
+        var ref: DocumentReference? = nil
+        ref = db.collection("members").addDocument(data: [
+            "name": "Ada",
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+        ref = db.collection("members").addDocument(data: [
+            "name": "Alan",
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    func readFromFirestore() {
+        db.collection("users").getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                }
+            }
+        }
+
     }
 
 }
