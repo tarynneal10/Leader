@@ -15,28 +15,21 @@ import Firebase
 class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
 @IBOutlet var currentEventsTableView: UITableView!
-//    let realm = try! Realm()
-//    var currentEvents: List<CurrentEvent>?
-//    var currentChapter : Results<Chapter>?
-//
+
    var db: Firestore!
+    var query : Query?
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Add a new document with a generated ID
+        db = Firestore.firestore()
+        query = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
+        
         //currentEventsTableView.separatorStyle = .none
-        //Code to add a current event to realm
-//        let currentEvent = CurrentEvent()
-//        currentEvent.eventTitle = "Best Day of the year"
-//        currentEvent.eventDate = "10/10/19"
-//        currentEvent.eventDescription = "Because it is. meet @ 7:35am"
-//        try! realm.write  {
-//            realm.add(currentEvent)
-//           // currentChapter?.currentEvents.append(currentEvent)
-//        }
         //Could make values like the ones below and use later on for more automation
         //let chapterName = currentUser.chapter
-        //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)")
-       //addToFirestore()
-        loadCurrentEvents()
+        //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)"
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -47,58 +40,91 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //return currentEventsTitles.count
         //return currentEvents?.count ?? 1
-        return 0
+        return 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
+//        query?.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    //                    if let event = document.data()[indexPath.row] {
+//                    //                      //  cell.nameLabel?.text = document.data()
+//                    //
+//                    //                    }
+//                    //                    else {
+//                    //                        //            cell.nameLabel?.text = "No Items Added"
+//                    //                        //            //Set up better GUI protocols here- maybe something like cell.imageView.hidden = true at first, then set to false here & tap into the .hidden of other objects and set to true.
+//                    //                    }
+//                    cell.nameLabel?.text = "\(document.data())"
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+              let docRef = db.collection("currentevents").document("4GB8y70hAf92oPIVFib3")
+//                let currentEventDoc = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
 //
-//        if let event = currentEvents?[indexPath.row] {
+                docRef.getDocument { (document, error) in
+                    if let document = document, document.exists {
+                        let property = document.get("title")
+                        cell.nameLabel?.text = "\(String(describing: property))"
+                       // print("\(property)")
+                      //  print("Document data: \(document.data())")
+                    } else {
+                        print("Document does not exist")
+                    }
+        }
+//        db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
+//        .getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//            } else {
+//                for document in querySnapshot!.documents {
+////                    if let event = document.data()[indexPath.row] {
+////                      //  cell.nameLabel?.text = document.data()
+////
+////                    }
+////                    else {
+////                        //            cell.nameLabel?.text = "No Items Added"
+////                        //            //Set up better GUI protocols here- maybe something like cell.imageView.hidden = true at first, then set to false here & tap into the .hidden of other objects and set to true.
+////                    }
 //
-//            cell.nameLabel?.text = event.eventTitle
-//            cell.dateLabel?.text = event.eventDate
-//            cell.descriptionLabel?.text = event.eventDescription
-//
-//        }
-//        else {
-//            cell.nameLabel?.text = "No Items Added"
-//            //Set up better GUI protocols here- maybe something like cell.imageView.hidden = true at first, then set to false here & tap into the .hidden of other objects and set to true.
-//        }
+//                    print("\(document.documentID) => \(document.data())")
+//                }
+//            }
+       // }
+        
+        
        return cell
         
     }
     func loadCurrentEvents() {
-      //  let predicate = NSPredicate(format: "name = %@", "Marysville Getchell")
-        // let predicate = NSPredicate(format: "color = %@ AND name BEGINSWITH %@", "tan", "B")
-//        currentChapter = realm.objects(Chapter.self).filter(predicate)
-//        currentEvents = currentChapter?.first?.currentEvents
 
         currentEventsTableView.reloadData()
         
     }
+//    func setData() {
+//        let data: [String: Any] = [:]
+//        db.collection("chapter").document("new-chapter-id").setData(data)
+////    }
     func addToFirestore() {
-        var ref: DocumentReference? = nil
-        ref = db.collection("members").addDocument(data: [
-            "name": "Ada",
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-        ref = db.collection("members").addDocument(data: [
-            "name": "Alan",
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("users").addDocument(data: [
+//            "first": "Ada",
+//            "last": "Lovelace",
+//            "born": 1815
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+
     }
+
     func readFromFirestore() {
-        db.collection("users").getDocuments() { (querySnapshot, err) in
+        db.collection("currentevents").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -107,10 +133,13 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
                 }
             }
         }
+    }
+    func getCurrentEvents() {
 
     }
-
+    
 }
+    
 
 class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
