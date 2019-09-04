@@ -6,8 +6,11 @@
 //  Copyright © 2019 Taryn Neal. All rights reserved.
 //
 //So this VC is gonna host ish like current events, competitive events, and whatever else I stick a table view in- remember to convert settings to buttons based VC once current events works
+
 import Foundation
-//import RealmSwift
+//import Firebase
+//import FirebaseFirestore
+//
 
 //Example Code:
 //class Item: Object {
@@ -40,12 +43,4 @@ import Foundation
 ////class CompetitiveEventDetails : Object {
 ////    @objc dynamic var overview : String = ""
 ////}
-////struct ColorsConfig {
-////    static let selectedText = UIColor.white
-////    static let text = UIColor.black
-////    static let textDisabled = UIColor.gray
-////    static let selectionBackground = UIColor(red: 0.2, green: 0.2, blue: 1.0, alpha: 1.0)
-////    static let sundayText = UIColor(red: 1.0, green: 0.2, blue: 0.2, alpha: 1.0)
-////    static let sundayTextDisabled = UIColor(red: 1.0, green: 0.6, blue: 0.6, alpha: 1.0)
-////    static let sundaySelectionBackground = sundayText
-////}
+

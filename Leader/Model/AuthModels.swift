@@ -7,8 +7,7 @@
 //
 
 import Foundation
-//import RealmSwift
-////
+
 //class Chapter : Object {
 //    @objc dynamic var name : String = ""
 //    let members = List<Member>()
