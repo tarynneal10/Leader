@@ -8,8 +8,6 @@
 
 import Foundation
 import UIKit
-//import Realm
-//import RealmSwift
 
 class CompetitiveEventDetailsVC : UIViewController {
 //    let realm = try! Realm()

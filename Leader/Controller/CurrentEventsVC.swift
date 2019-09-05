@@ -56,6 +56,9 @@ var dataCount : Int?
                         print("\(document.documentID) => \(document.data())")
                         self.dataCount = document.data().count
                         cell.nameLabel.text = document.get("name") as? String
+                        //While the strings work, the timestamp doesn't. Will need to look into more.
+                       // cell.dateLabel.text = document.get("date") as? String
+                        cell.descriptionLabel.text = document.get("description") as? String
                     }
                 }
             }
