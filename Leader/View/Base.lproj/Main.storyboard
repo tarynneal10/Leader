@@ -612,7 +612,7 @@
         <!--Member Sign Up-->
         <scene sceneID="9aE-13-WKI">
             <objects>
-                <viewController title="Member Sign Up" id="6Wi-HQ-Kb6" sceneMemberID="viewController">
+                <viewController title="Member Sign Up" id="6Wi-HQ-Kb6" customClass="SignUpVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oee-Ib-tNf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -657,13 +657,18 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Sign Up"/>
                                 <connections>
-                                    <segue destination="J8h-BQ-s8e" kind="push" id="OgH-7a-myC"/>
+                                    <action selector="signUpPressed:" destination="6Wi-HQ-Kb6" eventType="touchUpInside" id="h6e-0e-Ins"/>
+                                    <segue destination="J8h-BQ-s8e" kind="push" identifier="goToTabs" id="OgH-7a-myC"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="pwg-4r-om8"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="dwh-lQ-Lqa" id="Zjg-z6-dak"/>
+                        <outlet property="passwordTextField" destination="8Z4-lm-TLc" id="U2r-Eu-tFd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XRN-Bx-Xzz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -704,10 +709,10 @@
                                 </state>
                                 <connections>
                                     <action selector="logInPressed:" destination="a3c-6Y-moX" eventType="touchUpInside" id="g4E-Nf-L21"/>
-                                    <segue destination="J8h-BQ-s8e" kind="push" id="4l7-ts-uLl"/>
+                                    <segue destination="J8h-BQ-s8e" kind="push" identifier="goToTabs" id="4l7-ts-uLl"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FK7-Yx-2G9">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FK7-Yx-2G9">
                                 <rect key="frame" x="60" y="361" width="255" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
@@ -716,7 +721,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BjE-LY-nT4">
                                 <rect key="frame" x="0.0" y="64" width="375" height="227"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Username" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6qX-2n-hZ3">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6qX-2n-hZ3">
                                 <rect key="frame" x="60" y="311" width="255" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
@@ -743,6 +748,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ke4-hN-Bq4"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="6qX-2n-hZ3" id="sUz-T2-3Se"/>
+                        <outlet property="passwordTextField" destination="FK7-Yx-2G9" id="oFb-jz-9cL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="grY-FO-WpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

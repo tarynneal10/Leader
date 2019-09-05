@@ -8,27 +8,60 @@
 
 import Foundation
 import UIKit
-//import RealmSwift
-//import Realm
+import Firebase
 
 class LoginVC : UIViewController {
-//    override func viewWillAppear(_ animated: Bool) {
-//
-//    }
-    
-//let realm = try! Realm()
-//let testChapter = Chapter()
-    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    var handle: AuthStateDidChangeListenerHandle?
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+            // ...
+        }
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Auth.auth().removeStateDidChangeListener(handle!)
+    }
+    func errorAlert() {
+        let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
+        
+        let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in
+            self.emailTextField.text = ""
+            self.passwordTextField.text = ""
+        })
+        
+        alert.addAction(tryAgainAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+
     @IBAction func logInPressed(_ sender: Any) {
-        // for swift 2.0 Xcode 7
-       // print(Realm.Configuration.defaultConfiguration.fileURL!)
-        //testChapter.name = "Marysville Getchell"
-//        try! realm.write  {
-//            //realm.add(testChapter)
-//           // realm.delete(testChapter)
-//        }
+        //Current bug is that if anything is entered in both, it lets you through. Works for blank tho
+        if emailTextField.text != "", passwordTextField.text != ""
+        {
+            Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
+                (user, error) in
+                if error != nil {
+                    print(error!)
+                    self.errorAlert()
+                }
+                else {
+                    //success
+                    print("Log In successful")
+                    
+                }
+            }
+            
+        } else {
+            errorAlert()
+        }
 
     }
+    
 }
 //import UIKit
 //import Firebase

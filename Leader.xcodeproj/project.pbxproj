@@ -20,6 +20,7 @@
 		9B5B922322E7F37400B1985F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B922222E7F37400B1985F /* Assets.xcassets */; };
 		9B5B922622E7F37400B1985F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */; };
 		9B63101D2318626100D6E406 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B63101C2318626100D6E406 /* GoogleService-Info.plist */; };
+		9B7A0F8C23218A2B00C06CE2 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7A0F8B23218A2B00C06CE2 /* SignUpVC.swift */; };
 		9BA19D7C22FBDE2C00FB3204 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA19D7B22FBDE2C00FB3204 /* AuthModels.swift */; };
 		9BA2C80F22EE185200572FFE /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA2C80E22EE185200572FFE /* LogInVC.swift */; };
 		9BF9B67D22F534FD00F76410 /* TableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9B67C22F534FD00F76410 /* TableViewModels.swift */; };
@@ -40,6 +41,7 @@
 		9B5B922522E7F37400B1985F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B5B922722E7F37400B1985F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B63101C2318626100D6E406 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9B7A0F8B23218A2B00C06CE2 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		9BA19D7B22FBDE2C00FB3204 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
 		9BA2C80E22EE185200572FFE /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		9BF9B67C22F534FD00F76410 /* TableViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModels.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */,
 				8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */,
 				9BA2C80E22EE185200572FFE /* LogInVC.swift */,
+				9B7A0F8B23218A2B00C06CE2 /* SignUpVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -219,9 +222,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Leader/Pods-Leader-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseUI/FirebaseAuthUI.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FirebaseAuthUI.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -289,6 +295,7 @@
 				8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */,
 				9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */,
 				9BF9B67D22F534FD00F76410 /* TableViewModels.swift in Sources */,
+				9B7A0F8C23218A2B00C06CE2 /* SignUpVC.swift in Sources */,
 				9B1A475B22E80801006DD5F0 /* SettingsVC.swift in Sources */,
 				8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */,
 				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,

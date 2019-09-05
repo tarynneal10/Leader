@@ -7,7 +7,8 @@ target 'Leader' do
 
   # Pods for Leader
   pod 'Firebase/Analytics'
-  pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'Firebase/Auth'
+  
   #pod 'Firebase'
 end
