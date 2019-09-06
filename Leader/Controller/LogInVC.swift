@@ -14,9 +14,13 @@ class LoginVC : UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var handle: AuthStateDidChangeListenerHandle?
-
+    var logInSuccess : Bool?
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        passwordTextField.isSecureTextEntry = true
+        
+        logInSuccess = false
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             // ...
         }
@@ -30,6 +34,7 @@ class LoginVC : UIViewController {
         let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
         
         let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in
+            //Here might want to eventually change color of empty fields to red, then change back to black one interacted with
             self.emailTextField.text = ""
             self.passwordTextField.text = ""
         })
@@ -38,9 +43,16 @@ class LoginVC : UIViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        if identifier == "goToTabs" {
+            if logInSuccess != true {
+                return false
+            }
+        }
+        return true
+    }
     @IBAction func logInPressed(_ sender: Any) {
-        //Current bug is that if anything is entered in both, it lets you through. Works for blank tho
+        
         if emailTextField.text != "", passwordTextField.text != ""
         {
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
@@ -52,17 +64,19 @@ class LoginVC : UIViewController {
                 else {
                     //success
                     print("Log In successful")
-                    
+                    self.logInSuccess = true
+                    self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                 }
             }
             
         } else {
             errorAlert()
         }
+        
 
     }
-    
-}
+    }
+
 //import UIKit
 //import Firebase
 //import SVProgressHUD

@@ -12,39 +12,41 @@ import Firebase
 class SignUpVC : UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
+    var signUpSuccess : Bool?
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        signUpSuccess = false
+    }
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        if identifier == "goToTabs" {
+            //Might be able to have it just return false here and oerform segu e in else for auth- not yet tho
+            if signUpSuccess != true {
+                return false
+            }
+        }
+        return true
+    }
     @IBAction func signUpPressed(_ sender: Any) {
-        func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-            
-            if identifier == "goToTabs" {
-                //Does this account for only missing one?
-                if emailTextField.text?.isEmpty == true, passwordTextField.text?.isEmpty == true {
-                    print("*** NOPE, segue wont occur")
-                    errorAlert()
-                    return false
+        signUpSuccess = false
+        if emailTextField.text != "", passwordTextField.text != ""
+        {
+            Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) {
+                (user, error) in
+                if error != nil {
+                    print(error!)
+                    self.errorAlert()
                 }
                 else {
-                    print("*** YEP, segue will occur")
-                    Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) {
-                        (user, error) in
-                        if error != nil {
-                            print(error!)
-                            self.errorAlert()
-                        }
-                        else {
-                            //success
-                            print("Registration successful")
-                            
-                            self.performSegue(withIdentifier: "goToTabs", sender: self)
-                        }
-                    }
+                    //success
+                    print("Registration successful")
+                    self.signUpSuccess = true
+                    self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                 }
             }
             
-            // by default, transition
-            return true
+        } else {
+            errorAlert()
         }
-
         
     }
 

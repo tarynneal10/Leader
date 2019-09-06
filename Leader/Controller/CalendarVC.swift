@@ -9,7 +9,8 @@
 import UIKit
 //import CVCalendar
 //
-//class CalendarVC : UIViewController {
+
+class CalendarVC : UIViewController {
 //
 //    @IBOutlet weak var menuView: CVCalendarMenuView!
 //    @IBOutlet weak var calendarView: CVCalendarView!
@@ -29,22 +30,24 @@ import UIKit
 //            currentCalendar?.timeZone = timeZone
 //        }
 //    }
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
+    
+override func viewDidLoad() {
+        super.viewDidLoad()
+
 //        if let currentCalendar = currentCalendar {
 //            monthLabel.text = CVDate(date: Date(), calendar: currentCalendar).globalDescription
 //        }
 //
 //        // Do any additional setup after loading the view.
 //       // navigationController?.navigationBar.topItem?.hidesBackButton = true
-//}
+}
 //    override func viewDidLayoutSubviews() {
 //        super.viewDidLayoutSubviews()
 //        menuView.commitMenuViewUpdate()
 //        calendarView.commitCalendarViewUpdate()
 //    }
 //
-//}
+}
 //
 //extension CalendarVC: CVCalendarViewDelegate, CVCalendarMenuViewDelegate {
 //
