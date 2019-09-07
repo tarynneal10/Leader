@@ -8,57 +8,48 @@
 
 import Foundation
 import UIKit
+import Firebase
+import FirebaseFirestore
 
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
     @IBOutlet var competitiveEventsTableView: UITableView!
-//    let realm = try! Realm()
-//    var competitiveEvents : Results<CompetitiveEvents>?
+    var db: Firestore!
+    var DocRef : Query?
+    var dataCount : Int?
+
 //    var selectedEvent : CompetitiveEvents?
 //    var selectedRow : Int?
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //Code to add a competitive event to realm- could make array when finially want to add all of them for prod- for now just add a few to test
-//                let newEvent = CompetitiveEvents()
-//                newEvent.name = "3-D Animation"
-//        newEvent.category = "Prejuged Project"
-//                newEvent.type = "Why"
-//                try! realm.write  {
-//                    realm.add(newEvent)
-//                }
-       
-        
-     //   loadCompetitiveEvents()
-        
+        db = Firestore.firestore()
+        DocRef = db.collection("competitiveevents")
+        competitiveEventsTableView.reloadData()
     }
  
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return 0
+        return dataCount ?? 1
     }
 //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
-//        if let event = competitiveEvents?[indexPath.row] {
-//            
-//            cell.eventName?.text = event.name
-//            cell.eventCategory?.text = event.category
-//            cell.eventType?.text = event.type
-//            
-//        }
-//        else {
-//            cell.eventName?.text = "No Items Added"
-//            cell.eventCategory?.isHidden = true
-//            cell.eventType?.isHidden = true
-//            //Set up better GUI protocols here- maybe something like cell.imageView.isHidden = true at first, then set to false here & tap into the .isHidden of other objects and set to true.
-//        }
+            DocRef?.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                //Put more error handling here
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    self.dataCount = document.data().count
+                    cell.eventName.text = document.get("name") as? String
+                    cell.eventCategory.text = document.get("category") as? String
+                    cell.eventType.text = document.get("type") as? String
+                }
+            }
+        }
         return cell
     }
-//    func loadCompetitiveEvents() {
-//        competitiveEvents = realm.objects(CompetitiveEvents.self)
-//        competitiveEventsTableView.reloadData()
-//    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        if indexPath.row >= 0 {
 //        }
@@ -99,7 +90,6 @@ extension CompetitiveEventsVC: UISearchBarDelegate {
         }
     }
     
-//* Terminating app due to uncaught exception 'NSInternalInconsistencyException', reason: 'unable to dequeue a cell with identifier competitiveEventsCell - must register a nib or a class for the identifier or connect a prototype cell in a storyboard'- This is the error from when I try and run the app
 }
 class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!

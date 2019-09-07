@@ -13,6 +13,7 @@ class SignUpVC : UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var signUpSuccess : Bool?
+    var navControl = NaviagationController()
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         signUpSuccess = false
@@ -41,6 +42,7 @@ class SignUpVC : UIViewController {
                     print("Registration successful")
                     self.signUpSuccess = true
                     self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+                    
                 }
             }
             

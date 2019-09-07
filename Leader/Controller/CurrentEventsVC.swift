@@ -30,15 +30,9 @@ var dataCount : Int?
         //let chapterName = currentUser.chapter
         //let chapter = realm.objects(Chapter.self).filter("name like \(chapterName)"
      //
-
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-       
         currentEventsTableView.reloadData()
     }
-    
+
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
  
             return dataCount ?? 1
@@ -62,16 +56,11 @@ var dataCount : Int?
                     }
                 }
             }
+            
             return cell
             
         }
 
-    
-    func loadCurrentEvents() {
-
-        currentEventsTableView.reloadData()
-        
-    }
 //    func setData() {
 //        let data: [String: Any] = [:]
 //        db.collection("chapter").document("new-chapter-id").setData(data)

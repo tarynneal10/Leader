@@ -48,10 +48,13 @@ class SettingsVC : UIViewController {
     
 }
 
-class tabBarController : UITabBarController {
+class TabBarController : UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationItem.hidesBackButton = true
         
     }
+}
+class NaviagationController : UINavigationController {
+    
 }
