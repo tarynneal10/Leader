@@ -36,19 +36,19 @@ class ChapterVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
-        DocRef?.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-                //Put more error handling here
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    //self.dataCount = document.data().count
-                   cell.nameLabel.text = document.get("name") as? String
-
-                }
-            }
-        }
+//        DocRef?.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//                //Put more error handling here
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                    //self.dataCount = document.data().count
+//                   cell.nameLabel.text = document.get("name") as? String
+//
+//                }
+//            }
+//        }
         return cell
     }
 }

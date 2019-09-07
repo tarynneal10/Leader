@@ -9,6 +9,6 @@ target 'Leader' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Firestore'
   pod 'Firebase/Auth'
-  
-  #pod 'Firebase'
+  pod 'JTAppleCalendar'
+  #, '~>; 7.1'
 end
