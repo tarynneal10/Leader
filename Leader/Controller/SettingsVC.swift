@@ -17,28 +17,27 @@ class SettingsVC : UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     var db: Firestore!
-    
+    let logInVC = LoginVC()
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePicture.image = UIImage(named: "Logo2")
-      //  db = Firestore.firestore()
-        //This code works to get a field from a specific document in firestore & project it
-//        let docRef = db.collection("chapter").document("MarysvilleGetchell")
-//        docRef.getDocument { (document, error) in
-//            if let document = document, document.exists {
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                print("Document data: \(dataDescription)")
-//                self.testLabel.text = document.get("name") as? String
+        db = Firestore.firestore()
+        //The code below loads the current member's informastion based on their user UID from when they signed in.
+//        guard let userID = Auth.auth().currentUser?.uid else { return }
+//        let docRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+//        docRef.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//                //Put more error handling here
 //            } else {
-//                print("Document does not exist")
+//                for document in querySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                    self.nameLabel.text = document.get("name") as? String
+//                    self.chapterLabel.text = document.get("chapter") as? String
+//                    self.positionLabel.text = document.get("position") as? String
+//                }
 //            }
 //        }
-      //  let chapterName = realm.objects(Chapter.self).filter("name like 'Marysville Getchell'")
-       // print(chapterName.first as Any)
-       // testLabel.text = chapterName.first?.name
-        //nameLabel.text = ""
-        // Do any additional setup after loading the view.
-
     }
 
     override func viewDidAppear(_ animated: Bool) {

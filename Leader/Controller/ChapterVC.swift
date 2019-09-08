@@ -11,7 +11,16 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
-class ChapterVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ChapterVC : UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath as IndexPath) as! OfficerCell
+        return cell
+    }
+    
 
     
     @IBOutlet weak var officerCollectionView: UICollectionView!
@@ -55,5 +64,10 @@ class ChapterVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
 
 class MemberTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
+    
+}
+class OfficerCell : UICollectionViewCell {
+    @IBOutlet weak var officerImage: UIImageView!
+    @IBOutlet weak var officerPosition: UILabel!
     
 }

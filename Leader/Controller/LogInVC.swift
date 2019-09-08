@@ -9,17 +9,19 @@
 import Foundation
 import UIKit
 import Firebase
-
+//Current bug is also the when sent here from logout button, still have back button
 class LoginVC : UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var handle: AuthStateDidChangeListenerHandle?
     var logInSuccess : Bool?
+    var currentDoc : String?
+    var db: Firestore!
+    var DocRef : Query?
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        passwordTextField.isSecureTextEntry = true
-        
+        db = Firestore.firestore()
         logInSuccess = false
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             // ...
@@ -35,14 +37,15 @@ class LoginVC : UIViewController {
         
         let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in
             //Here might want to eventually change color of empty fields to red, then change back to black one interacted with
-            self.emailTextField.text = ""
-            self.passwordTextField.text = ""
+//            self.emailTextField.text = ""
+//            self.passwordTextField.text = ""
         })
         
         alert.addAction(tryAgainAction)
         
         self.present(alert, animated: true, completion: nil)
     }
+   
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if identifier == "goToTabs" {
             if logInSuccess != true {
@@ -65,6 +68,7 @@ class LoginVC : UIViewController {
                     //success
                     print("Log In successful")
                     self.logInSuccess = true
+                    //self.findMember()
                     self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                 }
             }
@@ -72,10 +76,35 @@ class LoginVC : UIViewController {
         } else {
             errorAlert()
         }
-        
 
     }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        view.endEditing(true)
+//        super.touchesBegan(touches, with: event)
+//    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        emailTextField.resignFirstResponder()
+//        passwordTextField.resignFirstResponder()
+//        return true
+//    }
+    
+    func findMember() {
+        //The code works here, but the info isn't being passed to the settings page
+//        guard let userID = Auth.auth().currentUser?.uid else { return }
+//        DocRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+//        DocRef?.getDocuments() { (querySnapshot, err) in
+//            if let err = err {
+//                print("Error getting documents: \(err)")
+//                //Put more error handling here
+//            } else {
+//                for document in querySnapshot!.documents {
+//                    print("\(document.documentID) => \(document.data())")
+//                    self.currentDoc = document.documentID
+//                }
+//            }
+//        }
     }
+}
 
 //import UIKit
 //import Firebase
