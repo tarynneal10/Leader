@@ -52,8 +52,8 @@ class CalendarVC : UIViewController {
     
     func handleCellSelected(cell: DateCell, cellState: CellState) {
         if cellState.isSelected {
-            cell.selectedView.layer.cornerRadius =  13
-            cell.selectedView.isHidden = false
+            //cell.selectedView.layer.cornerRadius =  13
+           // cell.selectedView.isHidden = false
         } else {
             cell.selectedView.isHidden = true
         }
@@ -74,10 +74,10 @@ class CalendarVC : UIViewController {
 //        }
         // Then convert that data into a form that can be used by the calendar.
         calendarDataSource = [
-            "07-Jan-2019": "SomeData",
-            "15-Jan-2019": "SomeMoreData",
-            "15-Feb-2019": "MoreData",
-            "21-Feb-2019": "onlyData",
+            "07-Jan-2020": "SomeData",
+            "15-Jan-2020": "SomeMoreData",
+            "15-Sep-2019": "MoreData",
+            "21-Dec-2019": "onlyData",
         ]
         // update the calendar
         calendarView.reloadData()
@@ -116,8 +116,8 @@ extension CalendarVC: JTACMonthViewDataSource {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy MM dd"
         
-        let startDate = dateFormatter.date(from: "2019 01 01")!
-        let endDate = Date()
+        let startDate = Date()
+        let endDate = dateFormatter.date(from: "2020 06 30")!
         return ConfigurationParameters(startDate: startDate, endDate: endDate)
 //        return ConfigurationParameters(startDate: startDate,
 //                                       endDate: endDate,
@@ -136,10 +136,10 @@ extension CalendarVC: JTACMonthViewDelegate {
         configureCell(view: cell, cellState: cellState)
     }
     func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
-        configureCell(view: cell, cellState: cellState)
+        //configureCell(view: cell, cellState: cellState)
     }
     
     func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
-        configureCell(view: cell, cellState: cellState)
+       // configureCell(view: cell, cellState: cellState)
     }
 }

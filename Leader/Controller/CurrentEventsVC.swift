@@ -18,7 +18,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
 var db: Firestore!
 var DocRef : Query?
-var dataCount : Int?
+    var dataCount : QuerySnapshot?
 var userID : String?
 var currentUser : Query?
 var currentChapter : String?
@@ -26,7 +26,8 @@ var currentChapter : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell ")
+        DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
+        getCount()
 //        currentUser = db.collection("members").whereField("user UID", isEqualTo: userID)
 //        userID = Auth.auth().currentUser?.uid
 //        if userID == nil {
@@ -35,12 +36,23 @@ var currentChapter : String?
 //            return
 //        }
         //currentEventsTableView.separatorStyle = .none
-     
-        currentEventsTableView.reloadData()
     }
 
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
+        return dataCount?.count ?? 1
+        
+    }
+    func getCount() {
+        DocRef?.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            }
+            self.dataCount = querySnapshot
+            self.currentEventsTableView.reloadData() // if it's a background thread embed code in DispatchQueue.main.async {---}
+        }
+    }
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
 
@@ -56,39 +68,25 @@ var currentChapter : String?
 //                    }
 //                }
 //            }
-            
             DocRef?.getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                     //Put more error handling here
                 } else {
-                    self.dataCount = querySnapshot?.count
-                    //Here it's getting the data
-                    print("\(self.dataCount)")
-                   // print("\(querySnapshot?.count)")
-                   // let snap = querySnapshot
-                   // self.dataCount = snap?.count { get }
                     for document in querySnapshot!.documents {
                         print("\(document.documentID) => \(document.data())")
                         
                         cell.nameLabel.text = document.get("name") as? String
-                        //While the strings work, the timestamp doesn't. Will need to look into more.
-                    //    cell.dateLabel.text = "\(document.get("date") ?? "")"
                         cell.descriptionLabel.text = document.get("description") as? String
+                        //I can get the datacount accurately, but can't set the fields quite right
                         
                     }
                     
                 }
             }
-            
+        
             return cell
             
-        }
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-      
-            return dataCount ?? 1
-            //Problem is getting data is so slow that it always just returns 1
-        
         }
 
 //    func setData() {

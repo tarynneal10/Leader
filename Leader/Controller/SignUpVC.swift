@@ -8,6 +8,7 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
 class SignUpVC : UIViewController {
     @IBOutlet weak var positionTF: UITextField!
@@ -15,9 +16,10 @@ class SignUpVC : UIViewController {
     @IBOutlet weak var chapterTF: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    
     var signUpSuccess : Bool?
     var db: Firestore!
-    var navControl = NaviagationController()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         signUpSuccess = false
@@ -73,7 +75,7 @@ class SignUpVC : UIViewController {
     }
 
     func errorAlert() {
-        let alert = UIAlertController(title: "Error", message: "Please enter an email and password.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Error", message: "Please reenter your information.", preferredStyle: .alert)
         
         let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in
             

@@ -24,6 +24,7 @@
 		9BA19D7C22FBDE2C00FB3204 /* AuthModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA19D7B22FBDE2C00FB3204 /* AuthModels.swift */; };
 		9BA2C80F22EE185200572FFE /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA2C80E22EE185200572FFE /* LogInVC.swift */; };
 		9BB5FCC0232335630053E843 /* ChapterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5FCBF232335630053E843 /* ChapterVC.swift */; };
+		9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE182623296C42004C5777 /* ChapterSignUp.swift */; };
 		9BF9B67D22F534FD00F76410 /* TableViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9B67C22F534FD00F76410 /* TableViewModels.swift */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		9BA19D7B22FBDE2C00FB3204 /* AuthModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModels.swift; sourceTree = "<group>"; };
 		9BA2C80E22EE185200572FFE /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		9BB5FCBF232335630053E843 /* ChapterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterVC.swift; sourceTree = "<group>"; };
+		9BCE182623296C42004C5777 /* ChapterSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterSignUp.swift; sourceTree = "<group>"; };
 		9BF9B67C22F534FD00F76410 /* TableViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewModels.swift; sourceTree = "<group>"; };
 		AC86948548FF4564F2D7BAD5 /* Pods_Leader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D08B275D4842C30CC741CB /* Pods-Leader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leader/Pods-Leader.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */,
 				9BA2C80E22EE185200572FFE /* LogInVC.swift */,
 				9B7A0F8B23218A2B00C06CE2 /* SignUpVC.swift */,
+				9BCE182623296C42004C5777 /* ChapterSignUp.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 				8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */,
 				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,
 				8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */,
+				9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */,
 				9B191DB52310C72500E27032 /* CompetitiveEventDetails.swift in Sources */,
 				9BA2C80F22EE185200572FFE /* LogInVC.swift in Sources */,
 				9BB5FCC0232335630053E843 /* ChapterVC.swift in Sources */,
