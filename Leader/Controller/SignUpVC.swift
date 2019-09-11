@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
-class SignUpVC : UIViewController {
+class SignUpVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var positionTF: UITextField!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var chapterTF: UITextField!
@@ -24,6 +24,10 @@ class SignUpVC : UIViewController {
         super.viewDidAppear(animated)
         signUpSuccess = false
         db = Firestore.firestore()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if identifier == "goToTabs" {

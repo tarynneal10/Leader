@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class ChapterSignUp : UIViewController {
+class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var chapterName: UITextField!
     @IBOutlet weak var advisorName: UITextField!
     @IBOutlet weak var advisorEmail: UITextField!
@@ -25,6 +25,10 @@ class ChapterSignUp : UIViewController {
         super.viewDidAppear(animated)
         signUpSuccess = false
         db = Firestore.firestore()
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     func errorAlert() {
         let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)

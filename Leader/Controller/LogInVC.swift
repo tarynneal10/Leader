@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 //Current bug is also the when sent here from logout button, still have back button
-class LoginVC : UIViewController {
+class LoginVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var handle: AuthStateDidChangeListenerHandle?
@@ -32,6 +32,11 @@ class LoginVC : UIViewController {
         super.viewWillDisappear(animated)
         Auth.auth().removeStateDidChangeListener(handle!)
     }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
+    
     func errorAlert() {
         let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
         
