@@ -44,3 +44,16 @@ import Foundation
 ////    @objc dynamic var overview : String = ""
 ////}
 
+class CurrentEvent {
+    
+    let name : String
+    let date : Date
+    let description : String
+    
+    init (eventName: String, eventDate: Date, eventDescription: String) {
+        name = eventName
+        date = eventDate
+        description = eventDescription
+    }
+    
+}
