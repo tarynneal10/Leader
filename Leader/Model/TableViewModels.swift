@@ -57,3 +57,11 @@ class CurrentEvent {
     }
     
 }
+
+class Member {
+    let name : String
+    
+    init (memberName: String) {
+        name = memberName
+    }
+}

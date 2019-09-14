@@ -18,7 +18,6 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
 var db: Firestore!
 var DocRef : Query?
-    var dataCount : QuerySnapshot?
 var userID : String?
 var currentUser : Query?
 var currentChapter : String?
@@ -28,7 +27,6 @@ var list: [CurrentEvent] = []
         super.viewDidLoad()
         db = Firestore.firestore()
         DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
-        getCount()
         list = createArray()
      //   self.currentEventsTableView.reloadData()
 //        currentUser = db.collection("members").whereField("user UID", isEqualTo: userID)
@@ -41,25 +39,8 @@ var list: [CurrentEvent] = []
         //currentEventsTableView.separatorStyle = .none
     }
 
-
-
-    func getCount() {
-        DocRef?.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            }
-            self.dataCount = querySnapshot
-            self.currentEventsTableView.reloadData() // if it's a background thread embed code in DispatchQueue.main.async {---}
-        }
-    }
     func createArray() -> [CurrentEvent]
     {
-      //  let tempTxt: [CurrentEvent] = []
-        
-        //Authentication
-      //  let authentication = Auth.auth().currentUser?.uid
-        
-        //Choosing collection
         DocRef?.getDocuments()
             { (QuerySnapshot, err) in
                 if err != nil
@@ -158,8 +139,11 @@ class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     func populate(currentEvent: CurrentEvent) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        
         nameLabel.text = currentEvent.name
-      //  dateLabel.text = currentEvent.date
+        dateLabel.text = formatter.string(from: currentEvent.date)
         descriptionLabel.text = currentEvent.description
     }
 }
