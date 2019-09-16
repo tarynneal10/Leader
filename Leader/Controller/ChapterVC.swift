@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
-import FirebaseStorage
+//import FirebaseStorage
 
 class ChapterVC : UIViewController{
 
@@ -19,15 +19,16 @@ class ChapterVC : UIViewController{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     
     var db: Firestore!
-    var storage : Storage!
+   // var storage : Storage!
     var DocRef : Query?
     var chapterRef : Query?
     var members : [Member] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         db = Firestore.firestore()
-        storage = Storage.storage()
+       // storage = Storage.storage()
         DocRef = db.collection("members").whereField("chapter", isEqualTo: "Marysville Getchell")
         chapterRef = db.collection("chapter").whereField("name", isEqualTo: "Marysville Getchell")
         setDescription()

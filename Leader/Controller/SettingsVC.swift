@@ -20,7 +20,7 @@ class SettingsVC : UIViewController {
     let logInVC = LoginVC()
     override func viewDidLoad() {
         super.viewDidLoad()
-        profilePicture.image = UIImage(named: "Logo2")
+       profilePicture.image = UIImage(named: "Anon")
         db = Firestore.firestore()
         //The code below loads the current member's informastion based on their user UID from when they signed in.
 //        guard let userID = Auth.auth().currentUser?.uid else { return }

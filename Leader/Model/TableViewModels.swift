@@ -8,8 +8,8 @@
 //So this VC is gonna host ish like current events, competitive events, and whatever else I stick a table view in- remember to convert settings to buttons based VC once current events works
 
 import Foundation
-//import Firebase
-//import FirebaseFirestore
+import Firebase
+import FirebaseFirestore
 //
 
 //Example Code:
@@ -47,17 +47,23 @@ import Foundation
 class CurrentEvent {
     
     let name : String
-    let date : Date
+    let date : Timestamp
     let description : String
     
-    init (eventName: String, eventDate: Date, eventDescription: String) {
+    init (eventName: String, eventDate: Timestamp, eventDescription: String) {
         name = eventName
         date = eventDate
         description = eventDescription
     }
     
 }
-
+//Gonna be honest this is just bc I'm too lazy to format the class above for the calendar
+class CurrentEventDate {
+    let date : Timestamp
+    init (eventDate: Timestamp) {
+        date = eventDate
+    }
+}
 class Member {
     let name : String
     

@@ -24,6 +24,7 @@ class CalendarVC : UIViewController {
     @IBOutlet var calendarView: JTACMonthView!
     var db: Firestore!
     var DocRef : Query?
+    var list: [CurrentEventDate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,24 +62,37 @@ class CalendarVC : UIViewController {
 
     func populateDataSource() {
         // You can get the data from a server.
-//        DocRef?.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//                //Put more error handling here
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    print("\(document.documentID) => \(document.data())")
-//                   // self.calendarDataSource = ["\(String(describing: document.get("date")))": "data"]
+//        DocRef?.getDocuments()
+//        { (QuerySnapshot, err) in
+//            if err != nil
+//            {
+//                print("Error getting documents: \(String(describing: err))");
+//            }
+//            else
+//            {
+//                self.list.removeAll()
+//                for document in QuerySnapshot!.documents {
+//                    let date = document.get("date") as? Timestamp
+//                    self.list.append(CurrentEventDate(eventDate: date!))
+//                    print(document.data())
 //                }
 //            }
+//            
 //        }
         // Then convert that data into a form that can be used by the calendar.
+      //  formatter.string(from:)
         calendarDataSource = [
             "07-Jan-2020": "SomeData",
             "15-Jan-2020": "SomeMoreData",
             "15-Sep-2019": "MoreData",
             "21-Dec-2019": "onlyData",
         ]
+        
+//        let date = (list.first?.date.dateValue()) ?? Date()
+//        let string = formatter.string(from: date)
+//        calendarDataSource = [
+//            string : "some data"
+//        ]
         // update the calendar
         calendarView.reloadData()
     }

@@ -53,9 +53,10 @@ var list: [CurrentEvent] = []
                     for document in QuerySnapshot!.documents {
 
                         let name = document.get("name") as? String
-                        let date = document.get("date") as? Date
+                        let date = document.get("date") as? Timestamp
                         let description = document.get("description") as? String
-                        self.list.append(CurrentEvent(eventName: name ?? "name", eventDate: date ?? Date(), eventDescription: description ?? "decription"))
+                        self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
+                        print(document.data())
                     }
                     
                     self.currentEventsTableView.reloadData()
@@ -139,11 +140,15 @@ class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     func populate(currentEvent: CurrentEvent) {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "MM/dd/yyyy"  formatter.string(from: currentEvent.date)
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
-        
+        let date = currentEvent.date.dateValue()
+    
         nameLabel.text = currentEvent.name
-        dateLabel.text = formatter.string(from: currentEvent.date)
+        dateLabel.text = formatter.string(from: date)
+
         descriptionLabel.text = currentEvent.description
     }
 }
