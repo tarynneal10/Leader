@@ -55,7 +55,7 @@ class ChapterVC : UIViewController{
         
                     }
         //Done getting members
-        
+        //Comment
     }
 //Sets description for chapter text box
     func setDescription() {

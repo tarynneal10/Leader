@@ -16,7 +16,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     var db: Firestore!
     var DocRef : Query?
     var dataCount : Int?
-
+    var events: [CompetitiveEvent] = []
 //    var selectedEvent : CompetitiveEvents?
 //    var selectedRow : Int?
     override func viewDidLoad() {
@@ -24,29 +24,44 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view.
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents")
+        events = createArray()
         competitiveEventsTableView.reloadData()
     }
- 
+    func createArray() -> [CompetitiveEvent]
+    {
+        DocRef?.getDocuments()
+            { (QuerySnapshot, err) in
+                if err != nil
+                {
+                    print("Error getting documents: \(String(describing: err))");
+                }
+                else
+                {
+                    self.events.removeAll()
+                    for document in QuerySnapshot!.documents {
+                        
+                        let name = document.get("name") as? String
+                        let category = document.get("category") as? String
+                        let type = document.get("type") as? String
+                        self.events.append(CompetitiveEvent(eventName: name!, eventCategory: category!, eventType: type!))
+                        print(document.data())
+                    }
+                    
+                    self.competitiveEventsTableView.reloadData()
+                }
+                
+        }
+        
+        return events
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataCount ?? 1
+        return events.count
     }
 //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
-            DocRef?.getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-                //Put more error handling here
-            } else {
-                for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
-                    self.dataCount = document.data().count
-                    cell.eventName.text = document.get("name") as? String
-                    cell.eventCategory.text = document.get("category") as? String
-                    cell.eventType.text = document.get("type") as? String
-                }
-            }
-        }
+        let listPath = events[indexPath.row]
+        cell.populate(competitiveEvent: listPath)
         return cell
     }
 
@@ -56,6 +71,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
        // selectedRow = indexPath.row
        //var amountOfEvents = competitiveEvents?.count
        
+        
         
         //Now I have it's number
        // var selectedItem = indexPath.item
@@ -74,6 +90,7 @@ extension CompetitiveEventsVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
      //   competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
+        //let SearchQuery = db.collection("competitiveevents")
 //Still need to get it to accept search filters for category and type
         
         competitiveEventsTableView.reloadData()
@@ -95,4 +112,9 @@ class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventCategory: UILabel!
     @IBOutlet weak var eventType: UILabel!
+    func populate(competitiveEvent: CompetitiveEvent) {
+        eventName.text = competitiveEvent.name
+        eventCategory.text = competitiveEvent.category
+        eventType.text = competitiveEvent.type
+    }
 }

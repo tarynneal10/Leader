@@ -71,3 +71,14 @@ class Member {
         name = memberName
     }
 }
+
+class CompetitiveEvent {
+    let name : String
+    let category : String
+    let type : String
+    init (eventName: String, eventCategory: String, eventType: String) {
+        name = eventName
+        category = eventCategory
+        type = eventType
+    }
+}
