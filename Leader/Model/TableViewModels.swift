@@ -59,8 +59,8 @@ class CurrentEvent {
 }
 //Gonna be honest this is just bc I'm too lazy to format the class above for the calendar
 class CurrentEventDate {
-    let date : Timestamp
-    init (eventDate: Timestamp) {
+    let date : String
+    init (eventDate: String) {
         date = eventDate
     }
 }
