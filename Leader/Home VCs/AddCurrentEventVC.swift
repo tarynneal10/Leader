@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class AddEventVC : UIViewController {
+class AddEventVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextField!
     @IBOutlet weak var datePicker: UIDatePicker!
@@ -37,6 +37,10 @@ class AddEventVC : UIViewController {
 //                        }
 //                    }
 //    
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
     func addToFirestore() {
         

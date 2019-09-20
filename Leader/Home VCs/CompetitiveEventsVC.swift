@@ -15,16 +15,17 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet var competitiveEventsTableView: UITableView!
     var db: Firestore!
     var DocRef : Query?
-    var dataCount : Int?
     var events: [CompetitiveEvent] = []
-//    var selectedEvent : CompetitiveEvents?
-//    var selectedRow : Int?
+    var valueToPass:String!
+    var logInSuccess : Bool?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents")
         events = createArray()
+        logInSuccess = false
         competitiveEventsTableView.reloadData()
     }
     func createArray() -> [CompetitiveEvent]
@@ -65,24 +66,78 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row >= 0 {
-//        }
-       // selectedRow = indexPath.row
-       //var amountOfEvents = competitiveEvents?.count
-       
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        if indexPath.row >= 0 {
+////        }
+//       // selectedRow = indexPath.row
+//       //var amountOfEvents = competitiveEvents?.count
+//
+//
+//
+//        //Now I have it's number
+//       // var selectedItem = indexPath.item
+//        //So from the copetitive events results that I'm currently sorting through I can get the values of what is first and what is last. From the indexpath.row/.item I can get the integer number of the row that I clicked on. I am sorting the results by when they were added (Need to change that soon) and I need a way to sort through them and say I want result number two because I clicked indexPath.row number two. I can also get the total number of competitiveEvents
+//      //  selectedEvent?.name = indexPath.row
+//
+//       // indexPath.row.eventName
+//        //competitiveEvents?.first?. =
+//        //selectedEvent = competitiveEvents.
+//
+//    //Might be able to do it by setting up an integer value for each of the events ... I'm sorting by name right now. Going to try todoey's version rn but ultimately will probs end up attributing to some value when loaded here then cqallling this class and tapping into that value. Could also reference center card's code.
+//    }
+       // func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
+
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        if identifier == "goToDetails" {
+            if logInSuccess != true {
+                return false
+            }
+        }
+        return true
+    }
+ func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+    // Get Cell Label
+    let indexPath = tableView.indexPathForSelectedRow
+    let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
+    valueToPass = currentCell.eventName?.text
+
+    performSegue(withIdentifier: "goToDetails", sender: self)
         
+    }
+    
+    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        //Now I have it's number
-       // var selectedItem = indexPath.item
-        //So from the copetitive events results that I'm currently sorting through I can get the values of what is first and what is last. From the indexpath.row/.item I can get the integer number of the row that I clicked on. I am sorting the results by when they were added (Need to change that soon) and I need a way to sort through them and say I want result number two because I clicked indexPath.row number two. I can also get the total number of competitiveEvents
-      //  selectedEvent?.name = indexPath.row
+        if (segue.identifier == "goToDetails") {
+//            let VC = CompetitiveEventDetailsVC()
+//            VC.passedValue = valueToPass
+//            let ref = db.collection("competitiveevents").whereField("name", isEqualTo: valueToPass!)
+//            ref.getDocuments() { (QuerySnapshot, err) in
+//                if err != nil
+//                {
+//                    print("Error getting documents: \(String(describing: err))");
+//                }
+//                else
+//                {
+//                    
+//                    for document in QuerySnapshot!.documents {
+//                        let viewController = segue.destination as! CompetitiveEventDetailsVC
+//                       
+//                        let name = document.get("name") as? String
+//                         viewController.passedValue = name
+//                        print(document.data())
+//                    }
+//                    
+//                }
+//                
+//            }
+
+            // initialize new view controller and cast it as your view controller
+            //var viewController = segue.destination as! CompetitiveEventDetailsVC
+            // your new view controller should have property that will store passed value
+           // viewController.passedValue = valueToPass
+        }
         
-       // indexPath.row.eventName
-        //competitiveEvents?.first?. =
-        //selectedEvent = competitiveEvents.
-        
-    //Might be able to do it by setting up an integer value for each of the events ... I'm sorting by name right now. Going to try todoey's version rn but ultimately will probs end up attributing to some value when loaded here then cqallling this class and tapping into that value. Could also reference center card's code.
     }
 }
 //Code example for search bar methods- note that it crashes every time I click search

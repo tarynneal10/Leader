@@ -8,18 +8,13 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 class CompetitiveEventDetailsVC : UIViewController {
-//    let realm = try! Realm()
-//    var competitiveEventsDetails : Results<CompetitiveEvents>?
-//    let CompetitiveEventsClass = CompetitiveEventsVC()
-//
-//
-//    var selectedEvent : CompetitiveEvents? {
-//        didSet{
-//            loadDetails()
-//        }
-//    }
+    var db: Firestore!
+    var DocRef : Query?
+  //  var events: [CompetitiveEvent] = []
+    var passedValue : String?
     
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -28,14 +23,33 @@ class CompetitiveEventDetailsVC : UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
        // loadCompetitiveEvents()
+        db = Firestore.firestore()
+        DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
+        print("\(String(describing: passedValue))")
         setTextValues()
         
     }
     func loadDetails() {
-       // eventName = selectedEvent?.name
-        //.sorted(byKeyPath: "title", ascending: true)
+        DocRef?.getDocuments() { (QuerySnapshot, err) in
+            if err != nil
+            {
+                print("Error getting documents: \(String(describing: err))");
+            }
+            else
+            {
+                
+                for document in QuerySnapshot!.documents {
+                    
+                    let name = document.get("name") as? String
+                    
+                    print(document.data())
+                }
+                
+            }
+            
+        }
+
         
-       // tableView.reloadData()
     }
 //    func selectedEvent() {
 //        competitiveEvents = realm.objects(CompetitiveEvents.self).filter("")
