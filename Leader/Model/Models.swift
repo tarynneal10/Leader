@@ -6,7 +6,7 @@
 //  Copyright © 2019 Taryn Neal. All rights reserved.
 //
 //So this VC is gonna host ish like current events, competitive events, and whatever else I stick a table view in- remember to convert settings to buttons based VC once current events works
-
+//Nvm I'm just putting the models here for now
 import Foundation
 import Firebase
 import FirebaseFirestore
@@ -80,5 +80,11 @@ class CompetitiveEvent {
         name = eventName
         category = eventCategory
         type = eventType
+    }
+}
+class Chapter {
+    let name : String
+    init(chapterName: String){
+        name = chapterName
     }
 }

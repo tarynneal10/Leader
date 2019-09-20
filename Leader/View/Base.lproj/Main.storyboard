@@ -297,10 +297,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GBK-X4-yhj"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Current Events" id="HoB-n9-lOK">
+                    <navigationItem key="navigationItem" id="HoB-n9-lOK">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="1ow-TU-BmA">
                             <connections>
-                                <segue destination="NgY-Dn-ePG" kind="show" id="Fwv-Ct-qhV"/>
+                                <segue destination="NgY-Dn-ePG" kind="presentation" identifier="addEvent" id="Fwv-Ct-qhV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -320,31 +320,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ziS-UU-cbK">
-                                <rect key="frame" x="36" y="89" width="254" height="30"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ziS-UU-cbK">
+                                <rect key="frame" x="24" y="109" width="299" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TAz-nj-53t">
-                                <rect key="frame" x="36" y="137" width="264" height="160"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUB-Dc-JQN">
+                                <rect key="frame" x="130" y="560" width="114" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Create Event"/>
+                                <connections>
+                                    <action selector="createEventPressed:" destination="NgY-Dn-ePG" eventType="touchUpInside" id="4iu-ze-oec"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dMN-6Q-73b">
+                                <rect key="frame" x="24" y="171" width="299" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="nhY-mt-SBu">
-                                <rect key="frame" x="36" y="305" width="291" height="126"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="61P-mt-5Y3">
+                                <rect key="frame" x="24" y="231" width="307" height="95"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="590267605.68106103">
-                                    <!--2019-09-15 19:13:25 +0000-->
+                                <date key="date" timeIntervalSinceReferenceDate="590644659.91194904">
+                                    <!--2019-09-20 03:57:39 +0000-->
                                 </date>
                             </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="wqu-tV-qby"/>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="61P-mt-5Y3" id="OQN-3o-Rym"/>
+                        <outlet property="descriptionText" destination="dMN-6Q-73b" id="SZv-SV-W9y"/>
+                        <outlet property="titleText" destination="ziS-UU-cbK" id="85J-c6-ipz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L7c-68-MPv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1305,7 +1318,7 @@
                                     <constraint firstAttribute="height" constant="40" id="U3B-z1-gg0"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7Ct-Ji-CkV">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FBLA" translatesAutoresizingMaskIntoConstraints="NO" id="7Ct-Ji-CkV">
                                 <rect key="frame" x="0.0" y="354" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="0n8-88-SlN"/>
@@ -1589,13 +1602,26 @@
                     <view key="view" contentMode="scaleToFill" id="hIv-66-PUe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I5q-zX-13o">
+                                <rect key="frame" x="16" y="79" width="166" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4s-yU-tTQ">
+                                <rect key="frame" x="208" y="79" width="151" height="230"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="72L-Wn-Jvt"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HQc-Mh-vYj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1279" y="1314"/>
+            <point key="canvasLocation" x="1277.5999999999999" y="1313.793103448276"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="O4C-v4-isY">
@@ -1629,6 +1655,7 @@
     <resources>
         <image name="BugReport" width="400" height="400"/>
         <image name="CalendarIcon" width="25" height="25"/>
+        <image name="FBLA" width="640" height="640"/>
         <image name="HomeIcon" width="25" height="25"/>
         <image name="Leader3" width="850" height="350"/>
         <image name="LogOut" width="213.33332824707031" height="213.33332824707031"/>
@@ -1638,7 +1665,7 @@
         <image name="untitled (7)" width="640" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PoP-fU-Tw6"/>
+        <segue reference="MwE-px-bY7"/>
         <segue reference="DUQ-WW-Roz"/>
         <segue reference="3al-01-Kou"/>
     </inferredMetricsTieBreakers>

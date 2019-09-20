@@ -55,10 +55,11 @@ class CalendarVC : UIViewController {
     func handleCellSelected(cell: DateCell, cellState: CellState) {
         if cellState.isSelected {
             //cell.selectedView.layer.cornerRadius =  13
-           // cell.selectedView.isHidden = false
+            //cell.selectedView.isHidden = false
         } else {
             cell.selectedView.isHidden = true
         }
+     //  calendarView.reloadData()
     }
 
     func populateDataSource() {

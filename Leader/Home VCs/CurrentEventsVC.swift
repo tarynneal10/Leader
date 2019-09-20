@@ -28,6 +28,7 @@ var list: [CurrentEvent] = []
         db = Firestore.firestore()
         DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
         list = createArray()
+        
      //   self.currentEventsTableView.reloadData()
 //        currentUser = db.collection("members").whereField("user UID", isEqualTo: userID)
 //        userID = Auth.auth().currentUser?.uid
@@ -38,7 +39,11 @@ var list: [CurrentEvent] = []
 //        }
         //currentEventsTableView.separatorStyle = .none
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        list = createArray()
+        currentEventsTableView.reloadData()
+    }
     func createArray() -> [CurrentEvent]
     {
         DocRef?.getDocuments()
