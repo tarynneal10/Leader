@@ -15,5 +15,14 @@ class FBLAVC : UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCurrentEvents" {
+        // get a reference to the second view controller
+        let secondViewController = segue.destination as! CurrentEventsVC
+        
+        // set a variable in the second view controller with the String to pass
+        secondViewController.receivedString = "IDk"
+        }
+    }
 }

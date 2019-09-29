@@ -17,19 +17,19 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     var db: Firestore!
     var DocRef : Query?
     var events: [CompetitiveEvent] = []
-    var valueToPass:String!
-    var logInSuccess : Bool?
+    var valueToPass = ""
+    var viewController : CompetitiveEventDetailsVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents")
-        events = createArray()
         
-        logInSuccess = false
+        events = createArray()
         competitiveEventsTableView.reloadData()
     }
+    
     func createArray() -> [CompetitiveEvent]
     {
         DocRef?.getDocuments()
@@ -65,82 +65,31 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
         let listPath = events[indexPath.row]
         cell.populate(competitiveEvent: listPath)
+        
         return cell
     }
-
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        if indexPath.row >= 0 {
-////        }
-//       // selectedRow = indexPath.row
-//       //var amountOfEvents = competitiveEvents?.count
-//
-//
-//
-//        //Now I have it's number
-//       // var selectedItem = indexPath.item
-//        //So from the copetitive events results that I'm currently sorting through I can get the values of what is first and what is last. From the indexpath.row/.item I can get the integer number of the row that I clicked on. I am sorting the results by when they were added (Need to change that soon) and I need a way to sort through them and say I want result number two because I clicked indexPath.row number two. I can also get the total number of competitiveEvents
-//      //  selectedEvent?.name = indexPath.row
-//
-//       // indexPath.row.eventName
-//        //competitiveEvents?.first?. =
-//        //selectedEvent = competitiveEvents.
-//
-//    //Might be able to do it by setting up an integer value for each of the events ... I'm sorting by name right now. Going to try todoey's version rn but ultimately will probs end up attributing to some value when loaded here then cqallling this class and tapping into that value. Could also reference center card's code.
-//    }
-       // func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
-    func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-      //  if segue.identifier == "goToDetails" {
-            //Problem is that passed value isn't setting to the value to Pass
-            //let viewController = CompetitiveEventDetailsVC()
-            //            VC.passedValue = valueToPass
-            //            let ref = db.collection("competitiveevents").whereField("name", isEqualTo: valueToPass!)
-            //            ref.getDocuments() { (QuerySnapshot, err) in
-            //                if err != nil
-            //                {
-            //                    print("Error getting documents: \(String(describing: err))");
-            //                }
-            //                else
-            //                {
-            //
-            //                    for document in QuerySnapshot!.documents {
-            //                        let viewController = segue.destination as! CompetitiveEventDetailsVC
-            //
-            //                        let name = document.get("name") as? String
-            //                         viewController.passedValue = name
-            //                        print(document.data())
-            //                    }
-            //
-            //                }
-            //
-            //            }
-            
-            // initialize new view controller and cast it as your view controller
-        var viewController : CompetitiveEventDetailsVC = segue.destination as! CompetitiveEventDetailsVC
-            // your new view controller should have property that will store passed value
-            viewController.passedValue = "eyftgedtgy"
- //       }
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get a reference to the second view controller
+        viewController = segue.destination as? CompetitiveEventDetailsVC
+        // set a variable in the second view controller with the String to pass
         
     }
-//    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
-//        if identifier == "goToDetails" {
-//            if logInSuccess != true {
-//                return false
-//            }
-//        }
-//        return true
-//    }
-// func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("You selected cell #\(indexPath.row)!")
-//    // Get Cell Label
-//    let indexPath = tableView.indexPathForSelectedRow
-//    let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
-//    //valueToPass = currentCell.eventName?.text
-//    //valueToPass = "plz work"
-//
-//  //  performSegue(withIdentifier: "goToDetails", sender: self)
-//
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+        // Get Cell Label
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
+        tableView.deselectRow(at: indexPath!, animated: true)
+        valueToPass = currentCell.eventName!.text!
+        viewController?.passedValue = valueToPass
+        print(valueToPass)
+        
+    }
+    
+
+
+
     
 
 }

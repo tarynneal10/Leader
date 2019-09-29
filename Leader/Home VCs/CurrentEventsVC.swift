@@ -21,11 +21,11 @@ var DocRef : Query?
 var userRef : Query?
 var list: [CurrentEvent] = []
 var chapterName = ""
-    
+var receivedString = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        
+        navigationItem.title = receivedString
      //   self.currentEventsTableView.reloadData()
     //currentEventsTableView.separatorStyle = .none
     }

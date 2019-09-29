@@ -25,8 +25,8 @@ class CompetitiveEventDetailsVC : UIViewController {
        // loadCompetitiveEvents()
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
-        
-        nameLabel.text = passedValue
+       // nameLabel.text = passedValue
+        loadDetails()
         //print("\(String(describing: passedValue))")
         setTextValues()
         
