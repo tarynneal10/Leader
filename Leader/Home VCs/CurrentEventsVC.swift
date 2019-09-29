@@ -18,31 +18,24 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
 
 var db: Firestore!
 var DocRef : Query?
-var userID : String?
-var currentUser : Query?
-var currentChapter : String?
+var userRef : Query?
 var list: [CurrentEvent] = []
-
+var chapterName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
-        list = createArray()
         
      //   self.currentEventsTableView.reloadData()
-//        currentUser = db.collection("members").whereField("user UID", isEqualTo: userID)
-//        userID = Auth.auth().currentUser?.uid
-//        if userID == nil {
-//            userID = ""
-//        } else {
-//            return
-//        }
-        //currentEventsTableView.separatorStyle = .none
+    //currentEventsTableView.separatorStyle = .none
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        list = createArray()
+        getUser()
         currentEventsTableView.reloadData()
+    }
+    @IBAction func unwindToCurrentEvents(segue: UIStoryboardSegue) {
+        //nothing goes here
     }
     func createArray() -> [CurrentEvent]
     {
@@ -71,6 +64,25 @@ var list: [CurrentEvent] = []
 
         return list
     }
+    func getUser() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+        userRef?.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                //Put more error handling here
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    let chapter = document.get("chapter") as? String
+                    self.chapterName = chapter!
+                    self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName)
+                    
+                }
+                self.list = self.createArray()
+            }
+        }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
@@ -81,37 +93,6 @@ var list: [CurrentEvent] = []
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
             let listPath = list[indexPath.row]
             cell.populate(currentEvent: listPath)
-
-            
-//            currentUser?.getDocuments(){ (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                    //Put more error handling here
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        self.currentChapter = document.get("chapter") as? String
-//                        self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.currentChapter!)
-//                        print("Got it!")
-//                    }
-//                }
-//            }
-//            DocRef?.getDocuments() { (querySnapshot, err) in
-//                if let err = err {
-//                    print("Error getting documents: \(err)")
-//                    //Put more error handling here
-//                } else {
-//                    for document in querySnapshot!.documents {
-//                        print("\(document.documentID) => \(document.data())")
-//
-//                        cell.nameLabel.text = document.get("name") as? String
-//                        cell.dateLabel.text = "01/01/2020"
-//                        cell.descriptionLabel.text = document.get("description") as? String
-//                        //I can get the datacount accurately, but can't set the fields quite right
-//
-//                    }
-//
-//                }
-//            }
         
             return cell
 
@@ -136,6 +117,11 @@ var list: [CurrentEvent] = []
 //            }
 //        }
 
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let backItem = UIBarButtonItem()
+        backItem.title = "Cancel"
+        navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
 
 }

@@ -16,41 +16,50 @@ class AddEventVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var db: Firestore!
-    var DocRef : Query?
-    var chapterName : String?
+    var userRef : Query?
+    var chapterName = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-//        guard let userID = Auth.auth().currentUser?.uid else { return }
-//        let reference = db.collection("members").whereField("userUID", isEqualTo: userID)
-//        DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
-//        reference.getDocuments(){ (querySnapshot, err) in
-//                        if let err = err {
-//                            print("Error getting documents: \(err)")
-//                            //Put more error handling here
-//                        } else {
-//                            for document in querySnapshot!.documents {
-//                                print("\(document.documentID) => \(document.data())")
-//                                let name = document.get("chapter") as? String
-//                                self.chapterName = name
-//                            }
-//                        }
-//                    }
-//    
+        getUser()
+   
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+    func getUser() {
+        if Auth.auth().currentUser != nil {
+            // User is signed in.
+            let userID = Auth.auth().currentUser?.uid
+            userRef = db.collection("members").whereField("user UID", isEqualTo: userID!)
+            userRef?.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                    //Put more error handling here
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        let chapter = document.get("chapter") as? String
+                        self.chapterName = chapter!
+                    }
+                }
+            }
+        } else {
+            // No user is signed in.
+            print("User not signed in")
+        }
+
+    }
     func addToFirestore() {
-        
         
                 var ref: DocumentReference? = nil
                 ref = db.collection("currentevents").addDocument(data: [
                     "name": titleText.text!,
                     "description": descriptionText.text!,
                     "date": datePicker.date,
-                    "chapter": "Marysville Getchell"
+                    "chapter": chapterName
                     //Force unwraps bc checked in createEventPressed
                 ]) { err in
                     if let err = err {
@@ -78,6 +87,7 @@ class AddEventVC : UIViewController, UITextFieldDelegate {
         {
             addToFirestore()
             dismiss(animated: true, completion: nil)
+          //  dismiss(animated: true, completion: nil)
         } else {
             errorAlert()
         }

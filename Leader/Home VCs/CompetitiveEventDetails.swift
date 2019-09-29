@@ -14,7 +14,7 @@ class CompetitiveEventDetailsVC : UIViewController {
     var db: Firestore!
     var DocRef : Query?
   //  var events: [CompetitiveEvent] = []
-    var passedValue : String?
+    var passedValue = ""
     
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -25,7 +25,9 @@ class CompetitiveEventDetailsVC : UIViewController {
        // loadCompetitiveEvents()
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
-        print("\(String(describing: passedValue))")
+        
+        nameLabel.text = passedValue
+        //print("\(String(describing: passedValue))")
         setTextValues()
         
     }
@@ -41,7 +43,12 @@ class CompetitiveEventDetailsVC : UIViewController {
                 for document in QuerySnapshot!.documents {
                     
                     let name = document.get("name") as? String
+                    let type = document.get("type") as? String
+                    let category = document.get("category") as? String
                     
+                    self.categoryLabel.text = category
+                    self.typeLabel.text = type
+                    self.nameLabel.text = name
                     print(document.data())
                 }
                 

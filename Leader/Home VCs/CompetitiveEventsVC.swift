@@ -11,6 +11,7 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 
+
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var competitiveEventsTableView: UITableView!
     var db: Firestore!
@@ -25,6 +26,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents")
         events = createArray()
+        
         logInSuccess = false
         competitiveEventsTableView.reloadData()
     }
@@ -86,59 +88,61 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 //    //Might be able to do it by setting up an integer value for each of the events ... I'm sorting by name right now. Going to try todoey's version rn but ultimately will probs end up attributing to some value when loaded here then cqallling this class and tapping into that value. Could also reference center card's code.
 //    }
        // func tableView(tableView: UITableView!, didSelectRowAtIndexPath indexPath: NSIndexPath!)
-
-    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
-        if identifier == "goToDetails" {
-            if logInSuccess != true {
-                return false
-            }
-        }
-        return true
-    }
- func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("You selected cell #\(indexPath.row)!")
-    // Get Cell Label
-    let indexPath = tableView.indexPathForSelectedRow
-    let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
-    valueToPass = currentCell.eventName?.text
-
-    performSegue(withIdentifier: "goToDetails", sender: self)
-        
-    }
-    
     func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if (segue.identifier == "goToDetails") {
-//            let VC = CompetitiveEventDetailsVC()
-//            VC.passedValue = valueToPass
-//            let ref = db.collection("competitiveevents").whereField("name", isEqualTo: valueToPass!)
-//            ref.getDocuments() { (QuerySnapshot, err) in
-//                if err != nil
-//                {
-//                    print("Error getting documents: \(String(describing: err))");
-//                }
-//                else
-//                {
-//                    
-//                    for document in QuerySnapshot!.documents {
-//                        let viewController = segue.destination as! CompetitiveEventDetailsVC
-//                       
-//                        let name = document.get("name") as? String
-//                         viewController.passedValue = name
-//                        print(document.data())
-//                    }
-//                    
-//                }
-//                
-//            }
-
+      //  if segue.identifier == "goToDetails" {
+            //Problem is that passed value isn't setting to the value to Pass
+            //let viewController = CompetitiveEventDetailsVC()
+            //            VC.passedValue = valueToPass
+            //            let ref = db.collection("competitiveevents").whereField("name", isEqualTo: valueToPass!)
+            //            ref.getDocuments() { (QuerySnapshot, err) in
+            //                if err != nil
+            //                {
+            //                    print("Error getting documents: \(String(describing: err))");
+            //                }
+            //                else
+            //                {
+            //
+            //                    for document in QuerySnapshot!.documents {
+            //                        let viewController = segue.destination as! CompetitiveEventDetailsVC
+            //
+            //                        let name = document.get("name") as? String
+            //                         viewController.passedValue = name
+            //                        print(document.data())
+            //                    }
+            //
+            //                }
+            //
+            //            }
+            
             // initialize new view controller and cast it as your view controller
-            //var viewController = segue.destination as! CompetitiveEventDetailsVC
+        var viewController : CompetitiveEventDetailsVC = segue.destination as! CompetitiveEventDetailsVC
             // your new view controller should have property that will store passed value
-           // viewController.passedValue = valueToPass
-        }
+            viewController.passedValue = "eyftgedtgy"
+ //       }
         
     }
+//    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+//        if identifier == "goToDetails" {
+//            if logInSuccess != true {
+//                return false
+//            }
+//        }
+//        return true
+//    }
+// func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        print("You selected cell #\(indexPath.row)!")
+//    // Get Cell Label
+//    let indexPath = tableView.indexPathForSelectedRow
+//    let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
+//    //valueToPass = currentCell.eventName?.text
+//    //valueToPass = "plz work"
+//
+//  //  performSegue(withIdentifier: "goToDetails", sender: self)
+//
+//    }
+    
+
 }
 //Code example for search bar methods- note that it crashes every time I click search
 extension CompetitiveEventsVC: UISearchBarDelegate {

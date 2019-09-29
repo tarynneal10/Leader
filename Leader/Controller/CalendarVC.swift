@@ -24,6 +24,8 @@ class CalendarVC : UIViewController {
     @IBOutlet var calendarView: JTACMonthView!
     var db: Firestore!
     var DocRef : Query?
+    var userRef : Query?
+    var chapterName = ""
     var calendarDataSource: [String : String] = [:]
     var formatter: DateFormatter {
         let formatter = DateFormatter()
@@ -34,15 +36,33 @@ class CalendarVC : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-        DocRef = db.collection("currentevents").whereField("chapter", isEqualTo: "Marysville Getchell")
-
+       getUser()
         calendarView.scrollDirection = .horizontal
         calendarView.scrollingMode   = .stopAtEachCalendarFrame
         calendarView.showsHorizontalScrollIndicator = false
-        populateDataSource()
+
 
     }
+    func getUser() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+        userRef?.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                //Put more error handling here
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    let chapter = document.get("chapter") as? String
+                    self.chapterName = chapter!
+                    self.navigationItem.title = self.chapterName
+                    self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName)
 
+                }
+                self.populateDataSource()
+            }
+        }
+    }
     func configureCell(view: JTACDayCell?, cellState: CellState) {
         guard let cell = view as? DateCell  else { return }
         cell.dateLabel.text = cellState.text
@@ -89,20 +109,10 @@ class CalendarVC : UIViewController {
 //            "15-Sep-2019": "MoreData",
 //            "21-Dec-2019": "onlyData",
 //        ]
-        
 
         // update the calendar
         calendarView.reloadData()
     }
-//    func handleCellEvents(cell: DateCell, cellState: CellState) {
-//        let dateString = formatter.string(from: cellState.date)
-//        if calendarDataSource[dateString] == nil {
-//            cell.dotView.isHidden = true
-//
-//        } else {
-//            cell.dotView.isHidden = false
-//        }
-//    }
         func handleCellEvents(cell: DateCell, cellState: CellState) {
             let dateString = formatter.string(from: cellState.date)
             if calendarDataSource[dateString] == nil {

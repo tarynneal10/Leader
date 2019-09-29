@@ -21,41 +21,17 @@ class ChapterVC : UIViewController{
     var db: Firestore!
    // var storage : Storage!
     var DocRef : Query?
+    var userRef : Query?
     var chapterRef : Query?
     var members : [Member] = []
+    var chapterName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         db = Firestore.firestore()
        // storage = Storage.storage()
-        DocRef = db.collection("members").whereField("chapter", isEqualTo: "Marysville Getchell")
-        chapterRef = db.collection("chapter").whereField("name", isEqualTo: "Marysville Getchell")
-        setDescription()
-        //gets members for table view - here bc wouldn't work work anywhere else
-            DocRef?.getDocuments() { (QuerySnapshot, err) in
-                        if err != nil
-                        {
-                            print("Error getting documents: \(String(describing: err))");
-                        }
-                        else
-                        {
-                            if let snapshot = QuerySnapshot {
-                                self.members.removeAll()
-                                    for document in snapshot.documents {
-                                        let name = document.get("name") as? String
-                                        self.members.append(Member(memberName: name ?? "name"))
-                                        print(document.data())
-                                    }
-                                DispatchQueue.main.async {
-                                    self.memberTableView.reloadData()
-                                }
-                            }
-                        }
-        
-                    }
-        //Done getting members
-        //Comment
+        getUser()
+        print(chapterName)
     }
 //Sets description for chapter text box
     func setDescription() {
@@ -71,7 +47,56 @@ class ChapterVC : UIViewController{
             }
         }
     }
-  
+    func getUser() {
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+        userRef?.getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+                        //Put more error handling here
+        } else {
+            for document in querySnapshot!.documents {
+                print("\(document.documentID) => \(document.data())")
+                let chapter = document.get("chapter") as? String
+                self.chapterName = chapter!
+                self.navigationItem.title = self.chapterName
+                self.DocRef = self.db.collection("members").whereField("chapter", isEqualTo: self.chapterName)
+                self.chapterRef = self.db.collection("chapter").whereField("name", isEqualTo: self.chapterName)
+            }
+            self.setDescription()
+            self.getMembers()
+        }
+    }
+    }
+    func getMembers() {
+        if chapterName != "" {
+            DocRef?.getDocuments() { (QuerySnapshot, err) in
+                if err != nil
+                {
+                    print("Error getting documents: \(String(describing: err))");
+                }
+                else
+                {
+                    if let snapshot = QuerySnapshot {
+                        self.members.removeAll()
+                        for document in snapshot.documents {
+                            let name = document.get("name") as? String
+                            self.members.append(Member(memberName: name ?? "name"))
+                            
+                            print(document.data())
+                        }
+                        DispatchQueue.main.async {
+                            self.memberTableView.reloadData()
+                        }
+                    }
+                }
+                
+            }
+        }
+        else {
+            print("Error, chapterName = nil")
+        }
+    }
 
 }
 extension ChapterVC : UICollectionViewDataSource, UICollectionViewDelegate {
