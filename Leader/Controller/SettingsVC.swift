@@ -44,7 +44,7 @@ class SettingsVC : UIViewController {
         super.viewDidAppear(animated)
     }
     @IBOutlet weak var testLabel: UILabel!
-    
+
 }
 
 class TabBarController : UITabBarController {

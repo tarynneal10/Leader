@@ -97,17 +97,17 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 extension CompetitiveEventsVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-     //   competitiveEvents = competitiveEvents?.filter("name CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "name", ascending: true)
-        //let SearchQuery = db.collection("competitiveevents")
-//Still need to get it to accept search filters for category and type
-        
+        DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: searchBar.text!)
+        events = createArray()
+        //Problem- only returns values if typed in exactly right and only for name field
         competitiveEventsTableView.reloadData()
     }
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
-           // loadCompetitiveEvents()
-
+            DocRef = db.collection("competitiveevents")
+            events = createArray()
+            competitiveEventsTableView.reloadData()
             DispatchQueue.main.async {
                 searchBar.resignFirstResponder()
             }

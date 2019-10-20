@@ -74,12 +74,12 @@ class CalendarVC : UIViewController {
     
     func handleCellSelected(cell: DateCell, cellState: CellState) {
         if cellState.isSelected {
-            //cell.selectedView.layer.cornerRadius =  13
-            //cell.selectedView.isHidden = false
+            cell.selectedView.layer.cornerRadius =  13
+            cell.selectedView.isHidden = false
+            print("Cell selected")
         } else {
             cell.selectedView.isHidden = true
         }
-     //  calendarView.reloadData()
     }
 
     func populateDataSource() {
@@ -141,6 +141,13 @@ class CalendarVC : UIViewController {
     func calendarSizeForMonths(_ calendar: JTACMonthView?) -> MonthSize? {
         return MonthSize(defaultSize: 50)
     }
+    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+        configureCell(view: cell, cellState: cellState)
+    }
+    func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+        configureCell(view: cell, cellState: cellState)
+    }
+
 }
 extension CalendarVC: JTACMonthViewDataSource {
     func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
@@ -166,11 +173,5 @@ extension CalendarVC: JTACMonthViewDelegate {
     func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         configureCell(view: cell, cellState: cellState)
     }
-    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
-        //configureCell(view: cell, cellState: cellState)
-    }
-    
-    func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState) {
-       // configureCell(view: cell, cellState: cellState)
-    }
+
 }

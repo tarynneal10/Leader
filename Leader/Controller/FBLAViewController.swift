@@ -22,7 +22,7 @@ class FBLAVC : UIViewController {
         let secondViewController = segue.destination as! CurrentEventsVC
         
         // set a variable in the second view controller with the String to pass
-        secondViewController.receivedString = "IDk"
+        //secondViewController.receivedString = "IDk"
         }
     }
 }

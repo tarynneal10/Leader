@@ -15,7 +15,6 @@ class LoginVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTextField: UITextField!
     var handle: AuthStateDidChangeListenerHandle?
     var logInSuccess : Bool?
-    var currentDoc : String?
     var db: Firestore!
     var DocRef : Query?
     
@@ -23,6 +22,7 @@ class LoginVC : UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         db = Firestore.firestore()
         logInSuccess = false
+        navigationItem.hidesBackButton = true
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             // ...
         }

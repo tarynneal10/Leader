@@ -13,13 +13,18 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch
         FirebaseApp.configure()
-       // let db = Firestore.firestore()
-       // let storage = Storage.storage()
-        
+//Code below doesn't work yet- but kinda works. Just doesn't set signUpSuccess quite right
+//        let signUp = SignUpVC()
+//        let signUpSuccess = signUp.signUpSuccess
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let loginVC : LoginVC = mainStoryboard.instantiateViewController(withIdentifier: "Login") as! LoginVC
+//        if signUpSuccess == true {
+//            self.window?.rootViewController = loginVC
+//        }
         return true
 
     }

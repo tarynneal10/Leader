@@ -12,9 +12,9 @@ import Firebase
 import FirebaseFirestore
 //import FirebaseStorage
 
-class ChapterVC : UIViewController{
+class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    @IBOutlet weak var officerCollectionView: UICollectionView!
+    @IBOutlet weak var collectionTableView: UITableView!
     @IBOutlet weak var memberTableView: UITableView!
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     
@@ -30,6 +30,11 @@ class ChapterVC : UIViewController{
         super.viewDidLoad()
         db = Firestore.firestore()
        // storage = Storage.storage()
+        collectionTableView.delegate = self
+        collectionTableView.dataSource = self
+        
+        memberTableView.delegate = self
+        memberTableView.dataSource = self
         getUser()
         print(chapterName)
     }
@@ -94,35 +99,73 @@ class ChapterVC : UIViewController{
             }
         }
         else {
-            print("Error, chapterName = nil")
+            print("Error, chapterName is empty")
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var count:Int?
+
+        if tableView == collectionTableView {
+            count = 1
+        }
+
+        if tableView == memberTableView {
+            count =  members.count
+        }
+
+        return count!
+        
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        if tableView == collectionTableView {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
+//
+//            //            let path = members[indexPath.row]
+//            //            cell.populate(member: path)
+//            //
+//            return cell
+//        }
+        //if tableView == memberTableView {
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
+//
+//            let path = members[indexPath.row]
+//            cell.populate(member: path)
+//
+//            return cell
+//        }
+//        return UITableViewCell()
+
+        
+        if tableView == self.memberTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
+            
+            let path = members[indexPath.row]
+            cell.populate(member: path)
+            
+            return cell
+        }
+        else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
+            return cell
         }
     }
 
+
 }
+
 extension ChapterVC : UICollectionViewDataSource, UICollectionViewDelegate {
+    
     //Collection view functions
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath as IndexPath) as! OfficerCell
-        return cell
-    }
-    
-}
-extension ChapterVC : UITableViewDelegate, UITableViewDataSource {
-    //Tableview functions
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return members.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
-        
-        let path = members[indexPath.row]
-        cell.populate(member: path)
-        
+        cell.officerPosition.text = "President"
         return cell
     }
 }
@@ -132,6 +175,9 @@ class MemberTableViewCell : UITableViewCell {
         nameLabel.text = member.name
     }
     
+}
+class CollectionCell : UITableViewCell {
+    @IBOutlet weak var officerCollectionView: UICollectionView!
 }
 class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var officerImage: UIImageView!
