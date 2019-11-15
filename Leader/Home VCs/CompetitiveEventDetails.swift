@@ -19,6 +19,8 @@ class CompetitiveEventDetailsVC : UIViewController {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var overviewLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -45,10 +47,12 @@ class CompetitiveEventDetailsVC : UIViewController {
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
+                    let overview = document.get("overview") as? String
                     
-                    self.categoryLabel.text = category
-                    self.typeLabel.text = type
+                    self.categoryLabel.text = "Category: \(category!)"
+                    self.typeLabel.text = "Type: \(type!)"
                     self.nameLabel.text = name
+                    self.overviewLabel.text = overview
                     print(document.data())
                 }
                 

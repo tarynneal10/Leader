@@ -10,8 +10,7 @@ import Foundation
 import UIKit
 import SafariServices
 
-class AboutFBLAVC : UITableViewController, SFSafariViewControllerDelegate {
-    
+class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -26,10 +26,24 @@ class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate 
         signUpSuccess = false
         db = Firestore.firestore()
     }
+//UITextField return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+//UITextView return
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        chapterDescription.text = textView.text
+            
+        if text == "\n" {
+            textView.resignFirstResponder()
+                
+            return false
+        }
+            
+        return true
+    }
+//Error Alert for when fields empty
     func errorAlert() {
         let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
         
@@ -43,9 +57,10 @@ class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate 
         
         self.present(alert, animated: true, completion: nil)
     }
+    
+//Stops from just going straight to next tab
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if identifier == "goToTabs" {
-            //Might be able to have it just return false here and oerform segu e in else for auth- not yet tho
             if signUpSuccess != true {
                 return false
             }
@@ -96,11 +111,10 @@ class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate 
                     }
                 }
             }
-            
-            
-        } else {
-            errorAlert()
         }
-        
+            else {
+            errorAlert()
+            }
     }
 }
+

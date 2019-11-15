@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T2x-LF-knJ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="T2x-LF-knJ">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -715,14 +715,42 @@
                                 <color key="textColor" red="0.49000471699999998" green="0.49000471699999998" blue="0.49000471699999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color key="highlightedColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPi-aY-ZFK">
+                                <rect key="frame" x="5" y="124" width="365" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EqX-ET-QHq">
+                                <rect key="frame" x="35" y="150" width="330" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.16168973806366049" green="0.16168973806366049" blue="0.16168973806366049" alpha="0.84705882352941175" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guidelines" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7d-hS-2oZ">
+                                <rect key="frame" x="5" y="175.5" width="365" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="LVm-lT-ghB" firstAttribute="top" secondItem="SjM-My-yMw" secondAttribute="bottom" id="2GU-hY-cB4"/>
+                            <constraint firstItem="QPi-aY-ZFK" firstAttribute="leading" secondItem="nGo-US-bhb" secondAttribute="leading" constant="5" id="2Y9-Kq-fSF"/>
+                            <constraint firstItem="nGo-US-bhb" firstAttribute="trailing" secondItem="EqX-ET-QHq" secondAttribute="trailing" constant="10" id="3F7-4B-QNW"/>
+                            <constraint firstItem="nGo-US-bhb" firstAttribute="trailing" secondItem="L7d-hS-2oZ" secondAttribute="trailing" constant="5" id="7Ff-K1-CMe"/>
                             <constraint firstItem="SjM-My-yMw" firstAttribute="trailing" secondItem="nGo-US-bhb" secondAttribute="trailing" id="8aa-sR-6Yv"/>
                             <constraint firstItem="xxC-yI-w4e" firstAttribute="leading" secondItem="nGo-US-bhb" secondAttribute="leading" constant="15" id="KmF-Nt-hYj"/>
                             <constraint firstItem="LVm-lT-ghB" firstAttribute="top" secondItem="SjM-My-yMw" secondAttribute="bottom" id="MTj-83-0YD"/>
+                            <constraint firstItem="EqX-ET-QHq" firstAttribute="top" secondItem="QPi-aY-ZFK" secondAttribute="bottom" constant="5" id="QOE-jS-7rw"/>
+                            <constraint firstItem="L7d-hS-2oZ" firstAttribute="top" secondItem="EqX-ET-QHq" secondAttribute="bottom" constant="5" id="QoX-tc-ccU"/>
+                            <constraint firstItem="EqX-ET-QHq" firstAttribute="leading" secondItem="nGo-US-bhb" secondAttribute="leading" constant="35" id="VQY-p9-CvT"/>
                             <constraint firstItem="SjM-My-yMw" firstAttribute="leading" secondItem="nGo-US-bhb" secondAttribute="leading" id="VX1-u6-Rgh"/>
+                            <constraint firstItem="QPi-aY-ZFK" firstAttribute="top" secondItem="xxC-yI-w4e" secondAttribute="bottom" constant="5" id="WD9-tA-csD"/>
+                            <constraint firstItem="L7d-hS-2oZ" firstAttribute="leading" secondItem="nGo-US-bhb" secondAttribute="leading" constant="5" id="ZQ1-xe-KoL"/>
+                            <constraint firstItem="nGo-US-bhb" firstAttribute="trailing" secondItem="QPi-aY-ZFK" secondAttribute="trailing" constant="5" id="ajA-GY-wRm"/>
+                            <constraint firstItem="EqX-ET-QHq" firstAttribute="top" secondItem="QPi-aY-ZFK" secondAttribute="bottom" constant="5" id="bFO-0N-Mma"/>
                             <constraint firstItem="xxC-yI-w4e" firstAttribute="top" secondItem="LVm-lT-ghB" secondAttribute="bottom" id="ieI-fS-pzJ"/>
                             <constraint firstItem="xxC-yI-w4e" firstAttribute="trailing" secondItem="nGo-US-bhb" secondAttribute="trailing" id="knG-qF-PML"/>
                             <constraint firstItem="SjM-My-yMw" firstAttribute="top" secondItem="nGo-US-bhb" secondAttribute="top" id="oG4-yl-q17"/>
@@ -736,6 +764,7 @@
                     <connections>
                         <outlet property="categoryLabel" destination="LVm-lT-ghB" id="Ywr-Vh-izT"/>
                         <outlet property="nameLabel" destination="SjM-My-yMw" id="USf-LH-qlc"/>
+                        <outlet property="overviewLabel" destination="EqX-ET-QHq" id="5db-ok-ZNu"/>
                         <outlet property="typeLabel" destination="xxC-yI-w4e" id="kXm-ld-rIi"/>
                     </connections>
                 </viewController>
@@ -1047,7 +1076,7 @@
         <!--Join FBLA-->
         <scene sceneID="y4O-n0-0AB">
             <objects>
-                <viewController title="Join FBLA" id="C75-Bf-96w" sceneMemberID="viewController">
+                <viewController title="Join FBLA" id="C75-Bf-96w" customClass="JoinFBLAVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FAh-dW-plz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1086,7 +1115,7 @@
                                 <rect key="frame" x="124" y="319" width="148" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSB-Tu-d6f">
                                 <rect key="frame" x="152" y="390" width="82" height="34"/>
@@ -1096,13 +1125,22 @@
                                     <color key="titleColor" red="0.082353793084621429" green="0.082351349294185638" blue="0.082353018224239349" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="J8h-BQ-s8e" kind="show" id="X8h-2I-dkB"/>
+                                    <action selector="joinFBLAPressed:" destination="C75-Bf-96w" eventType="touchUpInside" id="b4T-2m-lI7"/>
+                                    <segue destination="J8h-BQ-s8e" kind="show" identifier="goToTabs" id="X8h-2I-dkB"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.082352941176470587" green="0.082351349294185638" blue="0.082353018224239349" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <viewLayoutGuide key="safeArea" id="frh-RF-jIz"/>
                     </view>
+                    <connections>
+                        <outlet property="advisorTF" destination="P9Z-Xy-eDy" id="fva-tV-Wff"/>
+                        <outlet property="emailTF" destination="Xhk-50-4eS" id="M3x-Lf-yd2"/>
+                        <outlet property="gradeTF" destination="BzG-l9-Gpg" id="F8V-Q9-h2r"/>
+                        <outlet property="nameTF" destination="pIt-h5-yOq" id="XQG-rR-7nI"/>
+                        <outlet property="passwordTF" destination="x6J-6F-DMy" id="zyR-iB-Nu0"/>
+                        <outlet property="schoolTF" destination="Eb1-74-raO" id="U6j-qw-1FV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tML-s3-ci4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1232,7 +1270,7 @@
         <!--About FBLA-->
         <scene sceneID="A79-gX-Igs">
             <objects>
-                <viewController title="About FBLA" id="P1O-1u-Eex" sceneMemberID="viewController">
+                <viewController title="About FBLA" id="P1O-1u-Eex" customClass="AboutFBLAVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cdO-6Z-Q2D">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1243,7 +1281,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KJI-UR-823" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-146" y="1314"/>
+            <point key="canvasLocation" x="-146.40000000000001" y="1313.793103448276"/>
         </scene>
         <!--Settings-->
         <scene sceneID="kDH-p6-qDP">
@@ -1803,7 +1841,7 @@
         <image name="untitled (7)" width="640" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="k5o-vZ-arW"/>
-        <segue reference="eRh-1C-oYe"/>
+        <segue reference="DUQ-WW-Roz"/>
+        <segue reference="3al-01-Kou"/>
     </inferredMetricsTieBreakers>
 </document>

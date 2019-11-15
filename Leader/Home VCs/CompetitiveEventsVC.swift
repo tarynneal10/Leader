@@ -93,7 +93,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     
 
 }
-//Code example for search bar methods- note that it crashes every time I click search
+//Search Bar Code
 extension CompetitiveEventsVC: UISearchBarDelegate {
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
