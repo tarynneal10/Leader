@@ -112,6 +112,7 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.9.0)
+  - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -119,6 +120,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - JTAppleCalendar
+  - SVProgressHUD
 
 SPEC CHECKSUMS:
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
@@ -139,7 +141,8 @@ SPEC CHECKSUMS:
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: f15f4e887585f91dfabd3c03dab27af7cd8ca27d
+PODFILE CHECKSUM: ce7d2cc88463f65b629830893a0d965d9d46024f
 
 COCOAPODS: 1.4.0

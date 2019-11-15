@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
-
+import SVProgressHUD
 
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var competitiveEventsTableView: UITableView!
@@ -25,7 +25,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         // Do any additional setup after loading the view.
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents")
-        
+        SVProgressHUD.show()
         events = createArray()
         competitiveEventsTableView.reloadData()
     }
@@ -49,7 +49,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
                         self.events.append(CompetitiveEvent(eventName: name!, eventCategory: category!, eventType: type!))
                         print(document.data())
                     }
-                    
+                    SVProgressHUD.dismiss()
                     self.competitiveEventsTableView.reloadData()
                 }
                 

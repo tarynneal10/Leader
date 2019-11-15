@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 import Firebase
-//Current bug is also the when sent here from logout button, still have back button
+import SVProgressHUD
+
 class LoginVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -60,7 +61,7 @@ class LoginVC : UIViewController, UITextFieldDelegate {
         return true
     }
     @IBAction func logInPressed(_ sender: Any) {
-        
+        SVProgressHUD.show()
         if emailTextField.text != "", passwordTextField.text != ""
         {
             Auth.auth().signIn(withEmail: emailTextField.text!, password: passwordTextField.text!) {
@@ -72,6 +73,7 @@ class LoginVC : UIViewController, UITextFieldDelegate {
                 else {
                     //success
                     print("Log In successful")
+                    SVProgressHUD.dismiss()
                     self.logInSuccess = true
                     //self.findMember()
                     self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)

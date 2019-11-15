@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
+import SVProgressHUD
 //import FirebaseUI
 
 class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
@@ -26,6 +27,7 @@ var receivedString = ""
         super.viewDidLoad()
         db = Firestore.firestore()
         navigationItem.title = receivedString
+        SVProgressHUD.show()
      //   self.currentEventsTableView.reloadData()
     //currentEventsTableView.separatorStyle = .none
     }
@@ -56,7 +58,7 @@ var receivedString = ""
                         self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
                         print(document.data())
                     }
-                    
+                    SVProgressHUD.dismiss()
                     self.currentEventsTableView.reloadData()
                 }
   

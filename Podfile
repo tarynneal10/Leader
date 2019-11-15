@@ -11,6 +11,7 @@ target 'Leader' do
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'JTAppleCalendar'
+  pod 'SVProgressHUD'
   
   #, '~>; 7.1'
 end
