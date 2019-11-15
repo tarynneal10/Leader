@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
+import MessageUI
 
-class SettingsVC : UIViewController {
+class SettingsVC : UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var chapterLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
@@ -23,23 +24,43 @@ class SettingsVC : UIViewController {
        profilePicture.image = UIImage(named: "Anon")
         db = Firestore.firestore()
         //The code below loads the current member's informastion based on their user UID from when they signed in.
-//        guard let userID = Auth.auth().currentUser?.uid else { return }
-//        let docRef = db.collection("members").whereField("user UID", isEqualTo: userID)
-//        docRef.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//                //Put more error handling here
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    print("\(document.documentID) => \(document.data())")
-//                    self.nameLabel.text = document.get("name") as? String
-//                    self.chapterLabel.text = document.get("chapter") as? String
-//                    self.positionLabel.text = document.get("position") as? String
-//                }
-//            }
-//        }
+        guard let userID = Auth.auth().currentUser?.uid else { return }
+        let docRef = db.collection("members").whereField("user UID", isEqualTo: userID)
+        docRef.getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                //Put more error handling here
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    self.nameLabel.text = document.get("name") as? String
+                    self.chapterLabel.text = document.get("chapter") as? String
+                    self.positionLabel.text = document.get("position") as? String
+                }
+            }
+        }
+    }
+    
+    @IBAction func bugReportPressed(_ sender: Any) {
+        sendEmail()
+    }
+    func sendEmail() {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients(["tarynneal10@gmail.com"])
+            mail.setMessageBody("<p>Description of Bug:</p>", isHTML: true)
+            mail.setSubject("Bug Report")
+    
+            present(mail, animated: true)
+        } else {
+            // show failure alert
+        }
     }
 
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }

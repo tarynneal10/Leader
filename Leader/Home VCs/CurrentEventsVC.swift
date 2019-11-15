@@ -23,11 +23,13 @@ var userRef : Query?
 var list: [CurrentEvent] = []
 var chapterName = ""
 var receivedString = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         navigationItem.title = receivedString
         SVProgressHUD.show()
+        
      //   self.currentEventsTableView.reloadData()
     //currentEventsTableView.separatorStyle = .none
     }
@@ -55,6 +57,7 @@ var receivedString = ""
                         let name = document.get("name") as? String
                         let date = document.get("date") as? Timestamp
                         let description = document.get("description") as? String
+                        //Maybe could put if statement for date here
                         self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
                         print(document.data())
                     }

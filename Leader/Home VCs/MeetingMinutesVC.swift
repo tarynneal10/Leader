@@ -13,16 +13,18 @@ import Firebase
 class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+   
     var db: Firestore!
     var userRef : Query?
     var list = ["Call to Order","Minutes","Officer Reports","Committee Reports","Unfinished Business","New Business","Annoucements","Adjournment"]
+    
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
         db = Firestore.firestore()
         setTitle()
        }
-    
+
     func setTitle() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
@@ -48,7 +50,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "minutesCell", for: indexPath as IndexPath) as! MinutesCell
         cell.label.text = list[indexPath.row]
-        cell.textView.text = ""
+       
         return cell
     }
     
@@ -56,5 +58,5 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
 }
 class MinutesCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var minutesTextView: UITextView!
 }
