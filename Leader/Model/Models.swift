@@ -57,13 +57,14 @@ class CurrentEvent {
     }
     
 }
-//Gonna be honest this is just bc I'm too lazy to format the class above for the calendar
+
 class CurrentEventDate {
     let date : String
     init (eventDate: String) {
         date = eventDate
     }
 }
+
 class Member {
     let name : String
     
@@ -86,5 +87,12 @@ class Chapter {
     let name : String
     init(chapterName: String){
         name = chapterName
+    }
+}
+
+class Minutes {
+    let label : String
+    init(title: String){
+        label = title
     }
 }
