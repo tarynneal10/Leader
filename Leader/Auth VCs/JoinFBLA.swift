@@ -24,7 +24,7 @@ class JoinFBLAVC : UIViewController,MFMailComposeViewControllerDelegate, UITextF
         super.viewDidLoad()
         db = Firestore.firestore()
         signUpSuccess = false
-        
+
         nameTF.delegate = self
         schoolTF.delegate = self
         advisorTF.delegate = self

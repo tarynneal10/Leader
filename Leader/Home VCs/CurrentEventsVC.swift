@@ -23,7 +23,7 @@ var userRef : Query?
 var list: [CurrentEvent] = []
 var chapterName = ""
 var receivedString = ""
-
+let formatter = DateFormatter()
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -58,6 +58,11 @@ var receivedString = ""
                         let date = document.get("date") as? Timestamp
                         let description = document.get("description") as? String
                         //Maybe could put if statement for date here
+//                        let date1 = date
+//                        let date2 = Date()
+//                        if date1 > date2 {
+//
+//                        }
                         self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
                         print(document.data())
                     }

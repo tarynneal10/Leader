@@ -23,6 +23,7 @@ class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
         signUpSuccess = false
         db = Firestore.firestore()
     }

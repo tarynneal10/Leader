@@ -32,16 +32,17 @@ class CalendarVC : UIViewController {
         formatter.dateFormat = "dd-MMM-yyyy"
         return formatter
     }
+    let monthFormatter = DateFormatter()
+    var dataReceived = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        monthFormatter.dateFormat = "MMMM"
         db = Firestore.firestore()
-       getUser()
+        getUser()
         calendarView.scrollDirection = .horizontal
-        calendarView.scrollingMode   = .stopAtEachCalendarFrame
+        calendarView.scrollingMode = .stopAtEachCalendarFrame
         calendarView.showsHorizontalScrollIndicator = false
-
-
     }
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -60,6 +61,7 @@ class CalendarVC : UIViewController {
 
                 }
                 self.populateDataSource()
+                self.dataReceived = true
             }
         }
     }
@@ -69,7 +71,6 @@ class CalendarVC : UIViewController {
         handleCellTextColor(cell: cell, cellState: cellState)
         handleCellEvents(cell: cell, cellState: cellState)
         handleCellSelected(cell: cell, cellState: cellState)
-        calendarView.reloadData()
     }
     
     func handleCellSelected(cell: DateCell, cellState: CellState) {
@@ -99,16 +100,8 @@ class CalendarVC : UIViewController {
                     print(document.data())
                 }
             }
-            
-        }
-        // Then convert that data into a form that can be used by the calendar.
 
-//        calendarDataSource = [
-//            "07-Jan-2020": "SomeData",
-//            "15-Jan-2020": "SomeMoreData",
-//            "15-Sep-2019": "MoreData",
-//            "21-Dec-2019": "onlyData",
-//        ]
+        }
 
         // update the calendar
         calendarView.reloadData()
@@ -117,12 +110,12 @@ class CalendarVC : UIViewController {
             let dateString = formatter.string(from: cellState.date)
             if calendarDataSource[dateString] == nil {
                 cell.dotView.isHidden = true
-    
+
             } else {
                 cell.dotView.isHidden = false
             }
         }
-
+//
     func handleCellTextColor(cell: DateCell, cellState: CellState) {
         if cellState.dateBelongsTo == .thisMonth {
             cell.dateLabel.textColor = UIColor.yellow
@@ -130,22 +123,15 @@ class CalendarVC : UIViewController {
             cell.dateLabel.textColor = UIColor.gray
         }
     }
-    func calendar(_ calendar: JTACMonthView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTACMonthReusableView {
-        let monthFormatter = DateFormatter()  // Declare this outside, to avoid instancing this heavy class multiple times.
-        monthFormatter.dateFormat = "MMMM"
-        let header = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "DateHeader", for: indexPath) as! DateHeader
+  func calendar(_ calendar: JTACMonthView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTACMonthReusableView {
+       let header = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "DateHeader", for: indexPath) as! DateHeader
         header.monthTitle.text = monthFormatter.string(from: range.start)
-        return header
+       return header
+    
     }
     
     func calendarSizeForMonths(_ calendar: JTACMonthView?) -> MonthSize? {
         return MonthSize(defaultSize: 50)
-    }
-    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
-        configureCell(view: cell, cellState: cellState)
-    }
-    func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
-        configureCell(view: cell, cellState: cellState)
     }
 
 }
@@ -157,10 +143,6 @@ extension CalendarVC: JTACMonthViewDataSource {
         let startDate = Date()
         let endDate = dateFormatter.date(from: "2020 06 30")!
         return ConfigurationParameters(startDate: startDate, endDate: endDate)
-//        return ConfigurationParameters(startDate: startDate,
-//                                       endDate: endDate,
-//                                       generateInDates: .forAllMonths,
-//                                       generateOutDates: .tillEndOfGrid)
     }
 }
 extension CalendarVC: JTACMonthViewDelegate {
@@ -172,6 +154,15 @@ extension CalendarVC: JTACMonthViewDelegate {
     
     func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         configureCell(view: cell, cellState: cellState)
+        print("Cells Displayed")
+        //Once more, we run into the problem of the cells being displayed before I get the data from the cloud- how to fix?
     }
+    
+    func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+         configureCell(view: cell, cellState: cellState)
+     }
+     func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
+         configureCell(view: cell, cellState: cellState)
+     }
 
 }
