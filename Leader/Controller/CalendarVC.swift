@@ -20,7 +20,7 @@ class DateHeader: JTACMonthReusableView  {
     @IBOutlet var monthTitle: UILabel!
    
 }
-class CalendarVC : UIViewController {
+class CalendarVC : UIViewController{
     @IBOutlet var calendarView: JTACMonthView!
     var db: Firestore!
     var DocRef : Query?
@@ -33,7 +33,7 @@ class CalendarVC : UIViewController {
         return formatter
     }
     let monthFormatter = DateFormatter()
-    var dataReceived = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,7 +61,7 @@ class CalendarVC : UIViewController {
 
                 }
                 self.populateDataSource()
-                self.dataReceived = true
+                
             }
         }
     }
@@ -98,13 +98,15 @@ class CalendarVC : UIViewController {
                     let append = self.formatter.string(from: (date?.dateValue())!)
                     self.calendarDataSource[append] = "Idk"
                     print(document.data())
+                    // update the calendar
+                    self.calendarView.reloadData()
                 }
             }
 
         }
 
-        // update the calendar
-        calendarView.reloadData()
+        
+        
     }
         func handleCellEvents(cell: DateCell, cellState: CellState) {
             let dateString = formatter.string(from: cellState.date)
@@ -154,9 +156,10 @@ extension CalendarVC: JTACMonthViewDelegate {
     
     func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         configureCell(view: cell, cellState: cellState)
-        print("Cells Displayed")
+       // print("Cells Displayed")
         //Once more, we run into the problem of the cells being displayed before I get the data from the cloud- how to fix?
     }
+    //Have to run first to at least display empty cells- how to get to run again
     
     func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
          configureCell(view: cell, cellState: cellState)
