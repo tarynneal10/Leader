@@ -257,7 +257,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oLS-CB-ytW">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oLS-CB-ytW">
                                                     <rect key="frame" x="25" y="30" width="350" height="55"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -564,13 +564,52 @@
                                     <outlet property="ibCalendarDelegate" destination="fhp-0h-x8w" id="lzs-dy-Jmh"/>
                                 </connections>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kti-6Q-V9l">
+                                <rect key="frame" x="20" y="488" width="294" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UdQ-nb-WCG">
+                                <rect key="frame" x="319" y="488" width="36" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMb-I0-Uzm">
+                                <rect key="frame" x="35" y="514" width="320" height="89"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.12156974524259567" green="0.12156660109758377" blue="0.12156876176595688" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDE-ST-83W">
+                                <rect key="frame" x="15" y="483" width="345" height="120"/>
+                                <color key="backgroundColor" red="1" green="0.85937339069999996" blue="0.011647096839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="0.85937339069999996" blue="0.011647096839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.039216283708810806" green="0.039214614778757095" blue="0.039215747267007828" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="b8G-ES-y0z" firstAttribute="bottom" secondItem="cDE-ST-83W" secondAttribute="bottom" constant="15" id="5f1-VV-7fO"/>
                             <constraint firstItem="b8G-ES-y0z" firstAttribute="trailing" secondItem="PGK-vl-MeL" secondAttribute="trailing" constant="15" id="7fr-PQ-I4c"/>
+                            <constraint firstItem="b8G-ES-y0z" firstAttribute="trailing" secondItem="UdQ-nb-WCG" secondAttribute="trailing" constant="20" id="Cxy-vx-00e"/>
+                            <constraint firstItem="b8G-ES-y0z" firstAttribute="trailing" secondItem="mMb-I0-Uzm" secondAttribute="trailing" constant="20" id="Grf-ap-QKH"/>
+                            <constraint firstItem="Kti-6Q-V9l" firstAttribute="top" secondItem="PGK-vl-MeL" secondAttribute="bottom" constant="20" id="L04-NZ-y2q"/>
+                            <constraint firstItem="cDE-ST-83W" firstAttribute="leading" secondItem="b8G-ES-y0z" secondAttribute="leading" constant="15" id="PPB-g5-KzJ"/>
                             <constraint firstItem="b8G-ES-y0z" firstAttribute="bottom" secondItem="PGK-vl-MeL" secondAttribute="bottom" constant="150" id="RsQ-6O-VsE"/>
+                            <constraint firstItem="b8G-ES-y0z" firstAttribute="bottom" secondItem="mMb-I0-Uzm" secondAttribute="bottom" constant="15" id="bNM-Lg-oJ0"/>
+                            <constraint firstItem="b8G-ES-y0z" firstAttribute="trailing" secondItem="cDE-ST-83W" secondAttribute="trailing" constant="15" id="haJ-Me-jgb"/>
+                            <constraint firstItem="mMb-I0-Uzm" firstAttribute="top" secondItem="UdQ-nb-WCG" secondAttribute="bottom" constant="5" id="hd6-un-LgE"/>
+                            <constraint firstItem="mMb-I0-Uzm" firstAttribute="top" secondItem="Kti-6Q-V9l" secondAttribute="bottom" constant="5" id="on2-Gm-FBj"/>
+                            <constraint firstItem="cDE-ST-83W" firstAttribute="top" secondItem="PGK-vl-MeL" secondAttribute="bottom" constant="15" id="r9K-ji-Zg1"/>
                             <constraint firstItem="PGK-vl-MeL" firstAttribute="top" secondItem="b8G-ES-y0z" secondAttribute="top" constant="15" id="rmm-HQ-Fdu"/>
+                            <constraint firstItem="Kti-6Q-V9l" firstAttribute="leading" secondItem="b8G-ES-y0z" secondAttribute="leading" constant="20" id="spA-bA-OvC"/>
                             <constraint firstItem="PGK-vl-MeL" firstAttribute="leading" secondItem="b8G-ES-y0z" secondAttribute="leading" constant="15" id="svg-hn-ewo"/>
+                            <constraint firstItem="UdQ-nb-WCG" firstAttribute="leading" secondItem="Kti-6Q-V9l" secondAttribute="trailing" constant="5" id="vf3-jH-ALw"/>
+                            <constraint firstItem="UdQ-nb-WCG" firstAttribute="top" secondItem="PGK-vl-MeL" secondAttribute="bottom" constant="20" id="vfW-Ij-4bS"/>
+                            <constraint firstItem="mMb-I0-Uzm" firstAttribute="leading" secondItem="b8G-ES-y0z" secondAttribute="leading" constant="35" id="xUd-uv-KfR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b8G-ES-y0z"/>
                     </view>
@@ -578,7 +617,11 @@
                         <color key="badgeColor" red="0.97785097359999995" green="0.86324322220000005" blue="0.29076632860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="backgroundLabel" destination="cDE-ST-83W" id="ZCY-N2-P2c"/>
                         <outlet property="calendarView" destination="PGK-vl-MeL" id="KeP-tN-YWA"/>
+                        <outlet property="dateLabel" destination="UdQ-nb-WCG" id="ITk-6A-j5q"/>
+                        <outlet property="descriptionLabel" destination="mMb-I0-Uzm" id="aM9-Fn-TMb"/>
+                        <outlet property="nameLabel" destination="Kti-6Q-V9l" id="dQV-Bi-cTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4P-gx-aYF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1879,7 +1922,7 @@
         <image name="untitled (7)" width="640" height="640"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DUQ-WW-Roz"/>
+        <segue reference="4l7-ts-uLl"/>
         <segue reference="eRh-1C-oYe"/>
     </inferredMetricsTieBreakers>
 </document>

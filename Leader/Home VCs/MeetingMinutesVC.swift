@@ -50,7 +50,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "minutesCell", for: indexPath as IndexPath) as! MinutesCell
         cell.label.text = list[indexPath.row]
-       
+        
         return cell
     }
     

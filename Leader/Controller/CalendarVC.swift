@@ -9,6 +9,7 @@
 import JTAppleCalendar
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class DateCell: JTACDayCell {
     @IBOutlet var dotView: UIView!
@@ -22,6 +23,11 @@ class DateHeader: JTACMonthReusableView  {
 }
 class CalendarVC : UIViewController{
     @IBOutlet var calendarView: JTACMonthView!
+    @IBOutlet weak var backgroundLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    
     var db: Firestore!
     var DocRef : Query?
     var userRef : Query?
@@ -34,7 +40,6 @@ class CalendarVC : UIViewController{
     }
     let monthFormatter = DateFormatter()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         monthFormatter.dateFormat = "MMMM"
@@ -43,6 +48,11 @@ class CalendarVC : UIViewController{
         calendarView.scrollDirection = .horizontal
         calendarView.scrollingMode = .stopAtEachCalendarFrame
         calendarView.showsHorizontalScrollIndicator = false
+        backgroundLabel.isHidden = true
+        nameLabel.isHidden = true
+        dateLabel.isHidden = true
+        descriptionLabel.isHidden = true
+        SVProgressHUD.show()
     }
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -78,11 +88,43 @@ class CalendarVC : UIViewController{
             cell.selectedView.layer.cornerRadius =  13
             cell.selectedView.isHidden = false
             print("Cell selected")
+            
         } else {
             cell.selectedView.isHidden = true
         }
     }
-
+    //Work in progress
+//    func displayDetails() {
+//        // problem is can't figure exact document for row clicking on
+//        let query = DocRef
+//        query?.getDocuments(){ (QuerySnapshot, err) in
+//            if err != nil
+//            {
+//                print("Error getting documents: \(String(describing: err))");
+//            }
+//            else
+//            {
+//                for document in QuerySnapshot!.documents {
+//                    let date = document.get("date") as? Date
+//                    let dateString = self.formatter.string(from: date!)
+//                    let description = document.get("description") as? String
+//                    self.nameLabel.text = document.get("name") as? String
+//                    self.dateLabel.text = dateString
+//                    self.descriptionLabel.text = description
+//
+//                    self.nameLabel.isHidden = false
+//                    self.dateLabel.isHidden = false
+//                    self.descriptionLabel.isHidden = false
+//                    self.backgroundLabel.isHidden = false
+//                    print(document.data())
+//                    // update the calendar
+//                    self.calendarView.reloadData()
+//                }
+//            }
+//
+//        }
+//
+//    }
     func populateDataSource() {
         // You can get the data from a server.
         DocRef?.getDocuments()
@@ -98,9 +140,11 @@ class CalendarVC : UIViewController{
                     let append = self.formatter.string(from: (date?.dateValue())!)
                     self.calendarDataSource[append] = "Idk"
                     print(document.data())
-                    // update the calendar
-                    self.calendarView.reloadData()
                 }
+                // update the calendar
+                SVProgressHUD.dismiss()
+                self.calendarView.reloadData()
+                
             }
 
         }
@@ -108,7 +152,7 @@ class CalendarVC : UIViewController{
         
         
     }
-        func handleCellEvents(cell: DateCell, cellState: CellState) {
+    func handleCellEvents(cell: DateCell, cellState: CellState) {
             let dateString = formatter.string(from: cellState.date)
             if calendarDataSource[dateString] == nil {
                 cell.dotView.isHidden = true
@@ -117,7 +161,7 @@ class CalendarVC : UIViewController{
                 cell.dotView.isHidden = false
             }
         }
-//
+
     func handleCellTextColor(cell: DateCell, cellState: CellState) {
         if cellState.dateBelongsTo == .thisMonth {
             cell.dateLabel.textColor = UIColor.yellow
@@ -156,10 +200,7 @@ extension CalendarVC: JTACMonthViewDelegate {
     
     func calendar(_ calendar: JTACMonthView, willDisplay cell: JTACDayCell, forItemAt date: Date, cellState: CellState, indexPath: IndexPath) {
         configureCell(view: cell, cellState: cellState)
-       // print("Cells Displayed")
-        //Once more, we run into the problem of the cells being displayed before I get the data from the cloud- how to fix?
     }
-    //Have to run first to at least display empty cells- how to get to run again
     
     func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
          configureCell(view: cell, cellState: cellState)
