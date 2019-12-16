@@ -12,11 +12,11 @@ import SafariServices
 
 class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
         let contentWidth = scrollView.bounds.width
         let contentHeight = scrollView.bounds.height * 3
         scrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)

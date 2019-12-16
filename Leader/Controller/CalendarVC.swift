@@ -27,9 +27,11 @@ class CalendarVC : UIViewController{
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var noEventsLabel: UILabel!
     
     var db: Firestore!
     var DocRef : Query?
+    var SpecRef : Query?
     var userRef : Query?
     var chapterName = ""
     var calendarDataSource: [String : String] = [:]
@@ -52,7 +54,8 @@ class CalendarVC : UIViewController{
         nameLabel.isHidden = true
         dateLabel.isHidden = true
         descriptionLabel.isHidden = true
-        SVProgressHUD.show()
+        noEventsLabel.isHidden = true
+        //SVProgressHUD.show()- because it's annoying
     }
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -68,7 +71,7 @@ class CalendarVC : UIViewController{
                     self.chapterName = chapter!
                     self.navigationItem.title = self.chapterName
                     self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName)
-
+                    
                 }
                 self.populateDataSource()
                 
@@ -84,9 +87,25 @@ class CalendarVC : UIViewController{
     }
     
     func handleCellSelected(cell: DateCell, cellState: CellState) {
+        let dateString = formatter.string(from: cellState.date)
+        
         if cellState.isSelected {
             cell.selectedView.layer.cornerRadius =  13
             cell.selectedView.isHidden = false
+            backgroundLabel.isHidden = false
+            nameLabel.isHidden = false
+            dateLabel.isHidden = false
+            descriptionLabel.isHidden = false
+            noEventsLabel.isHidden = true
+            populateDataSource()
+            //can call in function to display once it actually works- just change some
+            if calendarDataSource[dateString] == nil {
+                noEventsLabel.isHidden = false
+                nameLabel.isHidden = true
+                dateLabel.isHidden = true
+                descriptionLabel.isHidden = true
+            } 
+            
             print("Cell selected")
             
         } else {
@@ -96,8 +115,8 @@ class CalendarVC : UIViewController{
     //Work in progress
 //    func displayDetails() {
 //        // problem is can't figure exact document for row clicking on
-//        let query = DocRef
-//        query?.getDocuments(){ (QuerySnapshot, err) in
+//        SpecRef = DocRef
+//        SpecRef?.getDocuments(){ (QuerySnapshot, err) in
 //            if err != nil
 //            {
 //                print("Error getting documents: \(String(describing: err))");
@@ -112,10 +131,6 @@ class CalendarVC : UIViewController{
 //                    self.dateLabel.text = dateString
 //                    self.descriptionLabel.text = description
 //
-//                    self.nameLabel.isHidden = false
-//                    self.dateLabel.isHidden = false
-//                    self.descriptionLabel.isHidden = false
-//                    self.backgroundLabel.isHidden = false
 //                    print(document.data())
 //                    // update the calendar
 //                    self.calendarView.reloadData()
@@ -138,15 +153,15 @@ class CalendarVC : UIViewController{
                 for document in QuerySnapshot!.documents {
                     let date = document.get("date") as? Timestamp
                     let append = self.formatter.string(from: (date?.dateValue())!)
+                    
                     self.calendarDataSource[append] = "Idk"
                     print(document.data())
                 }
                 // update the calendar
-                SVProgressHUD.dismiss()
+                //SVProgressHUD.dismiss()
                 self.calendarView.reloadData()
                 
             }
-
         }
 
         

@@ -37,6 +37,8 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
                 if err != nil
                 {
                     print("Error getting documents: \(String(describing: err))");
+                    SVProgressHUD.dismiss()
+                    //Put like an error pop up or something
                 }
                 else
                 {

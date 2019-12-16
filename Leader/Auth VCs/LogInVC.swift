@@ -41,6 +41,8 @@ class LoginVC : UIViewController, UITextFieldDelegate {
     func errorAlert() {
         let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
         
+        SVProgressHUD.dismiss()
+        
         let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in
             //Here might want to eventually change color of empty fields to red, then change back to black one interacted with
 //            self.emailTextField.text = ""

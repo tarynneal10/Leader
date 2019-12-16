@@ -15,7 +15,6 @@ import FirebaseFirestore
 class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var collectionTableView: UITableView!
-    @IBOutlet weak var memberTableView: UITableView!
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     var storedOffsets = [Int: CGFloat]()
     var db: Firestore!
@@ -32,9 +31,7 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
        // storage = Storage.storage()
         collectionTableView.delegate = self
         collectionTableView.dataSource = self
-        
-        memberTableView.delegate = self
-        memberTableView.dataSource = self
+
         getUser()
         print(chapterName)
     }
@@ -91,7 +88,7 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
                             print(document.data())
                         }
                         DispatchQueue.main.async {
-                            self.memberTableView.reloadData()
+                            self.collectionTableView.reloadData()
                         }
                     }
                 }
@@ -104,61 +101,46 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var count:Int?
-
-        if tableView == collectionTableView {
-            count = 1
-        }
-
-        if tableView == memberTableView {
-            count =  members.count
-        }
-
-        return count!
+        return members.count + 2
         
     }
-//   func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if tableView == self.collectionTableView {
-//            guard let tableViewCell = cell as? CollectionCell else { return }
-//            tableViewCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, forRow: indexPath.row)
-//        }
-//    }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.collectionTableView {
-                   let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
-                   
-                   return cell
-               }
-        if tableView == self.memberTableView {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
-            
-            let path = members[indexPath.row]
-            cell.populate(member: path)
-            
-            return cell
-        }
+//        if indexPath.row <= 1 {
+//                   let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
+//                    cell.image1.image = UIImage(named: "Anon")
+//                    cell.label1.text = "No one"
+//                   return cell
+//               }
+//        else if indexPath.row >= 1{
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
+//              //Problem is that this code put the indexpath.row out of range for this
+//            let path = members[indexPath.row]
+//            cell.populate(member: path)
+//
+//            return cell
+//        }
         return UITableViewCell()
     }
 
 
 }
 
-extension ChapterVC : UICollectionViewDataSource, UICollectionViewDelegate {
-    
-    //Collection view functions
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath as IndexPath) as! OfficerCell
-        cell.officerPosition.text = "President"
-        cell.officerImage.image = UIImage(named: "Anon")
-        return cell
-    }
-}
+//extension ChapterVC : UICollectionViewDataSource, UICollectionViewDelegate {
+//
+//    //Collection view functions
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 1
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath as IndexPath) as! OfficerCell
+//        cell.officerPosition.text = "President"
+//        cell.officerImage.image = UIImage(named: "Anon")
+//        return cell
+//    }
+//}
 class MemberTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     func populate(member: Member) {
@@ -167,7 +149,13 @@ class MemberTableViewCell : UITableViewCell {
     
 }
 class CollectionCell : UITableViewCell {
-    @IBOutlet private weak var officerCollectionView: UICollectionView!
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var image3: UIImageView!
+    @IBOutlet weak var label1: UILabel!
+    @IBOutlet weak var label2: UILabel!
+    @IBOutlet weak var label3: UILabel!
+    
 }
 //extension CollectionCell {
 //    func setCollectionViewDataSourceDelegate(dataSourceDelegate: UICollectionViewDataSource & UICollectionViewDelegate, forRow row: Int) {
@@ -176,8 +164,8 @@ class CollectionCell : UITableViewCell {
 //        officerCollectionView.reloadData()
 //    }
 //}
-class OfficerCell : UICollectionViewCell {
-    @IBOutlet weak var officerImage: UIImageView!
-    @IBOutlet weak var officerPosition: UILabel!
-    
-}
+//class OfficerCell : UICollectionViewCell {
+//    @IBOutlet weak var officerImage: UIImageView!
+//    @IBOutlet weak var officerPosition: UILabel!
+//
+//}

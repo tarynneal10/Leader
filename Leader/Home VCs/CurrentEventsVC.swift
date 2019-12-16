@@ -48,6 +48,7 @@ let formatter = DateFormatter()
                 if err != nil
                 {
                     print("Error getting documents: \(String(describing: err))");
+                    SVProgressHUD.dismiss()
                 }
                 else
                 {
@@ -57,14 +58,13 @@ let formatter = DateFormatter()
                         let name = document.get("name") as? String
                         let date = document.get("date") as? Timestamp
                         let description = document.get("description") as? String
-                        //Maybe could put if statement for date here
-//                        let date1 = date
-//                        let date2 = Date()
-//                        if date1 > date2 {
-//
-//                        }
-                        self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
-                        print(document.data())
+                        //Checks to see if event before today's date
+                        let eventDate = (date?.dateValue())!
+                        if eventDate > Date() {
+                            self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
+                            print(document.data())
+                        }
+                        
                     }
                     SVProgressHUD.dismiss()
                     self.currentEventsTableView.reloadData()
