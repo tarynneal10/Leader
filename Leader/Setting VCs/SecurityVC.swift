@@ -23,6 +23,9 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
     var db: Firestore!
     var docRef : Query?
     var userDoc : String?
+    var userPaidStatus : Bool?
+    var userGrade : Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -41,11 +44,17 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
+                    //Sets Fields to data
                     self.nameTF.text = document.get("name") as? String
                     self.chapterTF.text = document.get("chapter") as? String
                     self.positionTF.text = document.get("position") as? String
                     self.emailTF.text = email
+                    
+                    //Sets data for when changed (Want to incorp in UI eventually)
                     self.userDoc = document.documentID
+                    self.userPaidStatus = document.get("paid") as? Bool
+                    self.userGrade = document.get("grade") as? Int
+                    
                 }
             }
         }
@@ -71,8 +80,9 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
         doneButton.isHidden = false
         
     }
-    
+//Updates data
     @IBAction func donePressed(_ sender: Any) {
+
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
         db.collection("members").document(userDoc!).setData([
@@ -80,14 +90,20 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
             "chapter": chapterTF.text!,
             "position": positionTF.text!,
             "user UID": userID,
-            "paid": true,
-            "grade": 10
+            "paid": userPaidStatus!,
+            "grade": userGrade!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")
             } else {
                 print("Document successfully written!")
             }
+        }
+        Auth.auth().currentUser?.updateEmail(to: emailTF.text!) { (error) in
+            print("Email not updated")
+        }
+        Auth.auth().currentUser?.updatePassword(to: passwordTF.text!) { (error) in
+            print("Password not updated")
         }
     }
 }

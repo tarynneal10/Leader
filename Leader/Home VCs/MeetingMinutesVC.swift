@@ -13,7 +13,7 @@ import Firebase
 class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-   
+    
     var db: Firestore!
     var userRef : Query?
     var list = ["Call to Order","Minutes","Officer Reports","Committee Reports","Unfinished Business","New Business","Annoucements","Adjournment"]
@@ -23,28 +23,10 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
            // Do any additional setup after loading the view.
         db = Firestore.firestore()
         setTitle()
-        // Along with auto layout, these are the keys for enabling variable cell height
         tableView.estimatedRowHeight = 85.0
-       // tableView.rowHeight = UITableView.automaticDimension
        }
-//    func textViewDidChange(_ textView: UITextView) {
-//        UIView.setAnimationsEnabled(false)
-//        textView.sizeToFit()
-//        self.tableView.beginUpdates()
-//        self.tableView.endUpdates()
-//        UIView.setAnimationsEnabled(true)
-//    }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    // MARK: UITextViewDelegate
-    func textViewDidChange(textView: UITextView) {
-
-        // Calculate if the text view will change height, then only force
-        // the table to update if it does.  Also disable animations to
-        // prevent "jankiness".
-
+    func textViewDidChange(_ textView: UITextView) {
         let startHeight = textView.frame.size.height
         let calcHeight = textView.sizeThatFits(textView.frame.size).height
 
@@ -53,18 +35,16 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
             UIView.setAnimationsEnabled(false) // Disable animations
             self.tableView.beginUpdates()
             self.tableView.endUpdates()
-
-            // Might need to insert additional stuff here if scrolls
-            // table in an unexpected way.  This scrolls to the bottom
-            // of the table. (Though you might need something more
-            // complicated if editing in the middle.)
-
             let scrollTo = self.tableView.contentSize.height - self.tableView.frame.size.height
             self.tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
 
             UIView.setAnimationsEnabled(true)  // Re-enable animations.
+        }
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
+
 
     func setTitle() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -91,13 +71,32 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "minutesCell", for: indexPath as IndexPath) as! MinutesCell
         cell.label.text = list[indexPath.row]
-        
+        cell.textChanged {[weak tableView] (newText: String) in
+            DispatchQueue.main.async {
+                tableView?.beginUpdates()
+                tableView?.endUpdates()
+            }
+        }
         return cell
     }
     
-    
 }
-class MinutesCell : UITableViewCell {
+class MinutesCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var minutesTextView: UITextView!
+    
+    var textChanged: ((String) -> Void)?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        minutesTextView.delegate = self
+    }
+    
+    func textChanged(action: @escaping (String) -> Void) {
+        self.textChanged = action
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        textChanged?(textView.text)
+    }
 }

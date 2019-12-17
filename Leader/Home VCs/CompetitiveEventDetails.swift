@@ -10,38 +10,21 @@ import Foundation
 import UIKit
 import Firebase
 
-class CompetitiveEventDetailsVC : UIViewController {
+class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
+    
     var db: Firestore!
     var DocRef : Query?
-  //  var events: [CompetitiveEvent] = []
     var passedValue = ""
+    var sectionTitles = ["Overview", "Guidelines", "Preparation", "Alignment"]
+    var sectionInfo : [String]?
     
-    @IBOutlet weak var typeLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var overviewLabel: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-              let contentWidth = scrollView.bounds.width
-                let contentHeight = scrollView.bounds.height * 3
-                scrollView.contentSize = CGSize(width: contentWidth, height: contentHeight)
-         
-                let subviewHeight = CGFloat(120)
-                var currentViewOffset = CGFloat(0);
-
-                while currentViewOffset < contentHeight {
-                let frame = CGRect(x: 0, y: currentViewOffset, width: contentWidth, height: contentHeight).insetBy(dx: 5, dy: 5)
-
-                let subview = UIView(frame: frame)
-        //            //subview.backgroundColor = UIColor.orange
-                    //subView = UIView(frame: frame)
-                scrollView.addSubview(subview)
-
-                currentViewOffset += subviewHeight
-                }
+        tableView.delegate = self
+        tableView.dataSource = self
+        
        // loadCompetitiveEvents()
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
@@ -67,10 +50,10 @@ class CompetitiveEventDetailsVC : UIViewController {
                     let category = document.get("category") as? String
                     let overview = document.get("overview") as? String
                     
-                    self.categoryLabel.text = "Category: \(category!)"
-                    self.typeLabel.text = "Type: \(type!)"
-                    self.nameLabel.text = name
-                    self.overviewLabel.text = overview
+//                    self.categoryLabel.text = "Category: \(category!)"
+//                    self.typeLabel.text = "Type: \(type!)"
+//                    self.nameLabel.text = name
+                    self.sectionInfo = [overview!]
                     print(document.data())
                 }
                 
@@ -80,6 +63,21 @@ class CompetitiveEventDetailsVC : UIViewController {
 
         
     }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sectionTitles.count + 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
+        cell.label.text = sectionTitles[indexPath.row]
+        
+//        let listPath = events[indexPath.row]
+//        cell.populate(competitiveEvent: listPath)
+//
+        return cell
+    }
+    
 //    func selectedEvent() {
 //        competitiveEvents = realm.objects(CompetitiveEvents.self).filter("")
 //    }
@@ -93,4 +91,14 @@ class CompetitiveEventDetailsVC : UIViewController {
 ////Should probs set up a parameter or two for when there's no value
     }
 //
+}
+
+class DetailCell : UITableViewCell {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var textView: UITextView!
+}
+class TitleCell : UITableViewCell {
+    @IBOutlet weak var type: UILabel!
+    @IBOutlet weak var category: UILabel!
+    @IBOutlet weak var name: UILabel!
 }
