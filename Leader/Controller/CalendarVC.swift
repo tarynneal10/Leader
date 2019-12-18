@@ -31,9 +31,8 @@ class CalendarVC : UIViewController{
     
     var db: Firestore!
     var DocRef : Query?
-    var SpecRef : Query?
     var userRef : Query?
-    var chapterName = ""
+    var chapterName : String?
     var calendarDataSource: [String : String] = [:]
     var formatter: DateFormatter {
         let formatter = DateFormatter()
@@ -41,9 +40,11 @@ class CalendarVC : UIViewController{
         return formatter
     }
     let monthFormatter = DateFormatter()
-
+    var selectedDate : Date?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        selectedDate = formatter.date(from: "00-Jan-0000")
         monthFormatter.dateFormat = "MMMM"
         db = Firestore.firestore()
         getUser()
@@ -67,10 +68,9 @@ class CalendarVC : UIViewController{
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
-                    let chapter = document.get("chapter") as? String
-                    self.chapterName = chapter!
+                    self.chapterName = document.get("chapter") as? String
                     self.navigationItem.title = self.chapterName
-                    self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName)
+                    self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName!)
                     
                 }
                 self.populateDataSource()
@@ -93,18 +93,20 @@ class CalendarVC : UIViewController{
             cell.selectedView.layer.cornerRadius =  13
             cell.selectedView.isHidden = false
             backgroundLabel.isHidden = false
-            nameLabel.isHidden = false
-            dateLabel.isHidden = false
-            descriptionLabel.isHidden = false
-            noEventsLabel.isHidden = true
-            populateDataSource()
-            //can call in function to display once it actually works- just change some
+            
             if calendarDataSource[dateString] == nil {
                 noEventsLabel.isHidden = false
                 nameLabel.isHidden = true
                 dateLabel.isHidden = true
                 descriptionLabel.isHidden = true
-            } 
+            } else {
+
+                nameLabel.isHidden = false
+                dateLabel.isHidden = false
+                descriptionLabel.isHidden = false
+                noEventsLabel.isHidden = true
+                displayDetails()
+            }
             
             print("Cell selected")
             
@@ -112,34 +114,43 @@ class CalendarVC : UIViewController{
             cell.selectedView.isHidden = true
         }
     }
+
     //Work in progress
-//    func displayDetails() {
-//        // problem is can't figure exact document for row clicking on
-//        SpecRef = DocRef
-//        SpecRef?.getDocuments(){ (QuerySnapshot, err) in
-//            if err != nil
-//            {
-//                print("Error getting documents: \(String(describing: err))");
-//            }
-//            else
-//            {
-//                for document in QuerySnapshot!.documents {
-//                    let date = document.get("date") as? Date
-//                    let dateString = self.formatter.string(from: date!)
-//                    let description = document.get("description") as? String
-//                    self.nameLabel.text = document.get("name") as? String
-//                    self.dateLabel.text = dateString
-//                    self.descriptionLabel.text = description
-//
-//                    print(document.data())
-//                    // update the calendar
-//                    self.calendarView.reloadData()
-//                }
-//            }
-//
-//        }
-//
-//    }
+   func displayDetails() {
+        if selectedDate != formatter.date(from: "00-Jan-0000") {
+            
+            let timestamp = Timestamp(date: selectedDate!)
+            print(timestamp)
+            let DateRef = db.collection("currentevents")
+                .whereField("chapter", isEqualTo: chapterName!)
+                .whereField("date", isEqualTo: timestamp)
+            //The where field for date Just won't run
+            DateRef.getDocuments(){ (QuerySnapshot, err) in
+                    if err != nil
+                    {
+                        print("Error getting documents: \(String(describing: err))");
+                    } else {
+
+                        for document in QuerySnapshot!.documents {
+                            //Why?? Wont?? This?? Run???
+                            print("Here?")
+                            let date = document.get("date") as? Timestamp
+                            let dateString = self.formatter.string(from: (date?.dateValue())!)
+                            
+                            self.nameLabel.text = document.get("name") as? String
+                            self.dateLabel.text = dateString
+                            self.descriptionLabel.text = document.get("description") as? String
+
+                            print(document.data())
+
+                        }
+                    }
+
+            }
+        } else {
+          print("selectedDate has no value")
+        }
+    }
     func populateDataSource() {
         // You can get the data from a server.
         DocRef?.getDocuments()
@@ -218,7 +229,10 @@ extension CalendarVC: JTACMonthViewDelegate {
     }
     
     func calendar(_ calendar: JTACMonthView, didSelectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
-         configureCell(view: cell, cellState: cellState)
+
+        selectedDate = date
+        configureCell(view: cell, cellState: cellState)
+        
      }
      func calendar(_ calendar: JTACMonthView, didDeselectDate date: Date, cell: JTACDayCell?, cellState: CellState, indexPath: IndexPath) {
          configureCell(view: cell, cellState: cellState)

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -16,24 +17,24 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
     var db: Firestore!
     var DocRef : Query?
     var passedValue = ""
-    var sectionTitles = ["Overview", "Guidelines", "Preparation", "Alignment"]
-    var sectionInfo : [String]?
-    
+    var sectionTitles : [String] = []
+   // var sectionInfo : [[String]] = [[]]
+    var sectionInfo : [String] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
-        
-       // loadCompetitiveEvents()
+        tableView.estimatedRowHeight = 98.0
+        tableView.rowHeight = UITableView.automaticDimension
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
-       // nameLabel.text = passedValue
         loadDetails()
-        //print("\(String(describing: passedValue))")
-        setTextValues()
         
     }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     func loadDetails() {
         DocRef?.getDocuments() { (QuerySnapshot, err) in
             if err != nil
@@ -49,53 +50,60 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
                     let overview = document.get("overview") as? String
-                    
+                    let guidelines = document.get("guidelines") as? String
+                    let preparation = document.get("preparation") as? String
+                    let alignment = document.get("alignment") as? String
 //                    self.categoryLabel.text = "Category: \(category!)"
 //                    self.typeLabel.text = "Type: \(type!)"
 //                    self.nameLabel.text = name
-                    self.sectionInfo = [overview!]
+                   // self.sectionInfo = [["\(type!) & \(category!)"], [overview!], [guidelines!], [preparation!], [alignment!]]
+                    self.sectionInfo = ["\(type!) & \(category!)", overview!, guidelines!, preparation!,  alignment!]
+                    self.sectionTitles = [name!, "Overview", "Guidelines", "Preparation", "Alignment"]
                     print(document.data())
                 }
-                
+                self.tableView.reloadData()
             }
             
         }
 
         
     }
+    
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//
+//        return sectionTitles[section]
+//
+//    }
+//
+//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//
+//    return sectionTitles.count
+//
+//    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionTitles.count + 1
+        
+       // return sectionInfo[section].count
+        return sectionTitles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
-        cell.label.text = sectionTitles[indexPath.row]
         
-//        let listPath = events[indexPath.row]
-//        cell.populate(competitiveEvent: listPath)
-//
+        cell.label.text = sectionTitles[indexPath.row]
+        cell.textView.text = sectionInfo[indexPath.row]
+        //cell.textView.text = sectionInfo[indexPath.section][indexPath.row]
+        
         return cell
     }
-    
-//    func selectedEvent() {
-//        competitiveEvents = realm.objects(CompetitiveEvents.self).filter("")
-//    }
-    func findEventDetails() {
-        
-    }
-    func setTextValues() {
-//        typeLabel.text = competitiveEventsDetails?.first?.type
-//        categoryLabel.text = competitiveEventsDetails?.first?.category
-//        nameLabel.text = competitiveEventsDetails?.first?.name
-////Should probs set up a parameter or two for when there's no value
-    }
-//
+
 }
 
-class DetailCell : UITableViewCell {
+class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!
+
 }
 class TitleCell : UITableViewCell {
     @IBOutlet weak var type: UILabel!

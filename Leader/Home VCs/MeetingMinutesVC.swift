@@ -23,24 +23,24 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
            // Do any additional setup after loading the view.
         db = Firestore.firestore()
         setTitle()
-        tableView.estimatedRowHeight = 85.0
+        tableView.estimatedRowHeight = 40.0
        }
 
-    func textViewDidChange(_ textView: UITextView) {
-        let startHeight = textView.frame.size.height
-        let calcHeight = textView.sizeThatFits(textView.frame.size).height
-
-        if startHeight != calcHeight {
-
-            UIView.setAnimationsEnabled(false) // Disable animations
-            self.tableView.beginUpdates()
-            self.tableView.endUpdates()
-            let scrollTo = self.tableView.contentSize.height - self.tableView.frame.size.height
-            self.tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
-
-            UIView.setAnimationsEnabled(true)  // Re-enable animations.
-        }
-    }
+//    func textViewDidChange(_ textView: UITextView) {
+//        let startHeight = textView.frame.size.height
+//        let calcHeight = textView.sizeThatFits(textView.frame.size).height
+//
+//        if startHeight != calcHeight {
+//
+//            UIView.setAnimationsEnabled(false) // Disable animations
+//            self.tableView.beginUpdates()
+//            self.tableView.endUpdates()
+//            let scrollTo = self.tableView.contentSize.height - self.tableView.frame.size.height
+//            self.tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
+//
+//            UIView.setAnimationsEnabled(true)  // Re-enable animations.
+//        }
+//    }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }

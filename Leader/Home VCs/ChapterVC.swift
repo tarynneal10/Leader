@@ -106,21 +106,23 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.row <= 1 {
-//                   let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
-//                    cell.image1.image = UIImage(named: "Anon")
-//                    cell.label1.text = "No one"
-//                   return cell
-//               }
-//        else if indexPath.row >= 1{
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
-//              //Problem is that this code put the indexpath.row out of range for this
-//            let path = members[indexPath.row]
-//            cell.populate(member: path)
-//
-//            return cell
-//        }
-        return UITableViewCell()
+        let customIndexPath = NSIndexPath(index: indexPath.row - 2)
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath as IndexPath) as! CollectionCell
+             cell.image1.image = UIImage(named: "Anon")
+             cell.label1.text = "President"
+            return cell
+            
+        } else {
+            // let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
+             let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath)as! MemberTableViewCell
+                   //Problem is that this code put the indexpath.row out of range for this
+//             let path = members[customIndexPath.row]
+//             cell.populate(member: path)
+
+             return cell
+
+        }
     }
 
 

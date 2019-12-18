@@ -19,6 +19,7 @@ class JoinFBLAVC : UIViewController,MFMailComposeViewControllerDelegate, UITextF
     @IBOutlet weak var passwordTF: UITextField!
     var db: Firestore!
     var signUpSuccess : Bool?
+    var advisorEmail : String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +74,6 @@ class JoinFBLAVC : UIViewController,MFMailComposeViewControllerDelegate, UITextF
                     else {
                         //success
                         print("Registration successful")
-                        self.signUpSuccess = true
-                        self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                         guard let userID = Auth.auth().currentUser?.uid else { return }
                         //Adds user as new member
                         var ref: DocumentReference? = nil
@@ -95,12 +94,55 @@ class JoinFBLAVC : UIViewController,MFMailComposeViewControllerDelegate, UITextF
                        
                     }
                 }
-                
-                
+                findAdvisorInfo()
+
             } else {
                 errorAlert()
             }
-            
         }
+    func findAdvisorInfo() {
+        let advisorRef = db.collection("members").whereField("name", isEqualTo: advisorTF.text!)
+        advisorRef.getDocuments()
+            { (QuerySnapshot, err) in
+                if err != nil
+                {
+                    print("Error getting documents: \(String(describing: err))");
+                    //Put like an error pop up or something
+                }
+                else
+                {
+                    for document in QuerySnapshot!.documents {
+                        self.advisorEmail = (document.get("email") as? String)!
+                        print(document.data())
+                    }
+                    self.sendEmail()
+                }
+                
+        }
+        
+    }
+    func sendEmail() {
+    if advisorEmail != "" {
+        if MFMailComposeViewController.canSendMail() {
+            let mail = MFMailComposeViewController()
+            mail.mailComposeDelegate = self
+            mail.setToRecipients([advisorEmail])
+            mail.setMessageBody("<p>Why I want to join FBLA:</p>", isHTML: true)
+            mail.setSubject("New FBLA Member- \(nameTF.text!), Grade \(gradeTF.text!)")
+            present(mail, animated: true)
+
+            signUpSuccess = true
+            performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+            
+        } else {
+            // show failure alert
+        }
+        }
+    }
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true)
+    }
+    
     }
     
