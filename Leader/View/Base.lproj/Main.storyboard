@@ -2052,19 +2052,36 @@
         <!--Q&A-->
         <scene sceneID="O4C-v4-isY">
             <objects>
-                <tableViewController title="Q&amp;A" id="6zP-ht-xuq" sceneMemberID="viewController">
+                <tableViewController title="Q&amp;A" id="6zP-ht-xuq" customClass="QATableViewController" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="LZP-2J-csn">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="4nh-vV-5hR">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" id="4nh-vV-5hR" customClass="QuestionCell" customModule="Leader" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4nh-vV-5hR" id="3uy-oB-78H">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X51-zX-I6z">
+                                            <rect key="frame" x="16" y="11" width="343" height="21.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="X51-zX-I6z" secondAttribute="bottom" id="PFq-2U-SDR"/>
+                                        <constraint firstItem="X51-zX-I6z" firstAttribute="leading" secondItem="3uy-oB-78H" secondAttribute="leadingMargin" id="epa-fi-3Zs"/>
+                                        <constraint firstItem="X51-zX-I6z" firstAttribute="top" secondItem="3uy-oB-78H" secondAttribute="topMargin" id="ga8-Mv-05d"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="X51-zX-I6z" secondAttribute="trailing" id="phC-WU-thZ"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="label" destination="X51-zX-I6z" id="gga-D4-x51"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>

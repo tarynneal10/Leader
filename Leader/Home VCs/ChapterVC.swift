@@ -101,7 +101,7 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return members.count + 2
+        return 1 + members.count
         
     }
 
@@ -117,8 +117,8 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
             // let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
              let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath)as! MemberTableViewCell
                    //Problem is that this code put the indexpath.row out of range for this
-//             let path = members[customIndexPath.row]
-//             cell.populate(member: path)
+             let path = members[customIndexPath.row]
+             //cell.populate(member: path)
 
              return cell
 
