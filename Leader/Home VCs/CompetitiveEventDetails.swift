@@ -13,20 +13,25 @@ import SVProgressHUD
 
 class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var typeLabel: UILabel!
     
     var db: Firestore!
     var DocRef : Query?
     var passedValue = ""
     var sectionTitles : [String] = []
-   // var sectionInfo : [[String]] = [[]]
     var sectionInfo : [String] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        sectionTitles = ["Overview", "Guidelines", "Preparation", "Alignment"]
+
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 98.0
+        tableView.estimatedRowHeight = 34.0
         tableView.rowHeight = UITableView.automaticDimension
+        
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)
         loadDetails()
@@ -49,16 +54,18 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
+                    
                     let overview = document.get("overview") as? String
                     let guidelines = document.get("guidelines") as? String
                     let preparation = document.get("preparation") as? String
                     let alignment = document.get("alignment") as? String
-//                    self.categoryLabel.text = "Category: \(category!)"
-//                    self.typeLabel.text = "Type: \(type!)"
-//                    self.nameLabel.text = name
-                   // self.sectionInfo = [["\(type!) & \(category!)"], [overview!], [guidelines!], [preparation!], [alignment!]]
-                    self.sectionInfo = ["\(type!) & \(category!)", overview!, guidelines!, preparation!,  alignment!]
-                    self.sectionTitles = [name!, "Overview", "Guidelines", "Preparation", "Alignment"]
+                    
+                    self.categoryLabel.text = "Category: \(category!)"
+                    self.typeLabel.text = "Type: \(type!)"
+                    self.nameLabel.text = name
+                    
+                    self.sectionInfo = [overview!, guidelines!, preparation!,  alignment!]
+                    
                     print(document.data())
                 }
                 self.tableView.reloadData()
@@ -82,9 +89,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-       // return sectionInfo[section].count
-        return sectionTitles.count
+        return sectionInfo.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -93,8 +98,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         
         cell.label.text = sectionTitles[indexPath.row]
         cell.textView.text = sectionInfo[indexPath.row]
-        //cell.textView.text = sectionInfo[indexPath.section][indexPath.row]
-        
+
         return cell
     }
 
@@ -104,9 +108,4 @@ class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textView: UITextView!
 
-}
-class TitleCell : UITableViewCell {
-    @IBOutlet weak var type: UILabel!
-    @IBOutlet weak var category: UILabel!
-    @IBOutlet weak var name: UILabel!
 }

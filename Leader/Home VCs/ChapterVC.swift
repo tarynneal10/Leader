@@ -117,7 +117,7 @@ class ChapterVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
             // let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath) as! MemberTableViewCell
              let cell = tableView.dequeueReusableCell(withIdentifier: "memberCell", for: indexPath as IndexPath)as! MemberTableViewCell
                    //Problem is that this code put the indexpath.row out of range for this
-             let path = members[customIndexPath.row]
+             //let path = members[indexPath.row]
              //cell.populate(member: path)
 
              return cell

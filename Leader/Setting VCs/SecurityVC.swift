@@ -70,19 +70,38 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
         chapterTF.isUserInteractionEnabled = true
         emailTF.isUserInteractionEnabled = true
         passwordTF.isUserInteractionEnabled = true
+        
         passwordTF.isHidden = false
         editButton.isHidden = true
-        nameTF.textColor = UIColor(named: "Black")
-        positionTF.textColor = UIColor(named: "Black")
-        chapterTF.textColor = UIColor(named: "Black")
-        emailTF.textColor = UIColor(named: "Black")
-        passwordTF.textColor = UIColor(named: "Black")
         doneButton.isHidden = false
+        
+        nameTF.textColor = UIColor.black
+        positionTF.textColor = UIColor.black
+        chapterTF.textColor = UIColor.black
+        emailTF.textColor = UIColor.black
+        passwordTF.textColor = UIColor.black
+
         
     }
 //Updates data
     @IBAction func donePressed(_ sender: Any) {
+        //Changes to UI
+        nameTF.isUserInteractionEnabled = false
+        positionTF.isUserInteractionEnabled = false
+        chapterTF.isUserInteractionEnabled = false
+        emailTF.isUserInteractionEnabled = false
+        
+        passwordTF.isHidden = true
+        editButton.isHidden = false
+        doneButton.isHidden = true
+        
+        nameTF.textColor = UIColor.darkGray
+        positionTF.textColor = UIColor.darkGray
+        chapterTF.textColor = UIColor.darkGray
+        emailTF.textColor = UIColor.darkGray
 
+        
+        //Changes to cloud
         guard let userID = Auth.auth().currentUser?.uid else { return }
         
         db.collection("members").document(userDoc!).setData([
