@@ -18,13 +18,14 @@ class SettingsVC : UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profilePicture: UIImageView!
     var db: Firestore!
+ 
     let logInVC = LoginVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         profilePicture.image = UIImage(named: "Anon")
         db = Firestore.firestore()
-        
+
         //The code below loads the current member's informastion based on their user UID from when they signed in.
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let docRef = db.collection("members").whereField("user UID", isEqualTo: userID)

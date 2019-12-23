@@ -14,6 +14,7 @@ import SVProgressHUD
 
 class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var competitiveEventsTableView: UITableView!
+    
     var db: Firestore!
     var DocRef : Query?
     var events: [CompetitiveEvent] = []

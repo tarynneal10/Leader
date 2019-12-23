@@ -38,9 +38,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         loadDetails()
         
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+
     func loadDetails() {
         DocRef?.getDocuments() { (QuerySnapshot, err) in
             if err != nil
@@ -98,7 +96,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
         
         cell.label.text = sectionTitles[indexPath.row]
-        cell.textView.text = sectionInfo[indexPath.row]
+        cell.details.text = sectionInfo[indexPath.row]
 
         return cell
     }
@@ -107,6 +105,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 
 class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var details: UILabel!
+    
 
 }

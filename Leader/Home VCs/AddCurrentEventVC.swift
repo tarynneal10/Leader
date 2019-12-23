@@ -12,7 +12,7 @@ import Firebase
 
 class AddEventVC : UIViewController, UITextFieldDelegate {
     @IBOutlet weak var titleText: UITextField!
-    @IBOutlet weak var descriptionText: UITextField!
+    @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     var db: Firestore!
