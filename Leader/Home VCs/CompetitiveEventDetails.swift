@@ -31,6 +31,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         tableView.dataSource = self
         tableView.estimatedRowHeight = 34.0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
         
         db = Firestore.firestore()
         DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: passedValue)

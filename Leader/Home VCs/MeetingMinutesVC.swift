@@ -24,6 +24,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         db = Firestore.firestore()
         setTitle()
         tableView.estimatedRowHeight = 40.0
+        tableView.separatorStyle = .none
        }
 
 //    func textViewDidChange(_ textView: UITextView) {

@@ -30,8 +30,8 @@ let formatter = DateFormatter()
         navigationItem.title = receivedString
         SVProgressHUD.show()
         
-     //   self.currentEventsTableView.reloadData()
-    //currentEventsTableView.separatorStyle = .none
+        currentEventsTableView.estimatedRowHeight = 125.0
+        currentEventsTableView.rowHeight = UITableView.automaticDimension
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
