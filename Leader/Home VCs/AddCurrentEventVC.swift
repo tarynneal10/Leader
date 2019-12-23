@@ -29,6 +29,18 @@ class AddEventVC : UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         return false
     }
+    //UITextView return
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        descriptionText.text = textView.text
+            
+        if text == "\n" {
+            textView.resignFirstResponder()
+                
+            return false
+        }
+            
+        return true
+    }
     func getUser() {
         if Auth.auth().currentUser != nil {
             // User is signed in.

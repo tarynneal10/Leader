@@ -115,16 +115,15 @@ class CalendarVC : UIViewController{
         }
     }
 
-    //Work in progress
+    //Displays details in yellow box- WARNING- only displays if time is 12 AM. Need to fix.
    func displayDetails() {
         if selectedDate != formatter.date(from: "00-Jan-0000") {
-            
             let timestamp = Timestamp(date: selectedDate!)
             print(timestamp)
             let DateRef = db.collection("currentevents")
                 .whereField("chapter", isEqualTo: chapterName!)
                 .whereField("date", isEqualTo: timestamp)
-            //The where field for date Just won't run
+
             DateRef.getDocuments(){ (QuerySnapshot, err) in
                     if err != nil
                     {
@@ -132,7 +131,6 @@ class CalendarVC : UIViewController{
                     } else {
 
                         for document in QuerySnapshot!.documents {
-                            //Why?? Wont?? This?? Run???
                             print("Here?")
                             let date = document.get("date") as? Timestamp
                             let dateString = self.formatter.string(from: (date?.dateValue())!)

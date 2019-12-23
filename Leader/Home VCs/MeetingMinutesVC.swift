@@ -27,21 +27,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.separatorStyle = .none
        }
 
-//    func textViewDidChange(_ textView: UITextView) {
-//        let startHeight = textView.frame.size.height
-//        let calcHeight = textView.sizeThatFits(textView.frame.size).height
-//
-//        if startHeight != calcHeight {
-//
-//            UIView.setAnimationsEnabled(false) // Disable animations
-//            self.tableView.beginUpdates()
-//            self.tableView.endUpdates()
-//            let scrollTo = self.tableView.contentSize.height - self.tableView.frame.size.height
-//            self.tableView.setContentOffset(CGPoint(x: 0, y: scrollTo), animated: false)
-//
-//            UIView.setAnimationsEnabled(true)  // Re-enable animations.
-//        }
-//    }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
@@ -92,7 +78,18 @@ class MinutesCell : UITableViewCell, UITextViewDelegate {
         super.awakeFromNib()
         minutesTextView.delegate = self
     }
-    
+    //UITextView return
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        minutesTextView.text = textView.text
+            
+        if text == "\n" {
+            textView.resignFirstResponder()
+                
+            return false
+        }
+            
+        return true
+    }
     func textChanged(action: @escaping (String) -> Void) {
         self.textChanged = action
     }

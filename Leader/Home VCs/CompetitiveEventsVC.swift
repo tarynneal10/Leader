@@ -96,29 +96,29 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     
 
 }
-//Search Bar Code
-extension CompetitiveEventsVC: UISearchBarDelegate {
-
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: searchBar.text!)
-        events = createArray()
-        //Problem- only returns values if typed in exactly right and only for name field
-        competitiveEventsTableView.reloadData()
-    }
-
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchBar.text?.count == 0 {
-            DocRef = db.collection("competitiveevents")
-            events = createArray()
-            competitiveEventsTableView.reloadData()
-            DispatchQueue.main.async {
-                searchBar.resignFirstResponder()
-            }
-
-        }
-    }
-    
-}
+////Search Bar Code
+//extension CompetitiveEventsVC: UISearchBarDelegate {
+//
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        DocRef = db.collection("competitiveevents").whereField("name", isEqualTo: searchBar.text!)
+//        events = createArray()
+//        //Problem- only returns values if typed in exactly right and only for name field
+//        competitiveEventsTableView.reloadData()
+//    }
+//
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        if searchBar.text?.count == 0 {
+//            DocRef = db.collection("competitiveevents")
+//            events = createArray()
+//            competitiveEventsTableView.reloadData()
+//            DispatchQueue.main.async {
+//                searchBar.resignFirstResponder()
+//            }
+//
+//        }
+//    }
+//    
+//}
 class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventCategory: UILabel!

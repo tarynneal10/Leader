@@ -60,7 +60,7 @@ let formatter = DateFormatter()
                         let description = document.get("description") as? String
                         //Checks to see if event before today's date
                         let eventDate = (date?.dateValue())!
-                        if eventDate > Date() {
+                        if eventDate >= Date() {
                             self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
                             print(document.data())
                         }
