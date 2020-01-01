@@ -12,8 +12,9 @@ import Firebase
 import FirebaseFirestore
 //import FirebaseStorage
 
-class ChapterVC : UIViewController{
+class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
+    @IBOutlet weak var officerView: UICollectionView!
     
     var db: Firestore!
    // var storage : Storage!
@@ -21,12 +22,14 @@ class ChapterVC : UIViewController{
     var userRef : Query?
     var chapterRef : Query?
     var chapterName = ""
+    var officerArray : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
        // storage = Storage.storage()
-
+        officerView.delegate = self
+        officerView.dataSource = self
         getUser()
     }
 
@@ -55,16 +58,28 @@ class ChapterVC : UIViewController{
     
     //Gets officers for that mess
     func populateOfficers() {
-        
-        DocRef?.whereField("position", isEqualTo: "President").getDocuments() { (querySnapshot, err) in
+        //So what this needs to do is retrieve the members where the position equals one of the officers
+        DocRef?.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
                 //Put more error handling here
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
+                    
+                    let position = document.get("position") as? String
                     let name = document.get("name") as? String
+                    if position == "President" {
+                        self.officerArray.append("\(position!): \(name!)")
+                    } else if position == "Treasurer" {
+                        self.officerArray.append("\(position!): \(name!)")
+                    } else {
+                        print("Not an officer")
+                    }
+                    print(self.officerArray)
+                    
                 }
+                self.officerView.reloadData()
             }
         }
     }
@@ -86,9 +101,21 @@ class ChapterVC : UIViewController{
         }
     }
 
-
-
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return officerArray.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath) as! OfficerCell
+        cell.image.image = UIImage(named: "Anon")
+        cell.label.text = officerArray[indexPath.row]
+        
+        return cell
+    }
 }
-
+class OfficerCell : UICollectionViewCell {
+    @IBOutlet weak var image: UIImageView!
+    @IBOutlet weak var label: UILabel!
+}
 
 

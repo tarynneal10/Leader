@@ -27,6 +27,8 @@ class LoginVC : UIViewController, UITextFieldDelegate {
         handle = Auth.auth().addStateDidChangeListener { (auth, user) in
             // ...
         }
+        guard let email = Auth.auth().currentUser?.email else { return }
+        emailTextField.text = email
         
     }
     override func viewWillDisappear(_ animated: Bool) {

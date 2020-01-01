@@ -25,8 +25,8 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         setTitle()
         tableView.estimatedRowHeight = 40.0
         tableView.separatorStyle = .none
-       }
 
+       }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -97,4 +97,5 @@ class MinutesCell : UITableViewCell, UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         textChanged?(textView.text)
     }
+    
 }
