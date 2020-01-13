@@ -39,39 +39,27 @@ class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate, UITableVie
     }
     
     @IBAction func openFBLA(_ sender: Any) {
-        guard let url = URL(string: "https://www.fbla-pbl.org/") else {
-            return
-        }
-        
+        guard let url = URL(string: "https://www.fbla-pbl.org/") else { return }
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true, completion: nil)
         safariVC.delegate = self
     }
     @IBAction func openFacebook(_ sender: Any) {
-        guard let url = URL(string: "https://www.facebook.com/FutureBusinessLeaders/") else {
-            return
-        }
-        
+        guard let url = URL(string: "https://www.facebook.com/FutureBusinessLeaders/") else { return }
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true, completion: nil)
         safariVC.delegate = self
     }
     
     @IBAction func openTwitter(_ sender: Any) {
-        guard let url = URL(string: "https://twitter.com/fbla_national?lang=en") else {
-            return
-        }
-        
+        guard let url = URL(string: "https://twitter.com/fbla_national?lang=en") else { return }
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true, completion: nil)
         safariVC.delegate = self
     }
     
     @IBAction func openInstagram(_ sender: Any) {
-        guard let url = URL(string: "https://www.instagram.com/fbla_pbl/?hl=en") else {
-            return
-        }
-        
+        guard let url = URL(string: "https://www.instagram.com/fbla_pbl/?hl=en") else { return }
         let safariVC = SFSafariViewController(url: url)
         present(safariVC, animated: true, completion: nil)
         safariVC.delegate = self

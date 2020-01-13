@@ -12,7 +12,7 @@ import Firebase
 import FirebaseFirestore
 //import FirebaseStorage
 
-class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     @IBOutlet weak var officerView: UICollectionView!
     
@@ -69,9 +69,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                     let position = document.get("position") as? String
                     let name = document.get("name") as? String
-                    if position == "President" {
-                        self.officerArray.append("\(position!): \(name!)")
-                    } else if position == "Treasurer" {
+                    if position != "Member", position != "Advisor" {
                         self.officerArray.append("\(position!): \(name!)")
                     } else {
                         print("Not an officer")

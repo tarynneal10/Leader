@@ -16,15 +16,14 @@ class SettingsVC : UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var positionLabel: UILabel!
     @IBOutlet weak var chapterLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
+    
     var db: Firestore!
- 
     let logInVC = LoginVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         db = Firestore.firestore()
-
+    
         //The code below loads the current member's informastion based on their user UID from when they signed in.
         guard let userID = Auth.auth().currentUser?.uid else { return }
         let docRef = db.collection("members").whereField("user UID", isEqualTo: userID)

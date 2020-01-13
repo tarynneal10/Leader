@@ -16,8 +16,10 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     
     var db: Firestore!
     var userRef : Query?
-    var list = ["Call to Order","Minutes","Officer Reports","Committee Reports","Unfinished Business","New Business","Annoucements","Adjournment"]
-    
+    var DocRef : Query?
+    var members : [Member] = []
+    var chapterName = ""
+    let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
@@ -45,12 +47,42 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
                     print("\(document.documentID) => \(document.data())")
                     let chapter = document.get("chapter") as? String
                     self.titleLabel.text = "\(chapter!) FBLA Local Chapter Regular Meeting Minutes"
+                    self.DocRef = self.db.collection("members").whereField("chapter", isEqualTo: self.chapterName)
                     //Should probs put in smth for if they don't have chapter
                 }
             }
+            //self.getMembers()
         }
     }
-    
+    //Gets members for tableView
+    func getMembers() {
+            DocRef?.getDocuments() { (QuerySnapshot, err) in
+                if err != nil
+                {
+                    print("Error getting documents: \(String(describing: err))");
+                }
+                else
+                {
+                    //self.members = [Member(memberName: "Call to Order"),Member(memberName: "Minutes"),Member(memberName: "Officer Reports"),Member(memberName: "Committee Reports"),Member(memberName: "Unfinished Business"),Member(memberName: "New Business"),Member(memberName: "Annoucements"),Member(memberName: "Adjournment")]
+                    if let snapshot = QuerySnapshot {
+                        self.members.removeAll()
+                        for document in snapshot.documents {
+                            let name = document.get("name") as? String
+                            self.members.append(Member(memberName: name ?? "name"))
+                            
+                            
+                            print(document.data())
+                        }
+
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
+                }
+                
+            }
+
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
@@ -71,12 +103,14 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
 class MinutesCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var minutesTextView: UITextView!
+    @IBOutlet weak var button: UIButton!
     
     var textChanged: ((String) -> Void)?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         minutesTextView.delegate = self
+        button.isHidden = true
     }
     //UITextView return
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {

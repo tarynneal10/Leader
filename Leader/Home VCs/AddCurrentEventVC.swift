@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class AddEventVC : UIViewController, UITextFieldDelegate {
+class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
