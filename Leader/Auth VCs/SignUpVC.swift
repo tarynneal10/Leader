@@ -25,6 +25,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     var db: Firestore!
     var storage : Storage!
     var filePath = ""
+    var download : URL?
     
     override func viewDidAppear( _ animated: Bool) {
         super.viewDidAppear(animated)
@@ -113,7 +114,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imagePicker.dismiss(animated: true, completion: nil)
-        uploadImage()
+        
         //Saving Image
         guard let yourImage = info[.originalImage] as? UIImage else { return }
         UIImageWriteToSavedPhotosAlbum(yourImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -129,39 +130,32 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
             print("PhotoURL: \(photoURL)")
 
         }
-
+        
         //Uploading image
-
-        //let localFile = URL(string: "filepath")!
         guard let localFile = photoURL else { return }
-//K so its being weird in the next line a code- not uploading?
-        let ref = storage.reference().child("Officers/Anon.jpg")
-        let uploadTask = ref.putFile(from: localFile, metadata: nil) { metadata, error in
+        let ref = storage.reference().child("")
+        let uploadTask = ref.putFile(from: localFile, metadata: nil) { etadata, error in
+            print("Image Uploaded")
               ref.downloadURL { (url, error) in
                     guard let downloadURL = url else {
                       print(error)
                       return
                     }
                     print("downloadURL: \(downloadURL)")
+                    self.download = downloadURL
                 }
             }
 
        // takeImage.image = info[.originalImage] as? UIImage
     }
-    func uploadImage(){
-
-    }
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
-            // we got back an error!
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
             ac.addAction(UIAlertAction(title: "OK", style: .default))
             present(ac, animated: true)
         } else {
-            let ac = UIAlertController(title: "Saved!", message: "Your image has been saved to your photos.", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            present(ac, animated: true)
-
+            print("Image saved")
         }
         
     }

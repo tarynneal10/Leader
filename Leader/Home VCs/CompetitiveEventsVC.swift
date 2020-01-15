@@ -11,9 +11,8 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import SVProgressHUD
-import SafariServices
 
-class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, SFSafariViewControllerDelegate {
+class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var competitiveEventsTableView: UITableView!
     
     var db: Firestore!
@@ -67,7 +66,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
-//
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "competitiveEventsCell", for: indexPath as IndexPath) as! CompetitiveEventsCell
         let listPath = events[indexPath.row]
@@ -76,27 +75,22 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         return cell
     }
 //    // This function is called before the segue
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // get a reference to the second view controller
-//        viewController = segue.destination as? CompetitiveEventDetailsVC
-//        // set a variable in the second view controller with the String to pass
-//        
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get a reference to the second view controller
+        viewController = segue.destination as? CompetitiveEventDetailsVC
+        // set a variable in the second view controller with the String to pass
+        
+    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row)!")
-        var urlString = "https://www.fbla-pbl.org/competitive-event/\(eventName)-fbla/"
-        guard let url = URL(string: urlString) else { return }
-        let safariVC = SFSafariViewController(url: url)
-        present(safariVC, animated: true, completion: nil)
-        safariVC.delegate = self
-//        // Get Cell Label
-//        let indexPath = tableView.indexPathForSelectedRow
-//        let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
-//        tableView.deselectRow(at: indexPath!, animated: true)
-//        valueToPass = currentCell.eventName!.text!
-//        viewController?.passedValue = valueToPass
-//        print(valueToPass)
-//        
+        // Get Cell Label
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRow(at: indexPath!) as! CompetitiveEventsCell
+        tableView.deselectRow(at: indexPath!, animated: true)
+        valueToPass = currentCell.eventName!.text!
+        viewController?.passedValue = valueToPass
+        print(valueToPass)
+      
     }
     
 
@@ -132,6 +126,7 @@ class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventCategory: UILabel!
     @IBOutlet weak var eventType: UILabel!
+    
     func populate(competitiveEvent: CompetitiveEvent) {
         eventName.text = competitiveEvent.name
         eventCategory.text = competitiveEvent.category

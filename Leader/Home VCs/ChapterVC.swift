@@ -15,9 +15,11 @@ import FirebaseFirestore
 class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     @IBOutlet weak var officerView: UICollectionView!
+    @IBOutlet weak var view1: UIView!
+    
     
     var db: Firestore!
-   // var storage : Storage!
+    var storage : Storage!
     var DocRef : Query?
     var userRef : Query?
     var chapterRef : Query?
@@ -27,9 +29,10 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
-       // storage = Storage.storage()
+        storage = Storage.storage()
         officerView.delegate = self
         officerView.dataSource = self
+        
         getUser()
     }
 
@@ -56,9 +59,8 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     }
     }
     
-    //Gets officers for that mess
+    //Gets officers
     func populateOfficers() {
-        //So what this needs to do is retrieve the members where the position equals one of the officers
         DocRef?.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")

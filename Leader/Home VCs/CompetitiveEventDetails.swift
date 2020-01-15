@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import Firebase
 import SVProgressHUD
+import SafariServices
 
-class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
+class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate, SFSafariViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -20,16 +21,16 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
     var db: Firestore!
     var DocRef : Query?
     var passedValue = ""
-    var sectionTitles : [String] = []
-    var sectionInfo : [String] = []
+    var sectionInfo : String?
+    var eventURL : String?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sectionTitles = ["Overview", "Guidelines", "Preparation", "Alignment"]
 
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.estimatedRowHeight = 34.0
+        tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
         
@@ -53,17 +54,12 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
-                    
-                    let overview = document.get("overview") as? String
-                    let guidelines = document.get("guidelines") as? String
-                    let preparation = document.get("preparation") as? String
-                    let alignment = document.get("alignment") as? String
+                    self.sectionInfo = document.get("overview") as? String
+                    self.eventURL = document.get("url") as? String
                     
                     self.categoryLabel.text = "Category: \(category!)"
                     self.typeLabel.text = "Type: \(type!)"
                     self.nameLabel.text = name
-                    
-                    self.sectionInfo = [overview!, guidelines!, preparation!,  alignment!]
                     
                     print(document.data())
                 }
@@ -75,7 +71,14 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         
     }
     
-//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    @IBAction func eventDetailsPressed(_ sender: Any) {
+            let urlString = eventURL!
+            guard let url = URL(string: urlString) else { return }
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true, completion: nil)
+            safariVC.delegate = self
+    }
+    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //
 //        return sectionTitles[section]
 //
@@ -88,15 +91,15 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 //    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionInfo.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
         
-        cell.label.text = sectionTitles[indexPath.row]
-        cell.details.text = sectionInfo[indexPath.row]
+        cell.label.text = "Overview"
+        cell.details.text = sectionInfo
 
         return cell
     }
@@ -106,6 +109,4 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var details: UILabel!
-    
-
 }

@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		67B613D36ABFF701BB124D98 /* Pods_Leader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC86948548FF4564F2D7BAD5 /* Pods_Leader.framework */; };
-		8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */; };
+		8B6B076B22E8F4B5008C6885 /* FBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */; };
 		8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */; };
 		8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */; };
 		8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */; };
@@ -32,10 +32,11 @@
 		9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE182623296C42004C5777 /* ChapterSignUp.swift */; };
 		9BE21400235CECD000373AF8 /* MeetingMinutesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE213FF235CECD000373AF8 /* MeetingMinutesVC.swift */; };
 		9BF9B67D22F534FD00F76410 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9B67C22F534FD00F76410 /* Models.swift */; };
+		9BFCA94923CD465B002285C2 /* AttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFCA94823CD465B002285C2 /* AttendanceVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLAViewController.swift; sourceTree = "<group>"; };
+		8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLAVC.swift; sourceTree = "<group>"; };
 		8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEventsVC.swift; sourceTree = "<group>"; };
 		8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEventsVC.swift; sourceTree = "<group>"; };
 		8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFBLAVC.swift; sourceTree = "<group>"; };
@@ -61,6 +62,7 @@
 		9BCE182623296C42004C5777 /* ChapterSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterSignUp.swift; sourceTree = "<group>"; };
 		9BE213FF235CECD000373AF8 /* MeetingMinutesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMinutesVC.swift; sourceTree = "<group>"; };
 		9BF9B67C22F534FD00F76410 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		9BFCA94823CD465B002285C2 /* AttendanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceVC.swift; sourceTree = "<group>"; };
 		AC86948548FF4564F2D7BAD5 /* Pods_Leader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Leader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D08B275D4842C30CC741CB /* Pods-Leader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Leader/Pods-Leader.debug.xcconfig"; sourceTree = "<group>"; };
 		E4D237944597EC107B0F9A2A /* Pods-Leader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Leader.release.xcconfig"; path = "Pods/Target Support Files/Pods-Leader/Pods-Leader.release.xcconfig"; sourceTree = "<group>"; };
@@ -118,7 +120,7 @@
 			children = (
 				9B5B921D22E7F37300B1985F /* CalendarVC.swift */,
 				9B1A475A22E80801006DD5F0 /* SettingsVC.swift */,
-				8B6B076A22E8F4B5008C6885 /* FBLAViewController.swift */,
+				8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */,
 				9BC57A4B2380CDAD002EADDC /* WelcomeVC.swift */,
 			);
 			path = Controller;
@@ -130,6 +132,7 @@
 				9BB5FCBF232335630053E843 /* ChapterVC.swift */,
 				9BE213FF235CECD000373AF8 /* MeetingMinutesVC.swift */,
 				9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */,
+				9BFCA94823CD465B002285C2 /* AttendanceVC.swift */,
 			);
 			name = "Chapter VCs";
 			path = "Home VCs";
@@ -355,6 +358,7 @@
 				9B5B921E22E7F37300B1985F /* CalendarVC.swift in Sources */,
 				8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */,
 				9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */,
+				9BFCA94923CD465B002285C2 /* AttendanceVC.swift in Sources */,
 				9B8FAEC9232FF8060047AE87 /* AddCurrentEventVC.swift in Sources */,
 				9B58C8752341389100186DBB /* SecurityVC.swift in Sources */,
 				9BF9B67D22F534FD00F76410 /* Models.swift in Sources */,
@@ -362,7 +366,7 @@
 				9BBDFF2C237F48DF0065107B /* JoinFBLA.swift in Sources */,
 				9B1A475B22E80801006DD5F0 /* SettingsVC.swift in Sources */,
 				9BE21400235CECD000373AF8 /* MeetingMinutesVC.swift in Sources */,
-				8B6B076B22E8F4B5008C6885 /* FBLAViewController.swift in Sources */,
+				8B6B076B22E8F4B5008C6885 /* FBLAVC.swift in Sources */,
 				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,
 				8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */,
 				9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */,
