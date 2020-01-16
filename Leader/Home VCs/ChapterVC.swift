@@ -10,19 +10,20 @@ import Foundation
 import UIKit
 import Firebase
 import FirebaseFirestore
-//import FirebaseStorage
+import SDWebImage
+import FirebaseUI
 
 class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     @IBOutlet weak var officerView: UICollectionView!
     @IBOutlet weak var view1: UIView!
     
-    
     var db: Firestore!
     var storage : Storage!
     var DocRef : Query?
     var userRef : Query?
     var chapterRef : Query?
+    var storageRef : StorageReference?
     var chapterName = ""
     var officerArray : [String] = []
     
@@ -30,9 +31,11 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         super.viewDidLoad()
         db = Firestore.firestore()
         storage = Storage.storage()
+        
         officerView.delegate = self
         officerView.dataSource = self
         
+        storageRef = storage.reference(forURL: "gs://leader-8bab1.appspot.com/untitled.png")
         getUser()
     }
 
@@ -107,8 +110,10 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath) as! OfficerCell
+        //let placeholderImage = UIImage(named: "Anon")
         cell.image.image = UIImage(named: "Anon")
         cell.label.text = officerArray[indexPath.row]
+        //cell.image.sd_setImage(with: storageRef!, placeholderImage: placeholderImage)
         
         return cell
     }

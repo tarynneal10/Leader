@@ -14,6 +14,7 @@
 		8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */; };
 		9B191DB52310C72500E27032 /* CompetitiveEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B191DB42310C72500E27032 /* CompetitiveEventDetails.swift */; };
 		9B1A475B22E80801006DD5F0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A475A22E80801006DD5F0 /* SettingsVC.swift */; };
+		9B2BA2B323CED36800D66585 /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */; };
 		9B41E19523AD64EA001AF690 /* Q&A VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B41E19423AD64EA001AF690 /* Q&A VC.swift */; };
 		9B4B24B323B85CB100B5F5E9 /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */; };
 		9B58C8752341389100186DBB /* SecurityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B58C8742341389100186DBB /* SecurityVC.swift */; };
@@ -42,6 +43,7 @@
 		8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFBLAVC.swift; sourceTree = "<group>"; };
 		9B191DB42310C72500E27032 /* CompetitiveEventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEventDetails.swift; sourceTree = "<group>"; };
 		9B1A475A22E80801006DD5F0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		9B41E19423AD64EA001AF690 /* Q&A VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Q&A VC.swift"; sourceTree = "<group>"; };
 		9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
 		9B58C8742341389100186DBB /* SecurityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityVC.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */,
 				9B58C8742341389100186DBB /* SecurityVC.swift */,
 				9B41E19423AD64EA001AF690 /* Q&A VC.swift */,
+				9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */,
 			);
 			path = "Setting VCs";
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/JTAppleCalendar/JTAppleCalendar.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
@@ -337,6 +341,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JTAppleCalendar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
@@ -360,6 +365,7 @@
 				9B5B921C22E7F37300B1985F /* AppDelegate.swift in Sources */,
 				9BFCA94923CD465B002285C2 /* AttendanceVC.swift in Sources */,
 				9B8FAEC9232FF8060047AE87 /* AddCurrentEventVC.swift in Sources */,
+				9B2BA2B323CED36800D66585 /* TermsOfUseVC.swift in Sources */,
 				9B58C8752341389100186DBB /* SecurityVC.swift in Sources */,
 				9BF9B67D22F534FD00F76410 /* Models.swift in Sources */,
 				9B7A0F8C23218A2B00C06CE2 /* SignUpVC.swift in Sources */,
@@ -526,10 +532,7 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -546,10 +549,7 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

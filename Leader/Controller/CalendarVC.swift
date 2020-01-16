@@ -36,7 +36,7 @@ class CalendarVC : UIViewController{
     var calendarDataSource: [String : String] = [:]
     var formatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd-MMM-yyyy"
+        formatter.dateFormat = "MM/dd/yyyy"
         return formatter
     }
     let monthFormatter = DateFormatter()
@@ -44,7 +44,7 @@ class CalendarVC : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedDate = formatter.date(from: "00-Jan-0000")
+        selectedDate = formatter.date(from: "01/00/0000")
         monthFormatter.dateFormat = "MMMM"
         db = Firestore.firestore()
         getUser()
@@ -117,12 +117,11 @@ class CalendarVC : UIViewController{
 
     //Displays details in yellow box- WARNING- only displays if time is 12 AM. Need to fix.
    func displayDetails() {
-        if selectedDate != formatter.date(from: "00-Jan-0000") {
-            let timestamp = Timestamp(date: selectedDate!)
-            print(timestamp)
+        if selectedDate != formatter.date(from: "01/00/0000") {
+            let date = formatter.string(from: selectedDate!)
             let DateRef = db.collection("currentevents")
                 .whereField("chapter", isEqualTo: chapterName!)
-                .whereField("date", isEqualTo: timestamp)
+                .whereField("date", isEqualTo: date)
 
             DateRef.getDocuments(){ (QuerySnapshot, err) in
                     if err != nil
@@ -131,12 +130,8 @@ class CalendarVC : UIViewController{
                     } else {
 
                         for document in QuerySnapshot!.documents {
-                            print("Here?")
-                            let date = document.get("date") as? Timestamp
-                            let dateString = self.formatter.string(from: (date?.dateValue())!)
-                            
                             self.nameLabel.text = document.get("name") as? String
-                            self.dateLabel.text = dateString
+                            self.dateLabel.text = document.get("date") as? String
                             self.descriptionLabel.text = document.get("description") as? String
 
                             print(document.data())
@@ -150,7 +145,6 @@ class CalendarVC : UIViewController{
         }
     }
     func populateDataSource() {
-        // You can get the data from a server.
         DocRef?.getDocuments()
         { (QuerySnapshot, err) in
             if err != nil
@@ -160,13 +154,10 @@ class CalendarVC : UIViewController{
             else
             {
                 for document in QuerySnapshot!.documents {
-                    let date = document.get("date") as? Timestamp
-                    let append = self.formatter.string(from: (date?.dateValue())!)
-                    
-                    self.calendarDataSource[append] = "Idk"
+                    let date = document.get("date") as? String
+                    self.calendarDataSource[date!] = "Idk"
                     print(document.data())
                 }
-                // update the calendar
                 //SVProgressHUD.dismiss()
                 self.calendarView.reloadData()
                 

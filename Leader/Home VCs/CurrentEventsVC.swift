@@ -23,12 +23,17 @@ var userRef : Query?
 var list: [CurrentEvent] = []
 var chapterName = ""
 var receivedString = ""
-let formatter = DateFormatter()
+var formatter: DateFormatter {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MM/dd/yyyy"
+    return formatter
+}
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         navigationItem.title = receivedString
         SVProgressHUD.show()
+        
         
         currentEventsTableView.estimatedRowHeight = 125.0
         currentEventsTableView.rowHeight = UITableView.automaticDimension
@@ -56,11 +61,13 @@ let formatter = DateFormatter()
                     for document in QuerySnapshot!.documents {
 
                         let name = document.get("name") as? String
-                        let date = document.get("date") as? Timestamp
+                        let date = document.get("date") as? String
                         let description = document.get("description") as? String
+                        
                         //Checks to see if event before today's date
-                        let eventDate = (date?.dateValue())!
-                        if eventDate >= Date() {
+                        let eventDate = self.formatter.date(from: date!)
+                        
+                        if eventDate! >= Date() {
                             self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
                             print(document.data())
                         }
@@ -141,15 +148,8 @@ class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     func populate(currentEvent: CurrentEvent) {
-//        let formatter = DateFormatter()
-//        formatter.dateFormat = "MM/dd/yyyy"  formatter.string(from: currentEvent.date)
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        let date = currentEvent.date.dateValue()
-    
         nameLabel.text = currentEvent.name
-        dateLabel.text = formatter.string(from: date)
-
+        dateLabel.text = currentEvent.date
         descriptionLabel.text = currentEvent.description
     }
 }

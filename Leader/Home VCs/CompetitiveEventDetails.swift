@@ -21,7 +21,9 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
     var db: Firestore!
     var DocRef : Query?
     var passedValue = ""
-    var sectionInfo : String?
+    var overview : String?
+    var topic : String?
+    var skills : String?
     var eventURL : String?
     
     
@@ -54,7 +56,10 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
-                    self.sectionInfo = document.get("overview") as? String
+                    
+                    self.overview = document.get("overview") as? String
+                    self.topic = document.get("topic") as? String
+                    self.skills = document.get("skills") as? String
                     self.eventURL = document.get("url") as? String
                     
                     self.categoryLabel.text = "Category: \(category!)"
@@ -99,7 +104,9 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
         
         cell.label.text = "Overview"
-        cell.details.text = sectionInfo
+        cell.details.text = overview
+        cell.topic.text = topic
+        cell.skills.text = skills
 
         return cell
     }
@@ -109,4 +116,6 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var details: UILabel!
+    @IBOutlet weak var topic: UILabel!
+    @IBOutlet weak var skills: UILabel!
 }

@@ -14,15 +14,24 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var dateTF: UITextField!
+    @IBOutlet weak var doneButton: UIButton!
     
     var db: Firestore!
     var userRef : Query?
     var chapterName = ""
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         getUser()
+        datePicker.isHidden = true
+        doneButton.isHidden = true
    
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -41,6 +50,19 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
             
         return true
     }
+    @IBAction func dateTFPressed(_ sender: Any) {
+        dateTF.isHidden = true
+        datePicker.isHidden = false
+        doneButton.isHidden = false
+    }
+    @IBAction func donePressed(_ sender: Any) {
+        datePicker.isHidden = true
+        dateTF.isHidden = false
+        doneButton.isHidden = true
+        dateTF.text = formatter.string(from: datePicker.date)
+        
+    }
+    
     func getUser() {
         if Auth.auth().currentUser != nil {
             // User is signed in.
@@ -70,9 +92,8 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
                 ref = db.collection("currentevents").addDocument(data: [
                     "name": titleText.text!,
                     "description": descriptionText.text!,
-                    "date": datePicker.date,
+                    "date": dateTF.text!,
                     "chapter": chapterName
-                    //Force unwraps bc checked in createEventPressed
                 ]) { err in
                     if let err = err {
                         print("Error adding document: \(err)")
@@ -95,11 +116,11 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func createEventPressed(_ sender: Any) {
-        if titleText.text != "", descriptionText.text != ""
+        if titleText.text != "", descriptionText.text != "", dateTF.text != ""
         {
             addToFirestore()
             dismiss(animated: true, completion: nil)
-          //  dismiss(animated: true, completion: nil)
+            
         } else {
             errorAlert()
         }

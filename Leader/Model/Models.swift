@@ -13,10 +13,10 @@ import FirebaseFirestore
 class CurrentEvent {
     
     let name : String
-    let date : Timestamp
+    let date : String
     let description : String
     
-    init (eventName: String, eventDate: Timestamp, eventDescription: String) {
+    init (eventName: String, eventDate: String, eventDescription: String) {
         name = eventName
         date = eventDate
         description = eventDescription
