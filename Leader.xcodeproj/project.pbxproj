@@ -31,6 +31,7 @@
 		9BBDFF2C237F48DF0065107B /* JoinFBLA.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBDFF2B237F48DF0065107B /* JoinFBLA.swift */; };
 		9BC57A4C2380CDAD002EADDC /* WelcomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC57A4B2380CDAD002EADDC /* WelcomeVC.swift */; };
 		9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCE182623296C42004C5777 /* ChapterSignUp.swift */; };
+		9BDDA79423DA713900A10882 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BDDA79323DA713900A10882 /* SignUp.storyboard */; };
 		9BE21400235CECD000373AF8 /* MeetingMinutesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE213FF235CECD000373AF8 /* MeetingMinutesVC.swift */; };
 		9BF9B67D22F534FD00F76410 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF9B67C22F534FD00F76410 /* Models.swift */; };
 		9BFCA94923CD465B002285C2 /* AttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFCA94823CD465B002285C2 /* AttendanceVC.swift */; };
@@ -62,6 +63,7 @@
 		9BBDFF2B237F48DF0065107B /* JoinFBLA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFBLA.swift; sourceTree = "<group>"; };
 		9BC57A4B2380CDAD002EADDC /* WelcomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeVC.swift; sourceTree = "<group>"; };
 		9BCE182623296C42004C5777 /* ChapterSignUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterSignUp.swift; sourceTree = "<group>"; };
+		9BDDA79323DA713900A10882 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		9BE213FF235CECD000373AF8 /* MeetingMinutesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingMinutesVC.swift; sourceTree = "<group>"; };
 		9BF9B67C22F534FD00F76410 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		9BFCA94823CD465B002285C2 /* AttendanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceVC.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			children = (
 				9B5B921F22E7F37300B1985F /* Main.storyboard */,
 				9B5B922422E7F37400B1985F /* LaunchScreen.storyboard */,
+				9BDDA79323DA713900A10882 /* SignUp.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				9B63101D2318626100D6E406 /* GoogleService-Info.plist in Resources */,
 				9B5B922322E7F37400B1985F /* Assets.xcassets in Resources */,
 				9B5B922122E7F37300B1985F /* Main.storyboard in Resources */,
+				9BDDA79423DA713900A10882 /* SignUp.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,7 +536,10 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -549,7 +556,10 @@
 				DEVELOPMENT_TEAM = QDQ2MBW2QX;
 				INFOPLIST_FILE = Leader/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.tarynneal10.Leader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

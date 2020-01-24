@@ -20,12 +20,15 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     var db: Firestore!
     var storage : Storage!
+    
     var DocRef : Query?
     var userRef : Query?
     var chapterRef : Query?
     var storageRef : StorageReference?
+    
     var chapterName = ""
     var officerArray : [String] = []
+    var urlArray : [String] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +38,6 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         officerView.delegate = self
         officerView.dataSource = self
         
-        storageRef = storage.reference(forURL: "gs://leader-8bab1.appspot.com/untitled.png")
         getUser()
     }
 
@@ -74,12 +76,12 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                     let position = document.get("position") as? String
                     let name = document.get("name") as? String
+                    //let url = document.get("imageURL") as? String
+                    
                     if position != "Member", position != "Advisor" {
                         self.officerArray.append("\(position!): \(name!)")
-                    } else {
-                        print("Not an officer")
+                        self.storageRef = self.storage.reference(forURL: "gs://leader-8bab1.appspot.com/untitled.png")
                     }
-                    print(self.officerArray)
                     
                 }
                 self.officerView.reloadData()

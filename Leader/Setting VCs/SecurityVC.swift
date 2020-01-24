@@ -50,8 +50,9 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
                     self.positionTF.text = document.get("position") as? String
                     self.emailTF.text = email
                     
-                    //Sets data for when changed (Want to incorp in UI eventually)
                     self.userDoc = document.documentID
+                    
+                    //Sets data for when changed (Want to incorp in UI eventually)
                     self.userPaidStatus = document.get("paid") as? Bool
                     self.userGrade = document.get("grade") as? Int
                     
@@ -81,8 +82,8 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
         emailTF.textColor = UIColor.black
         passwordTF.textColor = UIColor.black
 
-        
     }
+    
 //Updates data
     @IBAction func donePressed(_ sender: Any) {
         //Changes to UI
@@ -99,16 +100,11 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
         positionTF.textColor = UIColor.darkGray
         chapterTF.textColor = UIColor.darkGray
         emailTF.textColor = UIColor.darkGray
-
         
-        //Changes to cloud
-        guard let userID = Auth.auth().currentUser?.uid else { return }
-        
-        db.collection("members").document(userDoc!).setData([
+        db.collection("members").document(userDoc!).updateData([
             "name": nameTF.text!,
             "chapter": chapterTF.text!,
             "position": positionTF.text!,
-            "user UID": userID,
             "paid": userPaidStatus!,
             "grade": userGrade!
         ]) { err in

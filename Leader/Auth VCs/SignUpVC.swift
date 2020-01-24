@@ -26,6 +26,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     var storage : Storage!
     var filePath = ""
     var download : URL?
+    var docID : String?
     
     override func viewDidAppear( _ animated: Bool) {
         super.viewDidAppear(animated)
@@ -76,6 +77,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                             print("Error adding document: \(err)")
                         } else {
                             print("Document added with ID: \(ref!.documentID)")
+                            self.docID = ref!.documentID
                         }
                     }
                     self.showCamera()
@@ -127,28 +129,43 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
             let documentDirectory = NSTemporaryDirectory()
             let localPath = documentDirectory.appending(imgName)
             photoURL = URL.init(fileURLWithPath: localPath)
-            print("PhotoURL: \(photoURL)")
+            print("PhotoURL: \(String(describing: photoURL))")
 
         }
         
         //Uploading image
         guard let localFile = photoURL else { return }
-        let ref = storage.reference().child("")
-        let uploadTask = ref.putFile(from: localFile, metadata: nil) { etadata, error in
+        let ref = storage.reference().child("images/officer.png")
+        let uploadTask = ref.putFile(from: localFile, metadata: nil) { metadata, error in
             print("Image Uploaded")
               ref.downloadURL { (url, error) in
                     guard let downloadURL = url else {
-                      print(error)
+                        print(error!)
                       return
-                    }
+            }
                     print("downloadURL: \(downloadURL)")
                     self.download = downloadURL
+                    self.addDownloadURl()
                 }
             }
+        
 
        // takeImage.image = info[.originalImage] as? UIImage
     }
-    
+    func addDownloadURl() {
+        if docID != nil {
+            let reference = db.collection("members").document(docID!)
+            reference.updateData([
+                "imageURL": download!
+            ]) { err in
+                if let err = err {
+                    print("Error updating document: \(err)")
+                } else {
+                    print("Document successfully updated")
+                }
+            }
+        }
+    }
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
