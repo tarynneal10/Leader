@@ -9,12 +9,7 @@
 import Foundation
 import Firebase
 import FirebaseFirestore
-enum AppStoryboard : String {
-    case Main, PreLogin, SignUp
-    var instance : UIStoryboard {
-      return UIStoryboard(name: self.rawValue, bundle: Bundle.main)
-    }
-}
+
 class CurrentEvent {
     
     let name : String

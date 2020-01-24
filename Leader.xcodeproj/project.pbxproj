@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		67B613D36ABFF701BB124D98 /* Pods_Leader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC86948548FF4564F2D7BAD5 /* Pods_Leader.framework */; };
-		8B6B076B22E8F4B5008C6885 /* FBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */; };
 		8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */; };
 		8B6B076F22E8F5A0008C6885 /* CurrentEventsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */; };
 		8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */; };
@@ -39,7 +38,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBLAVC.swift; sourceTree = "<group>"; };
 		8B6B076C22E8F546008C6885 /* CompetitiveEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEventsVC.swift; sourceTree = "<group>"; };
 		8B6B076E22E8F5A0008C6885 /* CurrentEventsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentEventsVC.swift; sourceTree = "<group>"; };
 		8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFBLAVC.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 			children = (
 				9B5B921D22E7F37300B1985F /* CalendarVC.swift */,
 				9B1A475A22E80801006DD5F0 /* SettingsVC.swift */,
-				8B6B076A22E8F4B5008C6885 /* FBLAVC.swift */,
 				9BC57A4B2380CDAD002EADDC /* WelcomeVC.swift */,
 			);
 			path = Controller;
@@ -380,7 +377,6 @@
 				9BBDFF2C237F48DF0065107B /* JoinFBLA.swift in Sources */,
 				9B1A475B22E80801006DD5F0 /* SettingsVC.swift in Sources */,
 				9BE21400235CECD000373AF8 /* MeetingMinutesVC.swift in Sources */,
-				8B6B076B22E8F4B5008C6885 /* FBLAVC.swift in Sources */,
 				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,
 				8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */,
 				9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */,

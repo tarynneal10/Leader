@@ -97,20 +97,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sY6-2o-IEg">
-                                    <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" id="mbP-yZ-m19" customClass="MemberTableViewCell" customModule="Leader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbP-yZ-m19" id="JNK-ss-ebj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-zu-G7v">
-                                                    <rect key="frame" x="15" y="11" width="345" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -358,18 +358,9 @@
                     <navigationItem key="navigationItem" id="YsG-kS-E2z"/>
                     <connections>
                         <outlet property="competitiveEventsTableView" destination="8gy-m4-L1d" id="pnN-tW-bff"/>
-                        <outlet property="searchDisplayController" destination="3Gq-FN-pPo" id="1Y6-wG-Mf1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92u-Hf-NBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="3Gq-FN-pPo">
-                    <connections>
-                        <outlet property="delegate" destination="jUG-bY-ovP" id="t3H-xw-jeE"/>
-                        <outlet property="searchContentsController" destination="jUG-bY-ovP" id="awa-KH-JLy"/>
-                        <outlet property="searchResultsDataSource" destination="jUG-bY-ovP" id="j3W-Gr-BLz"/>
-                        <outlet property="searchResultsDelegate" destination="jUG-bY-ovP" id="PlO-he-8sK"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2282" y="-363"/>
         </scene>
@@ -797,7 +788,7 @@
         <!--Home-->
         <scene sceneID="sXc-0L-c2U">
             <objects>
-                <viewController storyboardIdentifier="Home" title="Home" id="oK6-oI-ZhX" customClass="FBLAVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Home" title="Home" id="oK6-oI-ZhX" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SE7-6c-PMe">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

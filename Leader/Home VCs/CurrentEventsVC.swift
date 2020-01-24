@@ -116,25 +116,6 @@ var formatter: DateFormatter {
 
         }
 
-//    func setData() {
-//        let data: [String: Any] = [:]
-//        db.collection("chapter").document("new-chapter-id").setData(data)
-////    }
-    func addToFirestore() {
-//        var ref: DocumentReference? = nil
-//        ref = db.collection("users").addDocument(data: [
-//            "first": "Ada",
-//            "last": "Lovelace",
-//            "born": 1815
-//        ]) { err in
-//            if let err = err {
-//                print("Error adding document: \(err)")
-//            } else {
-//                print("Document added with ID: \(ref!.documentID)")
-//            }
-//        }
-
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"

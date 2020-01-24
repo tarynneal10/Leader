@@ -25,7 +25,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     var db: Firestore!
     var storage : Storage!
     var filePath = ""
-    var download : URL?
+    var download : String?
     var docID : String?
     
     override func viewDidAppear( _ animated: Bool) {
@@ -81,8 +81,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                         }
                     }
                     self.showCamera()
-                    self.signUpSuccess = true
-                    self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+                    
                 }
             }
 
@@ -103,55 +102,66 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
         
         self.present(alert, animated: true, completion: nil)
     }
+    
     //MARK: Camera methods
     func showCamera() {
             if self.positionTF.text != "Member" {
-                self.imagePicker =  UIImagePickerController()
-                self.imagePicker.delegate = self
-                self.imagePicker.sourceType = .camera
+                let profileImagePicker = UIImagePickerController()
+                profileImagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+                profileImagePicker.delegate = self
+                present(profileImagePicker, animated: true, completion: nil)
 
-                self.present(self.imagePicker, animated: true, completion: nil)
             }
+        self.signUpSuccess = true
+        self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
     }
-    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        imagePicker.dismiss(animated: true, completion: nil)
-        
-        //Saving Image
-        guard let yourImage = info[.originalImage] as? UIImage else { return }
-        UIImageWriteToSavedPhotosAlbum(yourImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
-        
-        //Selecting file path
-        var photoURL : URL?
-        if (picker.sourceType == UIImagePickerController.SourceType.camera) {
-
-            let imgName = UUID().uuidString
-            let documentDirectory = NSTemporaryDirectory()
-            let localPath = documentDirectory.appending(imgName)
-            photoURL = URL.init(fileURLWithPath: localPath)
-            print("PhotoURL: \(String(describing: photoURL))")
-
+        if let profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let optimizedImageData = profileImage.jpegData(compressionQuality: 0.6)
+        {
+            // upload image from here
+            uploadProfileImage(imageData: optimizedImageData)
         }
-        
-        //Uploading image
-        guard let localFile = photoURL else { return }
-        let ref = storage.reference().child("images/officer.png")
-        let uploadTask = ref.putFile(from: localFile, metadata: nil) { metadata, error in
-            print("Image Uploaded")
-              ref.downloadURL { (url, error) in
-                    guard let downloadURL = url else {
-                        print(error!)
-                      return
-            }
-                    print("downloadURL: \(downloadURL)")
-                    self.download = downloadURL
-                    self.addDownloadURl()
-                }
-            }
-        
+        picker.dismiss(animated: true, completion:nil)
 
        // takeImage.image = info[.originalImage] as? UIImage
     }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion:nil)
+    }
+    func uploadProfileImage(imageData: Data) {
+        let activityIndicator = UIActivityIndicatorView.init(style: .gray)
+        activityIndicator.startAnimating()
+        activityIndicator.center = self.view.center
+        self.view.addSubview(activityIndicator)
+        
+        
+        let storageReference = Storage.storage().reference()
+        let currentUser = Auth.auth().currentUser
+        let profileImageRef = storageReference.child("officers").child("\(currentUser!.uid)-profileImage.jpg")
+        
+        download = "gs://leader-8bab1.appspot.com/officers/\(currentUser!.uid)-profileImage.jpg"
+        addDownloadURl()
+        
+        //Metadata stuff
+        let uploadMetaData = StorageMetadata()
+        uploadMetaData.contentType = "image/jpeg"
+        
+        profileImageRef.putData(imageData, metadata: uploadMetaData) { (uploadedImageMeta, error) in
+           
+            activityIndicator.stopAnimating()
+            activityIndicator.removeFromSuperview()
+            
+            if error != nil
+            {
+                print("Error took place \(String(describing: error?.localizedDescription))")
+                return
+            } else {
+    
+                print("Meta data of uploaded image \(String(describing: uploadedImageMeta))")
+            }
+        }
+    }
+    
     func addDownloadURl() {
         if docID != nil {
             let reference = db.collection("members").document(docID!)
@@ -166,6 +176,7 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
             }
         }
     }
+    
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)

@@ -76,11 +76,11 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                     let position = document.get("position") as? String
                     let name = document.get("name") as? String
-                    //let url = document.get("imageURL") as? String
+                    let url = document.get("imageURL") as? String
                     
                     if position != "Member", position != "Advisor" {
                         self.officerArray.append("\(position!): \(name!)")
-                        self.storageRef = self.storage.reference(forURL: "gs://leader-8bab1.appspot.com/untitled.png")
+                        self.storageRef = self.storage.reference(forURL: url!)
                     }
                     
                 }
@@ -112,11 +112,13 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath) as! OfficerCell
-        //let placeholderImage = UIImage(named: "Anon")
+        let placeholderImage = UIImage(named: "Anon")
+        
         cell.image.image = UIImage(named: "Anon")
         cell.label.text = officerArray[indexPath.row]
-        //cell.image.sd_setImage(with: storageRef!, placeholderImage: placeholderImage)
         
+        //cell.image.sd_setImage(with: storageRef!, placeholderImage: placeholderImage)
+        //Need this to iterate through images
         return cell
     }
 }

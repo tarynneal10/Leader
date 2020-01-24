@@ -79,7 +79,6 @@ class LoginVC : UIViewController, UITextFieldDelegate {
                     print("Log In successful")
                     SVProgressHUD.dismiss()
                     self.logInSuccess = true
-                    //self.findMember()
                     self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                 }
             }
@@ -89,30 +88,5 @@ class LoginVC : UIViewController, UITextFieldDelegate {
         }
 
     }
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//        super.touchesBegan(touches, with: event)
-//    }
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        emailTextField.resignFirstResponder()
-//        passwordTextField.resignFirstResponder()
-//        return true
-//    }
-    
-    func findMember() {
-        //The code works here, but the info isn't being passed to the settings page
-//        guard let userID = Auth.auth().currentUser?.uid else { return }
-//        DocRef = db.collection("members").whereField("user UID", isEqualTo: userID)
-//        DocRef?.getDocuments() { (querySnapshot, err) in
-//            if let err = err {
-//                print("Error getting documents: \(err)")
-//                //Put more error handling here
-//            } else {
-//                for document in querySnapshot!.documents {
-//                    print("\(document.documentID) => \(document.data())")
-//                    self.currentDoc = document.documentID
-//                }
-//            }
-//        }
-    }
+
 }
