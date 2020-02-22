@@ -110,6 +110,13 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 
         return cell
     }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let eventToPass = nameLabel.text
+        let viewController = segue.destination as? YourCompetitiveEventsVC
+        viewController?.passedValue = eventToPass!
+    }
 
 }
 

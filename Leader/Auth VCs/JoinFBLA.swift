@@ -10,13 +10,14 @@ import Foundation
 import MessageUI
 import Firebase
 
-class JoinFBLAVC : UIViewController,MFMailComposeViewControllerDelegate, UITextFieldDelegate{
+class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var schoolTF: UITextField!
     @IBOutlet weak var advisorTF: UITextField!
     @IBOutlet weak var gradeTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    
     var db: Firestore!
     var signUpSuccess : Bool?
     var advisorEmail : String = ""

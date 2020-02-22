@@ -92,11 +92,6 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         print(valueToPass)
       
     }
-    
-
-
-
-    
 
 }
 ////Search Bar Code

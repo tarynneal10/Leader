@@ -105,8 +105,9 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
             "name": nameTF.text!,
             "chapter": chapterTF.text!,
             "position": positionTF.text!,
-            "paid": userPaidStatus!,
-            "grade": userGrade!
+//Dont currently need- also grade was found nil????
+//            "paid": userPaidStatus!,
+//            "grade": userGrade!
         ]) { err in
             if let err = err {
                 print("Error writing document: \(err)")

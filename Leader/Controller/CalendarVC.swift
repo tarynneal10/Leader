@@ -58,6 +58,7 @@ class CalendarVC : UIViewController{
         noEventsLabel.isHidden = true
         //SVProgressHUD.show()- because it's annoying
     }
+    
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
