@@ -17,6 +17,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     var db: Firestore!
     var userRef : Query?
     let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
+    
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
@@ -25,7 +26,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.estimatedRowHeight = 40.0
         tableView.separatorStyle = .none
 
-       }
+    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
@@ -64,6 +65,29 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         return cell
+    }
+    @IBAction func savePressed(_ sender: Any) {
+        //Getting text view values
+        var values = [String:String?]()
+        for (index, value) in list.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = tableView.cellForRow(at: indexPath) as? MinutesCell else{ return }
+                if let text = cell.minutesTextView.text, !text.isEmpty {
+                    values[value] = text
+                }
+        }
+        
+        //Adding to firebase
+        self.db.collection("minutes").addDocument(data: [
+            "minutes": values
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added")
+            }
+        }
+        
     }
     
 }

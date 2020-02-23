@@ -22,18 +22,26 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     var yourEvents : [String] = [""]
     var advisorEmail : String = ""
     var chapterName : String?
+    var addingSuccess : Bool?
         
     override func viewDidLoad() {
             super.viewDidLoad()
-            
             db = Firestore.firestore()
-            print(passedValue)
+            addingSuccess = false
+            
             eventsTableView.delegate = self
             eventsTableView.dataSource = self
             
             getUser()
     }
-
+        override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+            if identifier == "goToHome" {
+                if addingSuccess != true {
+                    return false
+                }
+            }
+            return true
+        }
         //Gets user for other queries
         func getUser() {
             guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -112,6 +120,8 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+        addingSuccess = true
+        performSegue(withIdentifier: "goToHome", sender: UIButton.self)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -125,7 +135,17 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
 
             return cell
         }
-        
+    
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
+    {
+        let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            self.yourEvents.remove(at: indexPath.row)
+            self.eventsTableView.reloadData()
+
+        })
+
+        return [deleteAction]
+    }
     @IBAction func submitPressed(_ sender: Any) {
         updateData()
         findAdvisorInfo()
@@ -134,6 +154,7 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     @IBAction func savePressed(_ sender: Any) {
         updateData()
     }
+    
     
 }
 class YourEventsCell : UITableViewCell {

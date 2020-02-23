@@ -19,7 +19,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
      var userRef : Query?
      var members : [Member] = []
      var chapterName = ""
-    
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -90,19 +90,32 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
              return cell
     }
     
+    @IBAction func donePressed(_ sender: Any) {
+        
+    }
     
 }
 class AttendanceTableViewCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!
+    
+    var checkmark : Bool?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        button.imageView?.image = UIImage(named: "Nothing")
+        checkmark = false
     }
     @IBAction func buttonPressed(_ sender: Any) {
-        button.imageView?.image = UIImage(named: "Checkmark")
-        print("Member here")
-        
+        if checkmark == false {
+            button.setImage(UIImage(named: "Checkmark"), for: .normal)
+            checkmark = true
+            print("Member present")
+        } else {
+            button.setImage(UIImage(named: "Nothing"), for: .normal)
+            checkmark = false
+            print("Member Absent")
+        }
+    
     }
     
     func populate(member: Member) {

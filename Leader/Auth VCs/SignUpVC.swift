@@ -71,7 +71,8 @@ class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                         "chapter": self.chapterTF.text!,
                         "grade": self.gradeTextField.text!,
                         "paid": true,
-                        "user UID": userID
+                        "user UID": userID,
+                        "competitive events": [""]
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

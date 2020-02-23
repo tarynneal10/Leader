@@ -131,9 +131,6 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
             mail.setMessageBody("<p>Why I want to join FBLA:</p>", isHTML: true)
             mail.setSubject("New FBLA Member- \(nameTF.text!), Grade \(gradeTF.text!)")
             present(mail, animated: true)
-
-            signUpSuccess = true
-            performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
             
         } else {
             // show failure alert
