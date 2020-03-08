@@ -17,6 +17,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     var db: Firestore!
     var userRef : Query?
     let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
+    var passedValues = [""]
     
     override func viewDidLoad() {
            super.viewDidLoad()
@@ -25,7 +26,8 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         setTitle()
         tableView.estimatedRowHeight = 40.0
         tableView.separatorStyle = .none
-
+        //idk why but value isn't passing
+        print(passedValues)
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -79,7 +81,9 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         
         //Adding to firebase
         self.db.collection("minutes").addDocument(data: [
-            "minutes": values
+            "minutes": values,
+            "attendees": passedValues
+            
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")

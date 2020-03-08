@@ -17,8 +17,10 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
      var db: Firestore!
      var DocRef : Query?
      var userRef : Query?
-     var members : [Member] = []
+     //var members : [Member] = []
+     var members : [String] = [""]
      var chapterName = ""
+    var values = [String]()
      
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +31,13 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         
         getUser()
     }
-
+    //This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let viewController = segue.destination as? MeetingMinutesVC
+        //This isn't passing for some reason
+        viewController?.passedValues = values
+    }
+    
     //Gets user for other queries
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -40,7 +48,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                         //Put more error handling here
         } else {
             for document in querySnapshot!.documents {
-                print("\(document.documentID) => \(document.data())")
+               // print("\(document.documentID) => \(document.data())")
                 let chapter = document.get("chapter") as? String
                 self.chapterName = chapter!
                 self.navigationItem.title = self.chapterName
@@ -63,10 +71,8 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                         self.members.removeAll()
                         for document in snapshot.documents {
                             let name = document.get("name") as? String
-                            
-                            self.members.append(Member(memberName: name ?? "name"))
-                            
-                            print(document.data())
+                            self.members.append(name!)
+                            //print(document.data())
                         }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
@@ -84,16 +90,24 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
              let cell = tableView.dequeueReusableCell(withIdentifier: "attendanceCell", for: indexPath as IndexPath)as! AttendanceTableViewCell
     
-             let path = members[indexPath.row]
-             cell.populate(member: path)
+             cell.label.text = members[indexPath.row]
 
              return cell
     }
-    
+//So here what I need is a way to get an array of present members to pass back to the meetings page and add to the cloud
     @IBAction func donePressed(_ sender: Any) {
-        
+        //Getting label values
+        var values = [String]()
+        for (index, value) in members.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
+            if let text = cell.label.text, !text.isEmpty, cell.checkmark == true {
+                values.append(value)
+            }
+        }
+        print(values)
     }
-    
+
 }
 class AttendanceTableViewCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
@@ -109,17 +123,11 @@ class AttendanceTableViewCell : UITableViewCell {
         if checkmark == false {
             button.setImage(UIImage(named: "Checkmark"), for: .normal)
             checkmark = true
-            print("Member present")
         } else {
             button.setImage(UIImage(named: "Nothing"), for: .normal)
             checkmark = false
-            print("Member Absent")
         }
     
-    }
-    
-    func populate(member: Member) {
-        label.text = member.name
     }
     
 }

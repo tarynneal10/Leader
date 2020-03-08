@@ -24,7 +24,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var DocRef : Query?
     var userRef : Query?
     var chapterRef : Query?
-    var storageRef : StorageReference?
+    var storageRef : [StorageReference] = []
     
     var chapterName = ""
     var officerArray : [String] = []
@@ -80,7 +80,9 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                     if position != "Member", position != "Advisor" {
                         self.officerArray.append("\(position!): \(name!)")
-                        self.storageRef = self.storage.reference(forURL: url!)
+                        //Maybe I could make an array of storage refs
+                        
+                        self.storageRef.append(self.storage.reference(forURL: url!))
                     }
                     
                 }
@@ -113,18 +115,23 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "officerCell", for: indexPath) as! OfficerCell
         let placeholderImage = UIImage(named: "Anon")
+        let photoUrl = storageRef[indexPath.row]
         
-        cell.image.image = UIImage(named: "Anon")
         cell.label.text = officerArray[indexPath.row]
+        cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
         
-        //cell.image.sd_setImage(with: storageRef!, placeholderImage: placeholderImage)
-        //Need this to iterate through images
+        
         return cell
     }
+
 }
 class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        //image.image = UIImage(named: "Anon")
+    }
 }
 
 
