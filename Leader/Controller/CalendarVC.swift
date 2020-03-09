@@ -28,6 +28,7 @@ class CalendarVC : UIViewController{
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var noEventsLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
     
     var db: Firestore!
     var DocRef : Query?
@@ -48,6 +49,7 @@ class CalendarVC : UIViewController{
         monthFormatter.dateFormat = "MMMM"
         db = Firestore.firestore()
         getUser()
+        
         calendarView.scrollDirection = .horizontal
         calendarView.scrollingMode = .stopAtEachCalendarFrame
         calendarView.showsHorizontalScrollIndicator = false
@@ -56,6 +58,7 @@ class CalendarVC : UIViewController{
         dateLabel.isHidden = true
         descriptionLabel.isHidden = true
         noEventsLabel.isHidden = true
+        timeLabel.isHidden = true
         //SVProgressHUD.show()- because it's annoying
     }
     
@@ -100,6 +103,7 @@ class CalendarVC : UIViewController{
                              self.nameLabel.text = document.get("name") as? String
                              self.dateLabel.text = document.get("date") as? String
                              self.descriptionLabel.text = document.get("description") as? String
+                             self.timeLabel.text = document.get("time") as? String
 
                              print(document.data())
 
@@ -151,11 +155,12 @@ class CalendarVC : UIViewController{
                 nameLabel.isHidden = true
                 dateLabel.isHidden = true
                 descriptionLabel.isHidden = true
+                timeLabel.isHidden = true
             } else {
-
                 nameLabel.isHidden = false
                 dateLabel.isHidden = false
                 descriptionLabel.isHidden = false
+                timeLabel.isHidden = false
                 noEventsLabel.isHidden = true
                 displayDetails()
             }

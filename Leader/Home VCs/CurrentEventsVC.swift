@@ -62,12 +62,13 @@ var formatter: DateFormatter {
                         let name = document.get("name") as? String
                         let date = document.get("date") as? String
                         let description = document.get("description") as? String
+                        let time = document.get("time") as? String
                         
                         //Checks to see if event before today's date
                         let eventDate = self.formatter.date(from: date!)
                         
                         if eventDate! >= Date() {
-                            self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!))
+                            self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!, eventTime: time!))
                             print(document.data())
                         }
                         
@@ -127,10 +128,13 @@ class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    
     func populate(currentEvent: CurrentEvent) {
         nameLabel.text = currentEvent.name
         dateLabel.text = currentEvent.date
         descriptionLabel.text = currentEvent.description
+        timeLabel.text = currentEvent.time
     }
 }
 

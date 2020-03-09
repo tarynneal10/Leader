@@ -15,11 +15,13 @@ class CurrentEvent {
     let name : String
     let date : String
     let description : String
+    let time : String
     
-    init (eventName: String, eventDate: String, eventDescription: String) {
+    init (eventName: String, eventDate: String, eventDescription: String, eventTime: String) {
         name = eventName
         date = eventDate
         description = eventDescription
+        time = eventTime
     }
     
 }

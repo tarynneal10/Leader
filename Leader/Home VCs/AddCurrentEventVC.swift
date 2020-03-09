@@ -13,25 +13,18 @@ import Firebase
 class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var titleText: UITextField!
     @IBOutlet weak var descriptionText: UITextView!
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateTF: UITextField!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var timeTF: UITextField!
+    
     
     var db: Firestore!
     var userRef : Query?
     var chapterName = ""
-    var formatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
-        return formatter
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         getUser()
-        datePicker.isHidden = true
-        doneButton.isHidden = true
    
     }
     
@@ -79,7 +72,8 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
                       "name": titleText.text!,
                       "description": descriptionText.text!,
                       "date": dateTF.text!,
-                      "chapter": chapterName
+                      "chapter": chapterName,
+                      "time": timeTF.text!
                   ]) { err in
                       if let err = err {
                           print("Error adding document: \(err)")
@@ -92,11 +86,12 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
       }
     
 //MARK: Text field functions
-    
+    //UITextField return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+    
     //UITextView return
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         descriptionText.text = textView.text
@@ -109,22 +104,11 @@ class AddEventVC : UIViewController, UITextFieldDelegate, UITextViewDelegate {
             
         return true
     }
+    
 //MARK: IBAction functions
     
-    @IBAction func dateTFPressed(_ sender: Any) {
-        dateTF.isHidden = true
-        datePicker.isHidden = false
-        doneButton.isHidden = false
-    }
-    @IBAction func donePressed(_ sender: Any) {
-        datePicker.isHidden = true
-        dateTF.isHidden = false
-        doneButton.isHidden = true
-        dateTF.text = formatter.string(from: datePicker.date)
-        
-    }
     @IBAction func createEventPressed(_ sender: Any) {
-        if titleText.text != "", descriptionText.text != "", dateTF.text != ""
+        if titleText.text != "", descriptionText.text != "", dateTF.text != "", timeTF.text != ""
         {
             addToFirestore()
             dismiss(animated: true, completion: nil)
