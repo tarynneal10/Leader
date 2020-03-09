@@ -76,7 +76,6 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                 }
                 
             }
-
     }
     
 //MARK: Table View Functions

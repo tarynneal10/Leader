@@ -28,6 +28,8 @@ class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate, UITableVie
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         controller.dismiss(animated: true, completion: nil)
     }
+//MARK: Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fblaText.count
     }
@@ -37,6 +39,8 @@ class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate, UITableVie
         cell.label.text = fblaText[indexPath.row]
         return cell
     }
+    
+//MARK: IBAction Functions
     
     @IBAction func openFBLA(_ sender: Any) {
         guard let url = URL(string: "https://www.fbla-pbl.org/") else { return }
@@ -65,6 +69,7 @@ class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate, UITableVie
         safariVC.delegate = self
     }
 }
+//MARK: AboutFBLACell Class
 class AboutFBLACell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
     

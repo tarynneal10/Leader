@@ -18,6 +18,7 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
     var userRef : Query?
     let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
     var passedValues = [""]
+    var chapterName = ""
     
     override func viewDidLoad() {
            super.viewDidLoad()
@@ -40,8 +41,8 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
-                    let chapter = document.get("chapter") as? String
-                    self.titleLabel.text = "\(chapter!) FBLA Local Chapter Regular Meeting Minutes"
+                    self.chapterName = (document.get("chapter") as? String)!
+                    self.titleLabel.text = "\(self.chapterName) FBLA Local Chapter Regular Meeting Minutes"
                     //Should probs put in smth for if they don't have chapter
                 }
             }
@@ -82,9 +83,13 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
         //Adding to firebase
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
         self.db.collection("minutes").addDocument(data: [
             "minutes": values,
-            "attendees": passedValues
+            "attendees": passedValues,
+            "chapter": chapterName,
+            "date": formatter.string(from: Date())
             
         ]) { err in
             if let err = err {

@@ -92,10 +92,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
     }
     //  This function is called before the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // get a reference to the second view controller
         viewController = segue.destination as? CompetitiveEventDetailsVC
-        // set a variable in the second view controller with the String to pass
-        
     }
     
     @IBAction func unwindToCompetitiveEventsVC(segue: UIStoryboardSegue) {

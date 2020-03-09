@@ -60,10 +60,14 @@ class SecurityVC : UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+    
+//MARK: IBAction Functions
+    
     @IBAction func editPressed(_ sender: Any) {
         //Changes to UI
         nameTF.isUserInteractionEnabled = true

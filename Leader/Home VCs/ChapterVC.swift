@@ -52,7 +52,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                         //Put more error handling here
         } else {
             for document in querySnapshot!.documents {
-                print("\(document.documentID) => \(document.data())")
+                //print("\(document.documentID) => \(document.data())")
                 let chapter = document.get("chapter") as? String
                 self.chapterName = chapter!
                 self.navigationItem.title = self.chapterName
@@ -73,7 +73,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                 //Put more error handling here
             } else {
                 for document in querySnapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
+                    //print("\(document.documentID) => \(document.data())")
                     
                     let position = document.get("position") as? String
                     let name = document.get("name") as? String
