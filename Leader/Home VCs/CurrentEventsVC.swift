@@ -28,24 +28,23 @@ var formatter: DateFormatter {
     formatter.dateFormat = "MM/dd/yyyy"
     return formatter
 }
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         db = Firestore.firestore()
         navigationItem.title = receivedString
         SVProgressHUD.show()
         
-        
         currentEventsTableView.estimatedRowHeight = 125.0
         currentEventsTableView.rowHeight = UITableView.automaticDimension
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+        
         getUser()
         currentEventsTableView.reloadData()
     }
-    @IBAction func unwindToCurrentEvents(segue: UIStoryboardSegue) {
-        //nothing goes here
-    }
+
+//MARK: Retrieving from cloud
+    
     func createArray() -> [CurrentEvent]
     {
         DocRef?.getDocuments()
@@ -100,30 +99,30 @@ var formatter: DateFormatter {
             }
         }
     }
-
+    
+//MARK: Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
        return list.count
-        
     }
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
             let listPath = list[indexPath.row]
             cell.populate(currentEvent: listPath)
         
             return cell
-
-
-        }
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"
         navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
     }
-
+    //Unwinds from add event
+    @IBAction func unwindToCurrentEvents(segue: UIStoryboardSegue) {}
 }
 
+//MARK: CurrentEventsCell Class
 class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!

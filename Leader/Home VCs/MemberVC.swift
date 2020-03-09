@@ -76,6 +76,9 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
             }
 
     }
+    
+//MARK: Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count
     }
@@ -91,6 +94,9 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
     
     
 }
+
+//MARK: MemberTableViewCell Class
+
 class MemberTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     func populate(member: Member) {

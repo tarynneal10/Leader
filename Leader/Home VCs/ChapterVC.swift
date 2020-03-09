@@ -24,8 +24,8 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
     var DocRef : Query?
     var userRef : Query?
     var chapterRef : Query?
-    var storageRef : [StorageReference] = []
     
+    var storageRef : [StorageReference] = []
     var chapterName = ""
     var officerArray : [String] = []
     var urlArray : [String] = []
@@ -41,6 +41,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         getUser()
     }
 
+//MARK: Retrieving from cloud
     //Gets user for other queries
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -91,8 +92,6 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
     }
     
-
-    
     //Sets description for chapter text box
     func setDescription() {
         chapterRef?.getDocuments() { (querySnapshot, err) in
@@ -108,6 +107,8 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         }
     }
 
+//MARK: Collection View Functions
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return officerArray.count
     }
@@ -118,13 +119,20 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let photoUrl = storageRef[indexPath.row]
         
         cell.label.text = officerArray[indexPath.row]
-        cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
+        //cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
         
         
         return cell
     }
+    
+    @IBAction func unwindToChapterVC(segue: UIStoryboardSegue) {
+        print("Unwind to ChapterVC")
+    }
 
 }
+
+//MARK: OfficerCell Class
+
 class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!

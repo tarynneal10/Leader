@@ -34,14 +34,10 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
             
             getUser()
     }
-        override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
-            if identifier == "goToHome" {
-                if addingSuccess != true {
-                    return false
-                }
-            }
-            return true
-        }
+
+    
+//MARK: Retrieving from cloud
+    
         //Gets user for other queries
         func getUser() {
             guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -100,29 +96,9 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
         }
         
     }
-    func sendEmail() {
-        if advisorEmail != "" {
-            if MFMailComposeViewController.canSendMail() {
-                let mail = MFMailComposeViewController()
-                mail.mailComposeDelegate = self
-                mail.setToRecipients([advisorEmail])
-                mail.setMessageBody("<p>My Events: \(yourEvents)</p>", isHTML: true)
-                mail.setSubject("Competitive Events")
 
-                present(mail, animated: true)
- 
-                } else {
-                    // show failure alert
-            }
-        }
-        
-    }
-
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true)
-        addingSuccess = true
-        performSegue(withIdentifier: "goToHome", sender: UIButton.self)
-    }
+    
+//MARK: Table View Functions
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return yourEvents.count
@@ -146,6 +122,44 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
 
         return [deleteAction]
     }
+
+//MARK: Email & Segue Stuff
+    
+       override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+           if identifier == "goToHome" {
+               if addingSuccess != true {
+                   return false
+               }
+           }
+           return true
+       }
+       
+       func sendEmail() {
+           if advisorEmail != "" {
+               if MFMailComposeViewController.canSendMail() {
+                   let mail = MFMailComposeViewController()
+                   mail.mailComposeDelegate = self
+                   mail.setToRecipients([advisorEmail])
+                   mail.setMessageBody("<p>My Events: \(yourEvents)</p>", isHTML: true)
+                   mail.setSubject("Competitive Events")
+
+                   present(mail, animated: true)
+    
+                   } else {
+                       // show failure alert
+               }
+           }
+           
+       }
+
+       func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+           controller.dismiss(animated: true)
+           addingSuccess = true
+           performSegue(withIdentifier: "goToHome", sender: UIButton.self)
+       }
+    
+//MARK: IBAction Functions
+    
     @IBAction func submitPressed(_ sender: Any) {
         updateData()
         findAdvisorInfo()
@@ -157,6 +171,9 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     
     
 }
+
+//MARK: YourEventsCell Class
+
 class YourEventsCell : UITableViewCell {
     @IBOutlet weak var eventsLabel: UILabel!
 }

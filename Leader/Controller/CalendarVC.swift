@@ -59,6 +59,8 @@ class CalendarVC : UIViewController{
         //SVProgressHUD.show()- because it's annoying
     }
     
+//MARK: Retrieving from cloud
+    
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
@@ -79,6 +81,55 @@ class CalendarVC : UIViewController{
             }
         }
     }
+    //Displays details in yellow box
+     
+    func displayDetails() {
+         if selectedDate != formatter.date(from: "01/00/0000") {
+             let date = formatter.string(from: selectedDate!)
+             let DateRef = db.collection("currentevents")
+                 .whereField("chapter", isEqualTo: chapterName!)
+                 .whereField("date", isEqualTo: date)
+
+             DateRef.getDocuments(){ (QuerySnapshot, err) in
+                     if err != nil
+                     {
+                         print("Error getting documents: \(String(describing: err))");
+                     } else {
+
+                         for document in QuerySnapshot!.documents {
+                             self.nameLabel.text = document.get("name") as? String
+                             self.dateLabel.text = document.get("date") as? String
+                             self.descriptionLabel.text = document.get("description") as? String
+
+                             print(document.data())
+
+                         }
+                     }
+
+             }
+         } else {
+           print("selectedDate has no value")
+         }
+     }
+     func populateDataSource() {
+         DocRef?.getDocuments()
+         { (QuerySnapshot, err) in
+             if err != nil {
+                 print("Error getting documents: \(String(describing: err))");
+             }
+             else {
+                 for document in QuerySnapshot!.documents {
+                     let date = document.get("date") as? String
+                     self.calendarDataSource[date!] = "Idk"
+                     print(document.data())
+                 }
+                 //SVProgressHUD.dismiss()
+                 self.calendarView.reloadData()
+             }
+         }
+     }
+    
+//MARK: Configure Cell
     func configureCell(view: JTACDayCell?, cellState: CellState) {
         guard let cell = view as? DateCell  else { return }
         cell.dateLabel.text = cellState.text
@@ -116,58 +167,7 @@ class CalendarVC : UIViewController{
         }
     }
 
-    //Displays details in yellow box- WARNING- only displays if time is 12 AM. Need to fix.
-   func displayDetails() {
-        if selectedDate != formatter.date(from: "01/00/0000") {
-            let date = formatter.string(from: selectedDate!)
-            let DateRef = db.collection("currentevents")
-                .whereField("chapter", isEqualTo: chapterName!)
-                .whereField("date", isEqualTo: date)
 
-            DateRef.getDocuments(){ (QuerySnapshot, err) in
-                    if err != nil
-                    {
-                        print("Error getting documents: \(String(describing: err))");
-                    } else {
-
-                        for document in QuerySnapshot!.documents {
-                            self.nameLabel.text = document.get("name") as? String
-                            self.dateLabel.text = document.get("date") as? String
-                            self.descriptionLabel.text = document.get("description") as? String
-
-                            print(document.data())
-
-                        }
-                    }
-
-            }
-        } else {
-          print("selectedDate has no value")
-        }
-    }
-    func populateDataSource() {
-        DocRef?.getDocuments()
-        { (QuerySnapshot, err) in
-            if err != nil
-            {
-                print("Error getting documents: \(String(describing: err))");
-            }
-            else
-            {
-                for document in QuerySnapshot!.documents {
-                    let date = document.get("date") as? String
-                    self.calendarDataSource[date!] = "Idk"
-                    print(document.data())
-                }
-                //SVProgressHUD.dismiss()
-                self.calendarView.reloadData()
-                
-            }
-        }
-
-        
-        
-    }
     func handleCellEvents(cell: DateCell, cellState: CellState) {
             let dateString = formatter.string(from: cellState.date)
             if calendarDataSource[dateString] == nil {
@@ -185,6 +185,8 @@ class CalendarVC : UIViewController{
             cell.dateLabel.textColor = UIColor.gray
         }
     }
+//MARK: Calendar View Functions
+    
   func calendar(_ calendar: JTACMonthView, headerViewForDateRange range: (start: Date, end: Date), at indexPath: IndexPath) -> JTACMonthReusableView {
        let header = calendar.dequeueReusableJTAppleSupplementaryView(withReuseIdentifier: "DateHeader", for: indexPath) as! DateHeader
         header.monthTitle.text = monthFormatter.string(from: range.start)
@@ -197,6 +199,9 @@ class CalendarVC : UIViewController{
     }
 
 }
+
+//MARK: Extensions
+
 extension CalendarVC: JTACMonthViewDataSource {
     func configureCalendar(_ calendar: JTACMonthView) -> ConfigurationParameters {
         let dateFormatter = DateFormatter()

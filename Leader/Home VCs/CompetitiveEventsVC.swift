@@ -31,6 +31,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         events = createArray()
         competitiveEventsTableView.reloadData()
     }
+//MARK: Retrieving from cloud
     
     func createArray() -> [CompetitiveEvent]
     {
@@ -63,6 +64,9 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         
         return events
     }
+    
+//MARK: Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
     }
@@ -74,13 +78,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         
         return cell
     }
-//    // This function is called before the segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // get a reference to the second view controller
-        viewController = segue.destination as? CompetitiveEventDetailsVC
-        // set a variable in the second view controller with the String to pass
-        
-    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("You selected cell #\(indexPath.row)!")
         // Get Cell Label
@@ -92,7 +90,17 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
         print(valueToPass)
       
     }
-
+    //  This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // get a reference to the second view controller
+        viewController = segue.destination as? CompetitiveEventDetailsVC
+        // set a variable in the second view controller with the String to pass
+        
+    }
+    
+    @IBAction func unwindToCompetitiveEventsVC(segue: UIStoryboardSegue) {
+        print("Unwind to CompetitiveEventsVC")
+    }
 }
 ////Search Bar Code
 //extension CompetitiveEventsVC: UISearchBarDelegate {
@@ -117,6 +125,9 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
 //    }
 //    
 //}
+
+//MARK: CompetitiveEventsCell Class
+
 class CompetitiveEventsCell : UITableViewCell{
     @IBOutlet weak var eventName: UILabel!
     @IBOutlet weak var eventCategory: UILabel!

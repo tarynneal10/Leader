@@ -20,24 +20,19 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
      //var members : [Member] = []
      var members : [String] = [""]
      var chapterName = ""
-    var values = [String]()
+     var values = [String]()
      
     override func viewDidLoad() {
-        super.viewDidLoad()
-        db = Firestore.firestore()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        getUser()
+            super.viewDidLoad()
+            db = Firestore.firestore()
+            
+            tableView.delegate = self
+            tableView.dataSource = self
+            
+            getUser()
     }
-    //This function is called before the segue
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let viewController = segue.destination as? MeetingMinutesVC
-        //This isn't passing for some reason
-        viewController?.passedValues = values
-    }
-    
+
+//MARK: Retrieving from cloud
     //Gets user for other queries
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -83,6 +78,9 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
             }
 
     }
+    
+//MARK: Table View Functions
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return members.count
     }
@@ -94,10 +92,16 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
 
              return cell
     }
-//So here what I need is a way to get an array of present members to pass back to the meetings page and add to the cloud
+    
+    //This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            let viewController = segue.destination as? MeetingMinutesVC
+            //This isn't passing for some reason
+            viewController?.passedValues = values
+    }
+
     @IBAction func donePressed(_ sender: Any) {
         //Getting label values
-        var values = [String]()
         for (index, value) in members.enumerated() {
                 let indexPath = IndexPath(row: index, section: 0)
                 guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
@@ -105,10 +109,13 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                 values.append(value)
             }
         }
-        print(values)
+        print("Values: \(values)")
     }
 
 }
+
+//MARK: AttendanceTableViewCell Class
+
 class AttendanceTableViewCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var button: UIButton!

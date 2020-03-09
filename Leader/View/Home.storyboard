@@ -32,7 +32,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="donePressed:" destination="MxD-Qb-T78" eventType="touchUpInside" id="mka-7i-fQs"/>
-                                                <segue destination="ayI-rB-SK2" kind="show" id="cBq-kU-Cku"/>
+                                                <segue destination="5dP-SB-YNG" kind="unwind" unwindAction="unwindToMinutesVCWithSegue:" id="uVw-UQ-tTb"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -108,8 +108,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="idJ-yr-zgo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="5dP-SB-YNG" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3812" y="-1664"/>
+            <point key="canvasLocation" x="3660" y="-2364"/>
         </scene>
         <!--Member View Controller-->
         <scene sceneID="DmF-zM-wck">
@@ -120,7 +121,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Krk-Vn-uiO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sY6-2o-IEg">
                                     <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
@@ -172,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1E-yA-oiJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2228" y="-2364"/>
+            <point key="canvasLocation" x="2194" y="-2363"/>
         </scene>
         <!--Meeting MinutesVC-->
         <scene sceneID="odO-gb-JHD">
@@ -183,7 +184,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" springLoaded="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dg4-cX-pqJ">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="NRX-Ug-l1Q">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -230,7 +231,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="savePressed:" destination="ayI-rB-SK2" eventType="touchUpInside" id="wZP-LL-OIo"/>
-                                                <segue destination="UtC-4U-wRA" kind="show" id="d8Z-5I-BLx"/>
+                                                <segue destination="yoi-SO-hpR" kind="unwind" unwindAction="unwindToChapterVCWithSegue:" id="Eit-xS-8F8"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -307,8 +308,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fHm-vL-puO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="yoi-SO-hpR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3018" y="-1665"/>
+            <point key="canvasLocation" x="2938" y="-2364"/>
         </scene>
         <!--Competitive Events-->
         <scene sceneID="yCA-vX-CQd">
@@ -400,7 +402,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="92u-Hf-NBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2263" y="-365"/>
+            <point key="canvasLocation" x="2262" y="-363"/>
         </scene>
         <!--Competitive Event DetailsVC-->
         <scene sceneID="GOm-YJ-7IZ">
@@ -580,7 +582,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6F-RX-PP6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3039" y="-364"/>
+            <point key="canvasLocation" x="3079" y="-341"/>
         </scene>
         <!--Your Competitive EventsVC-->
         <scene sceneID="XuS-cl-H4s">
@@ -603,7 +605,7 @@
                                     </state>
                                     <connections>
                                         <action selector="savePressed:" destination="bkc-gv-LOY" eventType="touchUpInside" id="NXX-Sb-CuE"/>
-                                        <segue destination="oK6-oI-ZhX" kind="show" id="YhL-RU-yN0"/>
+                                        <segue destination="sgG-Dz-RUr" kind="unwind" unwindAction="unwindToCompetitiveEventsVCWithSegue:" id="9IE-Fh-K9i"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwZ-a8-al7">
@@ -615,7 +617,7 @@
                                     </state>
                                     <connections>
                                         <action selector="submitPressed:" destination="bkc-gv-LOY" eventType="touchUpInside" id="3Ef-xd-61l"/>
-                                        <segue destination="oK6-oI-ZhX" kind="show" identifier="goToHome" id="e71-1n-TFx"/>
+                                        <segue destination="sgG-Dz-RUr" kind="unwind" unwindAction="unwindToCompetitiveEventsVCWithSegue:" id="i7E-ug-Gec"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -662,8 +664,9 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xMo-Pu-peA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="sgG-Dz-RUr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3812" y="-365"/>
+            <point key="canvasLocation" x="3910" y="-379"/>
         </scene>
         <!--Current Events-->
         <scene sceneID="gLL-3c-cKr">
@@ -767,7 +770,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c0J-0X-Z6K" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BRz-M3-k1c" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2245.5999999999999" y="-1011.544227886057"/>
+            <point key="canvasLocation" x="2262" y="-1012"/>
         </scene>
         <!--Add EventVC-->
         <scene sceneID="U2u-a1-Gvt">
@@ -909,18 +912,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkP-am-tNJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3038" y="-1012"/>
+            <point key="canvasLocation" x="3078" y="-1012"/>
         </scene>
         <!--Home-->
         <scene sceneID="sXc-0L-c2U">
             <objects>
                 <viewController storyboardIdentifier="Home" title="Home" id="oK6-oI-ZhX" customClass="HomeVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SE7-6c-PMe">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PEJ-c5-xzK">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="mUv-Yh-90s">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="575"/>
@@ -1005,7 +1008,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ya9-gY-CVl">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="598"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="Lx5-Iq-yur">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="482"/>
@@ -1166,10 +1169,6 @@
         <image name="Nothing" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zbt-ZL-DQ3"/>
-        <segue reference="d8Z-5I-BLx"/>
-        <segue reference="e71-1n-TFx"/>
         <segue reference="Bgl-lb-ubG"/>
-        <segue reference="cBq-kU-Cku"/>
     </inferredMetricsTieBreakers>
 </document>

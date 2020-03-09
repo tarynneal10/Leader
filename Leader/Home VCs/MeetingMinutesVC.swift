@@ -27,13 +27,8 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.estimatedRowHeight = 40.0
         tableView.separatorStyle = .none
         //idk why but value isn't passing
-        print(passedValues)
+        print("Passed Values: \(String(describing: passedValues))")
     }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-
 
     func setTitle() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -52,7 +47,11 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
     }
-
+//MARK: Table View Functions
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
@@ -68,6 +67,9 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         }
         return cell
     }
+
+//MARK: IBAction functions
+    
     @IBAction func savePressed(_ sender: Any) {
         //Getting text view values
         var values = [String:String?]()
@@ -93,8 +95,13 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         }
         
     }
-    
+    @IBAction func unwindToMinutesVC(segue: UIStoryboardSegue) {
+        print("Unwind to MinutesVC")
+    }
 }
+
+//MARK: MinutesCell Class
+
 class MinutesCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var minutesTextView: UITextView!

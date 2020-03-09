@@ -41,18 +41,14 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         loadDetails()
         
     }
-
+//MARK: Retrieving from cloud
     func loadDetails() {
         DocRef?.getDocuments() { (QuerySnapshot, err) in
-            if err != nil
-            {
+            if err != nil {
                 print("Error getting documents: \(String(describing: err))");
             }
-            else
-            {
-                
+            else {
                 for document in QuerySnapshot!.documents {
-                    
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
@@ -70,30 +66,9 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
                 }
                 self.tableView.reloadData()
             }
-            
         }
-
-        
     }
-    
-    @IBAction func eventDetailsPressed(_ sender: Any) {
-            let urlString = eventURL!
-            guard let url = URL(string: urlString) else { return }
-            let safariVC = SFSafariViewController(url: url)
-            present(safariVC, animated: true, completion: nil)
-            safariVC.delegate = self
-    }
-    //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//
-//        return sectionTitles[section]
-//
-//    }
-//
-//    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//
-//    return sectionTitles.count
-//
-//    }
+    //MARK: Table View Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -117,8 +92,16 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         let viewController = segue.destination as? YourCompetitiveEventsVC
         viewController?.passedValue = eventToPass!
     }
-
+    
+    @IBAction func eventDetailsPressed(_ sender: Any) {
+            let urlString = eventURL!
+            guard let url = URL(string: urlString) else { return }
+            let safariVC = SFSafariViewController(url: url)
+            present(safariVC, animated: true, completion: nil)
+            safariVC.delegate = self
+    }
 }
+//MARK: DetailCell Class
 
 class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
