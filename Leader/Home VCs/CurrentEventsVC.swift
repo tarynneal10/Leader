@@ -15,34 +15,43 @@ import SVProgressHUD
 
 class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-@IBOutlet var currentEventsTableView: UITableView!
+    @IBOutlet var currentEventsTableView: UITableView!
 
-var db: Firestore!
-var DocRef : Query?
-var userRef : Query?
-var list: [CurrentEvent] = []
-var chapterName = ""
-var receivedString = ""
-var formatter: DateFormatter {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "MM/dd/yyyy"
-    return formatter
-}
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
+    var db: Firestore!
+    var DocRef : Query?
+    var userRef : Query?
+    var list: [CurrentEvent] = []
+    var chapterName = ""
+    var receivedString = ""
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd/yyyy"
+        return formatter
+    }
+override func viewDidLoad() {
+        super.viewDidLoad()
         db = Firestore.firestore()
         navigationItem.title = receivedString
         SVProgressHUD.show()
         
         currentEventsTableView.estimatedRowHeight = 125.0
         currentEventsTableView.rowHeight = UITableView.automaticDimension
-        
+}
+override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         getUser()
         currentEventsTableView.reloadData()
+}
+    
+    func gradient(frame:CGRect) -> CAGradientLayer {
+        let layer = CAGradientLayer()
+        layer.frame = frame
+        layer.startPoint = CGPoint(x: 0, y: 0.5)
+        layer.endPoint = CGPoint(x: 1, y: 0.5)
+        layer.colors = [
+        UIColor.blue.cgColor,UIColor.yellow.cgColor]
+        return layer
     }
-
 //MARK: Retrieving from cloud
     
     func createArray() -> [CurrentEvent]
@@ -110,10 +119,17 @@ var formatter: DateFormatter {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
             let listPath = list[indexPath.row]
             cell.populate(currentEvent: listPath)
-        
+                if indexPath.row % 2 == 1 {
+                    cell.backgroundColor = UIColor(red: 230, green: 230, blue: 230)
+                } else {
+                    //cell.backgroundColor = UIColor(red: 5, green: 63, blue: 94)
+                }
             return cell
     }
-
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
         backItem.title = "Cancel"
@@ -136,5 +152,6 @@ class CurrentEventsCell : UITableViewCell {
         descriptionLabel.text = currentEvent.description
         timeLabel.text = currentEvent.time
     }
+
 }
 

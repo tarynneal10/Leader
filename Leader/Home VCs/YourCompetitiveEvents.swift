@@ -17,9 +17,11 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     
     var db: Firestore!
     var userRef : Query?
+    
     var passedValue = ""
     var userDoc : String?
     var yourEvents : [String] = [""]
+    
     var advisorEmail : String = ""
     var chapterName : String?
     var addingSuccess : Bool?
@@ -37,6 +39,15 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
 
     
 //MARK: Retrieving from cloud
+        //Pops up error for if already added event
+        func errorAlert() {
+            let alert = UIAlertController(title: "Error", message: "You have already added this event", preferredStyle: .alert)
+            
+            let continueAction = UIAlertAction(title: "Continue", style: .default, handler: { (UIAlertAction) in })
+            
+            alert.addAction(continueAction)
+            self.present(alert, animated: true, completion: nil)
+        }
     
         //Gets user for other queries
         func getUser() {
@@ -53,13 +64,26 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
                     self.yourEvents = (document.get("competitive events") as? Array)!
                     self.chapterName = document.get("chapter") as? String
                 }
+                //Checking array values
                 self.yourEvents.append(self.passedValue)
+//                if self.allUnequal(array: self.yourEvents) == false {
+//                    self.errorAlert()
+//                    
+//                }
+            
                 print(self.yourEvents)
                 self.eventsTableView.reloadData()
                 
             }
         }
         }
+    
+    func allUnequal<T : Equatable>(array : [T]) -> Bool {
+        if let firstElem = array.first {
+            return !array.dropFirst().contains { $0 == firstElem }
+        }
+        return true
+    }
     
     func updateData() {
         db.collection("members").document(userDoc!).updateData([
@@ -124,7 +148,7 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     }
 
 //MARK: Email & Segue Stuff
-    
+    //DOuble check if this is right segue
        override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
            if identifier == "goToHome" {
                if addingSuccess != true {

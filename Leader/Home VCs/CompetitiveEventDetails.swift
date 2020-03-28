@@ -21,11 +21,10 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
     var db: Firestore!
     var DocRef : Query?
     var passedValue = ""
-    var overview : String?
-    var topic : String?
-    var skills : String?
     var eventURL : String?
     
+    var sectionTitles = [""]
+    var sectionInfo = [[""]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,21 +41,27 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
         
     }
 //MARK: Retrieving from cloud
+    
     func loadDetails() {
         DocRef?.getDocuments() { (QuerySnapshot, err) in
             if err != nil {
                 print("Error getting documents: \(String(describing: err))");
             }
             else {
+                self.sectionTitles.removeAll()
+                self.sectionInfo.removeAll()
                 for document in QuerySnapshot!.documents {
                     let name = document.get("name") as? String
                     let type = document.get("type") as? String
                     let category = document.get("category") as? String
+                    let overview = document.get("overview") as? [String: String]
                     
-                    self.overview = document.get("overview") as? String
-                    self.topic = document.get("topic") as? String
-                    self.skills = document.get("skills") as? String
                     self.eventURL = document.get("url") as? String
+                    
+                    for (key, value) in overview! {
+                        self.sectionTitles.append(key)
+                        self.sectionInfo.append([value])
+                    }
                     
                     self.categoryLabel.text = "Category: \(category!)"
                     self.typeLabel.text = "Type: \(type!)"
@@ -68,22 +73,34 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
             }
         }
     }
+    
     //MARK: Table View Functions
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sectionTitles.count
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return sectionInfo[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "detailCell", for: indexPath as IndexPath) as! DetailCell
         
-        cell.label.text = "Overview"
-        cell.details.text = overview
-        cell.topic.text = topic
-        cell.skills.text = skills
-
+        cell.label.text = sectionInfo[indexPath.section][indexPath.row]
+        
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
+        view.tintColor = UIColor(red: 21, green: 103, blue: 147)
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor(red: 255, green: 219, blue: 3)
     }
     
     // This function is called before the segue
@@ -100,12 +117,28 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
             present(safariVC, animated: true, completion: nil)
             safariVC.delegate = self
     }
+
 }
-//MARK: DetailCell Class
+//MARK: DetailCell Class & Color stuff
 
 class DetailCell : UITableViewCell, UITextViewDelegate {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var details: UILabel!
-    @IBOutlet weak var topic: UILabel!
-    @IBOutlet weak var skills: UILabel!
+}
+
+extension UIColor {
+   convenience init(red: Int, green: Int, blue: Int) {
+       assert(red >= 0 && red <= 255, "Invalid red component")
+       assert(green >= 0 && green <= 255, "Invalid green component")
+       assert(blue >= 0 && blue <= 255, "Invalid blue component")
+
+       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+   }
+
+   convenience init(rgb: Int) {
+       self.init(
+           red: (rgb >> 16) & 0xFF,
+           green: (rgb >> 8) & 0xFF,
+           blue: rgb & 0xFF
+       )
+   }
 }

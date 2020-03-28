@@ -15,6 +15,7 @@ class QAViewController : UIViewController, UITableViewDelegate, UITableViewDataS
   
     var sectionTitles = ["Usage", "Passwords", "Bugs"]
     var sectionInfo = [["Use it", "Don't be a fool"], ["How can I reset my password?", "Why is my password not working", "Someone stole my password"], ["Why does the app keep crashing?", "Why are the designs this way?", "Why isn't there more functionality?"]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         QATableView.delegate = self
