@@ -47,6 +47,7 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
              
          return true
      }
+//MARK: Alerts
     //Error Alert for when fields empty
       func errorAlert() {
           let alert = UIAlertController(title: "Error", message: "Your information is incorrect", preferredStyle: .alert)
@@ -62,10 +63,19 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
           self.present(alert, animated: true, completion: nil)
       }
     
+    func advisorAlert() {
+        let alert = UIAlertController(title: "Error", message: "You entered the advisor name incorrectly", preferredStyle: .alert)
+        
+        let tryAgainAction = UIAlertAction(title: "Try Again", style: .default, handler: { (UIAlertAction) in })
+        
+        alert.addAction(tryAgainAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func joinFBLAPressed(_ sender: Any) {
         signUpSuccess = false
-        if nameTF.text != "", schoolTF.text != "", advisorTF.text != "", gradeTF.text != "", emailTF.text != "", passwordTF.text != ""
-            {
+        if nameTF.text != "", schoolTF.text != "", advisorTF.text != "", gradeTF.text != "", emailTF.text != "", passwordTF.text != "" {
                 Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
                     (user, error) in
                     if error != nil {
@@ -93,10 +103,14 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
                                 print("Document added with ID: \(ref!.documentID)")
                             }
                         }
-                       
+                       //Get rid of once figure out to make it not crash for advisor ish
+                       self.signUpSuccess = true
+                       self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+                        self.findAdvisorInfo()
                     }
                 }
-                findAdvisorInfo()
+
+                
 
             } else {
                 errorAlert()
@@ -104,24 +118,19 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
         }
     func findAdvisorInfo() {
         let advisorRef = db.collection("members").whereField("name", isEqualTo: advisorTF.text!)
-        advisorRef.getDocuments()
-            { (QuerySnapshot, err) in
-                if err != nil
-                {
+        advisorRef.getDocuments() { (QuerySnapshot, err) in
+                if err != nil {
                     print("Error getting documents: \(String(describing: err))");
-                    //Put like an error pop up or something
-                }
-                else
-                {
+                    self.advisorAlert()
+                } else {
                     for document in QuerySnapshot!.documents {
                         self.advisorEmail = (document.get("email") as? String)!
                         print(document.data())
                     }
+                    //self.signUpSuccess = true
                     self.sendEmail()
                 }
-                
         }
-        
     }
     func sendEmail() {
     if advisorEmail != "" {
@@ -133,15 +142,18 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
             mail.setSubject("New FBLA Member- \(nameTF.text!), Grade \(gradeTF.text!)")
             present(mail, animated: true)
             
+            
         } else {
-            // show failure alert
+            //Maybe?
+            advisorAlert()
         }
         }
     }
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+        //self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
     }
     
-    }
+}
     

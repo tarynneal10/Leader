@@ -433,7 +433,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="4eU-Mq-EWX"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -563,7 +563,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="KXD-QM-C1C">
-                                    <rect key="frame" x="0.0" y="82" width="375" height="104"/>
+                                    <rect key="frame" x="0.0" y="91.5" width="375" height="104"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvO-zt-KL3">
@@ -574,7 +574,8 @@
                                                 <color key="titleColor" red="1" green="0.85937339069999996" blue="0.011647096839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             </state>
                                             <connections>
-                                                <action selector="savePressed:" destination="Kjq-kg-ygY" eventType="touchUpInside" id="3m7-WK-A3P"/>
+                                                <action selector="savePressed:" destination="Kjq-kg-ygY" eventType="touchUpInside" id="sWf-a4-2Gj"/>
+                                                <segue destination="hlg-56-XNH" kind="unwind" unwindAction="unwindToCompetitiveEventsVCWithSegue:" id="gbL-M7-aul"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lwZ-a8-al7">
@@ -586,6 +587,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="submitPressed:" destination="Kjq-kg-ygY" eventType="touchUpInside" id="Cfh-fI-hDq"/>
+                                                <segue destination="hlg-56-XNH" kind="unwind" unwindAction="unwindToCompetitiveEventsVCWithSegue:" id="m9K-ng-Wuc"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -593,14 +595,17 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="yourEventsCell" id="K0P-Mg-JnD" customClass="YourEventsCell" customModule="Leader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="26"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="35.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K0P-Mg-JnD" id="8fm-Vd-Y9r">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="26"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="35.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v4t-tT-Isk">
-                                                    <rect key="frame" x="10" y="0.0" width="355" height="26"/>
+                                                    <rect key="frame" x="10" y="0.0" width="355" height="35.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="XWj-Nt-9Ms"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -630,7 +635,9 @@
                         <viewLayoutGuide key="safeArea" id="Y4g-eE-yUZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="1Bg-AV-wl7">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="7NR-vX-gMU"/>
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="7NR-vX-gMU">
+                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="eventsTableView" destination="HUu-jA-Ce0" id="sFr-IR-wjt"/>
@@ -638,8 +645,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="onj-hg-ZuY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="hlg-56-XNH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3852" y="-364"/>
+            <point key="canvasLocation" x="3815" y="-379"/>
         </scene>
         <!--Current Events-->
         <scene sceneID="gLL-3c-cKr">
@@ -1282,6 +1290,6 @@
         <image name="Nothing" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ly0-ig-eXi"/>
+        <segue reference="CJf-hk-wbk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -31,12 +31,11 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
             super.viewDidLoad()
             db = Firestore.firestore()
             addingSuccess = false
-            noEvents.isHidden = true
-            
-            eventsTableView.isHidden = false
+
             eventsTableView.delegate = self
             eventsTableView.dataSource = self
-            
+            noEvents.isHidden = true
+            eventsTableView.isHidden = false
             getUser()
     }
 
@@ -64,26 +63,35 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 print("Error getting documents: \(err)")
                 self.noEventsPresent()
             } else {
+                self.yourEvents.removeAll()
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     self.userDoc = document.documentID
                     self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
+                   
+
                 }
-                if self.yourEvents.isEmpty == true {
-                    self.noEventsPresent()
-                }
-                //Checking array values
                 self.yourEvents.append(self.passedValue)
+                //Checking array values
+                
 //                if self.allUnequal(array: self.yourEvents) == false {
 //                    self.errorAlert()
 //                    
 //                }
-            
+            //Checking to see if events are present
+            if self.yourEvents == [""] {
+                self.noEventsPresent()
+                print("no events")
+            } else if self.yourEvents.isEmpty == true {
+                self.noEventsPresent()
+            }
+                
                 print(self.yourEvents)
                 self.eventsTableView.reloadData()
                 
             }
+
         }
         }
     
@@ -140,9 +148,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "yourEventsCell", for: indexPath as IndexPath)as! YourEventsCell
-        
             cell.eventsLabel.text = yourEvents[indexPath.row]
-
             return cell
         }
     
@@ -180,7 +186,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
                    } else {
                        // show failure alert
-               }
+                    }
            }
            
        }
