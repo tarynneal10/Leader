@@ -11,8 +11,9 @@ import UIKit
 import Firebase
 import MessageUI
 
-class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControllerDelegate {
+class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDataSource, MFMailComposeViewControllerDelegate {
 
+    @IBOutlet weak var noEvents: UIImageView!
     @IBOutlet var eventsTableView: UITableView!
     
     var db: Firestore!
@@ -30,14 +31,19 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
             super.viewDidLoad()
             db = Firestore.firestore()
             addingSuccess = false
+            noEvents.isHidden = true
             
+            eventsTableView.isHidden = false
             eventsTableView.delegate = self
             eventsTableView.dataSource = self
             
             getUser()
     }
 
-    
+    func noEventsPresent() {
+        noEvents.isHidden = false
+        eventsTableView.isHidden = true
+    }
 //MARK: Retrieving from cloud
         //Pops up error for if already added event
         func errorAlert() {
@@ -56,13 +62,16 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
             userRef?.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
-                            //Put more error handling here
+                self.noEventsPresent()
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     self.userDoc = document.documentID
-                    self.yourEvents = (document.get("competitive events") as? Array)!
+                    self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
+                }
+                if self.yourEvents.isEmpty == true {
+                    self.noEventsPresent()
                 }
                 //Checking array values
                 self.yourEvents.append(self.passedValue)
@@ -85,6 +94,7 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
         return true
     }
     
+    //Updates data in cloud
     func updateData() {
         db.collection("members").document(userDoc!).updateData([
                 "competitive events" : yourEvents
@@ -97,6 +107,7 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
         }
     }
     
+    //Gets info for Advisor to email data to
     func findAdvisorInfo() {
         
         let advisorRef = db.collection("members").whereField("chapter", isEqualTo: chapterName!).whereField("position", isEqualTo: "Advisor")
@@ -116,7 +127,6 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
                     }
                     self.sendEmail()
                 }
-                
         }
         
     }
@@ -124,11 +134,11 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
     
 //MARK: Table View Functions
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return yourEvents.count
     }
         
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "yourEventsCell", for: indexPath as IndexPath)as! YourEventsCell
         
             cell.eventsLabel.text = yourEvents[indexPath.row]
@@ -136,8 +146,7 @@ class YourCompetitiveEventsVC : UITableViewController, MFMailComposeViewControll
             return cell
         }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?
-    {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
             self.yourEvents.remove(at: indexPath.row)
             self.eventsTableView.reloadData()

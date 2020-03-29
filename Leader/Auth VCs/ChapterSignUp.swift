@@ -90,7 +90,10 @@ class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate 
                         "name": self.advisorName.text!,
                         "position": "Advisor",
                         "chapter": self.chapterName.text!,
-                        "user UID": userID
+                        "grade": 0,
+                        "paid": true,
+                        "user UID": userID,
+                        "competitive events": [""]
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

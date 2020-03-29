@@ -15,6 +15,7 @@ import SVProgressHUD
 
 class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var noCurrentEvents: UIImageView!
     @IBOutlet var currentEventsTableView: UITableView!
 
     var db: Firestore!
@@ -34,11 +35,14 @@ override func viewDidLoad() {
         navigationItem.title = receivedString
         SVProgressHUD.show()
         
+    
         currentEventsTableView.estimatedRowHeight = 125.0
         currentEventsTableView.rowHeight = UITableView.automaticDimension
 }
 override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        noCurrentEvents.isHidden = true
+        currentEventsTableView.isHidden = false
         getUser()
         currentEventsTableView.reloadData()
 }
@@ -52,6 +56,11 @@ override func viewDidAppear(_ animated: Bool) {
         UIColor.blue.cgColor,UIColor.yellow.cgColor]
         return layer
     }
+    
+    func emptyArray() {
+        noCurrentEvents.isHidden = false
+        currentEventsTableView.isHidden = true
+    }
 //MARK: Retrieving from cloud
     
     func createArray() -> [CurrentEvent]
@@ -60,7 +69,8 @@ override func viewDidAppear(_ animated: Bool) {
             { (QuerySnapshot, err) in
                 if err != nil
                 {
-                    print("Error getting documents: \(String(describing: err))");
+                    print("Error getting documents: \(String(describing: err))")
+                    self.emptyArray()
                     SVProgressHUD.dismiss()
                 }
                 else
@@ -82,6 +92,9 @@ override func viewDidAppear(_ animated: Bool) {
                         }
                         
                     }
+                    if self.list.isEmpty == true {
+                        self.emptyArray()
+                    }
                     SVProgressHUD.dismiss()
                     self.currentEventsTableView.reloadData()
                 }
@@ -96,6 +109,7 @@ override func viewDidAppear(_ animated: Bool) {
         userRef?.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
+                self.emptyArray()
                 //Put more error handling here
             } else {
                 for document in querySnapshot!.documents {
