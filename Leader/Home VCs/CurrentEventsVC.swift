@@ -26,7 +26,7 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
     var receivedString = ""
     var formatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "M/d/yyyy"
         return formatter
     }
 override func viewDidLoad() {
@@ -60,49 +60,9 @@ override func viewDidAppear(_ animated: Bool) {
     func emptyArray() {
         noCurrentEvents.isHidden = false
         currentEventsTableView.isHidden = true
+        print("no events present")
     }
 //MARK: Retrieving from cloud
-    
-    func createArray() -> [CurrentEvent]
-    {
-        DocRef?.getDocuments()
-            { (QuerySnapshot, err) in
-                if err != nil
-                {
-                    print("Error getting documents: \(String(describing: err))")
-                    self.emptyArray()
-                    SVProgressHUD.dismiss()
-                }
-                else
-                {
-                    self.list.removeAll()
-                    for document in QuerySnapshot!.documents {
-
-                        let name = document.get("name") as? String
-                        let date = document.get("date") as? String
-                        let description = document.get("description") as? String
-                        let time = document.get("time") as? String
-                        
-                        //Checks to see if event before today's date
-                        let eventDate = self.formatter.date(from: date!)
-                        
-                        if eventDate! >= Date() {
-                            self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!, eventTime: time!))
-                            print(document.data())
-                        }
-                        
-                    }
-                    if self.list.isEmpty == true {
-                        self.emptyArray()
-                    }
-                    SVProgressHUD.dismiss()
-                    self.currentEventsTableView.reloadData()
-                }
-  
-        }
-
-        return list
-    }
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
         userRef = db.collection("members").whereField("user UID", isEqualTo: userID)
@@ -123,6 +83,43 @@ override func viewDidAppear(_ animated: Bool) {
             }
         }
     }
+    
+    func createArray() -> [CurrentEvent] {
+        DocRef?.getDocuments() { (QuerySnapshot, err) in
+                if err != nil {
+                    print("Error getting documents: \(String(describing: err))")
+                    self.emptyArray()
+                    SVProgressHUD.dismiss()
+                } else {
+                    self.list.removeAll()
+                    for document in QuerySnapshot!.documents {
+                        
+                        let name = document.get("name") as? String
+                        let date = document.get("date") as? String
+                        let description = document.get("description") as? String
+                        let time = document.get("time") as? String
+                        
+                        //Checks to see if event before today's date
+                        let eventDate = self.formatter.date(from: date!)
+                        
+                            if eventDate! >= Date() {
+                                self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!, eventTime: time!))
+                                print(document.data())
+                            }
+                        
+                    }
+                    if self.list.isEmpty == true {
+                        self.emptyArray()
+                    }
+                    SVProgressHUD.dismiss()
+                    self.currentEventsTableView.reloadData()
+                }
+  
+        }
+
+        return list
+    }
+
     
 //MARK: Table View Functions
     
