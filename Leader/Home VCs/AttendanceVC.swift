@@ -31,7 +31,17 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
             
             getUser()
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        //Getting label values
+        for (index, value) in members.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
+            if let text = cell.label.text, !text.isEmpty, cell.checkmark == true {
+                values.append(value)
+            }
+        }
+        print("Values: \(values)")
+    }
 //MARK: Retrieving from cloud
     //Gets user for other queries
     func getUser() {
@@ -91,7 +101,9 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
 
              return cell
     }
-    
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        }
     //This function is called before the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             let viewController = segue.destination as? MeetingMinutesVC
@@ -99,17 +111,6 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
             viewController?.passedValues = values
     }
 
-    @IBAction func donePressed(_ sender: Any) {
-        //Getting label values
-        for (index, value) in members.enumerated() {
-                let indexPath = IndexPath(row: index, section: 0)
-                guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
-            if let text = cell.label.text, !text.isEmpty, cell.checkmark == true {
-                values.append(value)
-            }
-        }
-        print("Values: \(values)")
-    }
 
 }
 

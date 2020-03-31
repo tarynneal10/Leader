@@ -38,7 +38,9 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
             eventsTableView.isHidden = false
             getUser()
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        updateData()
+    }
     func noEventsPresent() {
         noEvents.isHidden = false
         eventsTableView.isHidden = true
@@ -73,7 +75,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
                 }
                 self.yourEvents.append(self.passedValue)
-                //Checking array values
+            //Checking array values
                 
 //                if self.allUnequal(array: self.yourEvents) == false {
 //                    self.errorAlert()
@@ -87,8 +89,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 self.noEventsPresent()
             }
                 
-                print(self.yourEvents)
-                self.eventsTableView.reloadData()
+            print(self.yourEvents)
+            self.eventsTableView.reloadData()
                 
             }
 
@@ -203,11 +205,6 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         updateData()
         findAdvisorInfo()
     }
-    
-    @IBAction func savePressed(_ sender: Any) {
-        updateData()
-    }
-    
     
 }
 

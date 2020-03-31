@@ -37,7 +37,7 @@ class CalendarVC : UIViewController{
     var calendarDataSource: [String : String] = [:]
     var formatter: DateFormatter {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateFormat = "M/d/yyyy"
         return formatter
     }
     let monthFormatter = DateFormatter()
@@ -45,7 +45,7 @@ class CalendarVC : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selectedDate = formatter.date(from: "01/00/0000")
+        selectedDate = formatter.date(from: "1/00/0000")
         monthFormatter.dateFormat = "MMMM"
         db = Firestore.firestore()
         getUser()
@@ -59,7 +59,7 @@ class CalendarVC : UIViewController{
         descriptionLabel.isHidden = true
         noEventsLabel.isHidden = true
         timeLabel.isHidden = true
-        //SVProgressHUD.show()- because it's annoying
+        SVProgressHUD.show()
     }
     
 //MARK: Retrieving from cloud
@@ -87,7 +87,7 @@ class CalendarVC : UIViewController{
     //Displays details in yellow box
      
     func displayDetails() {
-         if selectedDate != formatter.date(from: "01/00/0000") {
+         if selectedDate != formatter.date(from: "1/00/0000") {
              let date = formatter.string(from: selectedDate!)
              let DateRef = db.collection("currentevents")
                  .whereField("chapter", isEqualTo: chapterName!)
@@ -127,7 +127,7 @@ class CalendarVC : UIViewController{
                      self.calendarDataSource[date!] = "Idk"
                      print(document.data())
                  }
-                 //SVProgressHUD.dismiss()
+                 SVProgressHUD.dismiss()
                  self.calendarView.reloadData()
              }
          }

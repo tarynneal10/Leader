@@ -39,7 +39,7 @@ class AboutFBLAVC : UIViewController, SFSafariViewControllerDelegate, UITableVie
         cell.label.text = fblaText[indexPath.row]
         return cell
     }
-    
+
 //MARK: IBAction Functions
     
     @IBAction func openFBLA(_ sender: Any) {

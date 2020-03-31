@@ -12,6 +12,7 @@ import Firebase
 import FirebaseFirestore
 import SDWebImage
 import FirebaseUI
+import SVProgressHUD
 
 class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
@@ -39,6 +40,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         officerView.dataSource = self
         
         getUser()
+        SVProgressHUD.show()
     }
 
 //MARK: Retrieving from cloud
@@ -87,6 +89,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     }
                     
                 }
+                SVProgressHUD.dismiss()
                 self.officerView.reloadData()
             }
         }
