@@ -47,7 +47,8 @@ class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDel
                         for (key, value) in minutes! {
                             array.append("\(key): \(value!)")
                         }
-                        
+                        array = array.sorted(by: { $0 < $1})
+                        //If possible, change sorting parameters to more exact values
                         self.sectionInfo = [attendees!, array]
                     }
                     self.tableView.reloadData()

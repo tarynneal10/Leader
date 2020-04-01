@@ -26,6 +26,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     var advisorEmail : String = ""
     var chapterName : String?
     var addingSuccess : Bool?
+    var currentIndexPath : IndexPath?
         
     override func viewDidLoad() {
             super.viewDidLoad()
@@ -163,18 +164,17 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
         return [deleteAction]
     }
-
 //MARK: Email & Segue Stuff
-    //DOuble check if this is right segue
-       override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
-           if identifier == "goToHome" {
-               if addingSuccess != true {
-                   return false
-               }
-           }
-           return true
-       }
-       
+//    //DOuble check if this is right segue
+//       override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+//           if identifier == "goToHome" {
+//               if addingSuccess != true {
+//                   return false
+//               }
+//           }
+//           return true
+//       }
+//
        func sendEmail() {
            if advisorEmail != "" {
                if MFMailComposeViewController.canSendMail() {
@@ -195,8 +195,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
            controller.dismiss(animated: true)
-           addingSuccess = true
-           performSegue(withIdentifier: "goToHome", sender: UIButton.self)
+//           addingSuccess = true
+//           performSegue(withIdentifier: "goToHome", sender: UIButton.self)
        }
     
 //MARK: IBAction Functions
@@ -206,6 +206,10 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         findAdvisorInfo()
     }
     
+    @IBAction func deletePressed(_ sender: Any) {
+        //self.yourEvents.remove(at: currentIndexPath!.row)
+        self.eventsTableView.reloadData()
+    }
 }
 
 //MARK: YourEventsCell Class

@@ -13,6 +13,7 @@ import SVProgressHUD
 
 class AttendanceViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noAttendees: UIImageView!
     
      var db: Firestore!
      var DocRef : Query?
@@ -28,9 +29,12 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
             
             tableView.delegate = self
             tableView.dataSource = self
-            
+        
+            noAttendees.isHidden = true
+            tableView.isHidden = false
             getUser()
     }
+    
     override func viewDidDisappear(_ animated: Bool) {
         //Getting label values
         for (index, value) in members.enumerated() {
@@ -42,6 +46,11 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         }
         print("Values: \(values)")
     }
+    
+    func noAttendeesPresent() {
+         noAttendees.isHidden = false
+         tableView.isHidden = true
+     }
 //MARK: Retrieving from cloud
     //Gets user for other queries
     func getUser() {
@@ -50,7 +59,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         userRef?.getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
-                        //Put more error handling here
+            self.noAttendeesPresent()
         } else {
             for document in querySnapshot!.documents {
                // print("\(document.documentID) => \(document.data())")
@@ -59,6 +68,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                 self.navigationItem.title = self.chapterName
                 self.DocRef = self.db.collection("members").whereField("chapter", isEqualTo: self.chapterName).whereField("paid", isEqualTo: true)
             }
+            
             self.getMembers()
         }
     }
@@ -66,18 +76,20 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
     //Gets members for tableView
     func getMembers() {
             DocRef?.getDocuments() { (QuerySnapshot, err) in
-                if err != nil
-                {
-                    print("Error getting documents: \(String(describing: err))");
-                }
-                else
-                {
+                if err != nil {
+                    print("Error getting documents: \(String(describing: err))")
+                    self.noAttendeesPresent()
+                } else {
                     if let snapshot = QuerySnapshot {
                         self.members.removeAll()
                         for document in snapshot.documents {
                             let name = document.get("name") as? String
                             self.members.append(name!)
                             //print(document.data())
+                        }
+                        if self.members.isEmpty == true {
+                            self.noAttendeesPresent()
+                            print("no attendees")
                         }
                         DispatchQueue.main.async {
                             self.tableView.reloadData()

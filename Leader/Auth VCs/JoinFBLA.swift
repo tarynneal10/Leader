@@ -9,6 +9,7 @@
 import Foundation
 import MessageUI
 import Firebase
+import SVProgressHUD
 
 class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
     @IBOutlet weak var nameTF: UITextField!
@@ -72,50 +73,50 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
         
         self.present(alert, animated: true, completion: nil)
     }
-    
-    @IBAction func joinFBLAPressed(_ sender: Any) {
-        signUpSuccess = false
+//MARK: Add user function
+    func addUser() {
         if nameTF.text != "", schoolTF.text != "", advisorTF.text != "", gradeTF.text != "", emailTF.text != "", passwordTF.text != "" {
-                Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
-                    (user, error) in
-                    if error != nil {
-                        print(error!)
-                        self.errorAlert()
-                    }
-                    else {
-                        //success
-                        print("Registration successful")
-                        guard let userID = Auth.auth().currentUser?.uid else { return }
-                        //Adds user as new member
-                        var ref: DocumentReference? = nil
-                        ref = self.db.collection("members").addDocument(data: [
-                            "name": self.nameTF.text!,
-                            "position": "Member",
-                            "chapter": self.schoolTF.text!,
-                            "grade": self.gradeTF.text!,
-                            "paid": false,
-                            "user UID": userID,
-                            "competitive events": [""]
-                        ]) { err in
-                            if let err = err {
-                                print("Error adding document: \(err)")
-                            } else {
-                                print("Document added with ID: \(ref!.documentID)")
+                    Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
+                            (user, error) in
+                            if error != nil {
+                                print(error!)
+                                self.errorAlert()
+                            }
+                            else {
+                                //success
+                                print("Registration successful")
+                                guard let userID = Auth.auth().currentUser?.uid else { return }
+                                //Adds user as new member
+                                var ref: DocumentReference? = nil
+                                ref = self.db.collection("members").addDocument(data: [
+                                    "name": self.nameTF.text!,
+                                    "position": "Member",
+                                    "chapter": self.schoolTF.text!,
+                                    "grade": self.gradeTF.text!,
+                                    "paid": false,
+                                    "user UID": userID,
+                                    "competitive events": [""]
+                                ]) { err in
+                                    if let err = err {
+                                        print("Error adding document: \(err)")
+                                    } else {
+                                        print("Document added with ID: \(ref!.documentID)")
+                                    }
+                                }
+                               //Get rid of once figure out to make it not crash for advisor ish
+        //                       self.signUpSuccess = true
+        //                       self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+                                
                             }
                         }
-                       //Get rid of once figure out to make it not crash for advisor ish
-                       self.signUpSuccess = true
-                       self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
-                        self.findAdvisorInfo()
+                    } else {
+                        errorAlert()
                     }
-                }
+    }
 
-                
-
-            } else {
-                errorAlert()
-            }
-        }
+    
+//MARK: Emailing advisor
+    
     func findAdvisorInfo() {
         let advisorRef = db.collection("members").whereField("name", isEqualTo: advisorTF.text!)
         advisorRef.getDocuments() { (QuerySnapshot, err) in
@@ -127,12 +128,21 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
                         self.advisorEmail = (document.get("email") as? String)!
                         print(document.data())
                     }
-                    //self.signUpSuccess = true
-                    self.sendEmail()
+                    SVProgressHUD.dismiss()
+                    if self.advisorEmail == "" {
+                        self.advisorAlert()
+                    } else {
+                        self.signUpSuccess = true
+                        self.addUser()
+                        self.sendEmail()
+                    }
+                    
+                    
                 }
         }
     }
     func sendEmail() {
+  
     if advisorEmail != "" {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
@@ -152,8 +162,13 @@ class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UIText
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
-        //self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+        self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
+        
     }
     
+    @IBAction func joinFBLAPressed(_ sender: Any) {
+        findAdvisorInfo()
+        SVProgressHUD.show()
+    }
 }
     
