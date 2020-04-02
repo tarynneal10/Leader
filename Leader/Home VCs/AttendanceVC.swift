@@ -90,6 +90,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                             self.members.append(name!)
                             //print(document.data())
                         }
+                        //self.members = self.members.sorted(by: {$0.localizedStandardCompare($1) == .orderedAscending})
                         if self.members.isEmpty == true {
                             self.noAttendeesPresent()
                             print("no attendees")

@@ -204,10 +204,6 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         findAdvisorInfo()
     }
     
-    @IBAction func deletePressed(_ sender: Any) {
-        //self.yourEvents.remove(at: currentIndexPath!.row)
-        self.eventsTableView.reloadData()
-    }
 }
 
 //MARK: YourEventsCell Class

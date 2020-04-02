@@ -24,6 +24,12 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     var valueToPass = ""
     var viewController : ArchiveDetailsVC?
     
+    var formatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d/yyyy"
+        return formatter
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -76,8 +82,11 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
                         print("\(document.documentID) => \(document.data())")
                             
                         let date = document.get("date") as? String
+                        //let eventDate = self.formatter.date(from: date!)
                         self.meetings.append(date!)
                     }
+                    self.meetings = self.meetings.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                    print("Meetings: \(self.meetings)")
                     
                     if self.meetings.isEmpty == true {
                         self.noMinutesPresent()

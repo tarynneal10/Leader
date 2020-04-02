@@ -67,9 +67,10 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
                             
                             print(document.data())
                         }
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
+                        
+                        self.members = self.members.sorted(by: {$0.name < $1.name})
+                        self.tableView.reloadData()
+                    
                     }
                 }
                 

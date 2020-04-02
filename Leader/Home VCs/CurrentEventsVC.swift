@@ -111,14 +111,7 @@ override func viewDidAppear(_ animated: Bool) {
                             }
                         
                     }
-//                    for CurrentEvent in self.list {
-//                        let date = dateFormatter.date(from: dat)
-//                        if let date = date {
-//                            convertedArray.append(date)
-//                        }
-//                    }
-//
-//                    var ready = convertedArray.sorted(by: { $0.compare($1) == .orderedDescending })
+                    self.list = self.list.sorted(by: {$0.date.localizedStandardCompare($1.date) == .orderedAscending})
 
                     if self.list.isEmpty == true {
                         self.emptyArray()
