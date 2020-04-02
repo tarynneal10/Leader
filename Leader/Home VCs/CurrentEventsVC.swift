@@ -29,6 +29,9 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
         formatter.dateFormat = "M/d/yyyy"
         return formatter
     }
+
+
+
 override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -108,6 +111,15 @@ override func viewDidAppear(_ animated: Bool) {
                             }
                         
                     }
+//                    for CurrentEvent in self.list {
+//                        let date = dateFormatter.date(from: dat)
+//                        if let date = date {
+//                            convertedArray.append(date)
+//                        }
+//                    }
+//
+//                    var ready = convertedArray.sorted(by: { $0.compare($1) == .orderedDescending })
+
                     if self.list.isEmpty == true {
                         self.emptyArray()
                     }

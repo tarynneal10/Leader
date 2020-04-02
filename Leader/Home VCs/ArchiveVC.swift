@@ -12,14 +12,18 @@ import UIKit
 
 class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var noMinutes: UIImageView!
     
     var db: Firestore!
     var meetings = [""]
+    
     var userRef : Query?
     var docRef : Query?
+    
     var chapterName = ""
     var valueToPass = ""
     var viewController : ArchiveDetailsVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
@@ -27,8 +31,15 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         tableView.delegate = self
         tableView.dataSource = self
         
+        noMinutes.isHidden = true
+        tableView.isHidden = false
+        
         getUser()
     }
+    func noMinutesPresent() {
+         noMinutes.isHidden = false
+         tableView.isHidden = true
+     }
     
     //Gets user for other queries
     func getUser() {
@@ -38,7 +49,7 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         userRef?.getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
-                            //Put more error handling here
+                self.noMinutesPresent()
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
@@ -54,21 +65,26 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     //Gets meeting dates for tableView
     func getMeetings() {
-            docRef?.getDocuments() { (QuerySnapshot, err) in
+            docRef?.getDocuments() { (querySnapshot, err) in
                 if err != nil {
-                    print("Error getting documents: \(String(describing: err))");
+                    print("Error getting documents: \(String(describing: err))")
+                    self.noMinutesPresent()
                 }
                 else {
-                    if let snapshot = QuerySnapshot {
-                        self.meetings.removeAll()
-                        for document in snapshot.documents {
-                            print("\(document.documentID) => \(document.data())")
+                    self.meetings.removeAll()
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
                             
-                            let date = document.get("date") as? String
-                            self.meetings.append(date!)
-                        }
+                        let date = document.get("date") as? String
+                        self.meetings.append(date!)
+                    }
+                    
+                    if self.meetings.isEmpty == true {
+                        self.noMinutesPresent()
+                        print("no minutes")
                     }
                     self.tableView.reloadData()
+                    
                 }
             }
     }

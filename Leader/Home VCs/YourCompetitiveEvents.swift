@@ -72,10 +72,10 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                     self.userDoc = document.documentID
                     self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
-                   
-
                 }
-                self.yourEvents.append(self.passedValue)
+                if self.passedValue != "" {
+                    self.yourEvents.append(self.passedValue)
+                }
             //Checking array values
                 
 //                if self.allUnequal(array: self.yourEvents) == false {
@@ -83,11 +83,9 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 //                    
 //                }
             //Checking to see if events are present
-            if self.yourEvents == [""] {
+          if self.yourEvents.isEmpty == true {
                 self.noEventsPresent()
                 print("no events")
-            } else if self.yourEvents.isEmpty == true {
-                self.noEventsPresent()
             }
                 
             print(self.yourEvents)

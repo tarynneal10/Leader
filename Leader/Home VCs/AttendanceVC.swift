@@ -51,7 +51,9 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
          noAttendees.isHidden = false
          tableView.isHidden = true
      }
+    
 //MARK: Retrieving from cloud
+    
     //Gets user for other queries
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -73,6 +75,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         }
     }
     }
+    
     //Gets members for tableView
     func getMembers() {
             DocRef?.getDocuments() { (QuerySnapshot, err) in

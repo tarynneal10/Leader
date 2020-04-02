@@ -29,7 +29,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="attendanceCell" id="1aW-O1-3l6" customClass="AttendanceTableViewCell" customModule="Leader" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="attendanceCell" id="1aW-O1-3l6" customClass="AttendanceTableViewCell" customModule="Leader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="45.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1aW-O1-3l6" id="TjU-EO-oPp">
@@ -117,7 +117,7 @@
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="memberCell" id="mbP-yZ-m19" customClass="MemberTableViewCell" customModule="Leader" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="memberCell" id="mbP-yZ-m19" customClass="MemberTableViewCell" customModule="Leader" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbP-yZ-m19" id="JNK-ss-ebj">
@@ -522,7 +522,7 @@
                         <viewLayoutGuide key="safeArea" id="geq-gS-We8"/>
                     </view>
                     <navigationItem key="navigationItem" id="mwD-8H-9ny">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="7cR-uf-QXf"/>
+                        <barButtonItem key="backBarButtonItem" title="Save" id="7cR-uf-QXf"/>
                     </navigationItem>
                     <connections>
                         <outlet property="categoryLabel" destination="erC-8C-xMS" id="ud8-GC-KkX"/>
@@ -623,11 +623,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Y4g-eE-yUZ"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1Bg-AV-wl7">
-                        <barButtonItem key="backBarButtonItem" title="Save" id="7NR-vX-gMU">
-                            <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="1Bg-AV-wl7"/>
                     <connections>
                         <outlet property="eventsTableView" destination="HUu-jA-Ce0" id="sFr-IR-wjt"/>
                         <outlet property="noEvents" destination="so0-bB-2DK" id="ZH9-W4-2Ji"/>
@@ -836,11 +832,17 @@
                                 <rect key="frame" x="40" y="276" width="295" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8g9-VZ-5A0" id="4e4-IR-DIG"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="3:00 AM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-os-zNg">
                                 <rect key="frame" x="40" y="359" width="295" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="8g9-VZ-5A0" id="5iJ-mG-Hw5"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1147,6 +1149,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Minutes" translatesAutoresizingMaskIntoConstraints="NO" id="aQo-WE-UW8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="30D-SJ-McQ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -1198,13 +1203,18 @@
                         <constraints>
                             <constraint firstItem="30D-SJ-McQ" firstAttribute="top" secondItem="xfQ-hx-XAE" secondAttribute="top" id="G9G-En-IAz"/>
                             <constraint firstItem="30D-SJ-McQ" firstAttribute="leading" secondItem="xfQ-hx-XAE" secondAttribute="leading" id="Jnl-If-Fcf"/>
+                            <constraint firstItem="aQo-WE-UW8" firstAttribute="top" secondItem="xfQ-hx-XAE" secondAttribute="top" id="STe-UR-fY9"/>
                             <constraint firstItem="xfQ-hx-XAE" firstAttribute="bottom" secondItem="30D-SJ-McQ" secondAttribute="bottom" id="aEP-9G-Prf"/>
+                            <constraint firstItem="aQo-WE-UW8" firstAttribute="leading" secondItem="xfQ-hx-XAE" secondAttribute="leading" id="aqW-z2-0Zx"/>
                             <constraint firstItem="xfQ-hx-XAE" firstAttribute="trailing" secondItem="30D-SJ-McQ" secondAttribute="trailing" id="ron-QL-Clm"/>
+                            <constraint firstItem="xfQ-hx-XAE" firstAttribute="bottom" secondItem="aQo-WE-UW8" secondAttribute="bottom" id="vmj-Gj-11E"/>
+                            <constraint firstItem="xfQ-hx-XAE" firstAttribute="trailing" secondItem="aQo-WE-UW8" secondAttribute="trailing" id="vxG-6i-0nC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xfQ-hx-XAE"/>
                     </view>
                     <navigationItem key="navigationItem" id="buz-yU-aX7"/>
                     <connections>
+                        <outlet property="noMinutes" destination="aQo-WE-UW8" id="5Jp-n8-J56"/>
                         <outlet property="tableView" destination="30D-SJ-McQ" id="Cnl-74-6x1"/>
                     </connections>
                 </viewController>
@@ -1236,12 +1246,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="35.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGh-nj-uqd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGh-nj-uqd">
                                                     <rect key="frame" x="15" y="0.0" width="360" height="35.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="35" id="Xkg-C8-SbH"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -1285,10 +1295,11 @@
         <image name="Home" width="25" height="25"/>
         <image name="No Current Events" width="580" height="1000"/>
         <image name="No Events" width="580" height="1000"/>
+        <image name="No Minutes" width="580" height="1000"/>
         <image name="No Paid Members" width="580" height="1000"/>
         <image name="Nothing" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ly0-ig-eXi"/>
+        <segue reference="CJf-hk-wbk"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -121,7 +121,7 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
 }
 //MARK: DetailCell Class & Color stuff
 
-class DetailCell : UITableViewCell, UITextViewDelegate {
+class DetailCell : UITableViewCell{
     @IBOutlet weak var label: UILabel!
 }
 
