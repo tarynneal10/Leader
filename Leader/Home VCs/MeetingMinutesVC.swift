@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import Firebase
 
-class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
+class MeetingMinutesVC : UITableViewController {
+  
+    @IBOutlet var minutesTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
     
     var db: Firestore!
@@ -25,8 +26,8 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
            // Do any additional setup after loading the view.
         db = Firestore.firestore()
         setTitle()
-        tableView.estimatedRowHeight = 40.0
-        tableView.separatorStyle = .none
+        minutesTableView.estimatedRowHeight = 40.0
+        minutesTableView.separatorStyle = .none
         //idk why but value isn't passing
         print("Passed Values: \(String(describing: passedValues))")
     }
@@ -49,15 +50,15 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
         }
     }
 //MARK: Table View Functions
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return list.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "minutesCell", for: indexPath as IndexPath) as! MinutesCell
         cell.label.text = list[indexPath.row]
         cell.textChanged {[weak tableView] (newText: String) in
@@ -105,9 +106,6 @@ class MeetingMinutesVC : UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         
-    }
-    @IBAction func unwindToMinutesVC(segue: UIStoryboardSegue) {
-        print("Unwind to MinutesVC")
     }
 }
 

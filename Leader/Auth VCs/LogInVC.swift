@@ -11,7 +11,7 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class LoginVC : UIViewController, UITextFieldDelegate {
+class LoginVC : UITableViewController, UITextFieldDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     var handle: AuthStateDidChangeListenerHandle?

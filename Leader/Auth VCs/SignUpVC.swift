@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseStorage
 
-class SignUpVC : UIViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet weak var positionTF: UITextField!
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var chapterTF: UITextField!

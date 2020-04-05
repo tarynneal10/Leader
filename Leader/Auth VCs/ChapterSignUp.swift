@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Firebase
 
-class ChapterSignUp : UIViewController, UITextFieldDelegate, UITextViewDelegate {
+class ChapterSignUp : UITableViewController, UITextFieldDelegate, UITextViewDelegate {
     @IBOutlet weak var chapterName: UITextField!
     @IBOutlet weak var advisorName: UITextField!
     @IBOutlet weak var advisorEmail: UITextField!

@@ -11,7 +11,7 @@ import MessageUI
 import Firebase
 import SVProgressHUD
 
-class JoinFBLAVC : UIViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
+class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, UITextFieldDelegate{
     @IBOutlet weak var nameTF: UITextField!
     @IBOutlet weak var schoolTF: UITextField!
     @IBOutlet weak var advisorTF: UITextField!
