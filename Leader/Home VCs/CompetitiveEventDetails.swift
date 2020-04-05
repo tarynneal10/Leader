@@ -98,9 +98,11 @@ class CompetitiveEventDetailsVC : UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
-        view.tintColor = UIColor(red: 21, green: 103, blue: 147)
+        //view.tintColor = UIColor(red: 21, green: 103, blue: 147)
+        view.tintColor = UIColor.white
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor(red: 255, green: 219, blue: 3)
+        //header.textLabel?.textColor = UIColor(red: 255, green: 219, blue: 3)
+        header.textLabel?.textColor = UIColor.black
     }
     
     // This function is called before the segue

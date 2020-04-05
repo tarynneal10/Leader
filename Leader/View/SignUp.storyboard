@@ -230,56 +230,51 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Chapter Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ds2-Dw-QgM">
-                                <rect key="frame" x="66" y="154" width="256" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Chapter Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ds2-Dw-QgM">
+                                <rect key="frame" x="50" y="100" width="275" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ZA4-kR-Gva" id="xnp-GJ-Bwx"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Advisor Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TfR-Mn-YvO">
-                                <rect key="frame" x="66" y="192" width="256" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Advisor Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TfR-Mn-YvO">
+                                <rect key="frame" x="50" y="149" width="275" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ZA4-kR-Gva" id="ekc-Lo-bvK"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Advisor Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Hv-Qs-H6r">
-                                <rect key="frame" x="66" y="230" width="256" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Advisor Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Hv-Qs-H6r">
+                                <rect key="frame" x="50" y="198" width="275" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="ZA4-kR-Gva" id="0Pr-Yb-34C"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choose Advisor Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jv-MW-g00">
-                                <rect key="frame" x="66" y="268" width="256" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Choose Advisor Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5jv-MW-g00">
+                                <rect key="frame" x="50" y="247" width="275" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="ZA4-kR-Gva" id="T2H-k9-HcU"/>
                                 </connections>
                             </textField>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Stuff" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xn5-Wi-Ttx">
-                                <rect key="frame" x="67" y="306" width="255" height="94"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Chapter Description" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xn5-Wi-Ttx">
+                                <rect key="frame" x="50" y="301" width="275" height="95"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="ZA4-kR-Gva" id="NMT-Ih-24H"/>
                                 </connections>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MX-Uh-P5H">
-                                <rect key="frame" x="67" y="435" width="262" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9MX-Uh-P5H">
+                                <rect key="frame" x="80" y="431" width="215" height="36"/>
                                 <color key="backgroundColor" red="0.97785097359999995" green="0.86324322220000005" blue="0.29076632860000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.039215686270000001" green="0.039215686270000001" blue="0.039215686270000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -290,6 +285,27 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.066666666669999999" green="0.31764705879999999" blue="0.45098039220000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="TfR-Mn-YvO" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="50" id="1Lh-r2-82f"/>
+                            <constraint firstItem="9Hv-Qs-H6r" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="50" id="474-PI-Gyz"/>
+                            <constraint firstItem="ds2-Dw-QgM" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="50" id="5mn-bQ-Wvf"/>
+                            <constraint firstItem="9Hv-Qs-H6r" firstAttribute="top" secondItem="TfR-Mn-YvO" secondAttribute="bottom" constant="15" id="7sc-wF-teN"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="bottom" secondItem="9MX-Uh-P5H" secondAttribute="bottom" constant="180" id="AvL-3v-tcZ"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="TfR-Mn-YvO" secondAttribute="trailing" constant="50" id="BUW-k0-8gA"/>
+                            <constraint firstItem="xn5-Wi-Ttx" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="50" id="CLg-Es-Jva"/>
+                            <constraint firstItem="9MX-Uh-P5H" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="80" id="Ips-8j-LQu"/>
+                            <constraint firstItem="xn5-Wi-Ttx" firstAttribute="top" secondItem="5jv-MW-g00" secondAttribute="bottom" constant="20" id="LMU-6T-tOr"/>
+                            <constraint firstItem="5jv-MW-g00" firstAttribute="top" secondItem="9Hv-Qs-H6r" secondAttribute="bottom" constant="15" id="MJb-0W-y3G"/>
+                            <constraint firstItem="5jv-MW-g00" firstAttribute="leading" secondItem="XAF-ga-FCg" secondAttribute="leading" constant="50" id="SSu-31-YBp"/>
+                            <constraint firstItem="TfR-Mn-YvO" firstAttribute="top" secondItem="ds2-Dw-QgM" secondAttribute="bottom" constant="15" id="TJC-z4-Cqh"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="5jv-MW-g00" secondAttribute="trailing" constant="50" id="X1O-ZM-Mhx"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="9Hv-Qs-H6r" secondAttribute="trailing" constant="50" id="alU-95-Ept"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="xn5-Wi-Ttx" secondAttribute="trailing" constant="50" id="gTf-cp-cKe"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="9MX-Uh-P5H" secondAttribute="trailing" constant="80" id="nAU-Hz-HDb"/>
+                            <constraint firstItem="ds2-Dw-QgM" firstAttribute="top" secondItem="XAF-ga-FCg" secondAttribute="top" constant="100" id="pmE-Lv-PaF"/>
+                            <constraint firstItem="XAF-ga-FCg" firstAttribute="trailing" secondItem="ds2-Dw-QgM" secondAttribute="trailing" constant="50" id="pxv-Sn-fNu"/>
+                            <constraint firstItem="9MX-Uh-P5H" firstAttribute="top" secondItem="xn5-Wi-Ttx" secondAttribute="bottom" constant="35" id="wFK-XU-IdI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="XAF-ga-FCg"/>
                     </view>
                     <navigationItem key="navigationItem" id="8Wk-LR-ZIw"/>
@@ -486,7 +502,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="cp8-70-hti"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <state key="normal" title="Join">
                                     <color key="titleColor" red="0.084196783819999996" green="0.084196783819999996" blue="0.084196783819999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
@@ -542,6 +558,6 @@
         <image name="Leader3" width="850" height="350"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1hT-wV-cpB"/>
+        <segue reference="Jgp-vV-c51"/>
     </inferredMetricsTieBreakers>
 </document>
