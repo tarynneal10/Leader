@@ -15,41 +15,56 @@ import SVProgressHUD
 
 class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var addEventButton: UIButton!
     @IBOutlet weak var noCurrentEvents: UIImageView!
     @IBOutlet var currentEventsTableView: UITableView!
 
     var db: Firestore!
     var DocRef : Query?
     var userRef : Query?
+    
     var list: [CurrentEvent] = []
+    var events : [String] = [""]
+    
     var chapterName = ""
     var receivedString = ""
-    var formatter: DateFormatter {
+    var userDoc : String?
+
+    var formatter : DateFormatter {
         let formatter = DateFormatter()
         formatter.dateFormat = "M/d/yyyy"
         return formatter
     }
 
 
-
-override func viewDidLoad() {
-        super.viewDidLoad()
-        db = Firestore.firestore()
-        navigationItem.title = receivedString
-        SVProgressHUD.show()
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            db = Firestore.firestore()
+            navigationItem.title = receivedString
+            SVProgressHUD.show()
         
-    
-        currentEventsTableView.estimatedRowHeight = 125.0
-        currentEventsTableView.rowHeight = UITableView.automaticDimension
-}
-override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        noCurrentEvents.isHidden = true
-        currentEventsTableView.isHidden = false
-        getUser()
-        currentEventsTableView.reloadData()
-}
-    
+            currentEventsTableView.estimatedRowHeight = 125.0
+            currentEventsTableView.rowHeight = UITableView.automaticDimension
+    }
+    override func viewDidAppear(_ animated: Bool) {
+            super.viewDidAppear(animated)
+            noCurrentEvents.isHidden = true
+            currentEventsTableView.isHidden = false
+            getUser()
+            currentEventsTableView.reloadData()
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        //Getting label values
+        events.removeAll()
+        for (index, event) in list.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = currentEventsTableView.cellForRow(at: indexPath) as? CurrentEventsCell else { return }
+            if let text = cell.nameLabel.text, !text.isEmpty, cell.added == true {
+                events.append(event.name)
+                addEventToMember()
+            }
+        }
+    }
     func gradient(frame:CGRect) -> CAGradientLayer {
         let layer = CAGradientLayer()
         layer.frame = frame
@@ -65,6 +80,18 @@ override func viewDidAppear(_ animated: Bool) {
         currentEventsTableView.isHidden = true
         print("no events present")
     }
+    func addEventToMember() {
+                db.collection("members").document(userDoc!).updateData([
+                    "current events" : events
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+                }
+
+    }
 //MARK: Retrieving from cloud
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -73,13 +100,14 @@ override func viewDidAppear(_ animated: Bool) {
             if let err = err {
                 print("Error getting documents: \(err)")
                 self.emptyArray()
-                //Put more error handling here
             } else {
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     let chapter = document.get("chapter") as? String
                     self.chapterName = chapter!
                     self.DocRef = self.db.collection("currentevents").whereField("chapter", isEqualTo: self.chapterName)
+                    self.userDoc = document.documentID
+                    self.events = (document.get("current events") as? [String])!
                     
                 }
                 self.list = self.createArray()
@@ -105,10 +133,10 @@ override func viewDidAppear(_ animated: Bool) {
                         //Checks to see if event before today's date
                         let eventDate = self.formatter.date(from: date!)
                         
-                            if eventDate! >= Date() {
-                                self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!, eventTime: time!))
-                                print(document.data())
-                            }
+                        if eventDate! >= Date() {
+                            self.list.append(CurrentEvent(eventName: name!, eventDate: date!, eventDescription: description!, eventTime: time!))
+                            print(document.data())
+                        }
                         
                     }
                     self.list = self.list.sorted(by: {$0.date.localizedStandardCompare($1.date) == .orderedAscending})
@@ -116,6 +144,7 @@ override func viewDidAppear(_ animated: Bool) {
                     if self.list.isEmpty == true {
                         self.emptyArray()
                     }
+                    
                     SVProgressHUD.dismiss()
                     self.currentEventsTableView.reloadData()
                 }
@@ -134,17 +163,24 @@ override func viewDidAppear(_ animated: Bool) {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "currentEventsCell", for: indexPath as IndexPath) as! CurrentEventsCell
             let listPath = list[indexPath.row]
+            
             cell.populate(currentEvent: listPath)
                 if indexPath.row % 2 == 1 {
                     cell.backgroundColor = UIColor(red: 230, green: 230, blue: 230)
-                } else {
-                    //cell.backgroundColor = UIColor(red: 5, green: 63, blue: 94)
                 }
+//                else {
+//                    //cell.backgroundColor = UIColor(red: 5, green: 63, blue: 94)
+//                }
+ 
+            for (index, event) in events.enumerated() {
+                if cell.nameLabel.text == event {
+                    cell.added = true
+                    cell.addEventButton.setImage(UIImage(named: "Checkmark.circle"), for: .normal)
+                    //print("This event has already been added")
+                }
+            }
+
             return cell
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-        
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let backItem = UIBarButtonItem()
@@ -153,6 +189,7 @@ override func viewDidAppear(_ animated: Bool) {
     }
     //Unwinds from add event
     @IBAction func unwindToCurrentEvents(segue: UIStoryboardSegue) {}
+    
 }
 
 //MARK: CurrentEventsCell Class
@@ -161,6 +198,15 @@ class CurrentEventsCell : UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var addEventButton: UIButton!
+    
+    var added : Bool?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        added = false
+        
+    }
     
     func populate(currentEvent: CurrentEvent) {
         nameLabel.text = currentEvent.name
@@ -168,6 +214,17 @@ class CurrentEventsCell : UITableViewCell {
         descriptionLabel.text = currentEvent.description
         timeLabel.text = currentEvent.time
     }
-
+    
+    @IBAction func addEventPressed(_ sender: Any) {
+        print("Button pressed")
+        if added == false {
+            addEventButton.setImage(UIImage(named: "Checkmark.circle"), for: .normal)
+            added = true
+        } else {
+            addEventButton.setImage(UIImage(named: "Plus"), for: .normal)
+            added = false
+        }
+    }
+    
 }
 

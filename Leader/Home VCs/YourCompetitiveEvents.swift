@@ -70,24 +70,24 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     self.userDoc = document.documentID
+                    //When I change this line to have better code everything just starts crashing for random reasons
                     self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
                 }
                 if self.passedValue != "" {
                     self.yourEvents.append(self.passedValue)
                 }
-            //Checking array values
-                
-//                if self.allUnequal(array: self.yourEvents) == false {
-//                    self.errorAlert()
-//                    
-//                }
+                //Checking array values
+                                
+                //                if self.allUnequal(array: self.yourEvents) == false {
+                //                    self.errorAlert()
+                //
+                //                }
             //Checking to see if events are present
           if self.yourEvents.isEmpty == true {
                 self.noEventsPresent()
                 print("no events")
             }
-                
             print(self.yourEvents)
             self.eventsTableView.reloadData()
                 
@@ -95,14 +95,14 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
         }
         }
-    
-    func allUnequal<T : Equatable>(array : [T]) -> Bool {
-        if let firstElem = array.first {
-            return !array.dropFirst().contains { $0 == firstElem }
-        }
-        return true
-    }
-    
+//No longer needed- storing here so don't have to look up again
+//    func allUnequal<T : Equatable>(array : [T]) -> Bool {
+//        if let firstElem = array.first {
+//            return !array.dropFirst().contains { $0 == firstElem }
+//        }
+//        return true
+//    }
+//
     //Updates data in cloud
     func updateData() {
         db.collection("members").document(userDoc!).updateData([

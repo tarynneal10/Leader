@@ -93,7 +93,8 @@ class ChapterSignUp : UITableViewController, UITextFieldDelegate, UITextViewDele
                         "grade": 0,
                         "paid": true,
                         "user UID": userID,
-                        "competitive events": [""]
+                        "competitive events": [""],
+                        "current events": [""]
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

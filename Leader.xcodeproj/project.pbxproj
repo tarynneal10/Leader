@@ -13,6 +13,7 @@
 		8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */; };
 		9B191DB52310C72500E27032 /* CompetitiveEventDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B191DB42310C72500E27032 /* CompetitiveEventDetails.swift */; };
 		9B1A475B22E80801006DD5F0 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1A475A22E80801006DD5F0 /* SettingsVC.swift */; };
+		9B27DD0E243AA50F008A4DBF /* QADetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */; };
 		9B2BA2B323CED36800D66585 /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */; };
 		9B41E19523AD64EA001AF690 /* Q&A VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B41E19423AD64EA001AF690 /* Q&A VC.swift */; };
 		9B4B24B323B85CB100B5F5E9 /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */; };
@@ -46,6 +47,7 @@
 		8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutFBLAVC.swift; sourceTree = "<group>"; };
 		9B191DB42310C72500E27032 /* CompetitiveEventDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitiveEventDetails.swift; sourceTree = "<group>"; };
 		9B1A475A22E80801006DD5F0 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QADetailsVC.swift; sourceTree = "<group>"; };
 		9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		9B41E19423AD64EA001AF690 /* Q&A VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Q&A VC.swift"; sourceTree = "<group>"; };
 		9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				9B58C8742341389100186DBB /* SecurityVC.swift */,
 				9B41E19423AD64EA001AF690 /* Q&A VC.swift */,
 				9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */,
+				9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */,
 			);
 			path = "Setting VCs";
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				8B6B076D22E8F546008C6885 /* CompetitiveEventsVC.swift in Sources */,
 				8B6B077122E8F5DC008C6885 /* AboutFBLAVC.swift in Sources */,
 				9BCE182723296C42004C5777 /* ChapterSignUp.swift in Sources */,
+				9B27DD0E243AA50F008A4DBF /* QADetailsVC.swift in Sources */,
 				9B191DB52310C72500E27032 /* CompetitiveEventDetails.swift in Sources */,
 				9BCECDBC2415D0BE00E0E531 /* ArchiveDetailsVC.swift in Sources */,
 				9BC57A4C2380CDAD002EADDC /* WelcomeVC.swift in Sources */,

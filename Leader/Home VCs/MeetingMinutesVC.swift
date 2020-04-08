@@ -69,13 +69,7 @@ class MeetingMinutesVC : UITableViewController {
         }
         return cell
     }
-//Supposed to make screen scroll to where selected but not working
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-//    }
-//    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
-//        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-//    }
+
 //MARK: IBAction functions
     
     @IBAction func savePressed(_ sender: Any) {

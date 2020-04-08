@@ -95,7 +95,8 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
                                     "grade": self.gradeTF.text!,
                                     "paid": false,
                                     "user UID": userID,
-                                    "competitive events": [""]
+                                    "competitive events": [""],
+                                    "current events": [""]
                                 ]) { err in
                                     if let err = err {
                                         print("Error adding document: \(err)")

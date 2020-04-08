@@ -72,7 +72,8 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
                         "grade": self.gradeTextField.text!,
                         "paid": true,
                         "user UID": userID,
-                        "competitive events": [""]
+                        "competitive events": [""],
+                        "current events": [""]
                     ]) { err in
                         if let err = err {
                             print("Error adding document: \(err)")

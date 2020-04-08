@@ -25,7 +25,8 @@ class CalendarVC : UIViewController{
     @IBOutlet var calendarView: JTACMonthView!
     @IBOutlet weak var backgroundLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var descriptionLabel: UILabel!
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var noEventsLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
@@ -56,7 +57,7 @@ class CalendarVC : UIViewController{
         backgroundLabel.isHidden = true
         nameLabel.isHidden = true
         dateLabel.isHidden = true
-        descriptionLabel.isHidden = true
+        descriptionTextView.isHidden = true
         noEventsLabel.isHidden = true
         timeLabel.isHidden = true
         SVProgressHUD.show()
@@ -102,7 +103,7 @@ class CalendarVC : UIViewController{
                          for document in QuerySnapshot!.documents {
                              self.nameLabel.text = document.get("name") as? String
                              self.dateLabel.text = document.get("date") as? String
-                             self.descriptionLabel.text = document.get("description") as? String
+                             self.descriptionTextView.text = document.get("description") as? String
                              self.timeLabel.text = document.get("time") as? String
 
                              print(document.data())
@@ -120,6 +121,7 @@ class CalendarVC : UIViewController{
          { (QuerySnapshot, err) in
              if err != nil {
                  print("Error getting documents: \(String(describing: err))");
+                SVProgressHUD.dismiss()
              }
              else {
                  for document in QuerySnapshot!.documents {
@@ -154,12 +156,12 @@ class CalendarVC : UIViewController{
                 noEventsLabel.isHidden = false
                 nameLabel.isHidden = true
                 dateLabel.isHidden = true
-                descriptionLabel.isHidden = true
+                descriptionTextView.isHidden = true
                 timeLabel.isHidden = true
             } else {
                 nameLabel.isHidden = false
                 dateLabel.isHidden = false
-                descriptionLabel.isHidden = false
+                descriptionTextView.isHidden = false
                 timeLabel.isHidden = false
                 noEventsLabel.isHidden = true
                 displayDetails()

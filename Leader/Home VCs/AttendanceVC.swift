@@ -18,7 +18,6 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
      var db: Firestore!
      var DocRef : Query?
      var userRef : Query?
-     //var members : [Member] = []
      var members : [String] = [""]
      var chapterName = ""
      var values = [String]()
@@ -117,13 +116,14 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
 
              return cell
     }
+    
+    //Wait why is this here
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
         }
     //This function is called before the segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             let viewController = segue.destination as? MeetingMinutesVC
-            //This isn't passing for some reason
             viewController?.passedValues = values
     }
 
