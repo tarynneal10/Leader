@@ -149,7 +149,7 @@
                                 <rect key="frame" x="35" y="517" width="320" height="81"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
@@ -754,22 +754,21 @@
                                     <outlet property="delegate" destination="MIA-ln-Ja9" id="AQE-cQ-fcY"/>
                                 </connections>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cax-Y1-7Sb">
-                                <rect key="frame" x="141" y="324" width="75" height="30"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="donePressed:" destination="MIA-ln-Ja9" eventType="touchUpInside" id="lOb-Dp-KHt"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ztj-9Z-7iL">
-                                <rect key="frame" x="50" y="617" width="275" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ztj-9Z-7iL">
+                                <rect key="frame" x="50" y="587" width="275" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.32522672414779663" blue="0.46270245313644409" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="Terms of Use">
                                     <color key="titleColor" red="1" green="0.85937339069999996" blue="0.011647096839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <segue destination="JyR-gc-hNL" kind="show" id="aq2-BO-sHR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cax-Y1-7Sb">
+                                <rect key="frame" x="150" y="265" width="75" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="donePressed:" destination="MIA-ln-Ja9" eventType="touchUpInside" id="lOb-Dp-KHt"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -779,6 +778,7 @@
                             <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="viM-3U-cVc" secondAttribute="trailing" constant="50" id="58V-KS-aGh"/>
                             <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="cax-Y1-7Sb" secondAttribute="trailing" constant="150" id="6zB-IV-rrz"/>
                             <constraint firstItem="QIF-ZJ-ulq" firstAttribute="width" secondItem="viM-3U-cVc" secondAttribute="width" id="Br5-Da-9C0"/>
+                            <constraint firstItem="lsy-Rq-dCK" firstAttribute="bottom" secondItem="Ztj-9Z-7iL" secondAttribute="bottom" constant="30" id="EDk-aA-Cki"/>
                             <constraint firstItem="CJV-ca-1Ha" firstAttribute="top" secondItem="viM-3U-cVc" secondAttribute="bottom" constant="10" id="FoD-ls-ztq"/>
                             <constraint firstItem="Sii-OZ-X94" firstAttribute="leading" secondItem="lsy-Rq-dCK" secondAttribute="leading" constant="50" id="GBT-UM-PBc"/>
                             <constraint firstItem="1Z6-Qp-1Lf" firstAttribute="height" secondItem="viM-3U-cVc" secondAttribute="height" id="GFq-if-hAS"/>
@@ -792,11 +792,13 @@
                             <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="Sii-OZ-X94" secondAttribute="trailing" constant="50" id="WyV-4J-6Y6"/>
                             <constraint firstItem="1Z6-Qp-1Lf" firstAttribute="width" secondItem="viM-3U-cVc" secondAttribute="width" id="a98-P4-xev"/>
                             <constraint firstItem="CJV-ca-1Ha" firstAttribute="leading" secondItem="lsy-Rq-dCK" secondAttribute="leading" constant="50" id="alf-KU-uuH"/>
+                            <constraint firstItem="Ztj-9Z-7iL" firstAttribute="leading" secondItem="lsy-Rq-dCK" secondAttribute="leading" constant="50" id="bso-6p-tqP"/>
                             <constraint firstItem="Sii-OZ-X94" firstAttribute="width" secondItem="viM-3U-cVc" secondAttribute="width" id="cJz-Ab-z0e"/>
                             <constraint firstItem="CJV-ca-1Ha" firstAttribute="height" secondItem="viM-3U-cVc" secondAttribute="height" id="dEb-CT-qDK"/>
                             <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="1Z6-Qp-1Lf" secondAttribute="trailing" constant="50" id="dtJ-fy-VDd"/>
                             <constraint firstItem="QIF-ZJ-ulq" firstAttribute="leading" secondItem="lsy-Rq-dCK" secondAttribute="leading" constant="50" id="eN3-mP-ID0"/>
                             <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="k4N-Jt-N0V" secondAttribute="trailing" constant="150" id="fXM-uY-hqd"/>
+                            <constraint firstItem="lsy-Rq-dCK" firstAttribute="trailing" secondItem="Ztj-9Z-7iL" secondAttribute="trailing" constant="50" id="h49-j5-2qJ"/>
                             <constraint firstItem="cax-Y1-7Sb" firstAttribute="top" secondItem="QIF-ZJ-ulq" secondAttribute="bottom" constant="15" id="hAG-qB-Qe4"/>
                             <constraint firstItem="cax-Y1-7Sb" firstAttribute="leading" secondItem="lsy-Rq-dCK" secondAttribute="leading" constant="150" id="hrK-ML-180"/>
                             <constraint firstItem="1Z6-Qp-1Lf" firstAttribute="top" secondItem="Sii-OZ-X94" secondAttribute="bottom" constant="10" id="iex-XT-2Lt"/>
@@ -826,7 +828,7 @@
         <!--Terms Of UseVC-->
         <scene sceneID="cci-to-tHv">
             <objects>
-                <viewController id="JyR-gc-hNL" customClass="TermsOfUseVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TermsOfUse" id="JyR-gc-hNL" customClass="TermsOfUseVC" customModule="Leader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fb6-OB-2sx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

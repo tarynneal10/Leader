@@ -18,6 +18,8 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
     @IBOutlet weak var gradeTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    @IBOutlet weak var checkmarkButton: UIButton!
+    @IBOutlet weak var termsOfUseButton: UIButton!
     
     var db: Firestore!
     var signUpSuccess : Bool?
@@ -167,6 +169,9 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
         
     }
     
+    @IBAction func checkmarkPressed(_ sender: Any) {
+        
+    }
     @IBAction func joinFBLAPressed(_ sender: Any) {
         findAdvisorInfo()
         SVProgressHUD.show()
