@@ -18,24 +18,29 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
     @IBOutlet weak var gradeTF: UITextField!
     @IBOutlet weak var emailTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
+    
     @IBOutlet weak var checkmarkButton: UIButton!
     @IBOutlet weak var termsOfUseButton: UIButton!
     
     var db: Firestore!
     var signUpSuccess : Bool?
     var advisorEmail : String = ""
+    var agreed : Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         signUpSuccess = false
-
+        agreed = false
+        
         nameTF.delegate = self
         schoolTF.delegate = self
         advisorTF.delegate = self
         gradeTF.delegate = self
         emailTF.delegate = self
         passwordTF.delegate = self
+        
+        setFontColor()
     }
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if identifier == "goToTabs" {
@@ -50,6 +55,18 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
              
          return true
      }
+    func setFontColor() {
+        let attrs1 = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.white]
+
+        let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.init(red: 0, green: 122, blue: 255)]
+
+        let attributedString1 = NSMutableAttributedString(string:"Agree to Leader's", attributes:attrs1)
+
+        let attributedString2 = NSMutableAttributedString(string:" Terms of Use", attributes:attrs2)
+
+        attributedString1.append(attributedString2)
+        termsOfUseButton.setAttributedTitle(attributedString1, for: .normal)
+    }
 //MARK: Alerts
     //Error Alert for when fields empty
       func errorAlert() {
@@ -75,9 +92,10 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
         
         self.present(alert, animated: true, completion: nil)
     }
+    
 //MARK: Add user function
     func addUser() {
-        if nameTF.text != "", schoolTF.text != "", advisorTF.text != "", gradeTF.text != "", emailTF.text != "", passwordTF.text != "" {
+        if nameTF.text != "", schoolTF.text != "", advisorTF.text != "", gradeTF.text != "", emailTF.text != "", passwordTF.text != "", agreed != false {
                     Auth.auth().createUser(withEmail: emailTF.text!, password: passwordTF.text!) {
                             (user, error) in
                             if error != nil {
@@ -106,9 +124,6 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
                                         print("Document added with ID: \(ref!.documentID)")
                                     }
                                 }
-                               //Get rid of once figure out to make it not crash for advisor ish
-        //                       self.signUpSuccess = true
-        //                       self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
                                 
                             }
                         }
@@ -144,6 +159,7 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
                 }
         }
     }
+    
     func sendEmail() {
   
     if advisorEmail != "" {
@@ -155,10 +171,9 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
             mail.setSubject("New FBLA Member- \(nameTF.text!), Grade \(gradeTF.text!)")
             present(mail, animated: true)
             
-            
         } else {
             //Maybe?
-            advisorAlert()
+            //advisorAlert()
         }
         }
     }
@@ -169,8 +184,16 @@ class JoinFBLAVC : UITableViewController, MFMailComposeViewControllerDelegate, U
         
     }
     
+//MARK: IBAction functions
+    
     @IBAction func checkmarkPressed(_ sender: Any) {
-        
+        if agreed == false {
+            checkmarkButton.setImage(UIImage(named: "Checkmark"), for: .normal)
+            agreed = true
+        } else {
+            checkmarkButton.setImage(UIImage(named: "Nothing"), for: .normal)
+            agreed = false
+        }
     }
     @IBAction func joinFBLAPressed(_ sender: Any) {
         findAdvisorInfo()

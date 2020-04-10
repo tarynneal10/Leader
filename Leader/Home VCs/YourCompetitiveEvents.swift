@@ -24,7 +24,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     var yourEvents : [String] = [""]
     //var sectionTitles = [""]
     var sectionInfo : [[String]] = [[""]]
-    
+    var currentSection : Int?
     var advisorEmail : String = ""
     var chapterName : String?
     var addingSuccess : Bool?
@@ -184,7 +184,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-            //self.sectionInfo.remove(at: indexPath.row)
+            
             var array = [""]
             var infoArray = [[String]]()
             for (index, value) in self.sectionInfo.enumerated() {
@@ -197,12 +197,13 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 }
             }
             self.sectionInfo = infoArray
-            //Need to update cloud lol
+            
             self.eventsTableView.reloadData()
         })
-
+        
         return [deleteAction]
     }
+    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionTitleCell") as! SectionTitleCell
@@ -213,6 +214,41 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "footerViewCell") as! FooterViewCell
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentSection = indexPath.section
+        print("cell selected at \(indexPath.row)")
+        print("Current Section: \(String(describing: currentSection))")
+        
+    }
+//Technically npt table view but related so it can stick around
+    func insertNewRow() {
+        //let indexPath = IndexPath(row: sectionInfo.count - 1, section: currentSection ?? 0)
+        var array = [""]
+        var infoArray = [[String]]()
+        //guard let indexPath = eventsTableView.indexPathForSelectedRow else { return }
+        let indexPath = IndexPath(row: 0, section: 0)
+        for (index, value) in self.sectionInfo.enumerated() {
+            
+//            if index == indexPath.section {
+//                array = value
+//                array.append("")
+//                infoArray.append(array)
+//            } else {
+//                infoArray.append(value)
+//            }
+        }
+        self.sectionInfo = infoArray
+        
+        eventsTableView.beginUpdates()
+        eventsTableView.insertRows(at: [indexPath], with: .automatic)
+        eventsTableView.endUpdates()
+        
     }
     
 //MARK: Email & Segue Stuff
@@ -230,7 +266,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
                    } else {
                        // show failure alert
-                    }
+                }
            }
            
        }
@@ -248,9 +284,10 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         findAdvisorInfo()
     }
     
+
 }
 
-//MARK: YourEventsCell Class
+//MARK: Cell Classes
 
 class YourEventsCell : UITableViewCell {
     @IBOutlet weak var eventsTF: UITextField!
@@ -260,15 +297,17 @@ class YourEventsCell : UITableViewCell {
     var sectionInfo = [[""]]
     var eventTable : UITableView?
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         eventsArray = YourEvents.yourEvents
         sectionInfo = YourEvents.sectionInfo
         eventTable = YourEvents.eventsTableView
     }
+
     
     @IBAction func addButtonPressed(_ sender: Any) {
-        
+        YourEvents.insertNewRow()
     }
     
 }
@@ -276,4 +315,13 @@ class YourEventsCell : UITableViewCell {
 class SectionTitleCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
     
+}
+
+class FooterViewCell : UITableViewCell {
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    @IBAction func addTeammatePressed(_ sender: Any) {
+        
+    }
 }
