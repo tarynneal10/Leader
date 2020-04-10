@@ -19,11 +19,17 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var gradeTextField: UITextField!
     
+    @IBOutlet weak var termsButton: UIButton!
+    @IBOutlet weak var checkmarkButton: UIButton!
+    
     var takeImage: UIImageView!
     var imagePicker: UIImagePickerController!
     var signUpSuccess : Bool?
+    var agreed : Bool?
+    
     var db: Firestore!
     var storage : Storage!
+    
     var filePath = ""
     var download : String?
     var docID : String?
@@ -31,14 +37,31 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
     override func viewDidAppear( _ animated: Bool) {
         super.viewDidAppear(animated)
         signUpSuccess = false
+        agreed = false
+        
         db = Firestore.firestore()
         storage = Storage.storage()
-
+        
+        setFontColor()
     }
+    func setFontColor() {
+        let attrs1 = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.white]
+
+        let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.init(red: 0, green: 122, blue: 255)]
+
+        let attributedString1 = NSMutableAttributedString(string:"Agree to Leader's", attributes:attrs1)
+
+        let attributedString2 = NSMutableAttributedString(string:" Terms of Use", attributes:attrs2)
+
+        attributedString1.append(attributedString2)
+        termsButton.setAttributedTitle(attributedString1, for: .normal)
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
+    
     override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
         if identifier == "goToTabs" {
             //Might be able to have it just return false here and oerform segu e in else for auth- not yet tho
@@ -48,6 +71,19 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
         }
         return true
     }
+    
+//Putting up higher bc camera area is a mess
+    
+    @IBAction func checkmarkPressed(_ sender: Any) {
+        if agreed == false {
+            checkmarkButton.setImage(UIImage(named: "Checkmark"), for: .normal)
+            agreed = true
+        } else {
+            checkmarkButton.setImage(UIImage(named: "Nothing"), for: .normal)
+            agreed = false
+        }
+    }
+    
 //MARK: Sign up pressed
     @IBAction func signUpPressed(_ sender: Any) {
         signUpSuccess = false

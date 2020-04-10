@@ -45,17 +45,36 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         updateData()
     }
     
+    //Updates data in cloud
+    func updateData() {
+        //This works for delete but not add... bc I'm just adding a value of "" to the array
+        var competitiveEvents = [String: [String]]()
+        for (index, value) in yourEvents.enumerated() {
+            competitiveEvents[yourEvents[index]] = sectionInfo[index]
+        }
+        print("Competitive Events: \(competitiveEvents)")
+        db.collection("members").document(userDoc!).updateData([
+                "competitive events" : competitiveEvents
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+        }
+    }
+    
     func noEventsPresent() {
         noEvents.isHidden = false
         eventsTableView.isHidden = true
     }
     
 
+
 //MARK: Retrieving from cloud
         //Pops up error for if already added event
         func errorAlert() {
             let alert = UIAlertController(title: "Error", message: "You have already added this event", preferredStyle: .alert)
-            
             let continueAction = UIAlertAction(title: "Continue", style: .default, handler: { (UIAlertAction) in })
             
             alert.addAction(continueAction)
@@ -83,12 +102,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                         array.append(key)
                         infoArray.append(value!)
                     }
-//                    array = array.sorted(by: { $0 < $1})
-//                    //If possible, change sorting parameters to more exact values
                     self.yourEvents = array
                     self.sectionInfo = infoArray
-                    //When I change this line to have better code everything just starts crashing for random reasons
-                    //self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
                 }
                 if self.passedValue != "" {
@@ -120,23 +135,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 //        return true
 //    }
 //
-    //Updates data in cloud
-    func updateData() {
-        var competitiveEvents = [String: [String]]()
-        for (index, value) in yourEvents.enumerated() {
-            competitiveEvents[yourEvents[index]] = sectionInfo[index]
-        }
-        print("Competitive Events: \(competitiveEvents)")
-        db.collection("members").document(userDoc!).updateData([
-                "competitive events" : competitiveEvents
-                ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
-                    }
-        }
-    }
+
     
     //Gets info for Advisor to email data to
     func findAdvisorInfo() {
@@ -183,6 +182,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
+        //Deleting row
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
             
             var array = [""]
@@ -201,12 +201,33 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
             self.eventsTableView.reloadData()
         })
         
-        return [deleteAction]
+        //Adding row
+        let addAction = UITableViewRowAction(style: .normal, title: "Add", handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
+            var array = [""]
+            var infoArray = [[String]]()
+            let index = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+            for (index, value) in self.sectionInfo.enumerated() {
+                    if index == indexPath.section {
+                        array = value
+                        array.append("")
+                        infoArray.append(array)
+                    } else {
+                        infoArray.append(value)
+                    }
+                }
+            self.sectionInfo = infoArray
+                    
+            self.eventsTableView.beginUpdates()
+            self.eventsTableView.insertRows(at: [index], with: .automatic)
+            self.eventsTableView.endUpdates()
+        })
+        
+        return [addAction, deleteAction]
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = tableView.dequeueReusableCell(withIdentifier: "sectionTitleCell") as! SectionTitleCell
+        
         cell.label.text = yourEvents[section]
         
         return cell.contentView
@@ -215,42 +236,14 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40.0
     }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "footerViewCell") as! FooterViewCell
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentSection = indexPath.section
-        print("cell selected at \(indexPath.row)")
-        print("Current Section: \(String(describing: currentSection))")
-        
-    }
-//Technically npt table view but related so it can stick around
-    func insertNewRow() {
-        //let indexPath = IndexPath(row: sectionInfo.count - 1, section: currentSection ?? 0)
-        var array = [""]
-        var infoArray = [[String]]()
-        //guard let indexPath = eventsTableView.indexPathForSelectedRow else { return }
-        let indexPath = IndexPath(row: 0, section: 0)
-        for (index, value) in self.sectionInfo.enumerated() {
-            
-//            if index == indexPath.section {
-//                array = value
-//                array.append("")
-//                infoArray.append(array)
-//            } else {
-//                infoArray.append(value)
-//            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            yourEvents.remove(at: indexPath.section - 1)
+            let indexSet = IndexSet(arrayLiteral: indexPath.section)
+            eventsTableView.deleteSections(indexSet, with: .automatic)
+            // Perform any follow up actions here
         }
-        self.sectionInfo = infoArray
-        
-        eventsTableView.beginUpdates()
-        eventsTableView.insertRows(at: [indexPath], with: .automatic)
-        eventsTableView.endUpdates()
-        
     }
-    
 //MARK: Email & Segue Stuff
     
        func sendEmail() {
@@ -283,45 +276,35 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
         updateData()
         findAdvisorInfo()
     }
-    
-
 }
 
 //MARK: Cell Classes
 
-class YourEventsCell : UITableViewCell {
+class YourEventsCell : UITableViewCell, UITextFieldDelegate {
     @IBOutlet weak var eventsTF: UITextField!
-    
-    var YourEvents = YourCompetitiveEventsVC()
-    var eventsArray = [""]
-    var sectionInfo = [[""]]
-    var eventTable : UITableView?
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
-        eventsArray = YourEvents.yourEvents
-        sectionInfo = YourEvents.sectionInfo
-        eventTable = YourEvents.eventsTableView
+        eventsTF.delegate = self
     }
-
-    
-    @IBAction func addButtonPressed(_ sender: Any) {
-        YourEvents.insertNewRow()
+    //UITextField return
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.eventsTF.endEditing(true)
+        return false
     }
-    
 }
  
 class SectionTitleCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
-    
-}
-
-class FooterViewCell : UITableViewCell {
+    var YourEvents = YourCompetitiveEventsVC()
+    var eventsTableView : UITableView?
     override func awakeFromNib() {
         super.awakeFromNib()
-    }
-    @IBAction func addTeammatePressed(_ sender: Any) {
+        eventsTableView = YourEvents.eventsTableView
         
     }
+    @IBAction func deletePressed(_ sender: Any) {
+        eventsTableView?.setEditing(true, animated: true)
+    }
 }
+
+

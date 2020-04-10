@@ -17,16 +17,36 @@ class ChapterSignUp : UITableViewController, UITextFieldDelegate, UITextViewDele
     @IBOutlet weak var advisorPassword: UITextField!
     @IBOutlet weak var chapterDescription: UITextView!
     
+    @IBOutlet weak var termsButton: UIButton!
+    @IBOutlet weak var checkmarkButton: UIButton!
     
+    var agreed : Bool?
     var signUpSuccess : Bool?
     var db: Firestore!
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        agreed = false
         signUpSuccess = false
         db = Firestore.firestore()
+        setFontColor()
     }
+    
+    func setFontColor() {
+        let attrs1 = [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.white]
+
+        let attrs2 = [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 18), NSAttributedString.Key.foregroundColor : UIColor.init(red: 0, green: 122, blue: 255)]
+
+        let attributedString1 = NSMutableAttributedString(string:"Agree to Leader's", attributes:attrs1)
+
+        let attributedString2 = NSMutableAttributedString(string:" Terms of Use", attributes:attrs2)
+
+        attributedString1.append(attributedString2)
+        termsButton.setAttributedTitle(attributedString1, for: .normal)
+    }
+    
+//MARK: UITextField&View Functions
+    
 //UITextField return
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
@@ -68,9 +88,11 @@ class ChapterSignUp : UITableViewController, UITextFieldDelegate, UITextViewDele
         }
         return true
     }
+    
+//MARK: IBAction Functions
     @IBAction func chapterSignUpPressed(_ sender: Any) {
         signUpSuccess = false
-        if chapterName.text != "", advisorEmail.text != "", advisorName.text != "", advisorPassword.text != "", chapterDescription.text != ""
+        if chapterName.text != "", advisorEmail.text != "", advisorName.text != "", advisorPassword.text != "", chapterDescription.text != "", agreed != false
         {
             Auth.auth().createUser(withEmail: advisorEmail.text!, password: advisorPassword.text!) {
                 (user, error) in
@@ -120,6 +142,16 @@ class ChapterSignUp : UITableViewController, UITextFieldDelegate, UITextViewDele
             else {
             errorAlert()
             }
+    }
+    
+    @IBAction func checkmarkPressed(_ sender: Any) {
+        if agreed == false {
+            checkmarkButton.setImage(UIImage(named: "Checkmark"), for: .normal)
+            agreed = true
+        } else {
+            checkmarkButton.setImage(UIImage(named: "Nothing"), for: .normal)
+            agreed = false
+        }
     }
 }
 
