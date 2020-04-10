@@ -22,6 +22,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     var passedValue = ""
     var userDoc : String?
     var yourEvents : [String] = [""]
+    //var sectionTitles = [""]
+    var sectionInfo : [[String]] = [[""]]
     
     var advisorEmail : String = ""
     var chapterName : String?
@@ -42,10 +44,13 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     override func viewDidDisappear(_ animated: Bool) {
         updateData()
     }
+    
     func noEventsPresent() {
         noEvents.isHidden = false
         eventsTableView.isHidden = true
     }
+    
+
 //MARK: Retrieving from cloud
         //Pops up error for if already added event
         func errorAlert() {
@@ -70,8 +75,20 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     self.userDoc = document.documentID
+                    let events = document.get("competitive events") as? [String:[String]?]
+                    var array = [String]()
+                    var infoArray = [[String]]()
+                    
+                   for (key, value) in events! {
+                        array.append(key)
+                        infoArray.append(value!)
+                    }
+//                    array = array.sorted(by: { $0 < $1})
+//                    //If possible, change sorting parameters to more exact values
+                    self.yourEvents = array
+                    self.sectionInfo = infoArray
                     //When I change this line to have better code everything just starts crashing for random reasons
-                    self.yourEvents = (document.get("competitive events") as? [String])!
+                    //self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
                 }
                 if self.passedValue != "" {
@@ -105,8 +122,13 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 //
     //Updates data in cloud
     func updateData() {
+        var competitiveEvents = [String: [String]]()
+        for (index, value) in yourEvents.enumerated() {
+            competitiveEvents[yourEvents[index]] = sectionInfo[index]
+        }
+        print("Competitive Events: \(competitiveEvents)")
         db.collection("members").document(userDoc!).updateData([
-                "competitive events" : yourEvents
+                "competitive events" : competitiveEvents
                 ]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -142,37 +164,59 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
     
 //MARK: Table View Functions
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return yourEvents.count
     }
-        
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return sectionInfo[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return yourEvents[section]
+    }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             let cell = tableView.dequeueReusableCell(withIdentifier: "yourEventsCell", for: indexPath as IndexPath)as! YourEventsCell
-            cell.eventsLabel.text = yourEvents[indexPath.row]
+            cell.eventsTF.text = sectionInfo[indexPath.section][indexPath.row]
             return cell
         }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]?{
         let deleteAction = UITableViewRowAction(style: .default, title: "Delete" , handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-            self.yourEvents.remove(at: indexPath.row)
+            //self.sectionInfo.remove(at: indexPath.row)
+            var array = [""]
+            var infoArray = [[String]]()
+            for (index, value) in self.sectionInfo.enumerated() {
+                if index == indexPath.section {
+                    array = value
+                    array.remove(at: indexPath.row)
+                    infoArray.append(array)
+                } else {
+                    infoArray.append(value)
+                }
+            }
+            self.sectionInfo = infoArray
+            //Need to update cloud lol
             self.eventsTableView.reloadData()
-
         })
 
         return [deleteAction]
     }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "sectionTitleCell") as! SectionTitleCell
+        cell.label.text = yourEvents[section]
+        
+        return cell.contentView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0
+    }
+    
 //MARK: Email & Segue Stuff
-//    //DOuble check if this is right segue
-//       override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
-//           if identifier == "goToHome" {
-//               if addingSuccess != true {
-//                   return false
-//               }
-//           }
-//           return true
-//       }
-//
+    
        func sendEmail() {
            if advisorEmail != "" {
                if MFMailComposeViewController.canSendMail() {
@@ -209,5 +253,27 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 //MARK: YourEventsCell Class
 
 class YourEventsCell : UITableViewCell {
-    @IBOutlet weak var eventsLabel: UILabel!
+    @IBOutlet weak var eventsTF: UITextField!
+    
+    var YourEvents = YourCompetitiveEventsVC()
+    var eventsArray = [""]
+    var sectionInfo = [[""]]
+    var eventTable : UITableView?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        eventsArray = YourEvents.yourEvents
+        sectionInfo = YourEvents.sectionInfo
+        eventTable = YourEvents.eventsTableView
+    }
+    
+    @IBAction func addButtonPressed(_ sender: Any) {
+        
+    }
+    
+}
+ 
+class SectionTitleCell : UITableViewCell {
+    @IBOutlet weak var label: UILabel!
+    
 }
