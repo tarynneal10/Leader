@@ -125,21 +125,38 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-zu-G7v">
-                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="280" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbt-k9-wRY">
+                                                    <rect key="frame" x="305" y="5" width="60" height="33"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.32522672409999998" blue="0.46270245310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="60" id="wBp-29-ozl"/>
+                                                    </constraints>
+                                                    <state key="normal" title="Unpaid">
+                                                        <color key="titleColor" red="1" green="0.85937339069999996" blue="0.011647096839999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="paidPressed:" destination="mbP-yZ-m19" eventType="touchUpInside" id="k0K-2F-GZI"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="cvV-zu-G7v" secondAttribute="trailing" id="6vG-Kc-ltl"/>
+                                                <constraint firstItem="Bbt-k9-wRY" firstAttribute="top" secondItem="JNK-ss-ebj" secondAttribute="top" constant="5" id="7TP-gi-x8Q"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="cvV-zu-G7v" secondAttribute="bottom" id="82L-V8-YjZ"/>
+                                                <constraint firstItem="Bbt-k9-wRY" firstAttribute="leading" secondItem="cvV-zu-G7v" secondAttribute="trailing" constant="10" id="8Nf-bu-RGN"/>
+                                                <constraint firstAttribute="bottom" secondItem="Bbt-k9-wRY" secondAttribute="bottom" constant="5" id="YML-ep-8G0"/>
                                                 <constraint firstItem="cvV-zu-G7v" firstAttribute="top" secondItem="JNK-ss-ebj" secondAttribute="topMargin" id="fEI-7l-OK1"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bbt-k9-wRY" secondAttribute="trailing" constant="10" id="xP1-Lh-dct"/>
                                                 <constraint firstItem="cvV-zu-G7v" firstAttribute="leading" secondItem="JNK-ss-ebj" secondAttribute="leadingMargin" id="zPr-aA-IFC"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="nameLabel" destination="cvV-zu-G7v" id="Sh7-vA-oag"/>
+                                            <outlet property="paidButton" destination="Bbt-k9-wRY" id="xai-Ry-g7x"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -161,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j1E-yA-oiJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2194" y="-2363"/>
+            <point key="canvasLocation" x="2192.8000000000002" y="-2363.568215892054"/>
         </scene>
         <!--Meeting MinutesVC-->
         <scene sceneID="KE9-cp-ONO">

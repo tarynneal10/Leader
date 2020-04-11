@@ -35,9 +35,10 @@ class CurrentEventDate {
 
 class Member {
     let name : String
-    
-    init (memberName: String) {
+    let paid : Bool
+    init (memberName: String, memberPaid: Bool) {
         name = memberName
+        paid = memberPaid
     }
 }
 

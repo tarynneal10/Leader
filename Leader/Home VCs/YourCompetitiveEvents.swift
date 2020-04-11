@@ -48,12 +48,6 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
     //Updates data in cloud
     func updateData() {
-        //This works for delete but not add... bc I'm just adding a value of "" to the array
-//        var competitiveEvents = [String: [String]]()
-//        for (index, value) in yourEvents.enumerated() {
-//            competitiveEvents[yourEvents[index]] = sectionInfo[index]
-//        }
-      //  print("Competitive Events: \(competitiveEvents)")
         db.collection("members").document(userDoc!).updateData([
                 "competitive events" : yourEvents
         ]) { err in
@@ -95,17 +89,6 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
                 for document in querySnapshot!.documents {
                     print("\(document.documentID) => \(document.data())")
                     self.userDoc = document.documentID
-//                    let events = document.get("competitive events") as? [String:[String]?]
-//                    var array = [String]()
-//                    var infoArray = [[String]]()
-//
-//                   for (key, value) in events! {
-//                        array.append(key)
-//                        infoArray.append(value!)
-////                    }
-//                    self.yourEvents = array
-//                    self.sectionInfo = infoArray
-                    
                     self.yourEvents = (document.get("competitive events") as? [String])!
                     self.chapterName = document.get("chapter") as? String
                 }
@@ -154,9 +137,7 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 //MARK: Table View Functions
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return yourEvents.count
-        
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -175,43 +156,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
             
             self.eventsTableView.reloadData()
         })
-        
-//        //Adding row- delete is same except for array.append("") turns to array.remove(at: indexPath.row)
-//        let addAction = UITableViewRowAction(style: .normal, title: "Add", handler: { (action:UITableViewRowAction, indexPath: IndexPath) -> Void in
-//            var array = [""]
-//            var infoArray = [[String]]()
-//            let index = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-//            for (index, value) in self.sectionInfo.enumerated() {
-//                    if index == indexPath.section {
-//                        array = value
-//                        array.append("")
-//                        infoArray.append(array)
-//                    } else {
-//                        infoArray.append(value)
-//                    }
-//                }
-//            self.sectionInfo = infoArray
-//
-//            self.eventsTableView.beginUpdates()
-//            self.eventsTableView.insertRows(at: [index], with: .automatic)
-//            self.eventsTableView.endUpdates()
-//        })
-//
-       // return [addAction, deleteAction]
         return[deleteAction]
     }
-    
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "sectionTitleCell") as! SectionTitleCell
-//
-//        cell.label.text = yourEvents[section]
-//
-//        return cell.contentView
-//    }
-//
-//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 40.0
-//    }
     
 //MARK: Email & Segue Stuff
     
@@ -235,7 +181,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
            controller.dismiss(animated: true)
-//           addingSuccess = true
+           addingSuccess = true
+            
 //           performSegue(withIdentifier: "goToHome", sender: UIButton.self)
        }
     

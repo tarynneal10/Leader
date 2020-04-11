@@ -18,7 +18,10 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
      var DocRef : Query?
      var userRef : Query?
      var members : [Member] = []
+    
+     var userDoc : String?
      var chapterName = ""
+     var paidStatus : Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,28 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
         
         getUser()
     }
-
+    override func viewDidDisappear(_ animated: Bool) {
+        
+    }
+    //Updates data in cloud
+    func updateData() {
+        for (index, value) in members.enumerated() {
+            let name = value.name
+            let paid = value.paid
+            
+            //db.collection("members").whereField("name", isEqualTo: name)
+        }
+        db.collection("members").document(userDoc!).updateData([
+                "paid" : paidStatus
+        ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document successfully written!")
+                    }
+        }
+    }
+    
     //Gets user for other queries
     func getUser() {
         guard let userID = Auth.auth().currentUser?.uid else { return }
@@ -63,7 +87,9 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
                         self.members.removeAll()
                         for document in snapshot.documents {
                             let name = document.get("name") as? String
-                            self.members.append(Member(memberName: name ?? "name"))
+                            let paid = document.get("paid") as? Bool
+                            
+                            self.members.append(Member(memberName: name ?? "name", memberPaid: paid ?? false))
                             
                             print(document.data())
                         }
@@ -100,8 +126,33 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
 
 class MemberTableViewCell : UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var paidButton: UIButton!
+    
+    var paid : Bool?
+    
+    override func awakeFromNib() {
+          super.awakeFromNib()
+      }
+
     func populate(member: Member) {
         nameLabel.text = member.name
+        if member.paid == true {
+            paidButton.setTitle("Paid", for: .normal)
+            paid = true
+        } else {
+            paidButton.setTitle("Unpaid", for: .normal)
+            paid = false
+        }
+
+    }
+    @IBAction func paidPressed(_ sender: Any) {
+        if paid == false {
+            paidButton.setTitle("Paid", for: .normal)
+            paid = true
+        } else {
+            paidButton.setTitle("Unpaid", for: .normal)
+            paid = false
+        }
     }
     
 }
