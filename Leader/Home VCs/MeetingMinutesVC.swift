@@ -24,11 +24,16 @@ class MeetingMinutesVC : UITableViewController {
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
+        
         db = Firestore.firestore()
         setTitle()
         minutesTableView.estimatedRowHeight = 40.0
         minutesTableView.separatorStyle = .none
         //idk why but value isn't passing
+        print("Passed Values: \(String(describing: passedValues))")
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         print("Passed Values: \(String(describing: passedValues))")
     }
 

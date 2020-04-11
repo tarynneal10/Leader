@@ -11,7 +11,8 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class AttendanceViewController : UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+class AttendanceViewController : UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noAttendees: UIImageView!
     
@@ -25,17 +26,20 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
             super.viewDidLoad()
             db = Firestore.firestore()
-            
+        
+            navigationController?.delegate = self
             tableView.delegate = self
             tableView.dataSource = self
         
             noAttendees.isHidden = true
             tableView.isHidden = false
+            SVProgressHUD.show()
             getUser()
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         //Getting label values
+        SVProgressHUD.dismiss()
         for (index, value) in members.enumerated() {
                 let indexPath = IndexPath(row: index, section: 0)
                 guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
@@ -45,7 +49,11 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         }
         print("Values: \(values)")
     }
-    
+//    
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        (viewController as? MeetingMinutesVC)?.passedValues = values // Here you pass the to your original view controller
+    }
+
     func noAttendeesPresent() {
          noAttendees.isHidden = false
          tableView.isHidden = true
@@ -84,6 +92,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                 } else {
                     if let snapshot = QuerySnapshot {
                         self.members.removeAll()
+                        
                         for document in snapshot.documents {
                             let name = document.get("name") as? String
                             self.members.append(name!)
@@ -95,6 +104,7 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
                             print("no attendees")
                         }
                         DispatchQueue.main.async {
+                            SVProgressHUD.dismiss()
                             self.tableView.reloadData()
                         }
                     }
@@ -121,10 +131,11 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
         }
-    //This function is called before the segue
+    //This function is called before the segue- not passing period- bc going back?
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             let viewController = segue.destination as? MeetingMinutesVC
             viewController?.passedValues = values
+        
     }
 
 

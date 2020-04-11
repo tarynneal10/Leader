@@ -19,7 +19,8 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
      var userRef : Query?
      var members : [Member] = []
     
-     var userDoc : String?
+    
+    var memberPosition : String?
      var chapterName = ""
      var paidStatus : Bool?
     
@@ -33,24 +34,31 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
         getUser()
     }
     override func viewDidDisappear(_ animated: Bool) {
-        
+        updateData()
     }
     //Updates data in cloud
     func updateData() {
-        for (index, value) in members.enumerated() {
-            let name = value.name
-            let paid = value.paid
-            
-            //db.collection("members").whereField("name", isEqualTo: name)
-        }
-        db.collection("members").document(userDoc!).updateData([
-                "paid" : paidStatus
-        ]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document successfully written!")
+        //Since I have to update every value in a loop, this can help limit the number of writes
+        print(memberPosition)
+        if memberPosition != nil, memberPosition != "Member" {
+            for (index, value) in members.enumerated() {
+                //paidStatus = value.paid
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = tableView.cellForRow(at: indexPath) as? MemberTableViewCell else { return }
+                guard let paid = cell.paid else { return }
+                //This is here also to prevent writes
+                if paid != value.paid {
+                    db.collection("members").document(value.docID).updateData([
+                        "paid" : paid
+                    ]) { err in
+                                if let err = err {
+                                    print("Error writing document: \(err)")
+                                } else {
+                                    print("Document successfully written!")
+                                }
                     }
+                }
+            }
         }
     }
     
@@ -65,15 +73,17 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
         } else {
             for document in querySnapshot!.documents {
                 print("\(document.documentID) => \(document.data())")
-                let chapter = document.get("chapter") as? String
-                self.chapterName = chapter!
+                self.chapterName = (document.get("chapter") as? String)!
+                self.memberPosition = document.get("position") as? String
                 self.navigationItem.title = self.chapterName
+                
                 self.DocRef = self.db.collection("members").whereField("chapter", isEqualTo: self.chapterName)
             }
             self.getMembers()
         }
     }
     }
+    
     //Gets members for tableView
     func getMembers() {
             DocRef?.getDocuments() { (QuerySnapshot, err) in
@@ -88,8 +98,9 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
                         for document in snapshot.documents {
                             let name = document.get("name") as? String
                             let paid = document.get("paid") as? Bool
+                            let doc = document.documentID
                             
-                            self.members.append(Member(memberName: name ?? "name", memberPaid: paid ?? false))
+                            self.members.append(Member(memberName: name ?? "name", memberPaid: paid ?? false, memberDoc: doc))
                             
                             print(document.data())
                         }
@@ -115,7 +126,11 @@ class MemberViewController : UIViewController, UITableViewDelegate, UITableViewD
     
              let path = members[indexPath.row]
              cell.populate(member: path)
-
+        
+            if memberPosition != nil, memberPosition == "Member" {
+                cell.paidButton.isHidden = true
+            }
+        
              return cell
     }
     
@@ -132,6 +147,7 @@ class MemberTableViewCell : UITableViewCell {
     
     override func awakeFromNib() {
           super.awakeFromNib()
+        paid = false
       }
 
     func populate(member: Member) {
@@ -145,6 +161,7 @@ class MemberTableViewCell : UITableViewCell {
         }
 
     }
+    
     @IBAction func paidPressed(_ sender: Any) {
         if paid == false {
             paidButton.setTitle("Paid", for: .normal)
