@@ -68,3 +68,12 @@ class Minutes {
         label = title
     }
 }
+
+class Archive {
+    let date : String
+    let subject : String
+    init(meetingDate: String, meetingSubject: String) {
+        date = meetingDate
+        subject = meetingSubject
+    }
+}

@@ -27,13 +27,13 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     
     var advisorEmail : String = ""
     var chapterName : String?
-    var addingSuccess : Bool?
+    var sendingSuccess : Bool?
         
     override func viewDidLoad() {
             super.viewDidLoad()
         print("Passed Value: \(passedValue)")
             db = Firestore.firestore()
-            addingSuccess = false
+            sendingSuccess = false
 
             eventsTableView.delegate = self
             eventsTableView.dataSource = self
@@ -160,6 +160,14 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
     }
     
 //MARK: Email & Segue Stuff
+    override func shouldPerformSegue(withIdentifier identifier: String?, sender: Any?) -> Bool {
+        if identifier == "unwindToCompetitiveEvents" {
+            if sendingSuccess != true {
+                return false
+            }
+        }
+        return true
+    }
     
        func sendEmail() {
            if advisorEmail != "" {
@@ -181,9 +189,8 @@ class YourCompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableVi
 
        func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
            controller.dismiss(animated: true)
-           addingSuccess = true
-            
-//           performSegue(withIdentifier: "goToHome", sender: UIButton.self)
+           sendingSuccess = true
+           performSegue(withIdentifier: "unwindToCompetitiveEvents", sender: UIButton.self)
        }
     
 //MARK: IBAction Functions

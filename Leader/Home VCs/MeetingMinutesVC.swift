@@ -17,7 +17,7 @@ class MeetingMinutesVC : UITableViewController {
     
     var db: Firestore!
     var userRef : Query?
-    let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
+    let list = ["Meeting Subject","Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
     var passedValues = [""]
     var chapterName = ""
     
@@ -95,8 +95,8 @@ class MeetingMinutesVC : UITableViewController {
             "minutes": values,
             "attendees": passedValues,
             "chapter": chapterName,
-            "date": formatter.string(from: Date())
-            
+            "date": formatter.string(from: Date()),
+            "subject": values.first?.value
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -105,6 +105,9 @@ class MeetingMinutesVC : UITableViewController {
             }
         }
         
+    }
+    @IBAction func unwindToMeetingMinutesVC(segue: UIStoryboardSegue) {
+        print("Unwind to MeetingMinutesVC")
     }
 }
 

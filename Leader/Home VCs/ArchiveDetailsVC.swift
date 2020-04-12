@@ -17,20 +17,23 @@ class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDel
     
     var sectionTitles = ["Attendees", "Minutes"]
     var sectionInfo : [[String]] = [[""],[""]]
-    var passedValue = ""
+    var passedDate = ""
+    var passedSubject = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.estimatedRowHeight = 30.0
         tableView.rowHeight = UITableView.automaticDimension
+        
         getMeeting()
     }
     
     func getMeeting() {
-        let docRef = db.collection("minutes").whereField("date", isEqualTo: self.passedValue)
+        let docRef = db.collection("minutes").whereField("date", isEqualTo: self.passedDate).whereField("subject", isEqualTo: self.passedSubject)
         docRef.getDocuments() { (QuerySnapshot, err) in
             if err != nil {
                 print("Error getting documents: \(String(describing: err))");

@@ -36,24 +36,6 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
             SVProgressHUD.show()
             getUser()
     }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        //Getting label values
-        SVProgressHUD.dismiss()
-        for (index, value) in members.enumerated() {
-                let indexPath = IndexPath(row: index, section: 0)
-                guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
-            if let text = cell.label.text, !text.isEmpty, cell.checkmark == true {
-                values.append(value)
-            }
-        }
-        print("Values: \(values)")
-    }
-//    
-    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        (viewController as? MeetingMinutesVC)?.passedValues = values // Here you pass the to your original view controller
-    }
-
     func noAttendeesPresent() {
          noAttendees.isHidden = false
          tableView.isHidden = true
@@ -138,7 +120,19 @@ class AttendanceViewController : UIViewController, UITableViewDelegate, UITableV
         
     }
 
-
+    @IBAction func donePressed(_ sender: Any) {
+        //Getting label values
+        SVProgressHUD.dismiss()
+        for (index, value) in members.enumerated() {
+                let indexPath = IndexPath(row: index, section: 0)
+                guard let cell = tableView.cellForRow(at: indexPath) as? AttendanceTableViewCell else { return }
+            if let text = cell.label.text, !text.isEmpty, cell.checkmark == true {
+                values.append(value)
+            }
+        }
+        print("Values: \(values)")
+    }
+    
 }
 
 //MARK: AttendanceTableViewCell Class
