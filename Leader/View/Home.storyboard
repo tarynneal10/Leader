@@ -799,7 +799,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="An5-gO-TLJ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="545"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="576"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yankee Candle Fundraiser" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-is-l2C">
@@ -849,9 +849,10 @@
                                     </connections>
                                 </textView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGB-Q3-0kR">
-                                    <rect key="frame" x="112.5" y="476" width="150" height="39"/>
+                                    <rect key="frame" x="112.5" y="486" width="150" height="40"/>
                                     <color key="backgroundColor" red="0.0" green="0.32549019610000002" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="CXo-8C-s4Z"/>
                                         <constraint firstAttribute="width" constant="150" id="pER-ZZ-Kbz"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
@@ -906,7 +907,7 @@
                                 <constraint firstItem="Zcm-k2-gE7" firstAttribute="trailing" secondItem="DnS-Xw-cWn" secondAttribute="trailing" id="mDg-vT-h6W"/>
                                 <constraint firstItem="FGB-Q3-0kR" firstAttribute="centerX" secondItem="An5-gO-TLJ" secondAttribute="centerX" id="tFf-vM-3v1"/>
                                 <constraint firstItem="bX9-Lb-WLg" firstAttribute="leading" secondItem="Zcm-k2-gE7" secondAttribute="leading" constant="15" id="u78-1j-MZE"/>
-                                <constraint firstItem="FGB-Q3-0kR" firstAttribute="top" secondItem="dtD-os-zNg" secondAttribute="bottom" constant="83" id="vhR-la-vXt"/>
+                                <constraint firstItem="FGB-Q3-0kR" firstAttribute="top" relation="greaterThanOrEqual" secondItem="dtD-os-zNg" secondAttribute="bottom" constant="80" id="vhR-la-vXt"/>
                                 <constraint firstItem="DnS-Xw-cWn" firstAttribute="leading" secondItem="Zcm-k2-gE7" secondAttribute="leading" constant="15" id="xBT-eK-cZY"/>
                                 <constraint firstItem="dtD-os-zNg" firstAttribute="top" secondItem="tp4-iX-1Ts" secondAttribute="bottom" constant="5" id="xfC-CK-jkT"/>
                                 <constraint firstItem="Zcm-k2-gE7" firstAttribute="trailing" secondItem="bX9-Lb-WLg" secondAttribute="trailing" id="zKD-O9-oSe"/>
