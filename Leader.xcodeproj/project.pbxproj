@@ -16,6 +16,7 @@
 		9B27DD0E243AA50F008A4DBF /* QADetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */; };
 		9B2BA2B323CED36800D66585 /* TermsOfUseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */; };
 		9B41E19523AD64EA001AF690 /* Q&A VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B41E19423AD64EA001AF690 /* Q&A VC.swift */; };
+		9B49EC9B244405AA005C881A /* Banks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B49EC9A244405AA005C881A /* Banks.swift */; };
 		9B4B24B323B85CB100B5F5E9 /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */; };
 		9B4D6EB023DA7C16008C3CE7 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D6EAF23DA7C16008C3CE7 /* Home.storyboard */; };
 		9B58C8752341389100186DBB /* SecurityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B58C8742341389100186DBB /* SecurityVC.swift */; };
@@ -50,6 +51,7 @@
 		9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QADetailsVC.swift; sourceTree = "<group>"; };
 		9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseVC.swift; sourceTree = "<group>"; };
 		9B41E19423AD64EA001AF690 /* Q&A VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Q&A VC.swift"; sourceTree = "<group>"; };
+		9B49EC9A244405AA005C881A /* Banks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Banks.swift; sourceTree = "<group>"; };
 		9B4B24B223B85CB100B5F5E9 /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
 		9B4D6EAF23DA7C16008C3CE7 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		9B58C8742341389100186DBB /* SecurityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityVC.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				9B5B921B22E7F37300B1985F /* AppDelegate.swift */,
 				9BF9B67C22F534FD00F76410 /* Models.swift */,
+				9B49EC9A244405AA005C881A /* Banks.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -159,8 +162,8 @@
 				8B6B077022E8F5DC008C6885 /* AboutFBLAVC.swift */,
 				9B58C8742341389100186DBB /* SecurityVC.swift */,
 				9B41E19423AD64EA001AF690 /* Q&A VC.swift */,
-				9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */,
 				9B27DD0D243AA50F008A4DBF /* QADetailsVC.swift */,
+				9B2BA2B223CED36800D66585 /* TermsOfUseVC.swift */,
 			);
 			path = "Setting VCs";
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				9BC57A4C2380CDAD002EADDC /* WelcomeVC.swift in Sources */,
 				9B41E19523AD64EA001AF690 /* Q&A VC.swift in Sources */,
 				9BA2C80F22EE185200572FFE /* LogInVC.swift in Sources */,
+				9B49EC9B244405AA005C881A /* Banks.swift in Sources */,
 				9B4B24B323B85CB100B5F5E9 /* MemberVC.swift in Sources */,
 				9BB5FCC0232335630053E843 /* ChapterVC.swift in Sources */,
 			);

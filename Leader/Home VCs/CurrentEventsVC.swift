@@ -166,7 +166,10 @@ class CurrentEventsVC : UIViewController, UITableViewDataSource, UITableViewDele
             
             cell.populate(currentEvent: listPath)
                 if indexPath.row % 2 == 1 {
-                    cell.backgroundColor = UIColor(red: 230, green: 230, blue: 230)
+                    cell.backgroundColor = UIColor(red: 225, green: 225, blue: 225)
+                    cell.dateLabel.textColor = UIColor.darkGray
+                    cell.timeLabel.textColor = UIColor.darkGray
+                    cell.descriptionLabel.textColor = UIColor.darkGray
                 }
 //                else {
 //                    //cell.backgroundColor = UIColor(red: 5, green: 63, blue: 94)

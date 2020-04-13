@@ -13,13 +13,18 @@ class QAViewController : UIViewController, UITableViewDelegate, UITableViewDataS
 
     @IBOutlet weak var QATableView: UITableView!
   
-    var sectionTitles = ["Usage", "Passwords", "Bugs"]
-    var sectionInfo = [["Use it", "Don't be a fool"], ["How can I reset my password?", "Why is my password not working", "Someone stole my password"], ["Why does the app keep crashing?", "Why are the designs this way?", "Why isn't there more functionality?"]]
+    var sectionTitles = ["Events", "Membership"]
+    var sectionInfo = [["How do I add competitive events?", "How do I delete my signed up events?"], ["How do I become a paid member?"]]
+    var viewController : QADetailsVC?
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         QATableView.delegate = self
         QATableView.dataSource = self
+        
+
+        
     }
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitles.count
@@ -40,6 +45,24 @@ class QAViewController : UIViewController, UITableViewDelegate, UITableViewDataS
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("You selected cell #\(indexPath.row)!")
+        // Get Cell Label
+        let indexPath = tableView.indexPathForSelectedRow
+        let currentCell = tableView.cellForRow(at: indexPath!) as! QuestionCell
+        tableView.deselectRow(at: indexPath!, animated: true)
+        
+        let valueToPass = currentCell.label.text
+        viewController?.passedValue = valueToPass!
+        print(valueToPass as Any)
+      
+    }
+    //  This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        viewController = segue.destination as? QADetailsVC
+    }
+    
 }
 class QuestionCell : UITableViewCell {
     

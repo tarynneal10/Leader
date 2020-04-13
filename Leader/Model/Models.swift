@@ -77,3 +77,14 @@ class Archive {
         subject = meetingSubject
     }
 }
+
+class Question {
+    let question : String
+    let answer : String
+    let section : String
+    init(questions: String, answers: String, sections: String) {
+        question = questions
+        answer = answers
+        section = sections
+    }
+}
