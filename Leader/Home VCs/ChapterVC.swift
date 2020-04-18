@@ -154,7 +154,6 @@ class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        //image.image = UIImage(named: "Anon")
     }
 }
 
