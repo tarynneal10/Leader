@@ -7,3 +7,6 @@ Leader keeps everyone updated with a current events page and calendar with descr
 Leader is fairly simple to install. It was made on Xcode 11, using swift 5, so make sure everything is up to date when you install. If you want our production version, just go on the App Store and look up Leader- FBLA. 
 If you want to see our code base just clone the respository and run pod install. To test, just sign up and add your chapter in the app once you get it running
 (If you are new to github, here's a helpful link on cloning resposities: https://help.github.com/en/articles/cloning-a-repository)
+
+## Support Info
+If you are having major issues with this application, contact us at tarynneal10@gmail.com
