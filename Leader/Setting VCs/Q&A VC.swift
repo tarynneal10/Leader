@@ -13,8 +13,8 @@ class QAViewController : UIViewController, UITableViewDelegate, UITableViewDataS
 
     @IBOutlet weak var QATableView: UITableView!
   
-    var sectionTitles = ["Events", "Membership"]
-    var sectionInfo = [["How do I add competitive events?", "How do I delete my signed up events?"], ["How do I become a paid member?"]]
+    var sectionTitles = ["Events", "Membership", "Passwords", "Leader"]
+    var sectionInfo = [["How do I add competitive events?", "How do I delete my signed up events?", "Why can’t I add teammates to your events screen?"], ["How do I become a paid member?", "What’s the difference between Sign Up and Join FBLA?"], ["How can I reset my password?", "Why is my password not working?", "Someone stole my password."], ["Why is the app so slow?", "My questions haven’t been answered, how can I get answers?"]]
     var viewController : QADetailsVC?
     
 

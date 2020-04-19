@@ -136,8 +136,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         //let height = view.frame.size.height
         let width = view.frame.size.width
-        
-        // in case you you want the cell to be 40% of your controllers view
+
         return CGSize(width: width * 0.3, height: 155)
     }
     
@@ -152,9 +151,6 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
 class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var label: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
 }
 
 

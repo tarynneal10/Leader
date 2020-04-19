@@ -9,6 +9,7 @@
 import Foundation
 import Firebase
 import UIKit
+import SVProgressHUD
 
 class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -23,6 +24,7 @@ class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
         db = Firestore.firestore()
+        SVProgressHUD.show()
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -37,6 +39,7 @@ class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDel
         docRef.getDocuments() { (QuerySnapshot, err) in
             if err != nil {
                 print("Error getting documents: \(String(describing: err))");
+                SVProgressHUD.dismiss()
             }
             else {
                 if let snapshot = QuerySnapshot {
@@ -54,6 +57,7 @@ class ArchiveDetailsVC : UIViewController, UITableViewDataSource, UITableViewDel
                         //If possible, change sorting parameters to more exact values
                         self.sectionInfo = [attendees!, array]
                     }
+                    SVProgressHUD.dismiss()
                     self.tableView.reloadData()
                 }
             }

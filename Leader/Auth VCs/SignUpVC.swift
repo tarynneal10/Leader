@@ -94,8 +94,7 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
                 if error != nil {
                     print(error!)
                     self.errorAlert()
-                }
-                else {
+                } else {
                     //success
                     print("Registration successful")
 
@@ -123,11 +122,9 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
                 }
             }
 
-            
         } else {
             errorAlert()
         }
-        
     }
     func errorAlert() {
         let alert = UIAlertController(title: "Error", message: "Please reenter your information.", preferredStyle: .alert)
@@ -153,6 +150,7 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
         self.signUpSuccess = true
         self.performSegue(withIdentifier: "goToTabs", sender: UIButton.self)
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let profileImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage, let optimizedImageData = profileImage.jpegData(compressionQuality: 0.6)
         {
@@ -163,9 +161,11 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
 
        // takeImage.image = info[.originalImage] as? UIImage
     }
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion:nil)
     }
+    
     func uploadProfileImage(imageData: Data) {
         let activityIndicator = UIActivityIndicatorView.init(style: .gray)
         activityIndicator.startAnimating()

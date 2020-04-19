@@ -57,6 +57,7 @@ class CompetitiveEventsVC : UIViewController, UITableViewDelegate, UITableViewDa
                         print(document.data())
                     }
                     self.events = self.events.sorted(by: {$0.name < $1.name})
+                    
                     SVProgressHUD.dismiss()
                     self.competitiveEventsTableView.reloadData()
                 }
