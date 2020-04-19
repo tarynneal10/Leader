@@ -87,7 +87,7 @@ class SignUpVC : UITableViewController, UITextFieldDelegate, UIImagePickerContro
 //MARK: Sign up pressed
     @IBAction func signUpPressed(_ sender: Any) {
         signUpSuccess = false
-        if emailTextField.text != "", passwordTextField.text != "", chapterTF.text != "", nameTF.text != "", positionTF.text != "", gradeTextField.text != ""
+        if emailTextField.text != "", passwordTextField.text != "", chapterTF.text != "", nameTF.text != "", positionTF.text != "", gradeTextField.text != "", agreed != false
         {
             Auth.auth().createUser(withEmail: emailTextField.text!, password: passwordTextField.text!) {
                 (user, error) in

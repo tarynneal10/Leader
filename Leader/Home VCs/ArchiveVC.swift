@@ -15,13 +15,15 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var noMinutes: UIImageView!
     
     var db: Firestore!
-    var meetings = [""]
+    var meetings : [Archive] = []
     
     var userRef : Query?
     var docRef : Query?
     
     var chapterName = ""
-    var valueToPass = ""
+    var dateToPass = ""
+    var subjectToPass = ""
+    
     var viewController : ArchiveDetailsVC?
     
     var formatter: DateFormatter {
@@ -82,9 +84,10 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
                         print("\(document.documentID) => \(document.data())")
                             
                         let date = document.get("date") as? String
-                        self.meetings.append(date!)
+                        let subject = document.get("subject") as? String
+                        self.meetings.append(Archive(meetingDate: date!, meetingSubject: subject ?? "No Subject"))
                     }
-                    self.meetings = self.meetings.sorted {$0.localizedStandardCompare($1) == .orderedAscending}
+                    self.meetings = self.meetings.sorted {$0.date.localizedStandardCompare($1.date) == .orderedAscending}
                     print("Meetings: \(self.meetings)")
                     
                     if self.meetings.isEmpty == true {
@@ -104,7 +107,9 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                  let cell = tableView.dequeueReusableCell(withIdentifier: "archiveCell", for: indexPath as IndexPath) as! ArchiveCell
         
-                 cell.label.text = "\(meetings[indexPath.row])"
+                let path = meetings[indexPath.row]
+                    cell.populate(meetings: path)
+                 //cell.label.text = "\(meetings[indexPath.row])"
 
                  return cell
     }
@@ -115,10 +120,14 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
         let currentCell = tableView.cellForRow(at: indexPath!) as! ArchiveCell
         tableView.deselectRow(at: indexPath!, animated: true)
         
-        //Set valueToPass
-        valueToPass = currentCell.label.text!
-        viewController?.passedValue = valueToPass
-        print(valueToPass)
+        //Sets passed values
+        dateToPass = currentCell.label.text!
+        subjectToPass = currentCell.subjectLabel.text!
+        
+        viewController?.passedDate = dateToPass
+        viewController?.passedSubject = subjectToPass
+        
+        print(dateToPass, subjectToPass)
       
     }
     //  This function is called before the segue
@@ -129,4 +138,9 @@ class ArchiveVC : UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 class ArchiveCell : UITableViewCell {
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var subjectLabel: UILabel!
+    
+    func populate(meetings: Archive) {
+        label.text = meetings.date
+        subjectLabel.text = meetings.subject    }
 }

@@ -35,9 +35,13 @@ class CurrentEventDate {
 
 class Member {
     let name : String
+    let paid : Bool
+    let docID : String
     
-    init (memberName: String) {
+    init (memberName: String, memberPaid: Bool, memberDoc: String) {
         name = memberName
+        paid = memberPaid
+        docID = memberDoc
     }
 }
 
@@ -62,5 +66,24 @@ class Minutes {
     let label : String
     init(title: String){
         label = title
+    }
+}
+
+class Archive {
+    let date : String
+    let subject : String
+    init(meetingDate: String, meetingSubject: String) {
+        date = meetingDate
+        subject = meetingSubject
+    }
+}
+
+class Question {
+    let question : String
+    let answer : String
+    
+    init(questions: String, answers: String) {
+        question = questions
+        answer = answers
     }
 }

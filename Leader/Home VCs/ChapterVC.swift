@@ -14,10 +14,11 @@ import SDWebImage
 import FirebaseUI
 import SVProgressHUD
 
-class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource{
+class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     @IBOutlet weak var chapterDescriptionLabel: UILabel!
     @IBOutlet weak var officerView: UICollectionView!
     @IBOutlet weak var view1: UIView!
+    @IBOutlet weak var officerViewHeight: NSLayoutConstraint!
     
     var db: Firestore!
     var storage : Storage!
@@ -38,7 +39,6 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         
         officerView.delegate = self
         officerView.dataSource = self
-        
         getUser()
         SVProgressHUD.show()
     }
@@ -88,7 +88,14 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
                     
                 }
                 SVProgressHUD.dismiss()
+                
                 self.officerView.reloadData()
+                let viewHeight = self.officerView.collectionViewLayout.collectionViewContentSize.height
+                self.officerViewHeight.constant = viewHeight
+                self.view.setNeedsLayout()
+                //self.view.layoutIfNeeded()
+                //self.view.layoutSubviews()
+                
             }
         }
     }
@@ -120,10 +127,18 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let photoUrl = storageRef[indexPath.row]
         
         cell.label.text = officerArray[indexPath.row]
-       // cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
+        cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
         
         
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        //let height = view.frame.size.height
+        let width = view.frame.size.width
+        
+        // in case you you want the cell to be 40% of your controllers view
+        return CGSize(width: width * 0.3, height: 155)
     }
     
     @IBAction func unwindToChapterVC(segue: UIStoryboardSegue) {
@@ -139,7 +154,6 @@ class OfficerCell : UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        //image.image = UIImage(named: "Anon")
     }
 }
 

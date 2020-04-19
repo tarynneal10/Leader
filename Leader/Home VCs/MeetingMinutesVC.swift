@@ -17,18 +17,23 @@ class MeetingMinutesVC : UITableViewController {
     
     var db: Firestore!
     var userRef : Query?
-    let list = ["Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
+    let list = ["Meeting Subject","Call to Order","Minutes","Officer Reports","Committee Reports", "Unfinished Business","New Business","Annoucements","Adjournment"]
     var passedValues = [""]
     var chapterName = ""
     
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
+        
         db = Firestore.firestore()
         setTitle()
         minutesTableView.estimatedRowHeight = 40.0
         minutesTableView.separatorStyle = .none
         //idk why but value isn't passing
+        print("Passed Values: \(String(describing: passedValues))")
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         print("Passed Values: \(String(describing: passedValues))")
     }
 
@@ -90,8 +95,8 @@ class MeetingMinutesVC : UITableViewController {
             "minutes": values,
             "attendees": passedValues,
             "chapter": chapterName,
-            "date": formatter.string(from: Date())
-            
+            "date": formatter.string(from: Date()),
+            "subject": values.first?.value
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
@@ -100,6 +105,9 @@ class MeetingMinutesVC : UITableViewController {
             }
         }
         
+    }
+    @IBAction func unwindToMeetingMinutesVC(segue: UIStoryboardSegue) {
+        print("Unwind to MeetingMinutesVC")
     }
 }
 
