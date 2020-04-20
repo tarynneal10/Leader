@@ -9,12 +9,16 @@ If you want to see our code base just clone the respository and run pod install.
 (If you are new to github, here's a helpful link on cloning resposities: https://help.github.com/en/articles/cloning-a-repository)
 
 ## Functionality
-#### Calendar
-![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Leader2.jpg)
-#### Competitive Events
-![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
+#### Login
+![Login](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Login.imageset/Screenshots.jpg)
 #### Home Screen
 ![Home Screen](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/HomeScreen.imageset/Leader1.jpg)
+#### Calendar
+![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Screenshots%20(5).jpg)
+#### Competitive Events
+![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
+#### Current Events
+![Current Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CurrentEvents.imageset/Leader5.jpg)
 #### Settings
 ![Settings](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Settings-1.imageset/Leader4.jpg)
 
