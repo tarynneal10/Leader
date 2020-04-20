@@ -10,11 +10,11 @@ If you want to see our code base just clone the respository and run pod install.
 
 ## Functionality
 #### Login
-![Login](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Login.imageset/Screenshots.jpg)
+![Login](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Login.imageset/Screenshots%20(2).jpg)
 #### Home Screen
 ![Home Screen](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/HomeScreen.imageset/Leader1.jpg)
 #### Calendar
-![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Screenshots%20(5).jpg)
+![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Leader2.jpg)
 #### Competitive Events
 ![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
 #### Current Events
