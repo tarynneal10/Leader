@@ -127,26 +127,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sY6-2o-IEg">
-                                    <rect key="frame" x="0.0" y="99" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="memberCell" id="mbP-yZ-m19" customClass="MemberTableViewCell" customModule="Leader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbP-yZ-m19" id="JNK-ss-ebj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-zu-G7v">
-                                                    <rect key="frame" x="15" y="11" width="280" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="280" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbt-k9-wRY">
-                                                    <rect key="frame" x="305" y="5" width="60" height="33"/>
+                                                    <rect key="frame" x="305" y="5" width="60" height="33.5"/>
                                                     <color key="backgroundColor" red="0.0" green="0.32522672409999998" blue="0.46270245310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="wBp-29-ozl"/>
@@ -799,43 +799,58 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="An5-gO-TLJ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="536"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="525"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yankee Candle Fundraiser" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-is-l2C">
-                                    <rect key="frame" x="40" y="54" width="295" height="34"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yankee Candle Fundraiser" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-is-l2C">
+                                    <rect key="frame" x="40" y="55" width="295" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="MfW-1g-r3U"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
                                         <outlet property="delegate" destination="8Da-Ae-l5i" id="8Ue-nM-5k5"/>
                                     </connections>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-Lb-WLg">
-                                    <rect key="frame" x="15" y="237" width="360" height="34"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bX9-Lb-WLg">
+                                    <rect key="frame" x="15" y="197" width="360" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="1GZ-rm-SxA"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="DevanagariSangamMN" family="Devanagari Sangam MN" pointSize="25"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-iX-1Ts">
-                                    <rect key="frame" x="14" y="320" width="361" height="34"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tp4-iX-1Ts">
+                                    <rect key="frame" x="14" y="281" width="361" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="DQx-HU-BG8"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="DevanagariSangamMN" family="Devanagari Sangam MN" pointSize="25"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-nJ-chm">
-                                    <rect key="frame" x="15" y="93" width="360" height="34"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EWA-nJ-chm">
+                                    <rect key="frame" x="15" y="94" width="360" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="YZv-PW-JpY"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="DevanagariSangamMN" family="Devanagari Sangam MN" pointSize="25"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnS-Xw-cWn">
-                                    <rect key="frame" x="15" y="15" width="360" height="34"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DnS-Xw-cWn">
+                                    <rect key="frame" x="15" y="15" width="360" height="35"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="35" id="uGG-Uj-a25"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="DevanagariSangamMN" family="Devanagari Sangam MN" pointSize="25"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ctE-Q2-XM6">
-                                    <rect key="frame" x="40" y="132" width="295" height="100"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ctE-Q2-XM6">
+                                    <rect key="frame" x="40" y="134" width="295" height="58"/>
                                     <color key="backgroundColor" red="0.95612219279999999" green="0.96329297550000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <color key="tintColor" red="0.2360190197" green="0.2360190197" blue="0.2360190197" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
@@ -849,7 +864,7 @@
                                     </connections>
                                 </textView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FGB-Q3-0kR">
-                                    <rect key="frame" x="112.5" y="466" width="150" height="40"/>
+                                    <rect key="frame" x="112.5" y="435" width="150" height="40"/>
                                     <color key="backgroundColor" red="0.0" green="0.32549019610000002" blue="0.46274509800000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="CXo-8C-s4Z"/>
@@ -864,16 +879,22 @@
                                         <segue destination="BRz-M3-k1c" kind="unwind" identifier="" unwindAction="unwindToCurrentEventsWithSegue:" id="lw2-RK-sUw"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1/20/2019" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRF-PV-xPj">
-                                    <rect key="frame" x="40" y="276" width="295" height="34"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1/20/2019" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gRF-PV-xPj">
+                                    <rect key="frame" x="40" y="237" width="295" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="wm1-9s-j09"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
                                         <outlet property="delegate" destination="8Da-Ae-l5i" id="aRQ-i1-Dz6"/>
                                     </connections>
                                 </textField>
-                                <textField opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="3:00 AM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-os-zNg">
-                                    <rect key="frame" x="40" y="359" width="295" height="34"/>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="3:00 AM" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dtD-os-zNg">
+                                    <rect key="frame" x="40" y="321" width="295" height="34"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="34" id="8Z1-ps-JDQ"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>

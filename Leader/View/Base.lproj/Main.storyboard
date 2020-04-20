@@ -918,7 +918,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_1512" translatesAutoresizingMaskIntoConstraints="NO" id="I5q-zX-13o">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BusinessProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="I5q-zX-13o">
                                 <rect key="frame" x="15" y="50" width="175" height="250"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="250" id="Ajj-29-3ZU"/>
@@ -1015,20 +1015,20 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="PIt-Bg-WrI">
-                                    <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" id="eZb-DB-sbi" customClass="QuestionCell" customModule="Leader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eZb-DB-sbi" id="aab-Nr-gh8">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgk-YV-Qfm">
-                                                    <rect key="frame" x="15" y="11" width="345" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="345" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -1183,10 +1183,10 @@
     </scenes>
     <resources>
         <image name="BugReport" width="400" height="400"/>
+        <image name="BusinessProfilePic" width="2481" height="3732"/>
         <image name="Calendar" width="25" height="25"/>
         <image name="FBLA" width="640" height="640"/>
         <image name="Home" width="25" height="25"/>
-        <image name="IMG_1512" width="2481" height="3732"/>
         <image name="Instagram" width="1200" height="1199"/>
         <image name="LogOut" width="213.33332824707031" height="213.33332824707031"/>
         <image name="People" width="640" height="640"/>
