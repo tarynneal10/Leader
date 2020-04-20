@@ -9,17 +9,23 @@ If you want to see our code base just clone the respository and run pod install.
 (If you are new to github, here's a helpful link on cloning resposities: https://help.github.com/en/articles/cloning-a-repository)
 
 ## Functionality
-#### Login
+### Authentication
+Leader allows people to Join FBLA, Sign Up, or simply Login when they first enter the application. This is the Login page,
 ![Login](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Login.imageset/Login.png)
-#### Home Screen
+### Home Screen
+Leader has a variety of functionality available right off the bat, including a Your Chapter page with chapter info like members, and the ablity to start meetings, take attendance, and save them to the archive. Then, there's a current events and competitive events page.
 ![Home Screen](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/HomeScreen.imageset/Leader1.jpg)
-#### Calendar
-![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Leader2.jpg)
-#### Competitive Events
+### Competitive Events
+Here, you can view the variety of events FBLA has to offer, and with a click you can see their basic details, access more on the website, and even sign up for the event with your events.
 ![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
-#### Current Events
+### Current Events
+Current events covers anything your chapter is organizing or attending, and allows its members to better keep track of their schedule. You can add events to the list, or sign up for them by clicking the blue plus sign.
 ![Current Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CurrentEvents.imageset/Leader5.jpg)
-#### Settings
+### Calendar
+Here, you can see your chapter's current events laid out on a date scale, along with basic details by clicking. 
+![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Leader2.jpg)
+### Settings
+The settings page is simple, but includes numerous essential things. There's the About FBLA page with its links to FBLA's social media and FBLA's goals. There's Q&A, Contact US, and Security, which is where you can change your info and view our terms and conditions. There's of course also Bug Report for any issues that pop up.
 ![Settings](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Settings-1.imageset/Leader4.jpg)
 
 ## Support Info
