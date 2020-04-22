@@ -10,22 +10,32 @@ If you want to see our code base just clone the respository and run pod install.
 
 ## Functionality
 ### Authentication
-Leader allows people to Join FBLA, Sign Up, or simply Login when they first enter the application. This is the Login page,
+Leader allows people to Join FBLA, Sign Up, or simply Login when they first enter the application. This is the Login page.
+
 ![Login](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Login.imageset/Login.png)
 ### Home Screen
-Leader has a variety of functionality available right off the bat, including a Your Chapter page with chapter info like members, and the ablity to start meetings, take attendance, and save them to the archive. Then, there's a current events and competitive events page.
+Here you can navigate to some of Leader's main functionality.
+
 ![Home Screen](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/HomeScreen.imageset/Leader1.jpg)
-### Competitive Events
-Here, you can view the variety of events FBLA has to offer, and with a click you can see their basic details, access more on the website, and even sign up for the event with your events.
-![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
+### Chapter
+Here you can view your chapter officers, see its members (And change their dues paid status if you are an officer), start meetings & take attendance, and view previous meetings in an archive.
+
+![Chapter](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Chapter.imageset/Chapter.png)
 ### Current Events
 Current events covers anything your chapter is organizing or attending, and allows its members to better keep track of their schedule. You can add events to the list, or sign up for them by clicking the blue plus sign.
+
 ![Current Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CurrentEvents.imageset/Leader5.jpg)
+### Competitive Events
+Here, you can view the variety of events FBLA has to offer, and with a click you can see their basic details, access more on the website, and even sign up for the event with your events.
+
+![Competitive Events](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/CompetitiveEvents.imageset/Leader3.jpg)
 ### Calendar
 Here, you can see your chapter's current events laid out on a date scale, along with basic details by clicking. 
+
 ![Calendar](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Calendar-1.imageset/Leader2.jpg)
 ### Settings
 The settings page is simple, but includes numerous essential things. There's the About FBLA page with its links to FBLA's social media and FBLA's goals. There's Q&A, Contact US, and Security, which is where you can change your info and view our terms and conditions. There's of course also Bug Report for any issues that pop up.
+
 ![Settings](https://github.com/tarynneal10/Leader/blob/master/Leader/Assets.xcassets/Settings-1.imageset/Leader4.jpg)
 
 ## Support Info
