@@ -127,7 +127,7 @@ class ChapterVC : UIViewController, UICollectionViewDelegate, UICollectionViewDa
         let photoUrl = storageRef[indexPath.row]
         
         cell.label.text = officerArray[indexPath.row]
-        //cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
+        cell.image.sd_setImage(with: photoUrl, placeholderImage: placeholderImage)
         
         
         return cell

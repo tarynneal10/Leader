@@ -127,26 +127,26 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="sY6-2o-IEg">
-                                    <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="99" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="memberCell" id="mbP-yZ-m19" customClass="MemberTableViewCell" customModule="Leader" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbP-yZ-m19" id="JNK-ss-ebj">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cvV-zu-G7v">
-                                                    <rect key="frame" x="15" y="11" width="280" height="21.5"/>
+                                                    <rect key="frame" x="15" y="11" width="280" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbt-k9-wRY">
-                                                    <rect key="frame" x="305" y="5" width="60" height="33.5"/>
+                                                    <rect key="frame" x="305" y="5" width="60" height="33"/>
                                                     <color key="backgroundColor" red="0.0" green="0.32522672409999998" blue="0.46270245310000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="60" id="wBp-29-ozl"/>
@@ -511,14 +511,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZM-Tp-ast">
-                                                    <rect key="frame" x="20" y="5" width="350" height="31"/>
+                                                    <rect key="frame" x="25" y="5" width="345" height="31"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                     <color key="textColor" red="0.019607843140000001" green="0.2470588235" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="iZM-Tp-ast" firstAttribute="leading" secondItem="A56-x0-2bZ" secondAttribute="leading" constant="20" id="5ep-Q6-Ufv"/>
+                                                <constraint firstItem="iZM-Tp-ast" firstAttribute="leading" secondItem="A56-x0-2bZ" secondAttribute="leading" constant="25" id="5ep-Q6-Ufv"/>
                                                 <constraint firstAttribute="trailing" secondItem="iZM-Tp-ast" secondAttribute="trailing" constant="5" id="Mtp-NL-fvA"/>
                                                 <constraint firstAttribute="bottom" secondItem="iZM-Tp-ast" secondAttribute="bottom" constant="5" id="abF-p6-0A0"/>
                                                 <constraint firstItem="iZM-Tp-ast" firstAttribute="top" secondItem="A56-x0-2bZ" secondAttribute="top" constant="5" id="b3p-yN-tDG"/>
@@ -799,7 +799,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="An5-gO-TLJ">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="525"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="505"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Yankee Candle Fundraiser" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="M9h-is-l2C">
